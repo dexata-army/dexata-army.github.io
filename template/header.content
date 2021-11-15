@@ -1,0 +1,11 @@
+<!-- Header -->
+<header id="header" class="alt">
+	<div class="logo" style="margin-top: -25px">
+		<noselect>
+			<a href="@pathto(index)"><img src="@pathtofile(output/images/logo.png)" height="45px" style="vertical-align: middle";> Dexata</a> &nbsp; 
+			<a href="@pathto(search)"><img src="@pathtofile('output/images/icons/search.png')" height="40px" style="vertical-align: middle"></a>
+		</noselect>
+	</div>
+
+	@input("template/menu.content")
+</header>

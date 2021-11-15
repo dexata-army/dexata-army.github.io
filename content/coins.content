@@ -1,0 +1,200 @@
+<!-- Wrapper -->
+<div id="wrapper">
+	<!-- One -->
+	<section id="one" class="wrapper style1">
+		<div class="inner">
+			<div class="spotlights">
+				<center>
+					<div class="spotlight" style="max-width:900px">
+						<div class="xscroll">
+							<table id="coins_table">
+								<thead>
+									<tr>
+										<th>rank</th>
+										<th>logo</th>
+										<th>symbol</th>
+										<th>name</th>
+										<th>price</th>
+										<th>change</th>
+										<th>market cap</th>
+										<th>volume</th>
+									</tr>
+								</thead>
+								<tfoot>
+									<tr>
+										<th>rank</th>
+										<th>logo</th>
+										<th>symbol</th>
+										<th>name</th>
+										<th>price</th>
+										<th>change</th>
+										<th>market cap</th>
+										<th>volume</th>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+					</div>
+					<noselect>
+						<a onclick="prev_page()"><img height="40px" src="@pathtofile(output/images/icons/left.png)"></a> &nbsp;&nbsp;&nbsp;&nbsp;
+						<a onclick="next_page()"><img height="40px" src="@pathtofile(output/images/icons/right.png)"></a><br>
+						page &nbsp; <input id="page_input" style="vertical-align: middle; height: 50px; width: 75px"> &nbsp; <a onclick="goto_page()" class="button primary" style="vertical-align: middle; height: 50px">go</a>
+					</noselect>
+				</center>
+			</div>
+		</div>
+	</section>
+</div>
+
+<script>
+	var page_no = 1;
+	var refresh_ms = 10000;
+
+	window.addEventListener('keydown',this.keydown,false);
+	//window.addEventListener('keyup',this.keyup,false);
+
+	if(localStorage.getItem('refresh_sec'))
+		refresh_ms = 1000*localStorage.getItem('refresh_sec');
+	else
+		localStorage.setItem('refresh_sec', 10);
+
+	function clear_table()
+	{
+		var table = document.getElementById("coins_table");
+
+		var no_rows = table.rows.length-2;
+		for(var i=0; i < no_rows; i++)
+			table.deleteRow(1);		
+	}
+
+	function fetch_table_coingecko()
+	{
+		$(document).ready(function(){
+			$.get(
+	    	    'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=' + page_no + '&sparkline=false',              
+				function(data) {
+					clear_table();
+					var table = document.getElementById("coins_table");
+					document.getElementById("page_input").value = page_no;
+
+					for(var i=0; i<=100; i++)
+					{
+						var row = table.insertRow(i+1);
+						row.insertCell(0).innerHTML = data[i]['market_cap_rank'];
+						if(data[i]['image'] != "")
+							row.insertCell(1).innerHTML = "<img height='23px' style='vertical-align:middle' class='rounded' onerror='this.style.display=\"none\"' src='" + data[i]['image'] + "'>";
+						row.insertCell(2).innerHTML = data[i]['symbol'];
+						row.insertCell(3).innerHTML = "<a href='@pathto(coin)?id=" + data[i]['id'] + "'>" + data[i]['name'] + "</a>";
+
+						if(data[i]['current_price'] > 999)
+							row.insertCell(4).innerHTML = "$" + parseFloat(data[i]['current_price']).toLocaleString('en') ;
+						else
+							row.insertCell(4).innerHTML = "$" + data[i]['current_price'] ;
+
+						if(parseFloat(data[i]['price_change_percentage_24h']) < 0)
+							row.insertCell(5).innerHTML = "<red>" + parseFloat(data[i]['price_change_percentage_24h']).toLocaleString('en') + "%</red>";
+						else
+							row.insertCell(5).innerHTML = "<green>" + parseFloat(data[i]['price_change_percentage_24h']).toLocaleString('en') + "%</green>";
+
+						row.insertCell(6).innerHTML = "$" + parseFloat(data[i]['market_cap']).toLocaleString('en') ;
+						row.insertCell(7).innerHTML = "$" + data[i]['total_volume'].toLocaleString('en') ;
+					}
+			});
+		});
+	}
+
+	function fetch_table_coinlore()
+	{
+		$(document).ready(function(){
+			$.get(
+	    	    'https://api.coinlore.net/api/tickers/',              
+				function(data) {
+					clear_table();
+					var table = document.getElementById("coins_table");
+
+					for(var i=0; i<=100; i++)
+					{
+						var row = table.insertRow(i+1);
+						row.insertCell(0).innerHTML = data['data'][i]['rank'];
+						row.insertCell(1).innerHTML = "<img height='23px' style='vertical-align:middle' onerror='this.style.display=\"none\"' src='https://cryptologos.cc/logos/" + data['data'][i]['name'].toLowerCase().replace(/ /g,"-") + "-" + data['data'][i]['symbol'].toLowerCase() + "-logo.svg?v=014'>";
+						row.insertCell(2).innerHTML = data['data'][i]['symbol'];
+						row.insertCell(3).innerHTML = "<a href='@pathto(coin)?id=" + data['data'][i]['name'].replace(/ /g,"-") + "'>" + data['data'][i]['name'] + "</a>";
+
+						if(data['data'][i]['price_usd'] > 999)
+							row.insertCell(4).innerHTML = "$" + parseFloat(data['data'][i]['price_usd']).toLocaleString('en') ;
+						else
+							row.insertCell(4).innerHTML = "$" + data['data'][i]['price_usd'] ;
+
+						if(parseFloat(data['data'][i]['percent_change_1h']) < 0)
+							row.insertCell(5).innerHTML = "<red>" + parseFloat(data['data'][i]['percent_change_1h']).toLocaleString('en') + "%</red>";
+						else
+							row.insertCell(5).innerHTML = "<green>" + parseFloat(data['data'][i]['percent_change_24h']).toLocaleString('en') + "%</green>";
+
+						if(parseFloat(data['data'][i]['percent_change_24h']) < 0)
+							row.insertCell(6).innerHTML = "<red>" + parseFloat(data['data'][i]['percent_change_24h']).toLocaleString('en') + "%</red>";
+						else
+							row.insertCell(6).innerHTML = "<green>" + parseFloat(data['data'][i]['percent_change_24h']).toLocaleString('en') + "%</green>";
+
+						if(parseFloat(data['data'][i]['percent_change_7d']) < 0)
+							row.insertCell(7).innerHTML = "<red>" + parseFloat(data['data'][i]['percent_change_7d']).toLocaleString('en') + "%</red>";
+						else
+							row.insertCell(7).innerHTML = "<green>" + parseFloat(data['data'][i]['percent_change_7d']).toLocaleString('en') + "%</green>";
+
+						row.insertCell(8).innerHTML = "$" + parseFloat(data['data'][i]['market_cap_usd']).toLocaleString('en') ;
+						row.insertCell(9).innerHTML = "$" + data['data'][i]['volume24'].toLocaleString('en') ;
+					}
+			});
+		});
+	}
+
+	function refresh_table()
+	{
+		if(refresh_ms > 0)
+			sleep(refresh_ms).then(() => { fetch_table_coingecko(); refresh_table(); });
+	}
+
+	function prev_page()
+	{
+		if(page_no > 1)
+		{
+			page_no--;
+			fetch_table_coingecko();
+		}
+	}
+
+	function next_page()
+	{
+		page_no++;
+		fetch_table_coingecko();
+	}
+
+	function goto_page()
+	{
+		page_no = document.getElementById("page_input").value;
+		fetch_table_coingecko();
+	}
+
+	function keydown(e)
+	{
+		var code = e.keyCode;
+		
+		if(document.activeElement.tagName == "INPUT")
+		{
+			if(code == 13)
+				goto_page();	
+		}
+		else
+		{
+			switch (code) 
+			{
+				
+				case 37: prev_page(); break; //Left key
+				case 39: next_page(); break; //Right key
+			}
+		}
+	}
+
+	fetch_table_coingecko();
+	refresh_table();
+			
+</script>

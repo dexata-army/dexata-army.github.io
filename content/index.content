@@ -1,0 +1,21 @@
+<!-- Wrapper -->
+<div id="wrapper">
+	<!-- One -->
+	<section id="one" class="wrapper style1">
+		<div class="inner">
+			<div class="spotlights">
+				<center>
+					<div class="spotlight" style="max-width:500px;">
+						<div class="content">
+							<h1><img src="@pathtofile(output/images/logo.png)" height="225px" style="vertical-align: middle";><noselect> Dexata</noselect></h1>
+						</div>
+					</div>
+
+					<p>
+						Dexata is the best resource for dex related data in the crypto space. We utilise various APIs to make the most useful data in the crypto space available to you at your fingertips.
+					</p>
+				</center>
+			</div>
+		</div>
+	</section>
+</div>

@@ -1,0 +1,146 @@
+<!-- Wrapper -->
+<div id="wrapper">
+	<!-- One -->
+	<section id="one" class="wrapper style1">
+		<div class="inner">
+			<div class="spotlights">
+				<center>
+					<div class="spotlight" style="max-width:500px;">
+						<div class="content">
+							<h1><img src="@pathtofile(output/images/icons/search.png)" height="125px" style="vertical-align: middle";><br><noselect>Search</noselect></h1>
+						</div>
+					</div>
+					
+					<center>
+						<select name="network_select" id="network_select" style="width:130px" onchange="change_search_network()">
+							<option value="binance-smart-chain">bsc</option>
+							<option value="ethereum">eth</option>
+							<option value="polygon">polygon</option>
+							<option value="fantom">ftm</option>
+						</select>
+					</center>
+					<input id="contract_input" placeholder="contract" style="margin-top:10px"><br><br>
+
+					<input id="search_input" placeholder="search" style="margin-bottom:15px">
+
+					<div class="spotlight" id="search_spotlight" style="max-width:500px; visibility: hidden">
+						<div class="xscroll">
+							<table id="search_table">
+								<thead>
+									<tr>
+										<th>symbol</th>
+										<th>name</th>
+									</tr>
+								</thead>
+								<tfoot>
+									<tr>
+										<th>symbol</th>
+										<th>name</th>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+					</div>
+				</center>
+			</div>
+		</div>
+	</section>
+</div>
+
+<script>
+	var search_network = "bsc";
+	var coins_data;
+
+	if(localStorage.getItem('search_network'))
+		search_network = localStorage.getItem('search_network');
+	else
+		localStorage.setItem('search_network', 'bsc');
+
+	document.getElementById('network_select').value = search_network;
+
+	window.addEventListener('keydown',this.keydown,false);
+
+	function change_search_network()
+	{
+		search_network = document.getElementById('network_select').value;
+		localStorage.setItem('search_network', search_network);
+	}
+
+	function clear_table()
+	{
+		var table = document.getElementById("search_table");
+
+		var no_rows = table.rows.length-1;
+		for(var i=0; i < no_rows; i++)
+			table.deleteRow(1);		
+	}
+
+	function search_coins()
+	{
+		document.getElementById("search_spotlight").style.visibility = "visible";
+
+		var table = document.getElementById("search_table");
+		var no_coins_found = 0;
+
+		var search_term = document.getElementById("search_input").value;
+
+		for(var i=0; i<coins_data.length; i++)
+		{
+			if(coins_data[i]['symbol'] == search_term ||
+				coins_data[i]['name'] == search_term ||
+				coins_data[i]['id'] == search_term)
+			{
+				var row = table.insertRow(1);
+				no_coins_found++;
+
+				row.insertCell(0).innerHTML = coins_data[i]['symbol'];
+				row.insertCell(1).innerHTML = "<a href=@pathto(coin)?id=" + coins_data[i]['id'] + ">" + coins_data[i]['name'] + "</a>";
+			}
+			else if(coins_data[i]['symbol'].search(search_term) != -1 ||
+				coins_data[i]['name'].search(search_term) != -1 ||
+				coins_data[i]['id'].search(search_term) != -1)
+			{
+				var row = table.insertRow(no_coins_found+1);
+				no_coins_found++;
+
+				row.insertCell(0).innerHTML = coins_data[i]['symbol'];
+				row.insertCell(1).innerHTML = "<a href=@pathto(coin)?id=" + coins_data[i]['id'] + ">" + coins_data[i]['name'] + "</a>";
+			}
+		}
+	}
+
+	function fetch_coins_list()
+	{
+		$(document).ready(function(){
+			$.get(
+	    	    'https://api.coingecko.com/api/v3/coins/list',              
+				function(data) {
+					coins_data = data;
+			}).fail(function() {
+				clear_page();
+				document.getElementById("page-div").innerHTML = "<p>could not find " + param_map.get('contract_address') + " on the " + param_map.get('network') + " network</p>";
+			});
+		});
+	}
+
+	function keydown(e)
+	{
+		var code = e.keyCode;
+		
+		if(document.activeElement.tagName == "INPUT")
+		{
+			if(code == 13)
+			{
+				if(document.activeElement.id == "contract_input")
+					window.location.href = "@pathto(coin)?network=" + search_network + "&contract_address=" + document.getElementById('contract_input').value;
+				else if(document.activeElement.id == "search_input")
+				{
+					clear_table();
+					search_coins();
+				}
+			}
+		}
+	}
+
+	fetch_coins_list();
+</script>

@@ -1,0 +1,16 @@
+<!-- Footer -->
+<div class="wrapper">
+	<div class="inner" style="text-align:center">
+		<noselect>
+			<p>
+					<a href="@pathto(config)"><img src="@pathtofile('output/images/icons/cog.png')" height="50px"></a> &nbsp;
+					<a href="https://t.me/dexata_army"><img src="@pathtofile('output/images/icons/telegram.png')" height="50px"></a> &nbsp;&nbsp;
+					<a href="https://twitter.com/dexata_army"><img src="@pathtofile('output/images/icons/twitter.png')" height="53px"></a>
+			</p>
+
+			<p class="copyright" style="margin-top:-40px">
+				&copy;$[load-YYYY] Dexata
+			</p>
+		</noselect>
+	</div>
+</div>

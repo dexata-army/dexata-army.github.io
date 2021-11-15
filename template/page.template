@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		@input(template/head.content)
+	</head>
+	<body class="is-preload">
+		@input(template/header.content)
+
+		@content
+
+		@input(template/footer.content)
+
+		<!-- Scripts -->
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.dropotron.min.js"></script>
+		<script src="assets/js/jquery.scrollex.min.js"></script>
+		<script src="assets/js/jquery.scrolly.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+
+		<!-- https://printjs.crabbly.com/ -->
+		<script src="assets/js/print.js"></script>
+	</body>
+</html>
+
+<!--
+	design: Threshold by Pixelarity
+	pixelarity.com | @ajlkn hello@pixelarity.com
+	License: pixelarity.com/license
+-->
