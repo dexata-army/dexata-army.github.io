@@ -1,0 +1,198 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Dexata - config</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/pagestyle.css" />
+		<link rel="stylesheet" href="assets/css/print.css" />
+		<link rel="icon" type="image/svg" href="images/logo.png">
+		
+		<script src="assets/js/sleep.js"></script>
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+		
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-D70JLR4EJM"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+		
+		  gtag('config', 'G-D70JLR4EJM');
+		</script>
+	</head>
+	<body class="is-preload">
+		<!-- Header -->
+		<header id="header" class="alt">
+			<div class="logo" style="margin-top: -25px">
+				<noselect>
+					<a href="index.html"><img src="images/logo.png" height="45px" style="vertical-align: middle";> Dexata</a> &nbsp; 
+					<a href="search.html"><img src="images/icons/search.png" height="40px" style="vertical-align: middle"></a>
+				</noselect>
+			</div>
+		
+			<nav id="nav">
+				<ul>
+					<li><a href="index.html">home</a></li>
+					<li><a href="coins.html">coins</a></li>
+					<li><a href="https://t.me/dexata_army">telegram</a></li>
+					<li><a href="https://twitter.com/dexata_army">twitter</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<!-- Wrapper -->
+		<div id="wrapper">
+			<!-- One -->
+			<section id="one" class="wrapper style1">
+				<div class="inner">
+					<div class="spotlights">
+						<center>
+							<div class="spotlight" style="max-width:500px;">
+								<div class="content">
+									<h1><img src="images/icons/cog.png" height="125px" style="vertical-align: middle";><br><noselect>Config</noselect></h1>
+								</div>
+							</div>
+		
+							<div class="spotlight" style="max-width:500px">
+								<table>
+									<tr>
+										<td>Refresh speed (seconds)</td>
+										<td><input id="refresh_sec"></td>
+									</tr>
+									<tr>
+										<td>BSC address</td>
+										<td><input id="bsc_addr"></td>
+									</tr>
+									<tr>
+										<td>BSCScan API key</td>
+										<td><input id="bscscan_api_key"></td>
+									</tr>
+								</table>
+							</div>
+		
+							<div class="spotlight" style="max-width:500px">
+								<p>
+									Watchlist
+		
+									<textarea id="watchlist"></textarea>
+								</p>
+							</div>
+		
+							<div class="spotlight" style="max-width:500px">
+								<p>
+									Ignore List
+		
+									<textarea id="ignorelist"></textarea>
+								</p>
+							</div>
+		
+							<a onclick="save_config()"><img src="images/icons/save.png" height="50px"></a>
+						</center>
+					</div>
+				</div>
+			</section>
+		</div>
+		
+		<script>
+		
+			function load_config()
+			{
+				if(localStorage.getItem('refresh_sec'))
+					document.getElementById("refresh_sec").value = localStorage.getItem('refresh_sec');
+				else
+				{
+					localStorage.setItem('refresh_sec', 60);
+					document.getElementById("refresh_sec").value = 60;
+				}
+		
+				if(localStorage.getItem('bsc_addr'))
+					document.getElementById("bsc_addr").value = localStorage.getItem('bsc_addr');
+		
+				if(localStorage.getItem('bscscan_api_key'))
+					document.getElementById("bscscan_api_key").value = localStorage.getItem('bscscan_api_key');
+		
+				if(localStorage.getItem('dexata_watchlist'))
+					document.getElementById("watchlist").value = localStorage.getItem('dexata_watchlist');
+		
+				if(localStorage.getItem('dexata_ignorelist'))
+					document.getElementById("ignorelist").value = localStorage.getItem('dexata_ignorelist');
+			}
+		
+			function save_config()
+			{
+				var valid_config = 1;
+		
+				if(document.getElementById("refresh_sec").value == "")
+				{
+					valid_config = 0;
+					alert("refresh time must be specified (use 0 to not refresh)");
+				}
+				else if(document.getElementById("refresh_sec").value < 0)
+				{
+					valid_config = 0;
+					alert("refresh time must be a non-negative numer (use 0 to not refresh)");
+				}
+				else if(document.getElementById("refresh_sec").value < 30)
+				{
+					valid_config = 0;
+					alert("refresh time too frequent (use 0 to not refresh)");
+				}
+		
+				if(valid_config)
+				{
+					localStorage.setItem('refresh_sec', document.getElementById("refresh_sec").value);
+					localStorage.setItem('bsc_addr', document.getElementById("bsc_addr").value);
+					localStorage.setItem('bscscan_api_key', document.getElementById("bscscan_api_key").value);
+					localStorage.setItem('dexata_watchlist', document.getElementById("watchlist").value);
+					localStorage.setItem('dexata_ignorelist', document.getElementById("ignorelist").value);
+					
+					alert("config saved successfully");
+				}
+			}
+		
+			load_config();
+		</script>
+
+		<!-- Footer -->
+		<div class="wrapper">
+			<div class="inner" style="text-align:center">
+				<noselect>
+					<p>
+							<a href="config.html"><img src="images/icons/cog.png" height="50px"></a> &nbsp;
+							<a href="https://t.me/dexata_army"><img src="images/icons/telegram.png" height="50px"></a> &nbsp;&nbsp;
+							<a href="https://twitter.com/dexata_army"><img src="images/icons/twitter.png" height="53px"></a>
+					</p>
+		
+					<p class="copyright" style="margin-top:-40px">
+						&copy;<script>document.write(new Date().getFullYear())</script> Dexata
+					</p>
+				</noselect>
+			</div>
+		</div>
+
+		<!-- Scripts -->
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.dropotron.min.js"></script>
+		<script src="assets/js/jquery.scrollex.min.js"></script>
+		<script src="assets/js/jquery.scrolly.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+
+		<!-- https://printjs.crabbly.com/ -->
+		<script src="assets/js/print.js"></script>
+	</body>
+</html>
+
+<!--
+	design: Threshold by Pixelarity
+	pixelarity.com | @ajlkn hello@pixelarity.com
+	License: pixelarity.com/license
+-->

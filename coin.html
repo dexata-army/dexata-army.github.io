@@ -1,0 +1,617 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Dexata - coin</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/pagestyle.css" />
+		<link rel="stylesheet" href="assets/css/print.css" />
+		<link rel="icon" type="image/svg" href="images/logo.png">
+		
+		<script src="assets/js/sleep.js"></script>
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+		
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-D70JLR4EJM"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+		
+		  gtag('config', 'G-D70JLR4EJM');
+		</script>
+	</head>
+	<body class="is-preload">
+		<!-- Header -->
+		<header id="header" class="alt">
+			<div class="logo" style="margin-top: -25px">
+				<noselect>
+					<a href="index.html"><img src="images/logo.png" height="45px" style="vertical-align: middle";> Dexata</a> &nbsp; 
+					<a href="search.html"><img src="images/icons/search.png" height="40px" style="vertical-align: middle"></a>
+				</noselect>
+			</div>
+		
+			<nav id="nav">
+				<ul>
+					<li><a href="index.html">home</a></li>
+					<li><a href="coins.html">coins</a></li>
+					<li><a href="https://t.me/dexata_army">telegram</a></li>
+					<li><a href="https://twitter.com/dexata_army">twitter</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<!-- Wrapper -->
+		<div id="wrapper">
+			<!-- One -->
+			<section id="one" class="wrapper style1">
+				<div class="inner">
+					<div class="spotlights">
+						<center>
+							<div class="spotlight" style="max-width:500px;">
+								<div class="content">
+									<h1 id="coin-title"></h1>
+									<p style="margin-top:-30px" id="coin-links"></p>
+								</div>
+							</div>
+							<div id="page-div">
+								<div class="spotlight" style="width: 350px; max-width: 90%; display:inline-block; margin-right: -10px; vertical-align: top;">
+									<div class="xscroll">
+										<table id="data_table" style="text-align:right">
+											<tr>
+												<td><b>price:</b></td>
+												<td></td>
+											</tr>
+											<tr>
+												<td><b>market cap:</b></td>
+												<td></td>
+											</tr>
+											<tr>
+												<td><b>volume:</b></td>
+												<td></td>
+											</tr>
+											<tr>
+												<td><b>tot supply:</b></td>
+												<td></td>
+											</tr>
+											<tr>
+												<td><b>max supply:</b></td>
+												<td></td>
+											</tr>
+											<tr>
+												<td><b>circ supply:</b></td>
+												<td></td>
+											</tr>
+										</table>
+									</div>
+								</div>
+								<div style="max-width: 100%; display:inline-block; vertical-align: top">
+									<div class="spotlight" style="width: 600px; max-width: 90%; margin-bottom: 20px">
+											<div class="xscroll">
+												<table id="change_table" style="text-align:center">
+													<thead>
+														<tr>
+															<td>hour</td>
+															<td>day</td>
+															<td>week</td>
+															<td>year</td>
+														</tr>
+													</thead>
+													<tr>
+														<td></td>
+														<td></td>
+														<td></td>
+														<td></td>
+													</tr>
+												</table>
+											</div>
+									</div>
+									<div class="spotlight" style="width: 600px; max-width: 90%">
+											<div class="xscroll">
+												<table id="at_table" style="text-align:center">
+													<thead>
+														<tr>
+															<td></td>
+															<td>price</td>
+															<td>change</td>
+															<td>date</td>
+															<td>days</td>
+														</tr>
+													</thead>
+													<tr>
+														<td><b>atl</b></td>
+														<td></td>
+														<td></td>
+														<td></td>
+														<td></td>
+													</tr>
+													<tr>
+														<td><b>ath</b></td>
+														<td></td>
+														<td></td>
+														<td></td>
+														<td></td>
+													</tr>
+												</table>
+											</div>
+									</div><br>
+								</div>
+		
+								<select name="chart_range" id="chart_range" style="width:105px; margin-bottom: 10px" onchange="change_chart_range()">
+									<option value="hour">1 hr</option>
+									<option value="day">24 hr</option>
+									<option value="week">1 wk</option>
+									<option value="year">1 yr</option>
+								</select>
+								<div class="spotlight" style="width: 100%;">
+									<div id="prices_chart" style="min-width: 600px; width: 90%; padding-top: 30px; padding-bottom:30px; margin: 0 auto; -webkit-filter: invert(100%); filter: invert(100%);">
+									</div><br>
+								</div>
+								<div class="spotlight" style="width: 100%;">
+									<div id="total_volumes_chart" style="min-width: 600px; width: 90%; padding-top: 30px; padding-bottom:30px; margin: 0 auto; -webkit-filter: invert(100%); filter: invert(100%);">
+									</div><br>
+								</div>
+							</div>
+						</center>
+					</div>
+		
+				</div>
+			</section>
+		</div>
+		
+		<script>
+			var param_array = [];
+			var details_filled = 0;
+			if(location.search.indexOf('?') > -1)
+				param_array = location.search.split("?")[1].replace("%20", " ").split('&');
+			var param_map = new Map();
+			var refresh_ms = 10000;
+			var chart_range = "hour";
+			var chart_freq = "minute";
+		
+			if(localStorage.getItem('refresh_sec'))
+				refresh_ms = 1000*localStorage.getItem('refresh_sec');
+			else
+				localStorage.setItem('refresh_sec', 10);
+		
+			if(localStorage.getItem('chart_freq'))
+				chart_freq = localStorage.getItem('chart_freq');
+			else
+				localStorage.setItem('chart_freq', 'minute');
+		
+			if(localStorage.getItem('chart_range'))
+				chart_range = localStorage.getItem('chart_range');
+			else
+				localStorage.setItem('chart_range', 'hour');
+		
+			document.getElementById('chart_range').value = chart_range;
+		
+			for(var i=0; i<param_array.length; i++)
+			{
+				param_array[i] = param_array[i].split('=');
+				param_map.set(param_array[i][0], param_array[i][1].toLowerCase());
+			}
+		
+			function treatAsUTC(date)
+			{
+			    var result = new Date(date);
+			    result.setMinutes(result.getMinutes() - result.getTimezoneOffset());
+			    return result;
+			}
+		
+			var millisecondsPerDay = 24 * 60 * 60 * 1000;
+			function daysSince(date)
+			{   
+			    return Math.round((treatAsUTC(new Date()) - treatAsUTC(date)) / millisecondsPerDay);
+			}
+		
+			function draw_chart(title, chart_type, y_title, data)
+			{
+				var options = {
+			      series: [{
+			      name: 'date',
+			      data: data
+			    }],
+			      chart: {
+			      type: 'area',
+			      stacked: false,
+			      height: 350,
+			      zoom: {
+			        type: 'xy',
+			        enabled: true,
+			      },
+			      toolbar: {
+			        autoSelected: 'zoom'
+			      }
+			    },
+			    colors:['#39ff14', '#E91E63', '#9C27B0'],
+			    dataLabels: {
+			      enabled: false
+			    },
+			    markers: {
+			      size: 0,
+			    },
+			    title: {
+			      text: title,
+			      align: 'left',
+			      textColor: '#ff1493',
+			    },
+			    fill: {
+			      type: 'gradient',
+			      gradient: {
+			        shadeIntensity: 1,
+			        inverseColors: true,
+			        opacityFrom: 0.5,
+			        opacityTo: 0.5,
+			        stops: [0, 90, 100]
+			      },
+			    },
+			    yaxis: {
+			      labels: {
+			        formatter: function (val) {
+			          if(val >= 1)
+			          	return val.toLocaleString('en');
+			          else if(val > 0 && val < 0.001)
+			          	return val.toExponential(3);
+			          else
+			          	return val;
+			        },
+			      },
+			      tickAmount: 4,
+			      title: {
+			        text: y_title,
+			      },
+			    },
+			    xaxis: {
+			      type: 'datetime',
+		          tickAmount: 5,
+			      labels: {
+			        formatter: function (val) {
+			          if(chart_range == "hour" || chart_range == "day")
+				      	return new Date(val).toLocaleTimeString();
+				      else
+				      	return new Date(val).toLocaleDateString();
+			        },
+			      },
+			    },
+			    theme: {
+			    	mode: 'light',
+			    },
+			    stroke: {
+				    width: 2,    
+				},
+			    tooltip: {
+			      shared: false,
+			      y: {
+			        formatter: function (val) {
+			          return (val / 1000000).toFixed(0);
+			        }
+			      }
+			    }
+			    };
+		
+			    var chart = new ApexCharts(document.querySelector("#" + chart_type + "_chart"), options);
+			    chart.render();
+			}
+		
+			function fetch_chart(chart_type, y_title, coin_data)
+			{
+				var data_range;
+		
+				if(chart_range == "hour")
+					data_range = 0.041666667;
+				else if(chart_range == "day")
+					data_range = 1;
+				else if(chart_range == "week")
+					data_range = 7;
+				else if(chart_range == "year")
+					data_range = 365; 
+		
+				$(document).ready(function(){
+					//alert('https://api.coingecko.com/api/v3/coins/' + coin_data['id'] + '/market_chart?vs_currency=usd&days=' + data_range + '&interval=' + chart_freq);
+					$.get(
+						'https://api.coingecko.com/api/v3/coins/' + coin_data['id'] + '/market_chart?vs_currency=usd&days=' + data_range + '&interval=' + chart_freq,
+						function(data) {
+							document.getElementById(chart_type + '_chart').innerHTML = "";
+							draw_chart(coin_data['name'], chart_type, y_title, data[chart_type]);
+					}).fail(function() {
+						clear_page();
+						document.getElementById("page-div").innerHTML = "<p>could not find " + param_map.get('contract_address') + " on the " + param_map.get('network') + " network</p>";
+					});
+				});
+			}
+		
+			function clear_page()
+			{
+				document.getElementById("coin-title").innerHTML = '<img src="images/logo.png" height="225px" style="vertical-align: middle";><noselect> Dexata</noselect>';
+		
+				document.getElementById("page-div").innerHTML = "";
+			}
+		
+			function ctrl_c(val)
+			{
+				navigator.clipboard.writeText(val);
+			}
+		
+			function fill_details(data)
+			{
+				document.title = "Dexata - " + data['symbol'];
+		
+				if(data['image']['large'] != "")
+					document.getElementById("coin-title").innerHTML = '<img onerror="this.src=\'images/missing.png\'" class="rounded" src="' + data['image']['large'] + '" height="150px" style="vertical-align: middle";><br><noselect>' + data['id'] + ' (' + data['symbol'] + ')</noselect>';
+		
+				document.getElementById("coin-links").innerHTML = "";
+		
+				if(data['links']['homepage'][0] != "")
+					document.getElementById("coin-links").innerHTML += '<a href="' + data['links']['homepage'][0] + '"><img src="images/icons/home.png" height="30px"></a>';
+		
+				if(data['links']['telegram_channel_identifier'] != "")
+					document.getElementById("coin-links").innerHTML += '&nbsp;<a href="https://t.me/' + data['links']['telegram_channel_identifier'] + '"><img src="images/icons/telegram.png" height="30px"></a>';
+		
+				if(data['links']['twitter_screen_name'] != "")
+					document.getElementById("coin-links").innerHTML += '&nbsp;<a href="https://twitter.com/' + data['links']['twitter_screen_name'] + '"><img src="images/icons/twitter.png" height="30px"></a>';
+		
+				if(data['links']['chat_url'][0] != "")
+					document.getElementById("coin-links").innerHTML += '&nbsp;&nbsp;<a href="' + data['links']['chat_url'][0] + '"><img src="images/icons/chat.png" height="30px" width="30px"></a>';
+		
+				if(data['links']['blockchain_site'][0] != "" || data['contract_address'] != "")
+				{
+					document.getElementById("coin-links").innerHTML += '<br>';
+		
+					if(data['links']['blockchain_site'][0].search("bscscan") != -1)
+						document.getElementById("coin-links").innerHTML += '<a href="' + data['links']['blockchain_site'][0] + '"><img src="images/logos/bscscan.png" height="30px"></a>';
+		
+					if(data['contract_address'] != "")
+					{
+						document.getElementById("coin-links").innerHTML += '&nbsp;&nbsp;<a href="https://poocoin.app/tokens/' + data['contract_address'] + '"><img src="images/logos/poocoin-poocoin.svg" height="30px"></a>';
+		
+						document.getElementById("coin-links").innerHTML += '<br><b>contract</b><br>' + data['contract_address'] + '&nbsp;&nbsp;&nbsp;<a onclick="ctrl_c(' + data['contract_address'] + ')"><img src="images/icons/copy.png" height="20px" style="display: inline-block; vertical-align: middle"></a>';
+					}
+				}
+			}
+		
+			function fill_data(data)
+			{
+				var table = document.getElementById("data_table");
+		
+				//alert(data['market_data']['current_price']['usd'])
+		
+				if(data['market_data']['current_price']['usd'] > 999)
+					table.rows[0].cells[1].innerHTML = "$" + data['market_data']['current_price']['usd'].toLocaleString('en');
+				else if(data['market_data']['current_price']['usd'] < 0.001)
+					table.rows[0].cells[1].innerHTML = "$" + data['market_data']['current_price']['usd'].toExponential(3);
+				else
+					table.rows[0].cells[1].innerHTML = "$" + data['market_data']['current_price']['usd'];
+		
+				if(data['market_data']['market_cap']['usd'] > 0)
+					table.rows[1].cells[1].innerHTML = "$" + data['market_data']['market_cap']['usd'].toLocaleString('en');
+				else
+					table.rows[1].cells[1].innerHTML = '-';
+		
+				if(data['market_data']['market_cap']['usd'] > 0)
+					table.rows[2].cells[1].innerHTML = "$" + data['market_data']['total_volume']['usd'].toLocaleString('en');
+				else
+					table.rows[2].cells[1].innerHTML = '-';
+		
+				if(data['market_data']['total_supply'] > 0)
+					table.rows[3].cells[1].innerHTML = data['market_data']['total_supply'].toLocaleString('en');
+				else
+					table.rows[3].cells[1].innerHTML = '-';
+		
+				if(data['market_data']['max_supply'] > 0)
+					table.rows[4].cells[1].innerHTML = data['market_data']['max_supply'].toLocaleString('en');
+				else
+					table.rows[4].cells[1].innerHTML = '-';
+		
+				if(data['market_data']['circulating_supply'] > 0)
+					table.rows[5].cells[1].innerHTML = data['market_data']['circulating_supply'].toLocaleString('en');
+				else
+					table.rows[5].cells[1].innerHTML = '-';
+		
+				table = document.getElementById("change_table");
+		
+				if(data['market_data']['price_change_percentage_1h_in_currency']['usd'] == undefined)
+					table.rows[1].cells[0].innerHTML = "-";
+				else if(data['market_data']['price_change_percentage_1h_in_currency']['usd'] >= 0)
+					table.rows[1].cells[0].innerHTML = "<green>" + data['market_data']['price_change_percentage_1h_in_currency']['usd'].toLocaleString('en') + "%</green>";
+				else
+					table.rows[1].cells[0].innerHTML = "<red>" + data['market_data']['price_change_percentage_1h_in_currency']['usd'].toLocaleString('en') + "%</red>";
+		
+				if(data['market_data']['price_change_percentage_24h_in_currency']['usd'] == undefined)
+					table.rows[1].cells[1].innerHTML = "-";
+				else if(data['market_data']['price_change_percentage_24h_in_currency']['usd'] >= 0)
+					table.rows[1].cells[1].innerHTML = "<green>" + data['market_data']['price_change_percentage_24h_in_currency']['usd'].toLocaleString('en') + "%</green>";
+				else
+					table.rows[1].cells[1].innerHTML = "<red>" + data['market_data']['price_change_percentage_24h_in_currency']['usd'].toLocaleString('en') + "%</red>";
+		
+				if(data['market_data']['price_change_percentage_7d_in_currency']['usd'] == undefined)
+					table.rows[1].cells[2].innerHTML = "-";
+				else if(data['market_data']['price_change_percentage_7d_in_currency']['usd'] >= 0)
+					table.rows[1].cells[2].innerHTML = "<green>" + data['market_data']['price_change_percentage_7d_in_currency']['usd'].toLocaleString('en') + "%</green>";
+				else
+					table.rows[1].cells[2].innerHTML = "<red>" + data['market_data']['price_change_percentage_7d_in_currency']['usd'].toLocaleString('en') + "%</red>";
+		
+				if(data['market_data']['price_change_percentage_1y_in_currency']['usd'] == undefined)
+					table.rows[1].cells[3].innerHTML = "-";
+				else if(data['market_data']['price_change_percentage_1y_in_currency']['usd'] >= 0)
+					table.rows[1].cells[3].innerHTML = "<green>" + data['market_data']['price_change_percentage_1y_in_currency']['usd'].toLocaleString('en') + "%</green>";
+				else
+					table.rows[1].cells[3].innerHTML = "<red>" + data['market_data']['price_change_percentage_1y_in_currency']['usd'].toLocaleString('en') + "%</red>";
+		
+				table = document.getElementById('at_table');
+		
+				if(data['market_data']['atl']['usd'] == undefined)
+					table.rows[1].cells[1].innerHTML = "-";
+				/*else if(data['market_data']['atl']['usd'] > 0 && data['market_data']['atl']['usd'] < 0.001)
+					table.rows[1].cells[1].innerHTML = "$" + data['market_data']['atl']['usd'].toExponential(3);*/
+				else
+					table.rows[1].cells[1].innerHTML = "$" + data['market_data']['atl']['usd'];
+		
+				if(data['market_data']['ath']['usd'] == undefined)
+					table.rows[2].cells[1].innerHTML = "-";
+				/*else if(data['market_data']['ath']['usd'] > 0 && data['market_data']['ath']['usd'] < 0.001)
+					table.rows[2].cells[1].innerHTML = "$" + data['market_data']['ath']['usd'].toExponential(3);*/
+				else
+					table.rows[2].cells[1].innerHTML = "$" + data['market_data']['ath']['usd'];
+		
+				if(data['market_data']['atl_change_percentage']['usd'] == undefined)
+					table.rows[1].cells[2].innerHTML = "-";
+				else if(data['market_data']['atl_change_percentage']['usd'] >= 0)
+					table.rows[1].cells[2].innerHTML = "<green>" + data['market_data']['atl_change_percentage']['usd'].toLocaleString('en') + "%</green>";
+				else
+					table.rows[1].cells[2].innerHTML = "<red>" + data['market_data']['atl_change_percentage']['usd'].toLocaleString('en') + "%</red>";
+		
+				if(data['market_data']['ath_change_percentage']['usd'] == undefined)
+					table.rows[2].cells[2].innerHTML = "-";
+				else if(data['market_data']['ath_change_percentage']['usd'] >= 0)
+					table.rows[2].cells[2].innerHTML = "<green>" + data['market_data']['ath_change_percentage']['usd'].toLocaleString('en') + "%</green>";
+				else
+					table.rows[2].cells[2].innerHTML = "<red>" + data['market_data']['ath_change_percentage']['usd'].toLocaleString('en') + "%</red>";
+		
+				if(data['market_data']['atl_date']['usd'] == undefined)
+					table.rows[1].cells[3].innerHTML = "-";
+				else
+				{
+					table.rows[1].cells[3].innerHTML = new Date(data['market_data']['atl_date']['usd']).toLocaleDateString();
+					table.rows[1].cells[4].innerHTML = daysSince(data['market_data']['atl_date']['usd']);
+				}
+		
+				if(data['market_data']['ath_date']['usd'] == undefined)
+					table.rows[2].cells[3].innerHTML = "-";
+				else
+				{
+					table.rows[2].cells[3].innerHTML = new Date(data['market_data']['ath_date']['usd']).toLocaleDateString();
+					table.rows[2].cells[4].innerHTML = daysSince(data['market_data']['ath_date']['usd']);
+				}
+			}
+		
+			function fetch_info_from_contract_address()
+			{
+				$(document).ready(function(){
+					$.get(
+			    	    'https://api.coingecko.com/api/v3/coins/' + param_map.get('network') + '/contract/' + param_map.get('contract_address'),              
+						function(data) {
+							if(!details_filled)
+							{
+								details_filled = 1;
+								fill_details(data);
+							}
+							fill_data(data);
+							fetch_chart("prices", "Price", data);
+							fetch_chart("total_volumes", "Volume", data);
+					}).fail(function() {
+						clear_page();
+						document.getElementById("page-div").innerHTML = "<p>could not find " + param_map.get('contract_address') + " on the " + param_map.get('network') + " network</p>";
+					});
+				});
+			}
+		
+			function fetch_info_from_id()
+			{
+				$(document).ready(function(){
+					$.get(
+			    	    'https://api.coingecko.com/api/v3/coins/' + param_map.get('id'),              
+						function(data) {
+							if(!details_filled)
+							{
+								details_filled = 1;
+								fill_details(data);
+							}
+							fill_data(data);
+							fetch_chart("prices", "Price", data);
+							fetch_chart("total_volumes", "Volume", data);
+					}).fail(function(){ 
+						clear_page();
+						document.getElementById("page-div").innerHTML = "<p>could not find " + param_map.get('id') + "</p>";
+					});
+				});
+			}
+		
+			function fetch_info()
+			{
+				if(param_map.get('contract_address') != undefined && param_map.get('network') != undefined)
+				{
+					fetch_info_from_contract_address();
+				}
+				else if(param_map.get('id') != undefined)
+				{
+					fetch_info_from_id();
+				}
+				else
+				{
+					clear_page();
+		
+					document.getElementById("page-div").innerHTML = "<p>please specify a coin name or alternatively a contract address along with a network</p>";
+				}
+			}
+		
+			function change_chart_range()
+			{
+				chart_range = document.getElementById('chart_range').value;
+				localStorage.setItem('chart_range', chart_range);
+				
+				if(chart_range == "hour")
+					chart_freq = "minute";
+				else if(chart_range == "day" || chart_range == "week")
+					chart_freq = "hourly";
+				else if(chart_range == "year")
+					chart_freq = "daily";
+		
+				localStorage.setItem('chart_freq', chart_freq);
+		
+				fetch_info();
+			}
+		
+			function refresh_data()
+			{
+				if(refresh_ms > 0)
+					sleep(refresh_ms).then(() => { fetch_info(); refresh_data(); });
+			}
+		
+			fetch_info();
+			refresh_data();
+			
+		</script>
+
+		<!-- Footer -->
+		<div class="wrapper">
+			<div class="inner" style="text-align:center">
+				<noselect>
+					<p>
+							<a href="config.html"><img src="images/icons/cog.png" height="50px"></a> &nbsp;
+							<a href="https://t.me/dexata_army"><img src="images/icons/telegram.png" height="50px"></a> &nbsp;&nbsp;
+							<a href="https://twitter.com/dexata_army"><img src="images/icons/twitter.png" height="53px"></a>
+					</p>
+		
+					<p class="copyright" style="margin-top:-40px">
+						&copy;<script>document.write(new Date().getFullYear())</script> Dexata
+					</p>
+				</noselect>
+			</div>
+		</div>
+
+		<!-- Scripts -->
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.dropotron.min.js"></script>
+		<script src="assets/js/jquery.scrollex.min.js"></script>
+		<script src="assets/js/jquery.scrolly.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+
+		<!-- https://printjs.crabbly.com/ -->
+		<script src="assets/js/print.js"></script>
+	</body>
+</html>
+
+<!--
+	design: Threshold by Pixelarity
+	pixelarity.com | @ajlkn hello@pixelarity.com
+	License: pixelarity.com/license
+-->
