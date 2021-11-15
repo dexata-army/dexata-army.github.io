@@ -76,14 +76,14 @@
 												</tr>
 											</thead>
 											<tr>
-												<td><b>atl</b></td>
+												<td><b>low</b></td>
 												<td></td>
 												<td></td>
 												<td></td>
 												<td></td>
 											</tr>
 											<tr>
-												<td><b>ath</b></td>
+												<td><b>high</b></td>
 												<td></td>
 												<td></td>
 												<td></td>
@@ -318,7 +318,7 @@
 			if(data['links']['blockchain_site'][0].search("bscscan") != -1)
 				document.getElementById("coin-links").innerHTML += '<a href="' + data['links']['blockchain_site'][0] + '"><img src="@pathtofile(output/images/logos/bscscan.png)" height="30px"></a>';
 
-			if(data['contract_address'] != "")
+			if(data['contract_address'] != undefined && data['contract_address'] != "")
 			{
 				document.getElementById("coin-links").innerHTML += '&nbsp;&nbsp;<a href="https://poocoin.app/tokens/' + data['contract_address'] + '"><img src="@pathtofile(output/images/logos/poocoin-poocoin.svg)" height="30px"></a>';
 

@@ -38,7 +38,7 @@
 					<noselect>
 						<a onclick="prev_page()"><img height="40px" src="@pathtofile(output/images/icons/left.png)"></a> &nbsp;&nbsp;&nbsp;&nbsp;
 						<a onclick="next_page()"><img height="40px" src="@pathtofile(output/images/icons/right.png)"></a><br>
-						page &nbsp; <input id="page_input" style="vertical-align: middle; height: 50px; width: 75px"> &nbsp; <a onclick="goto_page()" class="button primary" style="vertical-align: middle; height: 50px">go</a>
+						page &nbsp; <input id="page_input" style="vertical-align: middle; width: 75px">
 					</noselect>
 				</center>
 			</div>
