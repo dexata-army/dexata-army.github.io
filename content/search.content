@@ -41,6 +41,8 @@
 							</table>
 						</div>
 					</div>
+
+					<img src="@pathtofile(output/images/phone-illustration.png)" style="max-width:80%; width: 300px">
 				</center>
 			</div>
 		</div>
