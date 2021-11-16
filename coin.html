@@ -149,11 +149,11 @@
 									<option value="year">1 yr</option>
 								</select>
 								<div class="spotlight" style="width: 100%;">
-									<div id="prices_chart" style="min-width: 600px; width: 90%; padding-top: 30px; padding-bottom:30px; margin: 0 auto; -webkit-filter: invert(100%); filter: invert(100%);">
+									<div id="prices_chart" style="min-width: 200px; width: 90%; padding-top: 30px; padding-bottom:30px; margin: 0 auto; -webkit-filter: invert(100%); filter: invert(100%);">
 									</div><br>
 								</div>
 								<div class="spotlight" style="width: 100%;">
-									<div id="total_volumes_chart" style="min-width: 600px; width: 90%; padding-top: 30px; padding-bottom:30px; margin: 0 auto; -webkit-filter: invert(100%); filter: invert(100%);">
+									<div id="total_volumes_chart" style="min-width: 200px; width: 90%; padding-top: 30px; padding-bottom:30px; margin: 0 auto; -webkit-filter: invert(100%); filter: invert(100%);">
 									</div><br>
 								</div>
 							</div>
@@ -359,14 +359,14 @@
 				if(data['links']['chat_url'][0] != "")
 					document.getElementById("coin-links").innerHTML += '&nbsp;&nbsp;<a href="' + data['links']['chat_url'][0] + '"><img src="images/icons/chat.png" height="30px" width="30px"></a>';
 		
-				if(data['links']['blockchain_site'][0] != "" || data['contract_address'] != "")
+				if(data['links']['blockchain_site'][0] != "" || data['contract_address'].length > 10)
 				{
 					document.getElementById("coin-links").innerHTML += '<br>';
 		
 					if(data['links']['blockchain_site'][0].search("bscscan") != -1)
 						document.getElementById("coin-links").innerHTML += '<a href="' + data['links']['blockchain_site'][0] + '"><img src="images/logos/bscscan.png" height="30px"></a>';
 		
-					if(data['contract_address'] != undefined && data['contract_address'] != "")
+					if(data['contract_address'] != undefined && data['contract_address'].length > 10)
 					{
 						document.getElementById("coin-links").innerHTML += '&nbsp;&nbsp;<a href="https://poocoin.app/tokens/' + data['contract_address'] + '"><img src="images/logos/poocoin-poocoin.svg" height="30px"></a>';
 		
@@ -609,9 +609,3 @@
 		<script src="assets/js/print.js"></script>
 	</body>
 </html>
-
-<!--
-	design: Threshold by Pixelarity
-	pixelarity.com | @ajlkn hello@pixelarity.com
-	License: pixelarity.com/license
--->
