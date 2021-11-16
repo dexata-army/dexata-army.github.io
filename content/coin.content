@@ -183,7 +183,7 @@
 	        autoSelected: 'zoom'
 	      }
 	    },
-	    colors:['#c922c9', '#E91E63', '#9C27B0'],
+	    colors:['#C600EB', '#E91E63', '#9C27B0'],
 	    dataLabels: {
 	      enabled: false
 	    },
@@ -226,7 +226,6 @@
           tickAmount: 5,
 	      labels: {
 	        formatter: function (val) {
-	          return new Date(val);
 	          if(chart_range == "hour" || chart_range == "day")
 		      	return new Date(val).toLocaleTimeString();
 		      else
@@ -273,18 +272,22 @@
 			$.get(
 				'https://api.coingecko.com/api/v3/coins/' + coin_data['id'] + '/market_chart?vs_currency=usd&days=' + data_range + '&interval=' + chart_freq,
 				function(data) {
-					//document.getElementById('prices_chart').innerHTML = "";
-					//document.getElementById('total_volumes_chart').innerHTML = "";
 					if(chart_type == "prices")
 					{
 						if(price_chart != undefined)
+						{
 							price_chart.destroy();
+							document.getElementById('prices_chart').innerHTML = "";
+						}
 						price_chart = draw_chart(coin_data['name'], chart_type, y_title, data[chart_type]);
 					}
 					else
 					{
 						if(vol_chart != undefined)
+						{
 							vol_chart.destroy();
+							document.getElementById('total_volumes_chart').innerHTML = "";
+						}
 						vol_chart = draw_chart(coin_data['name'], chart_type, y_title, data[chart_type]);
 					}
 			}).fail(function() {
