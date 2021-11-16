@@ -1,10 +1,20 @@
-<title>BabyDogeZilla</title>
+<title>Dexata - $[title]</title>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 <meta name="description" content="" />
 <meta name="keywords" content="" />
-<link rel="stylesheet" href="https://n-ham.github.io/BabyDogeZilla-website/assets/css/404.css" />
-<link rel="stylesheet" href="https://n-ham.github.io/BabyDogeZilla-website/assets/css/main.css" />
-<link rel="stylesheet" href="https://n-ham.github.io/BabyDogeZilla-website/assets/css/pagestyle.css" />
-<link rel="stylesheet" href="https://n-ham.github.io/BabyDogeZilla-website/assets/css/print.css" />
-<link rel="icon" type="image/svg" href="https://n-ham.github.io/BabyDogeZilla-website/images/logo.png">
+<link rel="stylesheet" href="https://dexata-army.github.io/assets/css/404.css" />
+<link rel="stylesheet" href="https://dexata-army.github.io/assets/css/main.css" />
+<link rel="stylesheet" href="https://dexata-army.github.io/assets/css/pagestyle.css" />
+<link rel="stylesheet" href="https://dexata-army.github.io/assets/css/print.css" />
+<link rel="icon" type="image/svg" href="https://dexata-army.github.io/images/logo.png">
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-D70JLR4EJM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-D70JLR4EJM');
+</script>

@@ -28,19 +28,15 @@
 						</table>
 					</div>
 
-					<div class="spotlight" style="max-width:500px">
+					<div>
 						<p>
-							Watchlist
-
-							<textarea id="watchlist"></textarea>
+							Watchlist<br>
+							<textarea id="watchlist" style="max-width:100%; width: 400px; min-height: 100px"></textarea>
 						</p>
-					</div>
 
-					<div class="spotlight" style="max-width:500px">
 						<p>
-							Ignore List
-
-							<textarea id="ignorelist"></textarea>
+							Ignore list<br>
+							<textarea id="ignorelist" style="max-width:100%; width: 400px; min-height: 100px"></textarea>
 						</p>
 					</div>
 

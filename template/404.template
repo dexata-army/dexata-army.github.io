@@ -6,27 +6,23 @@
 	<body class="is-preload">
 		@input(template/header.404)
 
+		<br><br>
+
 		@content
 
 		@input(template/footer.content)
 
 		<!-- Scripts -->
-		<script src="https://n-ham.github.io/BabyDogeZilla-website/assets/js/jquery.min.js"></script>
-		<script src="https://n-ham.github.io/BabyDogeZilla-website/assets/js/jquery.dropotron.min.js"></script>
-		<script src="https://n-ham.github.io/BabyDogeZilla-website/assets/js/jquery.scrollex.min.js"></script>
-		<script src="https://n-ham.github.io/BabyDogeZilla-website/assets/js/jquery.scrolly.min.js"></script>
-		<script src="https://n-ham.github.io/BabyDogeZilla-website/assets/js/browser.min.js"></script>
-		<script src="https://n-ham.github.io/BabyDogeZilla-website/assets/js/breakpoints.min.js"></script>
-		<script src="https://n-ham.github.io/BabyDogeZilla-website/assets/js/util.js"></script>
-		<script src="https://n-ham.github.io/BabyDogeZilla-website/assets/js/main.js"></script>
+		<script src="https://dexata-army.github.io/assets/js/jquery.min.js"></script>
+		<script src="https://dexata-army.github.io/assets/js/jquery.dropotron.min.js"></script>
+		<script src="https://dexata-army.github.io/assets/js/jquery.scrollex.min.js"></script>
+		<script src="https://dexata-army.github.io/assets/js/jquery.scrolly.min.js"></script>
+		<script src="https://dexata-army.github.io/assets/js/browser.min.js"></script>
+		<script src="https://dexata-army.github.io/assets/js/breakpoints.min.js"></script>
+		<script src="https://dexata-army.github.io/assets/js/util.js"></script>
+		<script src="https://dexata-army.github.io/assets/js/main.js"></script>
 
 		<!-- https://printjs.crabbly.com/ -->
-		<script src="https://n-ham.github.io/BabyDogeZilla-website/assets/js/print.js"></script>
+		<script src="https://dexata-army.github.io/assets/js/print.js"></script>
 	</body>
 </html>
-
-<!--
-	design: Threshold by Pixelarity
-	pixelarity.com | @ajlkn hello@pixelarity.com
-	License: pixelarity.com/license
--->
