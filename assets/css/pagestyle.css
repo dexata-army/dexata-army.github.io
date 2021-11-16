@@ -21,16 +21,11 @@ br, button, nav, noselect
 input, textarea
 {
 	background:  #6e4d4b;
-	padding-left: 5px;
-	padding-right: 5px;
 	color: white;
 }
 
 textarea
 {
-	margin-left: 10px;
-	margin-right: 10px;
-	margin-bottom: -20px;
 	height: 200px;
 	resize: vertical;
 }
