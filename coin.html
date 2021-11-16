@@ -274,7 +274,7 @@
 		          tickAmount: 5,
 			      labels: {
 			        formatter: function (val) {
-			          return new Date(val);
+			          return new Date(va).toLocaleString();
 			          if(chart_range == "hour" || chart_range == "day")
 				      	return new Date(val).toLocaleTimeString();
 				      else
