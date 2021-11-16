@@ -149,11 +149,11 @@
 									<option value="year">1 yr</option>
 								</select>
 								<div class="spotlight" style="width: 100%;">
-									<div id="prices_chart" style="min-width: 200px; width: 90%; padding-top: 30px; padding-bottom:30px; margin: 0 auto; -webkit-filter: invert(100%); filter: invert(100%);">
+									<div id="prices_chart" style="min-width: 200px; width: 90%; padding-top: 30px; padding-bottom:30px; margin: 0 auto">
 									</div><br>
 								</div>
 								<div class="spotlight" style="width: 100%;">
-									<div id="total_volumes_chart" style="min-width: 200px; width: 90%; padding-top: 30px; padding-bottom:30px; margin: 0 auto; -webkit-filter: invert(100%); filter: invert(100%);">
+									<div id="total_volumes_chart" style="min-width: 200px; width: 90%; padding-top: 30px; padding-bottom:30px; margin: 0 auto">
 									</div><br>
 								</div>
 							</div>
@@ -173,6 +173,7 @@
 			var refresh_ms = 10000;
 			var chart_range = "hour";
 			var chart_freq = "minute";
+			var price_chart, vol_chart;
 		
 			if(localStorage.getItem('refresh_sec'))
 				refresh_ms = 1000*localStorage.getItem('refresh_sec');
@@ -220,6 +221,7 @@
 			      chart: {
 			      type: 'area',
 			      stacked: false,
+			      background: 'none',
 			      height: 350,
 			      zoom: {
 			        type: 'xy',
@@ -229,7 +231,7 @@
 			        autoSelected: 'zoom'
 			      }
 			    },
-			    colors:['#39ff14', '#E91E63', '#9C27B0'],
+			    colors:['#c922c9', '#E91E63', '#9C27B0'],
 			    dataLabels: {
 			      enabled: false
 			    },
@@ -244,10 +246,10 @@
 			    fill: {
 			      type: 'gradient',
 			      gradient: {
-			        shadeIntensity: 1,
-			        inverseColors: true,
-			        opacityFrom: 0.5,
-			        opacityTo: 0.5,
+			        shadeIntensity: 0.4,
+			        inverseColors: false,
+			        opacityFrom: 0.8,
+			        opacityTo: 0.4,
 			        stops: [0, 90, 100]
 			      },
 			    },
@@ -280,7 +282,7 @@
 			      },
 			    },
 			    theme: {
-			    	mode: 'light',
+			    	mode: 'dark',
 			    },
 			    stroke: {
 				    width: 2,    
@@ -297,6 +299,7 @@
 		
 			    var chart = new ApexCharts(document.querySelector("#" + chart_type + "_chart"), options);
 			    chart.render();
+			    return chart;
 			}
 		
 			function fetch_chart(chart_type, y_title, coin_data)
@@ -317,8 +320,20 @@
 					$.get(
 						'https://api.coingecko.com/api/v3/coins/' + coin_data['id'] + '/market_chart?vs_currency=usd&days=' + data_range + '&interval=' + chart_freq,
 						function(data) {
-							//document.getElementById(chart_type + '_chart').innerHTML = "";
-							draw_chart(coin_data['name'], chart_type, y_title, data[chart_type]);
+							//document.getElementById('prices_chart').innerHTML = "";
+							//document.getElementById('total_volumes_chart').innerHTML = "";
+							if(chart_type == "prices")
+							{
+								if(price_chart != undefined)
+									price_chart.destroy();
+								price_chart = draw_chart(coin_data['name'], chart_type, y_title, data[chart_type]);
+							}
+							else
+							{
+								if(vol_chart != undefined)
+									vol_chart.destroy();
+								vol_chart = draw_chart(coin_data['name'], chart_type, y_title, data[chart_type]);
+							}
 					}).fail(function() {
 						clear_page();
 						document.getElementById("page-div").innerHTML = "<p>could not find " + param_map.get('contract_address') + " on the " + param_map.get('network') + " network</p>";
