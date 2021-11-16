@@ -317,7 +317,7 @@
 					$.get(
 						'https://api.coingecko.com/api/v3/coins/' + coin_data['id'] + '/market_chart?vs_currency=usd&days=' + data_range + '&interval=' + chart_freq,
 						function(data) {
-							document.getElementById(chart_type + '_chart').innerHTML = "";
+							//document.getElementById(chart_type + '_chart').innerHTML = "";
 							draw_chart(coin_data['name'], chart_type, y_title, data[chart_type]);
 					}).fail(function() {
 						clear_page();
