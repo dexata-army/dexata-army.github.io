@@ -24,7 +24,10 @@
 						<a href="https://apexcharts.com/"><img src="@pathtofile(output/images/logos/apex-charts.png)" style="max-height:  100px"></a>
 					</p>
 					<p>
-						<a href="https://www.coingecko.com/en/api"><img src="@pathtofile(output/images/logos/coingecko.png)" style="max-height: 100px"></a>
+						<a href="https://bscscan.com/"><img src="@pathtofile(output/images/logos/bscscan.png)" style="max-height: 100px"></a>
+					</p>
+					<p>
+						<a href="https://www.coingecko.com/"><img src="@pathtofile(output/images/logos/coingecko.png)" style="max-height: 100px"></a>
 					</p>
 					<p>
 						<a href="https://nift.dev"><img src="@pathtofile(output/images/logos/nift.svg)" style="max-height: 120px"></a>

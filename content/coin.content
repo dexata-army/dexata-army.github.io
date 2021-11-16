@@ -335,7 +335,7 @@
 			document.getElementById("coin-links").innerHTML += '<br>';
 
 			if(data['links']['blockchain_site'][0].search("bscscan") != -1)
-				document.getElementById("coin-links").innerHTML += '<a href="' + data['links']['blockchain_site'][0] + '"><img src="@pathtofile(output/images/logos/bscscan.png)" height="30px"></a>';
+				document.getElementById("coin-links").innerHTML += '<a href="' + data['links']['blockchain_site'][0] + '"><img src="@pathtofile(output/images/logos/bscscan-icon.png)" height="30px"></a>';
 
 			if(data['contract_address'] != undefined && data['contract_address'].length > 10)
 			{
