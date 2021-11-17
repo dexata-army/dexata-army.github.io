@@ -118,45 +118,50 @@
 		
 			function fetch_table_coingecko()
 			{
-				$(document).ready(function(){
-					$.get(
-						'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=' + fetch_watchlist_str() + '&order=market_cap_desc&per_page=100&page=' + page_no + '&sparkline=false',             
-						function(data) {
-							clear_table();
-							var table = document.getElementById("watchlist_table");
-							document.getElementById("page_input").value = page_no;
+				var watchlist_str = fetch_watchlist_str();
 		
-							for(var i=0; i<=100; i++)
-							{
-								var row = table.insertRow(i+1);
-								row.insertCell(0).innerHTML = data[i]['market_cap_rank'];
-								if(data[i]['image'] != "")
-									row.insertCell(1).innerHTML = "<img height='23px' style='vertical-align:middle' class='rounded' onerror='this.style.display=\"none\"' src='" + data[i]['image'] + "'>";
-								row.insertCell(2).innerHTML = data[i]['symbol'];
-								row.insertCell(3).innerHTML = "<a href='coin.html?id=" + data[i]['id'] + "'>" + data[i]['name'] + "</a>";
+				if(watchlist_str != "")
+				{
+					$(document).ready(function(){
+						$.get(
+							'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=' + fetch_watchlist_str() + '&order=market_cap_desc&per_page=100&page=' + page_no + '&sparkline=false',             
+							function(data) {
+								clear_table();
+								var table = document.getElementById("watchlist_table");
+								document.getElementById("page_input").value = page_no;
 		
-								if(data[i]['current_price'] > 999)
-									row.insertCell(4).innerHTML = "$" + parseFloat(data[i]['current_price']).toLocaleString('en') ;
-								else
-									row.insertCell(4).innerHTML = "$" + data[i]['current_price'] ;
+								for(var i=0; i<=100; i++)
+								{
+									var row = table.insertRow(i+1);
+									row.insertCell(0).innerHTML = data[i]['market_cap_rank'];
+									if(data[i]['image'] != "")
+										row.insertCell(1).innerHTML = "<img height='23px' style='vertical-align:middle' class='rounded' onerror='this.style.display=\"none\"' src='" + data[i]['image'] + "'>";
+									row.insertCell(2).innerHTML = data[i]['symbol'];
+									row.insertCell(3).innerHTML = "<a href='coin.html?id=" + data[i]['id'] + "'>" + data[i]['name'] + "</a>";
 		
-								if(parseFloat(data[i]['price_change_percentage_24h']) < 0)
-									row.insertCell(5).innerHTML = "<red>" + parseFloat(data[i]['price_change_percentage_24h']).toLocaleString('en') + "%</red>";
-								else
-									row.insertCell(5).innerHTML = "<green>" + parseFloat(data[i]['price_change_percentage_24h']).toLocaleString('en') + "%</green>";
+									if(data[i]['current_price'] > 999)
+										row.insertCell(4).innerHTML = "$" + parseFloat(data[i]['current_price']).toLocaleString('en') ;
+									else
+										row.insertCell(4).innerHTML = "$" + data[i]['current_price'] ;
 		
-								if(data[i]['market_cap'] > 0)
-									row.insertCell(6).innerHTML = "$" + parseFloat(data[i]['market_cap']).toLocaleString('en') ;
-								else
-									row.insertCell(6).innerHTML = "-";
+									if(parseFloat(data[i]['price_change_percentage_24h']) < 0)
+										row.insertCell(5).innerHTML = "<red>" + parseFloat(data[i]['price_change_percentage_24h']).toLocaleString('en') + "%</red>";
+									else
+										row.insertCell(5).innerHTML = "<green>" + parseFloat(data[i]['price_change_percentage_24h']).toLocaleString('en') + "%</green>";
 		
-								if(data[i]['total_volume'] > 0)
-									row.insertCell(7).innerHTML = "$" + data[i]['total_volume'].toLocaleString('en') ;
-								else
-									row.insertCell(7).innerHTML = "-";
-							}
+									if(data[i]['market_cap'] > 0)
+										row.insertCell(6).innerHTML = "$" + parseFloat(data[i]['market_cap']).toLocaleString('en') ;
+									else
+										row.insertCell(6).innerHTML = "-";
+		
+									if(data[i]['total_volume'] > 0)
+										row.insertCell(7).innerHTML = "$" + data[i]['total_volume'].toLocaleString('en') ;
+									else
+										row.insertCell(7).innerHTML = "-";
+								}
+						});
 					});
-				});
+				}
 			}
 		
 			function refresh_table()

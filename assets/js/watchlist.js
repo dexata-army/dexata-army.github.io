@@ -1,6 +1,9 @@
 var watchlist;
 var watching;
 
+if(!localStorage.getItem('dexata_watchlist'))
+	localStorage.setItem('dexata_watchlist', "");
+
 function load_watchlist()
 {
 	watchlist = localStorage.getItem('dexata_watchlist').replace(/ /g,"").replace(/;/g, "\n").replace(/,/g, "\n").split("\n");
