@@ -307,7 +307,20 @@
 
 	function ctrl_c(val)
 	{
-		navigator.clipboard.writeText(val);
+		var textArea = document.createElement("textarea");
+		textArea.value = val;
+
+		textArea.style.position = "fixed";
+		textArea.style.bottom = "-30px";
+		textArea.style.right = "-30px";
+		textArea.style.width = "0px";
+		textArea.style.height = "0px";
+
+		document.body.appendChild(textArea);
+		textArea.select();
+		textArea.setSelectionRange(0, 99999); /*For mobile devices*/
+		document.execCommand("copy");
+		textArea.style.visibility = "hidden";
 	}
 
 	function toggle_watching(id)
@@ -359,7 +372,7 @@
 			{
 				document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="https://poocoin.app/tokens/' + data['contract_address'] + '"><img src="@pathtofile(output/images/logos/poocoin-poocoin.svg)" height="30px"></a>';
 
-				document.getElementById("coin_links").innerHTML += '<br><b>contract</b><br>' + data['contract_address'] + '&nbsp;&nbsp;&nbsp;<a onclick="ctrl_c(' + data['contract_address'] + ')"><img src="@pathtofile(output/images/icons/copy.png)" height="20px" style="display: inline-block; vertical-align: middle"></a>';
+				document.getElementById("coin_links").innerHTML += '<br><b>contract</b><br>' + data['contract_address'] + '&nbsp;&nbsp;&nbsp;<a onclick="ctrl_c(\'' + data['contract_address'] + '\')"><img src="@pathtofile(output/images/icons/copy.png)" height="20px" style="display: inline-block; vertical-align: middle"></a>';
 			}
 		}
 
