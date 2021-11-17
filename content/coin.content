@@ -43,8 +43,7 @@
 									</tr>
 								</table>
 							</div>
-						</div>
-						<div style="max-width: 100%; display:inline-block; vertical-align: top">
+						</div><div style="max-width: 100%; display:inline-block; vertical-align: top">
 							<div class="spotlight" style="width: 600px; max-width: 90%; margin-bottom: 20px">
 									<div class="xscroll">
 										<table id="change_table" style="text-align:center">
@@ -315,12 +314,12 @@
 	{
 		if(watching[id] == true)
 		{
-			document.getElementById('watchlist_img').src = "@pathtofile(output/images/icons/watch.png)";
+			document.getElementById('watchlist_icon').innerHTML = "<i class='fas fa-eye fa-2x'></i>";
 			unwatch(id);
 		}
 		else
 		{
-			document.getElementById('watchlist_img').src = "@pathtofile(output/images/icons/unwatch.png)";
+			document.getElementById('watchlist_icon').innerHTML = "<i class='fas fa-eye-slash fa-2x''></i>";
 			watch(id);
 		}
 	}
@@ -365,9 +364,9 @@
 		}
 
 		if(watching[data['id']] == undefined)
-			document.getElementById("coin_links").innerHTML += "<br><a onclick='toggle_watching(\"" + data['id'] + "\")'><img id='watchlist_img' src='@pathtofile(output/images/icons/watch.png)' style='max-height: 20px; margin-top: 10px'></a>";
+			document.getElementById("coin_links").innerHTML += "<br><p style='margin-top: 10px; margin-bottom: 0px'><a id='watchlist_icon' onclick='toggle_watching(\"" + data['id'] + "\")'><i class='fas fa-eye fa-2x'></i></a></p>";
 		else
-			document.getElementById("coin_links").innerHTML += "<br><a onclick='toggle_watching(\"" + data['id'] + "\")'><img id='watchlist_img' src='@pathtofile(output/images/icons/unwatch.png)' style='max-height: 20px; margin-top: 10px'></a>";
+			document.getElementById("coin_links").innerHTML += "<br><p style='margin-top: 10px; margin-bottom: 0px'><a id='watchlist_icon' onclick='toggle_watching(\"" + data['id'] + "\")'><i class='fas fa-eye-slash fa-2x'></i></a></p>";
 	}
 
 	function fill_data(data)

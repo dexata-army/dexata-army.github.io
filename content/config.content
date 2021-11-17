@@ -5,7 +5,7 @@
 		<div class="inner">
 			<div class="spotlights">
 				<center>
-					<div class="spotlight" style="max-width:500px;">
+					<div class="spotlight" style="max-width:500px; margin-bottom: 35px">
 						<div class="content">
 							<h1><i class="fas fa-cogs fa-3x" style="vertical-align:middle"></i><br><noselect>Config</noselect></h1>
 						</div>
@@ -16,7 +16,7 @@
 					<div class="spotlight" style="max-width:500px">
 						<table>
 							<tr>
-								<td>Refresh speed (seconds)</td>
+								<td>Refresh speed (sec)</td>
 								<td><input id="refresh_sec" spellcheck="false"></td>
 							</tr>
 							<tr>
@@ -43,7 +43,7 @@
 					</div>
 
 					<p>
-						<img src="@pathtofile(output/images/btc-illustration.png)" style="max-width:80%; width: 150px">
+						<img src="@pathtofile(output/images/btc-illustration.png)" style="max-width:80%; width: 150px; margin-top: 20px">
 					</p>
 				</center>
 			</div>

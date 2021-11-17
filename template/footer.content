@@ -5,13 +5,39 @@
 			<p>
 				<a href="@pathto(search)"><i class="fas fa-search fa-2x"></i></a> &nbsp;
 				<a href="@pathto(config)"><i class="fas fa-cogs fa-2x"></i></a> &nbsp;
+				<a href="@pathto(coins)"><i class="fas fa-coins fa-2x"></i></a> &nbsp;
+				<a href="@pathto(watchlist)"><i class="fas fa-binoculars fa-2x"></i></a> &nbsp;
 				<a href="https://t.me/dexata_army"><i class="icon brands fa-telegram fa-2x"></i></a> &nbsp;&nbsp;
 				<a href="https://twitter.com/dexata_army"><i class="icon brands fa-twitter fa-2x"></i></a>
 			</p>
 
-			<p class="copyright" style="margin-top:-40px">
+			<p style="margin-top: -30px">
+				<input id="footer_search_box" placeholder="search">
+			</p>
+
+			<p class="copyright" style="margin-top:-20px">
 				&copy;$[load-YYYY] Dexata
 			</p>
 		</noselect>
 	</div>
 </div>
+
+<script>
+	window.addEventListener('keydown',this.keydown,false);
+
+	function keydown(e)
+	{
+		var code = e.keyCode;
+		
+		if(document.activeElement.tagName == "INPUT")
+		{
+			if(code == 13)
+			{
+				if(document.activeElement.id == "footer_search_box")
+				{
+					window.location.href = "@pathto(search)?term=" + document.getElementById('footer_search_box').value;
+				}
+			}
+		}
+	}
+</script>

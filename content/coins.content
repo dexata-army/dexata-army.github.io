@@ -177,7 +177,7 @@
 
 	function goto_page()
 	{
-		page_no = document.getElementById("page_input").value;
+		page_no = document.getElementById(document.activeElement.id).value;
 		fetch_table_coingecko();
 	}
 
