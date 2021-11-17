@@ -12,6 +12,7 @@
 		<link rel="icon" type="image/svg" href="images/logo.png">
 		
 		<script src="assets/js/sleep.js"></script>
+		<script src="assets/js/watchlist.js"></script>
 		
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
@@ -31,8 +32,9 @@
 		<header id="header" class="alt">
 			<div class="logo" style="margin-top: -25px">
 				<noselect>
-					<a href="index.html"><img src="images/logo.png" height="45px" style="vertical-align: middle";> Dexata</a> &nbsp; 
-					<a href="search.html"><img src="images/icons/search.png" height="40px" style="vertical-align: middle"></a>
+					<a href="index.html"><img src="images/logo.png" height="45px" style="vertical-align: middle"> Dexata</a> &nbsp; 
+					<a href="search.html"><i class="fas fa-search fa-1x" style="vertical-align:middle"></i></a> 
+					<a href="config.html"><i class="fas fa-cogs fa-1x" style="vertical-align:middle"></i></a> 
 				</noselect>
 			</div>
 		
@@ -40,8 +42,7 @@
 				<ul>
 					<li><a href="index.html">home</a></li>
 					<li><a href="coins.html">coins</a></li>
-					<li><a href="https://t.me/dexata_army">telegram</a></li>
-					<li><a href="https://twitter.com/dexata_army">twitter</a></li>
+					<li><a href="watchlist.html">watchlist</a></li>
 				</ul>
 			</nav>
 		</header>
@@ -84,9 +85,9 @@
 								</div>
 							</div>
 							<noselect>
-								<a onclick="prev_page()"><img height="40px" src="images/icons/left.png"></a> &nbsp;&nbsp;&nbsp;&nbsp;
-								<a onclick="next_page()"><img height="40px" src="images/icons/right.png"></a><br>
-								page &nbsp; <input id="page_input" style="vertical-align: middle; width: 75px">
+								<a onclick="prev_page()"><i class="fas fa-arrow-circle-left fa-3x" style="vertical-align: middle"></i></a> &nbsp;&nbsp;
+								<input id="page_input" style="width: 75px; vertical-align: middle"> &nbsp;&nbsp;
+								<a onclick="next_page()"><i class="fas fa-arrow-circle-right fa-3x" style="vertical-align: middle"></i></a>
 							</noselect>
 						</center>
 					</div>
@@ -144,8 +145,15 @@
 								else
 									row.insertCell(5).innerHTML = "<green>" + parseFloat(data[i]['price_change_percentage_24h']).toLocaleString('en') + "%</green>";
 		
-								row.insertCell(6).innerHTML = "$" + parseFloat(data[i]['market_cap']).toLocaleString('en') ;
-								row.insertCell(7).innerHTML = "$" + data[i]['total_volume'].toLocaleString('en') ;
+								if(data[i]['market_cap'] > 0)
+									row.insertCell(6).innerHTML = "$" + parseFloat(data[i]['market_cap']).toLocaleString('en') ;
+								else
+									row.insertCell(6).innerHTML = "-";
+		
+								if(data[i]['total_volume'] > 0)
+									row.insertCell(7).innerHTML = "$" + data[i]['total_volume'].toLocaleString('en') ;
+								else
+									row.insertCell(7).innerHTML = "-";
 							}
 					});
 				});
@@ -252,9 +260,10 @@
 			<div class="inner" style="text-align:center">
 				<noselect>
 					<p>
-							<a href="config.html"><img src="images/icons/cog.png" height="50px"></a> &nbsp;
-							<a href="https://t.me/dexata_army"><img src="images/icons/telegram.png" height="50px"></a> &nbsp;&nbsp;
-							<a href="https://twitter.com/dexata_army"><img src="images/icons/twitter.png" height="53px"></a>
+						<a href="search.html"><i class="fas fa-search fa-2x"></i></a> &nbsp;
+						<a href="config.html"><i class="fas fa-cogs fa-2x"></i></a> &nbsp;
+						<a href="https://t.me/dexata_army"><i class="icon brands fa-telegram fa-2x"></i></a> &nbsp;&nbsp;
+						<a href="https://twitter.com/dexata_army"><i class="icon brands fa-twitter fa-2x"></i></a>
 					</p>
 		
 					<p class="copyright" style="margin-top:-40px">

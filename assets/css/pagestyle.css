@@ -11,7 +11,7 @@ menu
 	background-color: black !important;
 }
 
-br, button, nav, noselect
+br, button, nav, select, noselect
 {
 	-webkit-user-select: none; /* Chrome/Safari */
 	-moz-user-select: none; /* Firefox */
@@ -21,7 +21,15 @@ br, button, nav, noselect
 input, textarea
 {
 	background:  #6e4d4b;
+	line-height: normal;
+	padding:  5px;
 	color: white;
+}
+
+i
+{
+	margin-left: 3px;
+	margin-right: 3px;
 }
 
 textarea
@@ -77,6 +85,7 @@ table
 	margin:0 auto;
 	/*max-width:800px;*/
 	text-align: center;
+	white-space: nowrap;
 	
 	margin-bottom: 10px;
 	margin-top: 10px;
@@ -131,4 +140,26 @@ tr
 ::-webkit-scrollbar-thumb:hover 
 {
  	background: #ff1493; 
+}
+
+textarea::-webkit-scrollbar-track 
+{
+ 	background: #6e4d4b; 
+}
+ 
+/* Handle */
+textarea::-webkit-scrollbar-thumb 
+{
+ 	background: #632225;
+	border-radius: 10px;
+}
+
+/* Handle on hover */
+textarea::-webkit-scrollbar-thumb:hover 
+{
+ 	background: #421114; 
+}
+
+textarea::-webkit-resizer {
+  background: #6e4d4b;
 }

@@ -160,7 +160,7 @@ input, select, textarea {
 		-webkit-transition: color 0.2s ease-in-out;
 		-ms-transition: color 0.2s ease-in-out;
 		transition: color 0.2s ease-in-out;
-		color: #e46270;
+		color: #679267;
 
 		text-decoration: none;
 	}
@@ -171,7 +171,7 @@ input, select, textarea {
 		}
 
 		a:active {
-			color: #d54857;
+			color: #679267;
 		}
 
 	strong, b {
@@ -1964,7 +1964,7 @@ input, select, textarea {
 		input[type="button"].primary,
 		button.primary,
 		.button.primary {
-			background-color: #d54857;
+			background-color: #679267;
 			box-shadow: none;
 			color: #ffffff !important;
 		}
@@ -1999,7 +1999,7 @@ input, select, textarea {
 			input[type="button"].primary:active,
 			button.primary:active,
 			.button.primary:active {
-				background-color: #d54857;
+				background-color: #679267;
 			}
 
 				input[type="submit"].primary:active:after,
@@ -2227,8 +2227,8 @@ input, select, textarea {
 		input[type="url"]:focus,
 		select:focus,
 		textarea:focus {
-			border-color: #d54857;
-			box-shadow: 0 0 0 1px #d54857;
+			border-color: #679267;
+			box-shadow: 0 0 0 1px #679267;
 		}
 
 	label {
@@ -2335,16 +2335,16 @@ input, select, textarea {
 
 		input[type="checkbox"]:checked + label:before,
 		input[type="radio"]:checked + label:before {
-			background-color: #d54857;
-			border-color: #d54857;
+			background-color: #679267;
+			border-color: #679267;
 			color: #ffffff;
 			content: '\f00c';
 		}
 
 		input[type="checkbox"]:focus + label:before,
 		input[type="radio"]:focus + label:before {
-			border-color: #d54857;
-			box-shadow: 0 0 0 1px #d54857;
+			border-color: #679267;
+			box-shadow: 0 0 0 1px #679267;
 		}
 
 	input[type="checkbox"] + label:before {
@@ -2426,7 +2426,7 @@ input, select, textarea {
 		}
 
 			.icon.alt:before {
-				color: #d54857;
+				color: #679267;
 				font-size: 1.15rem;
 				position: relative;
 				top: 0.05rem;
@@ -2479,7 +2479,7 @@ input, select, textarea {
 	}
 
 		.image:after {
-			/*background: linear-gradient(45deg, #d54857 20%, #2eaeff 100%);*/
+			/*background: linear-gradient(45deg, #679267 20%, #2eaeff 100%);*/
 			content: '';
 			height: 100%;
 			left: 0;
@@ -3329,7 +3329,7 @@ input, select, textarea {
 				}
 
 					#header > nav > ul > li.current {
-						border-bottom: 3px solid #d54857;
+						border-bottom: 3px solid #679267;
 					}
 
 						#header > nav > ul > li.current a {
@@ -3363,7 +3363,7 @@ input, select, textarea {
 					}
 
 		.dropotron {
-			background-color: #d54857;
+			background-color: #679267;
 			border-radius: 0.5rem;
 			list-style-type: none;
 			margin: -0.5rem 0 0 1px;
@@ -3381,7 +3381,7 @@ input, select, textarea {
 					-webkit-transform: rotate(45deg);
 					-ms-transform: rotate(45deg);
 					transform: rotate(45deg);
-					background-color: #d54857;
+					background-color: #679267;
 					content: '';
 					height: 0.75rem;
 					position: absolute;
@@ -3532,7 +3532,7 @@ input, select, textarea {
 		-ms-transition: -ms-transform 0.5s ease, box-shadow 0.5s ease, visibility 0.5s;
 		transition: transform 0.5s ease, box-shadow 0.5s ease, visibility 0.5s;
 		-webkit-overflow-scrolling: touch;
-		background-color: #d54857;
+		background-color: #679267;
 		box-shadow: none;
 		color: rgba(255, 255, 255, 0.5);
 		height: 100%;
