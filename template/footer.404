@@ -3,8 +3,8 @@
 	<div class="inner" style="text-align:center">
 		<noselect>
 			<p>
-				<a href="@pathto(search)"><i class="fas fa-search fa-2x"></i></a> &nbsp;
-				<a href="@pathto(config)"><i class="fas fa-cogs fa-2x"></i></a> &nbsp;
+				<a href="https://dexata.net/search.html"><i class="fas fa-search fa-2x"></i></a> &nbsp;
+				<a href="https://dexata.net/config.html"><i class="fas fa-cogs fa-2x"></i></a> &nbsp;
 				<a href="https://t.me/dexata_army"><i class="icon brands fa-telegram fa-2x"></i></a> &nbsp;&nbsp;
 				<a href="https://twitter.com/dexata_army"><i class="icon brands fa-twitter fa-2x"></i></a>
 			</p>

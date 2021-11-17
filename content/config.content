@@ -7,25 +7,25 @@
 				<center>
 					<div class="spotlight" style="max-width:500px;">
 						<div class="content">
-							<h1><img src="@pathtofile(output/images/icons/cog.png)" height="125px" style="vertical-align: middle";><br><noselect>Config</noselect></h1>
+							<h1><i class="fas fa-cogs fa-3x" style="vertical-align:middle"></i><br><noselect>Config</noselect></h1>
 						</div>
 					</div>
 
-					<a onclick="save_config()"><img src="@pathtofile(output/images/icons/save.png)" style="max-width: 50px"></a><br><br>
+					<a onclick="save_config()"><i class="fas fa-save fa-3x"></i></a><br><br>
 
 					<div class="spotlight" style="max-width:500px">
 						<table>
 							<tr>
 								<td>Refresh speed (seconds)</td>
-								<td><input id="refresh_sec"></td>
+								<td><input id="refresh_sec" spellcheck="false"></td>
 							</tr>
 							<tr>
 								<td>BSC address</td>
-								<td><input id="bsc_addr"></td>
+								<td><input id="bsc_addr" spellcheck="false"></td>
 							</tr>
 							<tr>
 								<td>BSCScan API key</td>
-								<td><input id="bscscan_api_key"></td>
+								<td><input id="bscscan_api_key" spellcheck="false"></td>
 							</tr>
 						</table>
 					</div>
@@ -33,12 +33,12 @@
 					<div>
 						<p>
 							Watchlist<br>
-							<textarea id="watchlist" style="max-width:100%; width: 400px; min-height: 100px"></textarea>
+							<textarea id="watchlist" spellcheck="false" style="max-width:100%; width: 400px; height: 250px"></textarea>
 						</p>
 
 						<p>
 							Ignore list<br>
-							<textarea id="ignorelist" style="max-width:100%; width: 400px; min-height: 100px"></textarea>
+							<textarea id="ignorelist" spellcheck="false" style="max-width:100%; width: 400px; height: 250px"></textarea>
 						</p>
 					</div>
 
@@ -51,7 +51,11 @@
 	</section>
 </div>
 
+
+
 <script>
+
+	load_watchlist();
 
 	function load_config()
 	{
@@ -74,6 +78,13 @@
 
 		if(localStorage.getItem('dexata_ignorelist'))
 			document.getElementById("ignorelist").value = localStorage.getItem('dexata_ignorelist');
+	}
+
+	function remove_duplicates(x)
+	{
+		return x.filter(function(item, pos) {
+		    return x.indexOf(item) == pos;
+		})
 	}
 
 	function save_config()
@@ -101,6 +112,7 @@
 			localStorage.setItem('refresh_sec', document.getElementById("refresh_sec").value);
 			localStorage.setItem('bsc_addr', document.getElementById("bsc_addr").value);
 			localStorage.setItem('bscscan_api_key', document.getElementById("bscscan_api_key").value);
+			document.getElementById("watchlist").value = remove_duplicates(document.getElementById("watchlist").value.replace(/ /g,"").replace(/;/g, "\n").replace(/,/g, "\n").split("\n").sort()).join("\n")
 			localStorage.setItem('dexata_watchlist', document.getElementById("watchlist").value);
 			localStorage.setItem('dexata_ignorelist', document.getElementById("ignorelist").value);
 			

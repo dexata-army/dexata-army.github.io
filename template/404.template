@@ -10,7 +10,7 @@
 
 		@content
 
-		@input(template/footer.content)
+		@input(template/footer.404)
 
 		<!-- Scripts -->
 		<script src="https://dexata-army.github.io/assets/js/jquery.min.js"></script>

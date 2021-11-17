@@ -7,7 +7,7 @@
 				<center>
 					<div class="spotlight" style="max-width:500px;">
 						<div class="content">
-							<h1><img src="@pathtofile(output/images/icons/search.png)" height="125px" style="vertical-align: middle";><br><noselect>Search</noselect></h1>
+							<h1><i class="fas fa-search fa-3x" style="vertical-align:middle"></i><br><noselect>Search</noselect></h1>
 						</div>
 					</div>
 					
@@ -23,9 +23,9 @@
 
 					<input id="search_input" placeholder="search" style="margin-bottom:15px">
 
-					<div class="spotlight" id="search_spotlight" style="max-width:500px; visibility: hidden">
+					<div class="spotlight" id="search_spotlight" style="max-width:500px; visibility: hidden; ">
 						<div class="xscroll">
-							<table id="search_table">
+							<table id="search_table" style="display: none">
 								<thead>
 									<tr>
 										<th>symbol</th>
@@ -80,6 +80,7 @@
 	function search_coins()
 	{
 		document.getElementById("search_spotlight").style.visibility = "visible";
+		document.getElementById("search_table").style.display = "inline";
 
 		var table = document.getElementById("search_table");
 		var no_coins_found = 0;

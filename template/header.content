@@ -2,8 +2,9 @@
 <header id="header" class="alt">
 	<div class="logo" style="margin-top: -25px">
 		<noselect>
-			<a href="@pathto(index)"><img src="@pathtofile(output/images/logo.png)" height="45px" style="vertical-align: middle";> Dexata</a> &nbsp; 
-			<a href="@pathto(search)"><img src="@pathtofile('output/images/icons/search.png')" height="40px" style="vertical-align: middle"></a>
+			<a href="@pathto(index)"><img src="@pathtofile(output/images/logo.png)" height="45px" style="vertical-align: middle"> Dexata</a> &nbsp; 
+			<a href="@pathto(search)"><i class="fas fa-search fa-1x" style="vertical-align:middle"></i></a> 
+			<a href="@pathto(config)"><i class="fas fa-cogs fa-1x" style="vertical-align:middle"></i></a> 
 		</noselect>
 	</div>
 

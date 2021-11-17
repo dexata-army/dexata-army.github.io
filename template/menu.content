@@ -2,7 +2,6 @@
 	<ul>
 		<li><a href="@pathto(index)">home</a></li>
 		<li><a href="@pathto(coins)">coins</a></li>
-		<li><a href="https://t.me/dexata_army">telegram</a></li>
-		<li><a href="https://twitter.com/dexata_army">twitter</a></li>
+		<li><a href="@pathto(watchlist)">watchlist</a></li>
 	</ul>
 </nav>

@@ -8,7 +8,8 @@
 <link rel="stylesheet" href="@pathtofile(output/assets/css/print.css)" />
 <link rel="icon" type="image/svg" href="@pathtofile(output/images/logo.png)">
 
-<script src="assets/js/sleep.js"></script>
+<script src="@pathtofile(output/assets/js/sleep.js)"></script>
+<script src="@pathtofile(output/assets/js/watchlist.js)"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
