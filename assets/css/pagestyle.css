@@ -132,14 +132,14 @@ tr
 /* Handle */
 ::-webkit-scrollbar-thumb 
 {
- 	background: #53575c;
+ 	background: #24242a;
 	border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover 
 {
- 	background: #ff1493; 
+ 	background: #679267; 
 }
 
 textarea::-webkit-scrollbar-track 
@@ -150,7 +150,7 @@ textarea::-webkit-scrollbar-track
 /* Handle */
 textarea::-webkit-scrollbar-thumb 
 {
- 	background: #632225;
+ 	background: pink;
 	border-radius: 10px;
 }
 

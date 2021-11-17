@@ -54,7 +54,7 @@
 				<div class="inner">
 					<div class="spotlights">
 						<center>
-							<div class="spotlight" style="max-width:500px;">
+							<div class="spotlight" style="max-width:500px; margin-bottom: 50px">
 								<div class="content">
 									<h1><i class="fas fa-search fa-3x" style="vertical-align:middle"></i><br><noselect>Search</noselect></h1>
 								</div>
@@ -91,7 +91,7 @@
 								</div>
 							</div>
 		
-							<img src="images/phone-illustration.png" style="max-width:80%; width: 300px">
+							<img src="images/phone-illustration.png" style="max-width:80%; width: 300px; margin-top: 20px">
 						</center>
 					</div>
 				</div>
@@ -101,6 +101,18 @@
 		<script>
 			var search_network = "bsc";
 			var coins_data;
+		
+			var param_array = [];
+			var details_filled = 0;
+			if(location.search.indexOf('?') > -1)
+				param_array = location.search.split("?")[1].replace("%20", " ").split('&');
+			var param_map = new Map();
+		
+			for(var i=0; i<param_array.length; i++)
+			{
+				param_array[i] = param_array[i].split('=');
+				param_map.set(param_array[i][0], param_array[i][1].toLowerCase());
+			}
 		
 			if(localStorage.getItem('search_network'))
 				search_network = localStorage.getItem('search_network');
@@ -168,6 +180,12 @@
 			    	    'https://api.coingecko.com/api/v3/coins/list',              
 						function(data) {
 							coins_data = data;
+							if(document.getElementById('search_input').value != "")
+							{
+								clear_table();
+								search_coins();
+								document.getElementById("search_input").scrollIntoView();
+							}
 					}).fail(function() {
 						clear_page();
 						document.getElementById("page-div").innerHTML = "<p>could not find " + param_map.get('contract_address') + " on the " + param_map.get('network') + " network</p>";
@@ -194,7 +212,12 @@
 				}
 			}
 		
+			if(param_map.get('term') != undefined)
+				document.getElementById('search_input').value = param_map.get('term');
+		
 			fetch_coins_list();
+		
+		
 		</script>
 
 		<!-- Footer -->
@@ -204,16 +227,42 @@
 					<p>
 						<a href="search.html"><i class="fas fa-search fa-2x"></i></a> &nbsp;
 						<a href="config.html"><i class="fas fa-cogs fa-2x"></i></a> &nbsp;
+						<a href="coins.html"><i class="fas fa-coins fa-2x"></i></a> &nbsp;
+						<a href="watchlist.html"><i class="fas fa-binoculars fa-2x"></i></a> &nbsp;
 						<a href="https://t.me/dexata_army"><i class="icon brands fa-telegram fa-2x"></i></a> &nbsp;&nbsp;
 						<a href="https://twitter.com/dexata_army"><i class="icon brands fa-twitter fa-2x"></i></a>
 					</p>
 		
-					<p class="copyright" style="margin-top:-40px">
+					<p style="margin-top: -30px">
+						<input id="footer_search_box" placeholder="search">
+					</p>
+		
+					<p class="copyright" style="margin-top:-20px">
 						&copy;<script>document.write(new Date().getFullYear())</script> Dexata
 					</p>
 				</noselect>
 			</div>
 		</div>
+		
+		<script>
+			window.addEventListener('keydown',this.keydown,false);
+		
+			function keydown(e)
+			{
+				var code = e.keyCode;
+				
+				if(document.activeElement.tagName == "INPUT")
+				{
+					if(code == 13)
+					{
+						if(document.activeElement.id == "footer_search_box")
+						{
+							window.location.href = "search.html?term=" + document.getElementById('footer_search_box').value;
+						}
+					}
+				}
+			}
+		</script>
 
 		<!-- Scripts -->
 		<script src="assets/js/jquery.min.js"></script>

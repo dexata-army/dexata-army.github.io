@@ -54,7 +54,7 @@
 				<div class="inner">
 					<div class="spotlights">
 						<center>
-							<div class="spotlight" style="max-width:500px;">
+							<div class="spotlight" style="max-width:500px; margin-bottom: 35px">
 								<div class="content">
 									<h1><i class="fas fa-cogs fa-3x" style="vertical-align:middle"></i><br><noselect>Config</noselect></h1>
 								</div>
@@ -65,7 +65,7 @@
 							<div class="spotlight" style="max-width:500px">
 								<table>
 									<tr>
-										<td>Refresh speed (seconds)</td>
+										<td>Refresh speed (sec)</td>
 										<td><input id="refresh_sec" spellcheck="false"></td>
 									</tr>
 									<tr>
@@ -92,7 +92,7 @@
 							</div>
 		
 							<p>
-								<img src="images/btc-illustration.png" style="max-width:80%; width: 150px">
+								<img src="images/btc-illustration.png" style="max-width:80%; width: 150px; margin-top: 20px">
 							</p>
 						</center>
 					</div>
@@ -179,16 +179,42 @@
 					<p>
 						<a href="search.html"><i class="fas fa-search fa-2x"></i></a> &nbsp;
 						<a href="config.html"><i class="fas fa-cogs fa-2x"></i></a> &nbsp;
+						<a href="coins.html"><i class="fas fa-coins fa-2x"></i></a> &nbsp;
+						<a href="watchlist.html"><i class="fas fa-binoculars fa-2x"></i></a> &nbsp;
 						<a href="https://t.me/dexata_army"><i class="icon brands fa-telegram fa-2x"></i></a> &nbsp;&nbsp;
 						<a href="https://twitter.com/dexata_army"><i class="icon brands fa-twitter fa-2x"></i></a>
 					</p>
 		
-					<p class="copyright" style="margin-top:-40px">
+					<p style="margin-top: -30px">
+						<input id="footer_search_box" placeholder="search">
+					</p>
+		
+					<p class="copyright" style="margin-top:-20px">
 						&copy;<script>document.write(new Date().getFullYear())</script> Dexata
 					</p>
 				</noselect>
 			</div>
 		</div>
+		
+		<script>
+			window.addEventListener('keydown',this.keydown,false);
+		
+			function keydown(e)
+			{
+				var code = e.keyCode;
+				
+				if(document.activeElement.tagName == "INPUT")
+				{
+					if(code == 13)
+					{
+						if(document.activeElement.id == "footer_search_box")
+						{
+							window.location.href = "search.html?term=" + document.getElementById('footer_search_box').value;
+						}
+					}
+				}
+			}
+		</script>
 
 		<!-- Scripts -->
 		<script src="assets/js/jquery.min.js"></script>

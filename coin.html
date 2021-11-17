@@ -92,8 +92,7 @@
 											</tr>
 										</table>
 									</div>
-								</div>
-								<div style="max-width: 100%; display:inline-block; vertical-align: top">
+								</div><div style="max-width: 100%; display:inline-block; vertical-align: top">
 									<div class="spotlight" style="width: 600px; max-width: 90%; margin-bottom: 20px">
 											<div class="xscroll">
 												<table id="change_table" style="text-align:center">
@@ -364,12 +363,12 @@
 			{
 				if(watching[id] == true)
 				{
-					document.getElementById('watchlist_img').src = "images/icons/watch.png";
+					document.getElementById('watchlist_icon').innerHTML = "<i class='fas fa-eye fa-2x'></i>";
 					unwatch(id);
 				}
 				else
 				{
-					document.getElementById('watchlist_img').src = "images/icons/unwatch.png";
+					document.getElementById('watchlist_icon').innerHTML = "<i class='fas fa-eye-slash fa-2x''></i>";
 					watch(id);
 				}
 			}
@@ -414,9 +413,9 @@
 				}
 		
 				if(watching[data['id']] == undefined)
-					document.getElementById("coin_links").innerHTML += "<br><a onclick='toggle_watching(\"" + data['id'] + "\")'><img id='watchlist_img' src='images/icons/watch.png' style='max-height: 20px; margin-top: 10px'></a>";
+					document.getElementById("coin_links").innerHTML += "<br><p style='margin-top: 10px; margin-bottom: 0px'><a id='watchlist_icon' onclick='toggle_watching(\"" + data['id'] + "\")'><i class='fas fa-eye fa-2x'></i></a></p>";
 				else
-					document.getElementById("coin_links").innerHTML += "<br><a onclick='toggle_watching(\"" + data['id'] + "\")'><img id='watchlist_img' src='images/icons/unwatch.png' style='max-height: 20px; margin-top: 10px'></a>";
+					document.getElementById("coin_links").innerHTML += "<br><p style='margin-top: 10px; margin-bottom: 0px'><a id='watchlist_icon' onclick='toggle_watching(\"" + data['id'] + "\")'><i class='fas fa-eye-slash fa-2x'></i></a></p>";
 			}
 		
 			function fill_data(data)
@@ -630,16 +629,42 @@
 					<p>
 						<a href="search.html"><i class="fas fa-search fa-2x"></i></a> &nbsp;
 						<a href="config.html"><i class="fas fa-cogs fa-2x"></i></a> &nbsp;
+						<a href="coins.html"><i class="fas fa-coins fa-2x"></i></a> &nbsp;
+						<a href="watchlist.html"><i class="fas fa-binoculars fa-2x"></i></a> &nbsp;
 						<a href="https://t.me/dexata_army"><i class="icon brands fa-telegram fa-2x"></i></a> &nbsp;&nbsp;
 						<a href="https://twitter.com/dexata_army"><i class="icon brands fa-twitter fa-2x"></i></a>
 					</p>
 		
-					<p class="copyright" style="margin-top:-40px">
+					<p style="margin-top: -30px">
+						<input id="footer_search_box" placeholder="search">
+					</p>
+		
+					<p class="copyright" style="margin-top:-20px">
 						&copy;<script>document.write(new Date().getFullYear())</script> Dexata
 					</p>
 				</noselect>
 			</div>
 		</div>
+		
+		<script>
+			window.addEventListener('keydown',this.keydown,false);
+		
+			function keydown(e)
+			{
+				var code = e.keyCode;
+				
+				if(document.activeElement.tagName == "INPUT")
+				{
+					if(code == 13)
+					{
+						if(document.activeElement.id == "footer_search_box")
+						{
+							window.location.href = "search.html?term=" + document.getElementById('footer_search_box').value;
+						}
+					}
+				}
+			}
+		</script>
 
 		<!-- Scripts -->
 		<script src="assets/js/jquery.min.js"></script>
