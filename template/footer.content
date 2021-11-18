@@ -7,6 +7,7 @@
 				<a href="@pathto(config)"><i class="fas fa-cogs fa-2x"></i></a> &nbsp;
 				<a href="@pathto(coins)"><i class="fas fa-coins fa-2x"></i></a> &nbsp;
 				<a href="@pathto(watchlist)"><i class="fas fa-binoculars fa-2x"></i></a> &nbsp;
+				<a href="@pathto(wallet)"><i class="fas fa-wallet fa-2x"></i></a> &nbsp;
 				<a href="https://t.me/dexata_army"><i class="icon brands fa-telegram fa-2x"></i></a> &nbsp;&nbsp;
 				<a href="https://twitter.com/dexata_army"><i class="icon brands fa-twitter fa-2x"></i></a>
 			</p>

@@ -3,5 +3,6 @@
 		<li><a href="@pathto(index)">home</a></li>
 		<li><a href="@pathto(coins)">coins</a></li>
 		<li><a href="@pathto(watchlist)">watchlist</a></li>
+		<li><a href="@pathto(wallet)">wallet</a></li>
 	</ul>
 </nav>

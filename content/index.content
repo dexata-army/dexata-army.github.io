@@ -30,6 +30,9 @@
 						<a href="https://www.coingecko.com/"><img src="@pathtofile(output/images/logos/coingecko.png)" style="max-height: 100px"></a>
 					</p>
 					<p>
+						<a href="https://www.covalenthq.com/"><img src="@pathtofile(output/images/logos/covalent-hq.svg)" style="max-height: 100px"></a>
+					</p>
+					<p>
 						<a href="https://nift.dev"><img src="@pathtofile(output/images/logos/nift.svg)" style="max-height: 120px"></a>
 					</p>
 				</center>

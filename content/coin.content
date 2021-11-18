@@ -13,7 +13,7 @@
 								<noselect>
 						</div>
 					</div>
-					<div id="page-div">
+					<div id="page_div">
 						<div class="spotlight" style="width: 350px; max-width: 90%; display:inline-block; margin-right: -10px; vertical-align: top;">
 							<div class="xscroll">
 								<table id="data_table" style="text-align:right">
@@ -293,7 +293,7 @@
 					}
 			}).fail(function() {
 				clear_page();
-				document.getElementById("page-div").innerHTML = "<p>could not find " + param_map.get('contract_address') + " on the " + param_map.get('network') + " network</p>";
+				document.getElementById("page_div").innerHTML = "<p>could not find " + param_map.get('contract_address') + " on the " + param_map.get('network') + " network</p>";
 			});
 		});
 	}
@@ -302,7 +302,7 @@
 	{
 		document.getElementById("coin_title").innerHTML = '<img src="@pathtofile(output/images/logo.png)" height="225px" style="vertical-align: middle";><noselect> Dexata</noselect>';
 
-		document.getElementById("page-div").innerHTML = "";
+		document.getElementById("page_div").innerHTML = "";
 	}
 
 	function ctrl_c(val)
@@ -342,7 +342,7 @@
 		document.title = "Dexata - " + data['symbol'];
 
 		if(data['image']['large'] != "")
-			document.getElementById("coin_title").innerHTML = '<img onerror="this.src=\'@pathtofile(output/images/missing.png)\'" class="rounded" src="' + data['image']['large'] + '" height="150px" style="vertical-align: middle";><br>' + data['id'] + ' (' + data['symbol'] + ')';
+			document.getElementById("coin_title").innerHTML = '<img onerror="this.src=\'@pathtofile(output/images/missing.png)\'" class="rounded" src="' + data['image']['large'] + '" height="150px" style="vertical-align: middle";><br>' + data['name'] + ' (' + data['symbol'] + ')';
 
 		document.getElementById("coin_links").innerHTML = "";
 
@@ -511,7 +511,7 @@
 					fetch_chart("total_volumes", "Volume", data);
 			}).fail(function() {
 				clear_page();
-				document.getElementById("page-div").innerHTML = "<p>could not find " + param_map.get('contract_address') + " on the " + param_map.get('network') + " network</p>";
+				document.getElementById("page_div").innerHTML = "<p>could not find " + param_map.get('contract_address') + " on the " + param_map.get('network') + " network</p>";
 			});
 		});
 	}
@@ -532,7 +532,7 @@
 					fetch_chart("total_volumes", "Volume", data);
 			}).fail(function(){ 
 				clear_page();
-				document.getElementById("page-div").innerHTML = "<p>could not find " + param_map.get('id') + "</p>";
+				document.getElementById("page_div").innerHTML = "<p>could not find " + param_map.get('id') + "</p>";
 			});
 		});
 	}
@@ -551,7 +551,7 @@
 		{
 			clear_page();
 
-			document.getElementById("page-div").innerHTML = "<p>please specify a coin name or alternatively a contract address along with a network</p>";
+			document.getElementById("page_div").innerHTML = "<p>please specify a coin name or alternatively a contract address along with a network</p>";
 		}
 	}
 

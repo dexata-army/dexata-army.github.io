@@ -5,9 +5,16 @@
 		<div class="inner">
 			<div class="spotlights">
 				<center>
-					<div class="spotlight" style="max-width:900px">
-						<div class="xscroll">
-							<table id="coins_table">
+					<div class="spotlight" style="max-width:500px; margin-bottom: 50px">
+						<div class="content">
+							<h1><i class="fas fa-coins fa-3x" style="vertical-align:middle"></i><br><noselect>Coins</noselect></h1>
+						</div>
+					</div>
+
+					<div id="table_spotlight" class="spotlight" style="max-width:100%">
+						<div id="table_div" class="xscroll">
+							<img id="loading_gif" src="@pathtofile(output/images/loading.gif)" style="margin-top: 20px">
+							<table id="coins_table" style="display: none">
 								<thead>
 									<tr>
 										<th>rank</th>
@@ -77,7 +84,12 @@
 					var table = document.getElementById("coins_table");
 					document.getElementById("page_input").value = page_no;
 
-					for(var i=0; i<=100; i++)
+					document.getElementById('loading_gif').src = "";
+					document.getElementById('loading_gif').style.visibility = "hidden";
+					document.getElementById('loading_gif').style.display = "none";
+					document.getElementById("coins_table").style.display = "inline";
+
+					for(var i=0; i<100; i++)
 					{
 						var row = table.insertRow(i+1);
 						row.insertCell(0).innerHTML = data[i]['market_cap_rank'];
@@ -106,6 +118,16 @@
 						else
 							row.insertCell(7).innerHTML = "-";
 					}
+
+					document.getElementById('table_spotlight').style.width = (document.getElementById('coins_table').offsetWidth + 70) + "px";
+			}).fail(function() {
+				clear_table();
+				document.getElementById('loading_gif').src = "";
+				document.getElementById('loading_gif').style.visibility = "hidden";
+				document.getElementById('loading_gif').style.display = "none";
+				document.getElementById("table_spotlight").style.width = "600px";
+
+				document.getElementById("table_div").innerHTML = "<p style='margin-top: 20px; margin-bottom: 10px'>failed to fetch coins information, please refresh to try again.</p>";
 			});
 		});
 	}
@@ -119,7 +141,12 @@
 					clear_table();
 					var table = document.getElementById("coins_table");
 
-					for(var i=0; i<=100; i++)
+					document.getElementById('loading_gif').src = "";
+					document.getElementById('loading_gif').style.visibility = "hidden";
+					document.getElementById('loading_gif').style.display = "none";
+					document.getElementById("coins_table").style.display = "inline";
+
+					for(var i=0; i<100; i++)
 					{
 						var row = table.insertRow(i+1);
 						row.insertCell(0).innerHTML = data['data'][i]['rank'];
@@ -150,6 +177,16 @@
 						row.insertCell(8).innerHTML = "$" + parseFloat(data['data'][i]['market_cap_usd']).toLocaleString('en') ;
 						row.insertCell(9).innerHTML = "$" + data['data'][i]['volume24'].toLocaleString('en') ;
 					}
+
+					document.getElementById('table_spotlight').style.width = (document.getElementById('coins_table').offsetWidth + 70) + "px";
+			}).fail(function() {
+				clear_table();
+				document.getElementById('loading_gif').src = "";
+				document.getElementById('loading_gif').style.visibility = "hidden";
+				document.getElementById('loading_gif').style.display = "none";
+				document.getElementById("table_spotlight").style.width = "600px";
+
+				document.getElementById("table_div").innerHTML = "<p style='margin-top: 20px; margin-bottom: 10px'>failed to fetch coins information, please refresh to try again.</p>";
 			});
 		});
 	}
@@ -200,6 +237,8 @@
 			}
 		}
 	}
+
+	document.getElementById('table_spotlight').style.width = (document.getElementById('loading_gif').offsetWidth + 400) + "px";
 
 	fetch_table_coingecko();
 	refresh_table();
