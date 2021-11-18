@@ -14,8 +14,8 @@
 						</div>
 					</div>
 					<div id="page_div">
-						<div class="spotlight" style="width: 350px; max-width: 90%; display:inline-block; margin-right: -10px; vertical-align: top;">
-							<div class="xscroll">
+						<div id="data_table_spotlight" class="spotlight" style="width: 350px; max-width: 100%; display:inline-block; margin-bottom: 20px; vertical-align: top;">
+							<div id="data_table_div" class="xscroll">
 								<table id="data_table" style="text-align:right">
 									<tr>
 										<td><b>price:</b></td>
@@ -30,7 +30,7 @@
 										<td></td>
 									</tr>
 									<tr>
-										<td><b>tot supply:</b></td>
+										<td><b>total supply:</b></td>
 										<td></td>
 									</tr>
 									<tr>
@@ -38,20 +38,22 @@
 										<td></td>
 									</tr>
 									<tr>
-										<td><b>circ supply:</b></td>
+										<td><b>circulating supply:</b></td>
 										<td></td>
 									</tr>
 								</table>
 							</div>
-						</div><div style="max-width: 100%; display:inline-block; vertical-align: top">
-							<div class="spotlight" style="width: 600px; max-width: 90%; margin-bottom: 20px">
-									<div class="xscroll">
+						</div>
+						<div id="rhs_table_div" style="max-width: 100%; display:inline-block; vertical-align: top;">
+							<div id="change_table_spotlight" class="spotlight" style="width: 600px; max-width: 100%; margin-bottom: 20px">
+									<div id="change_table_div" class="xscroll">
 										<table id="change_table" style="text-align:center">
 											<thead>
 												<tr>
 													<td>hour</td>
 													<td>day</td>
 													<td>week</td>
+													<td>month</td>
 													<td>year</td>
 												</tr>
 											</thead>
@@ -60,12 +62,13 @@
 												<td></td>
 												<td></td>
 												<td></td>
+												<td></td>
 											</tr>
 										</table>
 									</div>
 							</div>
-							<div class="spotlight" style="width: 600px; max-width: 90%">
-									<div class="xscroll">
+							<div id="at_table_spotlight" class="spotlight" style="width: 600px; max-width: 100%;">
+									<div id="at_table_div" class="xscroll">
 										<table id="at_table" style="text-align:center">
 											<thead>
 												<tr>
@@ -95,11 +98,13 @@
 							</div><br>
 						</div>
 
-						<select name="chart_range" id="chart_range" style="width:105px; margin-bottom: 10px" onchange="change_chart_range()">
-							<option value="hour">1 hr</option>
-							<option value="day">24 hr</option>
-							<option value="week">1 wk</option>
-							<option value="year">1 yr</option>
+						<select name="chart_range" id="chart_range" style="width:130px; margin-bottom: 10px" onchange="change_chart_range()">
+							<option value="hour">hour</option>
+							<option value="day">day</option>
+							<option value="week">week</option>
+							<option value="month">month</option>
+							<option value="year">year</option>
+							<option value="max">max</option>
 						</select>
 						<div class="spotlight" style="width: 100%;">
 							<div id="prices_chart" style="min-width: 200px; width: 90%; padding-top: 30px; padding-bottom:30px; margin: 0 auto">
@@ -265,8 +270,12 @@
 			data_range = 1;
 		else if(chart_range == "week")
 			data_range = 7;
+		else if(chart_range == "month")
+			data_range = 30;
 		else if(chart_range == "year")
-			data_range = 365; 
+			data_range = 365;
+		else if(chart_range == "max")
+			data_range = "max";
 
 		$(document).ready(function(){
 			//alert('https://api.coingecko.com/api/v3/coins/' + coin_data['id'] + '/market_chart?vs_currency=usd&days=' + data_range + '&interval=' + chart_freq);
@@ -418,6 +427,8 @@
 		else
 			table.rows[5].cells[1].innerHTML = '-';
 
+		document.getElementById('data_table_spotlight').style.width = (document.getElementById('data_table').style.offsetWidth + 70) + "px";
+
 		table = document.getElementById("change_table");
 
 		if(data['market_data']['price_change_percentage_1h_in_currency']['usd'] == undefined)
@@ -427,26 +438,33 @@
 		else
 			table.rows[1].cells[0].innerHTML = "<red>" + data['market_data']['price_change_percentage_1h_in_currency']['usd'].toLocaleString('en') + "%</red>";
 
-		if(data['market_data']['price_change_percentage_24h_in_currency']['usd'] == undefined)
+		if(data['market_data']['price_change_percentage_24h'] == undefined)
 			table.rows[1].cells[1].innerHTML = "-";
-		else if(data['market_data']['price_change_percentage_24h_in_currency']['usd'] >= 0)
-			table.rows[1].cells[1].innerHTML = "<green>" + data['market_data']['price_change_percentage_24h_in_currency']['usd'].toLocaleString('en') + "%</green>";
+		else if(data['market_data']['price_change_percentage_24h'] >= 0)
+			table.rows[1].cells[1].innerHTML = "<green>" + data['market_data']['price_change_percentage_24h'].toLocaleString('en') + "%</green>";
 		else
-			table.rows[1].cells[1].innerHTML = "<red>" + data['market_data']['price_change_percentage_24h_in_currency']['usd'].toLocaleString('en') + "%</red>";
+			table.rows[1].cells[1].innerHTML = "<red>" + data['market_data']['price_change_percentage_24h'].toLocaleString('en') + "%</red>";
 
-		if(data['market_data']['price_change_percentage_7d_in_currency']['usd'] == undefined)
+		if(data['market_data']['price_change_percentage_7d'] == undefined)
 			table.rows[1].cells[2].innerHTML = "-";
-		else if(data['market_data']['price_change_percentage_7d_in_currency']['usd'] >= 0)
-			table.rows[1].cells[2].innerHTML = "<green>" + data['market_data']['price_change_percentage_7d_in_currency']['usd'].toLocaleString('en') + "%</green>";
+		else if(data['market_data']['price_change_percentage_7d'] >= 0)
+			table.rows[1].cells[2].innerHTML = "<green>" + data['market_data']['price_change_percentage_7d'].toLocaleString('en') + "%</green>";
 		else
-			table.rows[1].cells[2].innerHTML = "<red>" + data['market_data']['price_change_percentage_7d_in_currency']['usd'].toLocaleString('en') + "%</red>";
+			table.rows[1].cells[2].innerHTML = "<red>" + data['market_data']['price_change_percentage_7d'].toLocaleString('en') + "%</red>";
 
-		if(data['market_data']['price_change_percentage_1y_in_currency']['usd'] == undefined)
+		if(data['market_data']['price_change_percentage_30d'] == undefined)
 			table.rows[1].cells[3].innerHTML = "-";
-		else if(data['market_data']['price_change_percentage_1y_in_currency']['usd'] >= 0)
-			table.rows[1].cells[3].innerHTML = "<green>" + data['market_data']['price_change_percentage_1y_in_currency']['usd'].toLocaleString('en') + "%</green>";
+		else if(data['market_data']['price_change_percentage_30d'] >= 0)
+			table.rows[1].cells[3].innerHTML = "<green>" + data['market_data']['price_change_percentage_30d'].toLocaleString('en') + "%</green>";
 		else
-			table.rows[1].cells[3].innerHTML = "<red>" + data['market_data']['price_change_percentage_1y_in_currency']['usd'].toLocaleString('en') + "%</red>";
+			table.rows[1].cells[3].innerHTML = "<red>" + data['market_data']['price_change_percentage_30d'].toLocaleString('en') + "%</red>";
+
+		if(data['market_data']['price_change_percentage_1y'] == undefined)
+			table.rows[1].cells[4].innerHTML = "-";
+		else if(data['market_data']['price_change_percentage_1y'] >= 0)
+			table.rows[1].cells[4].innerHTML = "<green>" + data['market_data']['price_change_percentage_1y'].toLocaleString('en') + "%</green>";
+		else
+			table.rows[1].cells[4].innerHTML = "<red>" + data['market_data']['price_change_percentage_1y'].toLocaleString('en') + "%</red>";
 
 		table = document.getElementById('at_table');
 
@@ -493,6 +511,11 @@
 			table.rows[2].cells[3].innerHTML = new Date(data['market_data']['ath_date']['usd']).toLocaleDateString();
 			table.rows[2].cells[4].innerHTML = daysSince(data['market_data']['ath_date']['usd']);
 		}
+
+		var max_width = Math.max(document.getElementById('change_table').offsetWidth, document.getElementById('at_table').offsetWidth);
+		document.getElementById('change_table_spotlight').style.width = (max_width + 70) + "px";
+		document.getElementById('at_table_spotlight').style.width = (max_width + 70) + "px";
+		document.getElementById('rhs_table_div').style.width = (max_width + 120) + "px";
 	}
 
 	function fetch_info_from_contract_address()
@@ -564,7 +587,7 @@
 			chart_freq = "minute";
 		else if(chart_range == "day" || chart_range == "week")
 			chart_freq = "hourly";
-		else if(chart_range == "year")
+		else if(chart_range == "month" || chart_range == "year" || chart_range == "max")
 			chart_freq = "daily";
 
 		localStorage.setItem('chart_freq', chart_freq);
