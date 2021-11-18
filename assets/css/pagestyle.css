@@ -38,6 +38,11 @@ textarea
 	resize: vertical;
 }
 
+th a
+{
+	color:  white;
+}
+
 a:hover
 {
 	cursor: pointer;
@@ -140,7 +145,7 @@ tr
 /* Handle */
 ::-webkit-scrollbar-thumb 
 {
- 	background: #24242a;
+ 	background: #1f1f24;
 	border-radius: 10px;
 }
 
@@ -158,7 +163,7 @@ textarea::-webkit-scrollbar-track
 /* Handle */
 textarea::-webkit-scrollbar-thumb 
 {
- 	background: pink;
+ 	background: #24242a;
 	border-radius: 10px;
 }
 
