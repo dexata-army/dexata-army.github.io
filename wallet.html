@@ -1,0 +1,323 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Dexata - wallet</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/pagestyle.css" />
+		<link rel="stylesheet" href="assets/css/print.css" />
+		<link rel="icon" type="image/svg" href="images/logo.png">
+		
+		<script src="assets/js/sleep.js"></script>
+		<script src="assets/js/watchlist.js"></script>
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+		
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-D70JLR4EJM"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+		
+		  gtag('config', 'G-D70JLR4EJM');
+		</script>
+	</head>
+	<body class="is-preload">
+		<!-- Header -->
+		<header id="header" class="alt">
+			<div class="logo" style="margin-top: -25px">
+				<noselect>
+					<a href="index.html"><img src="images/logo.png" height="45px" style="vertical-align: middle"> Dexata</a> &nbsp; 
+					<a href="search.html"><i class="fas fa-search fa-1x" style="vertical-align:middle"></i></a> 
+					<a href="config.html"><i class="fas fa-cogs fa-1x" style="vertical-align:middle"></i></a> 
+				</noselect>
+			</div>
+		
+			<nav id="nav">
+				<ul>
+					<li><a href="index.html">home</a></li>
+					<li><a href="coins.html">coins</a></li>
+					<li><a href="watchlist.html">watchlist</a></li>
+					<li><a href="wallet.html">wallet</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<!-- Wrapper -->
+		<div id="wrapper">	
+			<!-- One -->
+			<section id="one" class="wrapper style1">
+				<div class="inner">
+					<div class="spotlights">
+						<center>
+							<div class="spotlight" style="max-width:500px; margin-bottom: 50px">
+								<div class="content">
+									<h1><img src="images/wallet-illustration.png" style="max-width:80%; width: 200px; margin-top: 10px; margin-bottom: 10px; vertical-align: middle"><noselect>Wallet</noselect></h1>
+								</div>
+							</div>
+		
+							<div id="balance_spotlight" class="spotlight" style="max-width:300px;">
+								<div id="balance_div" class="xscroll" style="margin-top:10px">
+									<b>balance: </b>
+								</div>
+							</div>
+		
+							<div class="spotlight" id="table_spotlight" style="max-width: 100%">
+								<div id="table_div" class="xscroll">
+									<img id="loading_gif" src="images/loading.gif" style="margin-top: 20px">
+									<table id="wallet_table" style="display: none;">
+										<thead>
+											<tr>
+												<th>logo</th>
+												<th>symbol</th>
+												<th>name</th>
+												<th>price</th>
+												<th>quantity</th>
+												<th>value</th>
+											</tr>
+										</thead>
+										<tfoot>
+											<tr>
+												<th>logo</th>
+												<th>symbol</th>
+												<th>name</th>
+												<th>price</th>
+												<th>quantity</th>
+												<th>value</th>
+											</tr>
+										</tfoot>
+									</table>
+								</div>
+							</div>
+						</center>
+					</div>
+				</div>
+			</section>
+		</div>
+		
+		<script>
+			var refresh_ms = 10000;
+		
+			var wallet_address;
+			var covalenthq_api_key;
+		
+			var coins_data;
+			var coins_map = {};
+		
+			if(localStorage.getItem('refresh_sec'))
+				refresh_ms = 1000*localStorage.getItem('refresh_sec');
+			else
+				localStorage.setItem('refresh_sec', 10);
+		
+			if(localStorage.getItem('bsc_addr'))
+				wallet_address = localStorage.getItem('bsc_addr');
+		
+			if(localStorage.getItem('covalenthq_api_key'))
+				covalenthq_api_key = localStorage.getItem('covalenthq_api_key');
+		
+			function clear_table()
+			{
+				var table = document.getElementById("wallet_table");
+		
+				var no_rows = table.rows.length-2;
+				for(var i=0; i < no_rows; i++)
+					table.deleteRow(1);		
+			}
+		
+			function fetch_table_covalenthq()
+			{
+				$(document).ready(function(){
+					$.get(
+						'https://api.covalenthq.com/v1/56/address/' + wallet_address + '/balances_v2/?key=' + covalenthq_api_key,          
+						function(api_response) {
+							clear_table();
+							var table = document.getElementById("wallet_table");
+							var wallet_balance = 0.0;
+		
+							document.getElementById('loading_gif').src = "";
+							document.getElementById('loading_gif').style.visibility = "hidden";
+							document.getElementById('loading_gif').style.display = "none";
+							document.getElementById("wallet_table").style.display = "inline";
+		
+							if(api_response['data']['items'].length > 0)
+							{
+								for(var i=0; i<api_response['data']['items'].length; i++)
+								{
+									if(api_response['data']['items'][i]['quote'] > 0)
+									{
+										api_response['data']['items'][i]['contract_ticker_symbol'] = api_response['data']['items'][i]['contract_ticker_symbol'].toLowerCase();
+		
+										var row = table.insertRow(i+1);
+										if(api_response['data']['items'][i]['logo_url'] != "")
+											row.insertCell(0).innerHTML = "<img height='23px' style='vertical-align:middle' class='rounded' onerror='this.style.display=\"none\"' src='" + api_response['data']['items'][i]['logo_url'] + "'>";
+										row.insertCell(1).innerHTML = api_response['data']['items'][i]['contract_ticker_symbol'];
+										if(coins_map[api_response['data']['items'][i]['contract_ticker_symbol']] != undefined)
+											row.insertCell(2).innerHTML = "<a href='coin.html?id=" + coins_map[api_response['data']['items'][i]['contract_ticker_symbol']]['id'] + "'>" + api_response['data']['items'][i]['contract_name'] + "</a>";
+										else
+											row.insertCell(2).innerHTML = api_response['data']['items'][i]['contract_name'];
+		
+										if(api_response['data']['items'][i]['quote_rate'] != undefined)
+										{
+											if(api_response['data']['items'][i]['quote_rate'] > 0.0001)
+												row.insertCell(3).innerHTML = "$" + parseFloat(api_response['data']['items'][i]['quote_rate']).toLocaleString('en');
+											else if(api_response['data']['items'][i]['quote_rate'] > 0 && api_response['data']['items'][i]['quote_rate'] < 0.0001)
+												row.insertCell(3).innerHTML = "$" + parseFloat(api_response['data']['items'][i]['quote_rate']).toExponential(3);
+											else
+												row.insertCell(3).innerHTML = "$" + api_response['data']['items'][i]['quote_rate'];
+										}
+										else
+											row.insertCell(3).innerHTML = "-";
+		
+										if(api_response['data']['items'][i]['quote_rate'] > 0)
+											api_response['data']['items'][i]['balance'] = api_response['data']['items'][i]['quote']/api_response['data']['items'][i]['quote_rate'];
+										row.insertCell(4).innerHTML = api_response['data']['items'][i]['balance'].toLocaleString('en');
+		
+										row.insertCell(5).innerHTML = "$" + api_response['data']['items'][i]['quote'].toLocaleString('en');
+		
+										wallet_balance += api_response['data']['items'][i]['quote'];
+									}
+								}
+		
+								document.getElementById('table_spotlight').style.width = (document.getElementById('wallet_table').offsetWidth + 70) + "px";
+		
+								document.getElementById("balance_div").innerHTML = "<b>balance:</b> $" + wallet_balance.toLocaleString();
+							}
+					});
+				}).fail(function() {
+					clear_table();
+					document.getElementById('loading_gif').src = "";
+					document.getElementById('loading_gif').style.visibility = "hidden";
+					document.getElementById('loading_gif').style.display = "none";
+					document.getElementById("balance_spotlight").style.display = "none";
+					document.getElementById("table_spotlight").style.width = "600px";
+		
+		
+					document.getElementById("table_div").innerHTML = "<p style='margin-top: 20px; margin-bottom: 10px'>failed to fetch wallet information, please refresh to try again.</p>";
+				});
+			}
+		
+			function refresh_table()
+			{
+				if(refresh_ms > 0)
+					sleep(refresh_ms).then(() => { fetch_table_coingecko(); refresh_table(); });
+			}
+		
+			function setup_coin_map()
+			{
+				for(var i=0; i<coins_data.length; i++)
+					if(coins_map[coins_data[i]['symbol'].toLowerCase()] == undefined)
+						coins_map[coins_data[i]['symbol'].toLowerCase()] = 
+						{"symbol": coins_data[i]['symbol'].toLowerCase(), 
+					       "name": coins_data[i]['name'], 
+					       "id": coins_data[i]['id']};
+			}
+		
+			function fetch_coins_list()
+			{
+				$(document).ready(function(){
+					$.get(
+			    	    'https://api.coingecko.com/api/v3/coins/list',              
+						function(data) {
+							coins_data = data;
+							setup_coin_map();
+		
+							fetch_table_covalenthq();
+							refresh_table();
+							document.getElementById("balance_div").scrollIntoView();
+					}).fail(function() {
+						clear_table();
+						document.getElementById('loading_gif').src = "";
+						document.getElementById('loading_gif').style.visibility = "hidden";
+						document.getElementById('loading_gif').style.display = "none";
+						document.getElementById("balance_spotlight").style.display = "none";
+						document.getElementById("table_spotlight").style.width = "600px";
+		
+		
+						document.getElementById("table_div").innerHTML = "<p style='margin-top: 20px; margin-bottom: 10px'>failed to fetch coins list, please refresh to try again.</p>";
+					});
+				});
+			}
+		
+			if(wallet_address != undefined && covalenthq_api_key != undefined)
+			{
+				document.getElementById('table_spotlight').style.width = (document.getElementById('loading_gif').offsetWidth + 400) + "px";
+				fetch_coins_list();
+			}
+			else
+			{
+				clear_table();
+				document.getElementById('loading_gif').src = "";
+				document.getElementById('loading_gif').style.visibility = "hidden";
+				document.getElementById('loading_gif').style.display = "none";
+				document.getElementById("balance_spotlight").style.display = "none";
+				document.getElementById("table_spotlight").style.width = "600px";
+		
+		
+				document.getElementById("table_div").innerHTML = "<p style='margin-top: 20px'>Please <a href='config.html'>configure</a> your wallet address and CovalentHQ api key.</p><p style='margin-bottom: 10px'><b>Note:</b> You will need to register an account with <a href='https://covalenthq.com/'>CovalentHQ</a> to obtain a free API key</p>";
+			}
+		</script>
+
+		<!-- Footer -->
+		<div class="wrapper">
+			<div class="inner" style="text-align:center">
+				<noselect>
+					<p>
+						<a href="search.html"><i class="fas fa-search fa-2x"></i></a> &nbsp;
+						<a href="config.html"><i class="fas fa-cogs fa-2x"></i></a> &nbsp;
+						<a href="coins.html"><i class="fas fa-coins fa-2x"></i></a> &nbsp;
+						<a href="watchlist.html"><i class="fas fa-binoculars fa-2x"></i></a> &nbsp;
+						<a href="wallet.html"><i class="fas fa-wallet fa-2x"></i></a> &nbsp;
+						<a href="https://t.me/dexata_army"><i class="icon brands fa-telegram fa-2x"></i></a> &nbsp;&nbsp;
+						<a href="https://twitter.com/dexata_army"><i class="icon brands fa-twitter fa-2x"></i></a>
+					</p>
+		
+					<p style="margin-top: -30px">
+						<input id="footer_search_box" placeholder="search">
+					</p>
+		
+					<p class="copyright" style="margin-top:-20px">
+						&copy;<script>document.write(new Date().getFullYear())</script> Dexata
+					</p>
+				</noselect>
+			</div>
+		</div>
+		
+		<script>
+			window.addEventListener('keydown',this.keydown,false);
+		
+			function keydown(e)
+			{
+				var code = e.keyCode;
+				
+				if(document.activeElement.tagName == "INPUT")
+				{
+					if(code == 13)
+					{
+						if(document.activeElement.id == "footer_search_box")
+						{
+							window.location.href = "search.html?term=" + document.getElementById('footer_search_box').value;
+						}
+					}
+				}
+			}
+		</script>
+
+		<!-- Scripts -->
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.dropotron.min.js"></script>
+		<script src="assets/js/jquery.scrollex.min.js"></script>
+		<script src="assets/js/jquery.scrolly.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+
+		<!-- https://printjs.crabbly.com/ -->
+		<script src="assets/js/print.js"></script>
+	</body>
+</html>

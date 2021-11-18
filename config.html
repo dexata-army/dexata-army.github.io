@@ -43,6 +43,7 @@
 					<li><a href="index.html">home</a></li>
 					<li><a href="coins.html">coins</a></li>
 					<li><a href="watchlist.html">watchlist</a></li>
+					<li><a href="wallet.html">wallet</a></li>
 				</ul>
 			</nav>
 		</header>
@@ -75,6 +76,10 @@
 									<tr>
 										<td>BSCScan API key</td>
 										<td><input id="bscscan_api_key" spellcheck="false"></td>
+									</tr>
+									<tr>
+										<td>CovalentHQ API key</td>
+										<td><input id="covalenthq_api_key" spellcheck="false"></td>
 									</tr>
 								</table>
 							</div>
@@ -122,11 +127,14 @@
 				if(localStorage.getItem('bscscan_api_key'))
 					document.getElementById("bscscan_api_key").value = localStorage.getItem('bscscan_api_key');
 		
-				if(localStorage.getItem('dexata_watchlist'))
-					document.getElementById("watchlist").value = localStorage.getItem('dexata_watchlist');
+				if(localStorage.getItem('covalenthq_api_key'))
+					document.getElementById("covalenthq_api_key").value = localStorage.getItem('covalenthq_api_key');
 		
-				if(localStorage.getItem('dexata_ignorelist'))
-					document.getElementById("ignorelist").value = localStorage.getItem('dexata_ignorelist');
+				if(localStorage.getItem('watchlist'))
+					document.getElementById("watchlist").value = localStorage.getItem('watchlist');
+		
+				if(localStorage.getItem('ignorelist'))
+					document.getElementById("ignorelist").value = localStorage.getItem('ignorelist');
 			}
 		
 			function remove_duplicates(x)
@@ -159,11 +167,35 @@
 				if(valid_config)
 				{
 					localStorage.setItem('refresh_sec', document.getElementById("refresh_sec").value);
-					localStorage.setItem('bsc_addr', document.getElementById("bsc_addr").value);
-					localStorage.setItem('bscscan_api_key', document.getElementById("bscscan_api_key").value);
-					document.getElementById("watchlist").value = remove_duplicates(document.getElementById("watchlist").value.replace(/ /g,"").replace(/;/g, "\n").replace(/,/g, "\n").split("\n").sort()).join("\n")
-					localStorage.setItem('dexata_watchlist', document.getElementById("watchlist").value);
-					localStorage.setItem('dexata_ignorelist', document.getElementById("ignorelist").value);
+		
+					if(document.getElementById("bsc_addr").value != "")
+						localStorage.setItem('bsc_addr', document.getElementById("bsc_addr").value);
+					else
+						localStorage.removeItem('bsc_addr');
+		
+					if(document.getElementById("bscscan_api_key").value != "")
+						localStorage.setItem('bscscan_api_key', document.getElementById("bscscan_api_key").value);
+					else
+						localStorage.removeItem('bscscan_api_key');
+		
+					if(document.getElementById("covalenthq_api_key").value != "")
+						localStorage.setItem('covalenthq_api_key', document.getElementById("covalenthq_api_key").value);
+					else
+						localStorage.removeItem('covalenthq_api_key');
+		
+					if(document.getElementById("watchlist").value != "")
+					{
+						document.getElementById("watchlist").value = remove_duplicates(document.getElementById("watchlist").value.replace(/ /g,"").replace(/;/g, "\n").replace(/,/g, "\n").split("\n").sort()).join("\n");
+						localStorage.setItem('watchlist', document.getElementById("watchlist").value);
+					}
+					else
+						localStorage.removeItem('watchlist');
+		
+					if(document.getElementById("ignorelist").value != "")
+					{
+						document.getElementById("ignorelist").value = remove_duplicates(document.getElementById("ignorelist").value.replace(/ /g,"").replace(/;/g, "\n").replace(/,/g, "\n").split("\n").sort()).join("\n");
+						localStorage.setItem('ignorelist', document.getElementById("ignorelist").value);
+					}
 					
 					alert("config saved successfully");
 				}
@@ -181,6 +213,7 @@
 						<a href="config.html"><i class="fas fa-cogs fa-2x"></i></a> &nbsp;
 						<a href="coins.html"><i class="fas fa-coins fa-2x"></i></a> &nbsp;
 						<a href="watchlist.html"><i class="fas fa-binoculars fa-2x"></i></a> &nbsp;
+						<a href="wallet.html"><i class="fas fa-wallet fa-2x"></i></a> &nbsp;
 						<a href="https://t.me/dexata_army"><i class="icon brands fa-telegram fa-2x"></i></a> &nbsp;&nbsp;
 						<a href="https://twitter.com/dexata_army"><i class="icon brands fa-twitter fa-2x"></i></a>
 					</p>

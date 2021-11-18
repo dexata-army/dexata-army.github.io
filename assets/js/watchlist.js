@@ -1,12 +1,21 @@
 var watchlist;
 var watching;
 
-if(!localStorage.getItem('dexata_watchlist'))
-	localStorage.setItem('dexata_watchlist', "");
+//can remove this later
+if(localStorage.getItem('dexata_watchlist'))
+{
+	localStorage.setItem('watchlist', localStorage.getItem('dexata_watchlist'));
+	localStorage.setItem('ignorelist', localStorage.getItem('dexata_ignorelist'));
+	localStorage.removeItem('dexata_watchlist');
+	localStorage.removeItem('dexata_ignorelist');
+}
+
+if(!localStorage.getItem('watchlist'))
+	localStorage.setItem('watchlist', "");
 
 function load_watchlist()
 {
-	watchlist = localStorage.getItem('dexata_watchlist').replace(/ /g,"").replace(/;/g, "\n").replace(/,/g, "\n").split("\n");
+	watchlist = localStorage.getItem('watchlist').replace(/ /g,"").replace(/;/g, "\n").replace(/,/g, "\n").split("\n");
 }
 
 function create_watching()
@@ -18,7 +27,7 @@ function create_watching()
 
 function fetch_watchlist_str()
 {
-	return localStorage.getItem('dexata_watchlist').replace(/ /g, "").replace(/;/g, ",").replace(/\n/g,",");
+	return localStorage.getItem('watchlist').replace(/ /g, "").replace(/;/g, ",").replace(/\n/g,",");
 }
 
 function watch(id)
@@ -59,5 +68,5 @@ function save_watchlist()
 	for(var i=1; i<watchlist.length; i++)
 		watchlist_str += "\n" + watchlist[i];
 
-	localStorage.setItem('dexata_watchlist', watchlist_str);
+	localStorage.setItem('watchlist', watchlist_str);
 }
