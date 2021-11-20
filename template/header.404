@@ -3,8 +3,9 @@
 	<div class="logo" style="margin-top: -25px">
 		<noselect>
 			<a href="https://dexata.net"><img src="@pathtofile(output/images/logo.png)" height="45px" style="vertical-align: middle";> Dexata</a> &nbsp; 
-			<a href="https://dexata.net/search.html"><i class="fas fa-search fa-1x" style="vertical-align:middle"></i></a> 
-			<a href="https://dexata.net/config.html"><i class="fas fa-cogs fa-1x" style="vertical-align:middle"></i></a> 
+			<a href="https://dexata.net/@pathto(search)" title='search'><i class="fas fa-search fa-1x" style="vertical-align:middle"></i></a> 
+			<a href="https://dexata.net/@pathto(config)" title='config'><i class="fas fa-cogs fa-1x" style="vertical-align:middle"></i></a> 
+			<a href="https://dexata.net/@pathto(manage_users)" title='manage users'><i class="fas fa-user-cog fa-1x" style="vertical-align:middle"></i></a> 
 		</noselect>
 	</div>
 

@@ -1,9 +1,9 @@
 09:58:36 Sunday November 21 2021
-'watchlist'
-'watchlist'
+'manage_users'
+'manage_users'
 'template/page.template'
 
-'content/watchlist.content'
+'content/manage_users.content'
 'template/accounts.js'
 'template/footer.content'
 'template/head.content'

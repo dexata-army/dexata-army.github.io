@@ -1,0 +1,174 @@
+<!-- Wrapper -->
+<div id="wrapper">
+	<!-- One -->
+	<section id="one" class="wrapper style1">
+		<div class="inner">
+			<div class="spotlights">
+				<center>
+					<div class="spotlight" style="max-width:500px; margin-bottom: 35px">
+						<div class="content">
+							<h1><i class="fas fa-users-cog fa-4x" style="vertical-align:middle"></i><br><noselect>Manage Users</noselect></h1>
+						</div>
+					</div>
+
+					<select id="add_rem_select" style="max-width: 100%; margin-bottom: 20px;display: inline-block" onchange="add_rem_select_event()">
+						<option value="add" selected="selected">add user</option>
+						<option value="remove">remove user</option>
+					</select><br>
+
+					<div id="add_user_spotlight" class="spotlight" style="max-width:100%; margin-bottom: 0px; display: inline-block">
+						<div id="add_user_div" class="xscroll">
+							<table id="add_user_table">
+								<tr>
+									<td><input id="add_user_username" spellcheck="false" placeholder="username"></td>
+								</tr>
+								<tr>
+									<td><input id="add_user_password" spellcheck="false" placeholder="password" type="password"></td>
+								</tr>
+								<tr>
+									<td><input id="confirm_password" spellcheck="false" placeholder="confirm password" type="password"></td>
+								</tr>
+							</table>
+							<a onclick="add_user()"><i class="fas fa-user-plus fa-2x" style="margin-bottom: 10px"></i></a><br>
+						</div>
+					</div>
+					<div id="remove_user_spotlight" class="spotlight" style="max-width:100%; margin-bottom: 0px;display: none">
+						<div id="remove_user_div" class="xscroll">
+							<table id="remove_user_table">
+								<tr>
+									<td><input id="remove_user_username" spellcheck="false" placeholder="username"></td>
+								</tr>
+								<tr>
+									<td><input id="remove_user_password" spellcheck="false" placeholder="password" type="password"></td>
+								</tr>
+							</table>
+							<a onclick="remove_user()"><i class="fas fa-user-minus fa-2x" style="margin-bottom: 10px"></i></a><br>
+						</div>
+					</div>
+				</center>
+			</div>
+		</div>
+	</section>
+</div>
+
+<script>
+	window.addEventListener('keydown',this.keydown,false);
+
+	var widthOffset = document.getElementById('add_user_div').offsetWidth;
+
+	function add_rem_select_event()
+	{
+		if(document.getElementById('add_rem_select').value == "add")
+		{
+			document.getElementById('add_user_spotlight').style.display = "inline-block";
+			document.getElementById('remove_user_spotlight').style.display = "none";
+
+			document.getElementById('add_rem_select').style.width = (widthOffset + 70) + "px";
+			document.getElementById('add_user_spotlight').style.width = (widthOffset + 70) + "px";
+		}
+		else if(document.getElementById('add_rem_select').value == "remove")
+		{
+			document.getElementById('add_user_spotlight').style.display = "none";
+			document.getElementById('remove_user_spotlight').style.display = "inline-block";
+
+			document.getElementById('add_rem_select').style.width = (widthOffset + 70) + "px";
+			document.getElementById('remove_user_spotlight').style.width = (widthOffset + 70) + "px";
+		}
+	}
+
+	function add_user()
+	{
+		if(document.getElementById('add_user_username').value == "")
+			alert("no username specified");
+		else if(document.getElementById('add_user_username').value == "guest")
+			alert("cannot have username as guest");
+		else if(document.getElementById('add_user_password').value.length < 5)
+			alert("password must be at least 5 characters long");
+		else if(localStorage.getItem(document.getElementById('add_user_username').value + '-encrypted_phrase'))
+		{
+			alert("account already exists for " + document.getElementById('add_user_username').value);
+		}
+		else if(document.getElementById('add_user_password').value == document.getElementById('confirm_password').value)
+		{
+			localStorage.setItem('username', document.getElementById("add_user_username").value);
+			sessionStorage.setItem('username', document.getElementById("add_user_username").value);
+			localStorage.setItem('password', CryptoJS.AES.encrypt(document.getElementById("add_user_password").value, "Go hang a salami, I’m a lasagna hog."));
+			sessionStorage.setItem('password', CryptoJS.AES.encrypt(document.getElementById("add_user_password").value, "Go hang a salami, I’m a lasagna hog."));
+			localStorage.setItem(document.getElementById('add_user_username').value + '-encrypted_phrase', CryptoJS.AES.encrypt("Go hang a salami, I’m a lasagna hog.", document.getElementById('add_user_password').value));
+
+			alert("successfully added " + document.getElementById('add_user_username').value);
+
+			location.reload();	
+		}
+		else
+		{
+			document.getElementById('add_user_password').value = document.getElementById('confirm_password').value = "";
+			alert("passwords do not match");
+		}
+	}
+
+	function remove_user()
+	{
+		if(localStorage.getItem(document.getElementById('remove_user_username').value + '-encrypted_phrase') &&
+			CryptoJS.AES.decrypt(localStorage.getItem(document.getElementById('remove_user_username').value + '-encrypted_phrase'), document.getElementById('remove_user_password').value).toString(CryptoJS.enc.Utf8) == "Go hang a salami, I’m a lasagna hog.")
+		{
+			document.getElementById('remove_user_username').value = "";
+			document.getElementById('remove_user_password').value = "";
+
+			var remove_username = document.getElementById('remove_user_username').value;
+			localStorage.removeItem(remove_username + '-encrypted_phrase');
+			localStorage.removeItem(remove_username + '-refresh_speed');
+			localStorage.removeItem(remove_username + '-session_timeout');
+			localStorage.removeItem(remove_username + '-bscscan_api_key');
+			localStorage.removeItem(remove_username + '-covalenthq_api_key');
+
+			localStorage.removeItem(remove_username + '-chart_freq');
+			localStorage.removeItem(remove_username + '-chart_range');
+
+			var watchlists = fetch_watchlists();
+			for(var i=0; i<watchlists.length; i++)
+				localStorage.removeItem(user + '-watchlist-' + watchlists[i]);
+			localStorage.removeItem(remove_username + '-watchlist');
+			localStorage.removeItem(remove_username + '-watchlists');
+
+			var wallets = fetch_wallets();
+			for(var i=0; i<wallets.length; i++)
+			{
+				localStorage.removeItem(user + '-wallet-' + wallets[i] + '-network');
+				localStorage.removeItem(user + '-wallet-' + wallets[i] + '-address');
+				localStorage.removeItem(user + '-ignorelist-' + wallets[i]);
+			}
+			localStorage.removeItem(remove_username + '-wallet');
+			localStorage.removeItem(remove_username + '-wallets');
+
+			alert("successfully removed " + document.getElementById('remove_user_username').value);
+
+			if(localStorage.getItem('username') == document.getElementById('remove_user_username'))
+				logout();
+			else
+				location.reload();
+		}
+		else
+		{
+			document.getElementById('remove_user_password').value = "";
+			alert("username and password do not match any on this system");
+		}
+	}
+
+	function keydown(e)
+	{
+		var code = e.keyCode;
+		
+		if(code == 13)
+		{
+			if(document.activeElement.id == "confirm_password")
+				add_user();
+			else if(document.activeElement.id == "remove_user_password")
+				remove_user();
+		}
+	}
+
+	document.getElementById('add_rem_select').style.width = (document.getElementById('add_user_div').offsetWidth + 70) + "px";
+	document.getElementById('add_user_spotlight').style.width = (document.getElementById('add_user_div').offsetWidth + 70) + "px";
+
+</script>

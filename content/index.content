@@ -33,6 +33,9 @@
 						<a href="https://www.covalenthq.com/"><img src="@pathtofile(output/images/logos/covalent-hq.svg)" style="max-height: 100px"></a>
 					</p>
 					<p>
+						<a href="hhttps://cryptojs.gitbook.io/docs/"><img src="@pathtofile(output/images/logos/cryptojs.png)" style="max-height: 100px"></a>
+					</p>
+					<p>
 						<a href="https://nift.dev"><img src="@pathtofile(output/images/logos/nift.svg)" style="max-height: 120px"></a>
 					</p>
 				</center>

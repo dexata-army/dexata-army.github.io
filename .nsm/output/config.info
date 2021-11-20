@@ -1,11 +1,13 @@
-08:29:31 Friday November 19 2021
+09:58:36 Sunday November 21 2021
 'config'
 'config'
 'template/page.template'
 
 'content/config.content'
+'template/accounts.js'
 'template/footer.content'
 'template/head.content'
 'template/header.content'
 'template/menu.content'
 'template/page.template'
+'template/toggle_login.js'

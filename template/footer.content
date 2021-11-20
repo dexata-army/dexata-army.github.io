@@ -3,13 +3,17 @@
 	<div class="inner" style="text-align:center">
 		<noselect>
 			<p>
-				<a href="@pathto(search)"><i class="fas fa-search fa-2x"></i></a> &nbsp;
-				<a href="@pathto(config)"><i class="fas fa-cogs fa-2x"></i></a> &nbsp;
-				<a href="@pathto(coins)"><i class="fas fa-coins fa-2x"></i></a> &nbsp;
-				<a href="@pathto(watchlist)"><i class="fas fa-binoculars fa-2x"></i></a> &nbsp;
-				<a href="@pathto(wallet)"><i class="fas fa-wallet fa-2x"></i></a> &nbsp;
-				<a href="https://t.me/dexata_army"><i class="icon brands fa-telegram fa-2x"></i></a> &nbsp;&nbsp;
-				<a href="https://twitter.com/dexata_army"><i class="icon brands fa-twitter fa-2x"></i></a>
+				<a href="@pathto(search)" title='search'><i class="fas fa-search fa-2x"></i></a> &nbsp;
+				<a href="@pathto(coins)" title='coins'><i class="fas fa-coins fa-2x"></i></a> &nbsp;
+				<a href="@pathto(watchlist)" title='watchlist'><i class="fas fa-binoculars fa-2x"></i></a> &nbsp;
+				<a href="@pathto(wallet)" title='wallet tracker'><i class="fas fa-wallet fa-2x"></i></a> &nbsp;
+				<a href="@pathto(config)" title='config'><i class="fas fa-cogs fa-2x"></i></a> &nbsp;
+				<a href="@pathto(manage_users)" title='manage users'><i class="fas fa-user-cog fa-2x"></i></a> &nbsp;
+				<text id="login_footer_item" style="display: inline-block"><a href="@pathto(login)" title='login'><i class="fas fa-sign-in-alt fa-2x"></i></a></text><br>
+				
+				<a href="https://t.me/dexata_army" title='telegram'><i class="icon brands fa-telegram fa-2x"></i></a> &nbsp;
+				<a href="https://twitter.com/dexata_army" title='twitter'><i class="icon brands fa-twitter fa-2x"></i></a> &nbsp;
+				<a href="https://github.com/dexata-army" title='github'><i class="icon brands fa-github fa-2x"></i></a>
 			</p>
 
 			<p style="margin-top: -30px">
@@ -34,11 +38,23 @@
 		{
 			if(code == 13)
 			{
-				if(document.activeElement.id == "footer_search_box")
+				if(document.activeElement.id == "footer_search_box" &&
+					document.getElementById('footer_search_box').value != "")
 				{
 					window.location.href = "@pathto(search)?term=" + document.getElementById('footer_search_box').value;
 				}
 			}
 		}
 	}
+
+	window.addEventListener("pageshow", function (event) {
+		var historyTraversal = event.persisted || 
+		                     ( typeof window.performance != "undefined" && 
+		                          window.performance.navigation.type === 2 );
+		if(historyTraversal) 
+		{
+			// Handle page restore.
+			window.location.reload();
+		}
+	});
 </script>

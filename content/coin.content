@@ -123,38 +123,32 @@
 </div>
 
 <script>
-	var param_array = [];
 	var details_filled = 0;
-	if(location.search.indexOf('?') > -1)
-		param_array = location.search.split("?")[1].replace("%20", " ").split('&');
-	var param_map = new Map();
-	var refresh_ms = 10000;
+	var refresh_ms = 60000;
 	var chart_range = "hour";
 	var chart_freq = "minute";
 	var price_chart, vol_chart;
 
-	if(localStorage.getItem('refresh_sec'))
-		refresh_ms = 1000*localStorage.getItem('refresh_sec');
-	else
-		localStorage.setItem('refresh_sec', 10);
+	var watchlist_name;
+	var watchlist;
+	var watching;
 
-	if(localStorage.getItem('chart_freq'))
-		chart_freq = localStorage.getItem('chart_freq');
+	if(localStorage.getItem(user + '-refresh_sec'))
+		refresh_ms = 1000*localStorage.getItem(user + '-refresh_sec');
 	else
-		localStorage.setItem('chart_freq', 'minute');
+		localStorage.setItem(user + '-refresh_sec', 60);
 
-	if(localStorage.getItem('chart_range'))
-		chart_range = localStorage.getItem('chart_range');
+	if(localStorage.getItem(user + '-chart_freq'))
+		chart_freq = localStorage.getItem(user + '-chart_freq');
 	else
-		localStorage.setItem('chart_range', 'hour');
+		localStorage.setItem(user + '-chart_freq', 'minute');
+
+	if(localStorage.getItem(user + '-chart_range'))
+		chart_range = localStorage.getItem(user + '-chart_range');
+	else
+		localStorage.setItem(user + '-chart_range', 'hour');
 
 	document.getElementById('chart_range').value = chart_range;
-
-	for(var i=0; i<param_array.length; i++)
-	{
-		param_array[i] = param_array[i].split('=');
-		param_map.set(param_array[i][0], param_array[i][1].toLowerCase());
-	}
 
 	function treatAsUTC(date)
 	{
@@ -219,7 +213,7 @@
 	          else if(val > 0 && val < 0.001)
 	          	return val.toExponential(3);
 	          else
-	          	return val;
+	          	return val.toFixed(5);
 	        },
 	      },
 	      tickAmount: 4,
@@ -337,13 +331,15 @@
 		if(watching[id] == true)
 		{
 			document.getElementById('watchlist_icon').innerHTML = "<i class='fas fa-eye fa-2x'></i>";
-			unwatch(id);
+			unwatch(watchlist, watchlist_name, id);
 		}
 		else
 		{
 			document.getElementById('watchlist_icon').innerHTML = "<i class='fas fa-eye-slash fa-2x''></i>";
-			watch(id);
+			watch(watchlist, watchlist_name, id);
 		}
+		watchlist = fetch_watchlist(watchlist_name);
+		watching = fetch_map(watchlist);
 	}
 
 	function fill_details(data)
@@ -438,33 +434,33 @@
 		else
 			table.rows[1].cells[0].innerHTML = "<red>" + data['market_data']['price_change_percentage_1h_in_currency']['usd'].toLocaleString('en') + "%</red>";
 
-		if(data['market_data']['price_change_percentage_24h'] == undefined)
+		if(data['market_data']['price_change_percentage_24h_in_currency']['usd'] == undefined)
 			table.rows[1].cells[1].innerHTML = "-";
-		else if(data['market_data']['price_change_percentage_24h'] >= 0)
-			table.rows[1].cells[1].innerHTML = "<green>" + data['market_data']['price_change_percentage_24h'].toLocaleString('en') + "%</green>";
+		else if(data['market_data']['price_change_percentage_24h_in_currency']['usd'] >= 0)
+			table.rows[1].cells[1].innerHTML = "<green>" + data['market_data']['price_change_percentage_24h_in_currency']['usd'].toLocaleString('en') + "%</green>";
 		else
-			table.rows[1].cells[1].innerHTML = "<red>" + data['market_data']['price_change_percentage_24h'].toLocaleString('en') + "%</red>";
+			table.rows[1].cells[1].innerHTML = "<red>" + data['market_data']['price_change_percentage_24h_in_currency']['usd'].toLocaleString('en') + "%</red>";
 
-		if(data['market_data']['price_change_percentage_7d'] == undefined)
+		if(data['market_data']['price_change_percentage_7d_in_currency']['usd'] == undefined)
 			table.rows[1].cells[2].innerHTML = "-";
-		else if(data['market_data']['price_change_percentage_7d'] >= 0)
-			table.rows[1].cells[2].innerHTML = "<green>" + data['market_data']['price_change_percentage_7d'].toLocaleString('en') + "%</green>";
+		else if(data['market_data']['price_change_percentage_7d_in_currency']['usd'] >= 0)
+			table.rows[1].cells[2].innerHTML = "<green>" + data['market_data']['price_change_percentage_7d_in_currency']['usd'].toLocaleString('en') + "%</green>";
 		else
-			table.rows[1].cells[2].innerHTML = "<red>" + data['market_data']['price_change_percentage_7d'].toLocaleString('en') + "%</red>";
+			table.rows[1].cells[2].innerHTML = "<red>" + data['market_data']['price_change_percentage_7d_in_currency']['usd'].toLocaleString('en') + "%</red>";
 
-		if(data['market_data']['price_change_percentage_30d'] == undefined)
+		if(data['market_data']['price_change_percentage_30d_in_currency']['usd'] == undefined)
 			table.rows[1].cells[3].innerHTML = "-";
-		else if(data['market_data']['price_change_percentage_30d'] >= 0)
-			table.rows[1].cells[3].innerHTML = "<green>" + data['market_data']['price_change_percentage_30d'].toLocaleString('en') + "%</green>";
+		else if(data['market_data']['price_change_percentage_30d_in_currency']['usd'] >= 0)
+			table.rows[1].cells[3].innerHTML = "<green>" + data['market_data']['price_change_percentage_30d_in_currency']['usd'].toLocaleString('en') + "%</green>";
 		else
-			table.rows[1].cells[3].innerHTML = "<red>" + data['market_data']['price_change_percentage_30d'].toLocaleString('en') + "%</red>";
+			table.rows[1].cells[3].innerHTML = "<red>" + data['market_data']['price_change_percentage_30d_in_currency']['usd'].toLocaleString('en') + "%</red>";
 
-		if(data['market_data']['price_change_percentage_1y'] == undefined)
+		if(data['market_data']['price_change_percentage_1y_in_currency']['usd'] == undefined)
 			table.rows[1].cells[4].innerHTML = "-";
-		else if(data['market_data']['price_change_percentage_1y'] >= 0)
-			table.rows[1].cells[4].innerHTML = "<green>" + data['market_data']['price_change_percentage_1y'].toLocaleString('en') + "%</green>";
+		else if(data['market_data']['price_change_percentage_1y_in_currency']['usd'] >= 0)
+			table.rows[1].cells[4].innerHTML = "<green>" + data['market_data']['price_change_percentage_1y_in_currency']['usd'].toLocaleString('en') + "%</green>";
 		else
-			table.rows[1].cells[4].innerHTML = "<red>" + data['market_data']['price_change_percentage_1y'].toLocaleString('en') + "%</red>";
+			table.rows[1].cells[4].innerHTML = "<red>" + data['market_data']['price_change_percentage_1y_in_currency']['usd'].toLocaleString('en') + "%</red>";
 
 		table = document.getElementById('at_table');
 
@@ -581,7 +577,7 @@
 	function change_chart_range()
 	{
 		chart_range = document.getElementById('chart_range').value;
-		localStorage.setItem('chart_range', chart_range);
+		localStorage.setItem(user + '-chart_range', chart_range);
 		
 		if(chart_range == "hour")
 			chart_freq = "minute";
@@ -590,7 +586,7 @@
 		else if(chart_range == "month" || chart_range == "year" || chart_range == "max")
 			chart_freq = "daily";
 
-		localStorage.setItem('chart_freq', chart_freq);
+		localStorage.setItem(user + '-chart_freq', chart_freq);
 
 		fetch_info();
 	}
@@ -601,8 +597,10 @@
 			sleep(refresh_ms).then(() => { fetch_info(); refresh_data(); });
 	}
 
-	load_watchlist();
-	create_watching();
+	watchlist_name = localStorage.getItem(user + "-watchlist");
+	watchlist = fetch_watchlist(watchlist_name);
+	watching = fetch_map(watchlist);
+
 
 	fetch_info();
 	refresh_data();

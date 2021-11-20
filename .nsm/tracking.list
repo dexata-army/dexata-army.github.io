@@ -18,6 +18,14 @@
 'index'
 'template/page.template'
 
+'login'
+'login'
+'template/page.template'
+
+'manage_users'
+'manage_users'
+'template/page.template'
+
 'search'
 'search'
 'template/page.template'
