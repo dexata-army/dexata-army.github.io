@@ -266,10 +266,11 @@
 				if(localStorage.getItem(document.getElementById('remove_user_username').value + '-encrypted_phrase') &&
 					CryptoJS.AES.decrypt(localStorage.getItem(document.getElementById('remove_user_username').value + '-encrypted_phrase'), document.getElementById('remove_user_password').value).toString(CryptoJS.enc.Utf8) == "Go hang a salami, I’m a lasagna hog.")
 				{
+					var remove_username = document.getElementById('remove_user_username').value;
+		
 					document.getElementById('remove_user_username').value = "";
 					document.getElementById('remove_user_password').value = "";
 		
-					var remove_username = document.getElementById('remove_user_username').value;
 					localStorage.removeItem(remove_username + '-encrypted_phrase');
 					localStorage.removeItem(remove_username + '-refresh_speed');
 					localStorage.removeItem(remove_username + '-session_timeout');
@@ -295,9 +296,9 @@
 					localStorage.removeItem(remove_username + '-wallet');
 					localStorage.removeItem(remove_username + '-wallets');
 		
-					alert("successfully removed " + document.getElementById('remove_user_username').value);
+					alert("successfully removed " + remove_username);
 		
-					if(localStorage.getItem('username') == document.getElementById('remove_user_username'))
+					if(localStorage.getItem('username') == remove_username)
 						logout();
 					else
 						location.reload();
