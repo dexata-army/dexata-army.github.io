@@ -1,0 +1,329 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Dexata - login</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/pagestyle.css" />
+		<link rel="stylesheet" href="assets/css/print.css" />
+		<link rel="icon" type="image/svg" href="images/logo.png">
+		
+		<!-- Scripts -->
+		<script src="assets/js/params.js"></script>
+		<script src="assets/js/sleep.js"></script>
+		<script src="assets/js/wallet.js"></script>
+		<script src="assets/js/watchlist.js"></script>
+		<script src="assets/js/apex-charts/apexcharts.min.js"></script>
+		<script src="assets/js/crypto-js/crypto-js.js"></script>
+		
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.dropotron.min.js"></script>
+		<script src="assets/js/jquery.scrollex.min.js"></script>
+		<script src="assets/js/jquery.scrolly.min.js"></script>
+		
+		<!-- https://printjs.crabbly.com/ -->
+		<script src="assets/js/print.js"></script>
+		
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-D70JLR4EJM"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+		
+		  gtag('config', 'G-D70JLR4EJM');
+		</script>
+
+		<script>
+			function logout()
+			{
+				localStorage.removeItem('no_dexata_tabs');
+				localStorage.removeItem('last_load_time');
+				localStorage.removeItem('username');
+				sessionStorage.removeItem('username');
+				localStorage.removeItem('password');
+				sessionStorage.removeItem('password');
+				location.reload();
+			}
+		
+			function check_for_logout(username)
+			{
+				sleep(2000).then(() => { 
+					if(!localStorage.getItem('username') || 
+						localStorage.getItem('username') != username)
+						location.reload();
+					else
+						check_for_logout(username);
+				});
+			}
+		
+			var session_timeout_sec = localStorage.getItem(user + '-session_timeout')*60;
+		
+			if(session_timeout_sec != undefined && session_timeout_sec > 0)
+			{
+				if(sessionStorage.getItem('username') || localStorage.getItem('username'))
+				{
+					var curr_time = Math.round((new Date()).getTime() / 1000);
+		
+					//checks last page load time
+					if(localStorage.getItem("last_load_time"))
+					{
+						if(curr_time - localStorage.getItem("last_load_time") > session_timeout_sec)
+							logout();
+						else
+							localStorage.setItem("last_load_time", curr_time);
+					}
+					else
+						logout();
+				}
+			}
+		
+			if(sessionStorage.getItem("username") && !localStorage.getItem("username"))
+			{
+				localStorage.setItem("no_dexata_tabs", 0);
+				localStorage.setItem("username", sessionStorage.getItem("username"));
+				localStorage.setItem("password", sessionStorage.getItem("password"));
+			}
+			else if(!sessionStorage.getItem("username") && localStorage.getItem("username"))
+			{
+				sessionStorage.setItem("username", localStorage.getItem("username"));
+				sessionStorage.setItem("password", localStorage.getItem("password"));
+			}
+		
+			var load_host = window.location.hostname;
+			if(localStorage.getItem("username"))
+			{
+				//updates number of dexata tabs open
+				if(localStorage.getItem('no_dexata_tabs') != undefined &&
+					localStorage.getItem('no_dexata_tabs') >= 0)
+					localStorage.setItem('no_dexata_tabs', parseFloat(localStorage.getItem('no_dexata_tabs'))+1);
+				else
+					localStorage.setItem('no_dexata_tabs', 1);
+		
+				window.addEventListener('beforeunload', function (e) {
+					if(localStorage.getItem('no_dexata_tabs'))
+					{
+					    localStorage.setItem('no_dexata_tabs', parseFloat(localStorage.getItem('no_dexata_tabs'))-1);
+		
+					    if(localStorage.getItem('no_dexata_tabs') == 0)
+					    {
+					    	localStorage.removeItem('no_dexata_tabs');
+					    	localStorage.removeItem('username');
+					    	localStorage.removeItem('password');
+					    }
+					}
+					else
+					{
+						sessionStorage.removeItem('username');
+						sessionStorage.removeItem('password');
+					}
+				});
+		
+				//reloads page if user has logged out
+				$(document).ready(function(){
+					check_for_logout(localStorage.getItem('username'));
+				});
+			}
+		</script>
+	</head>
+	<body class="is-preload">
+		<!-- Header -->
+		<header id="header" class="alt">
+			<div class="logo" style="margin-top: -25px">
+				<noselect>
+					<a href="index.html"><img src="images/logo.png" height="45px" style="vertical-align: middle"> Dexata</a> &nbsp; 
+					<a href="search.html" title='search'><i class="fas fa-search fa-1x" style="vertical-align:middle"></i></a> 
+					<a href="config.html" title='config'><i class="fas fa-cogs fa-1x" style="vertical-align:middle"></i></a> 
+					<a href="manage_users.html" title='manage users'><i class="fas fa-user-cog fa-1x" style="vertical-align:middle"></i></a> 
+				</noselect>
+			</div>
+		
+			<nav id="nav">
+				<ul>
+					<li><a href="index.html">home</a></li>
+					<li><a href="coins.html">coins</a></li>
+					<li><a href="watchlist.html">watchlist</a></li>
+					<li><a href="wallet.html">wallet</a></li>
+					<li id="login_menu_item"><a href="login.html">login</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<!-- Wrapper -->
+		<div id="wrapper">
+			<!-- One -->
+			<section id="one" class="wrapper style1">
+				<div class="inner">
+					<div class="spotlights">
+						<center>
+							<div class="spotlight" style="max-width:500px; margin-bottom: 35px">
+								<div class="content">
+									<h1><img src="images/btc-illustration.png" style="max-width:80%; width: 200px; margin-top: 20px; vertical-align: middle;"><br><noselect>Login</noselect></h1>
+								</div>
+							</div>
+		
+							<div id="table_spotlight" class="spotlight" style="max-width:100%; margin-bottom: 0px; display: inline-block">
+								<div id="table_div" class="xscroll">
+									<table id="login_table">
+										<tr>
+											<td><input id="username" spellcheck="false" placeholder="username"></td>
+										</tr>
+										<tr>
+											<td><input id="password" spellcheck="false" placeholder="password" type="password"></td>
+										</tr>
+									</table>
+									<a onclick="login()"><i class="fas fa-sign-in-alt fa-2x" style="margin-bottom: 0px"></i></a>
+								</div>
+							</div><br>
+							<a href="manage_users.html"><i class="fas fa-users-cog fa-2x" style="margin-top: 10px"></i></a>
+						</center>
+					</div>
+				</div>
+			</section>
+		</div>
+		
+		
+		
+		<script>
+			window.addEventListener('keydown',this.keydown,false);
+		
+			function login()
+			{
+				if(localStorage.getItem(document.getElementById('username').value + '-encrypted_phrase') && 
+					CryptoJS.AES.decrypt(localStorage.getItem(document.getElementById('username').value + '-encrypted_phrase'), document.getElementById('password').value).toString(CryptoJS.enc.Utf8) == "Go hang a salami, I’m a lasagna hog.")
+				{
+					localStorage.setItem('no_dexata_tabs', 0);
+					localStorage.setItem('last_load_time', Math.round((new Date()).getTime() / 1000));
+					localStorage.setItem('username', document.getElementById("username").value);
+					sessionStorage.setItem('username', document.getElementById("username").value);
+					localStorage.setItem('password', CryptoJS.AES.encrypt(document.getElementById("password").value, "Go hang a salami, I’m a lasagna hog."));
+					sessionStorage.setItem('password', CryptoJS.AES.encrypt(document.getElementById("password").value, "Go hang a salami, I’m a lasagna hog."));
+					document.getElementById("password").value = "";
+		
+					if(param_map.get('return_to') != undefined)
+						window.location.href = param_map.get('return_to');
+					else
+						window.location.href = "coins.html";
+				}
+				else
+				{
+					alert("username and password do not match any on this system");
+					document.getElementById('password').value = "";
+				}
+			}
+		
+			function keydown(e)
+			{
+				var code = e.keyCode;
+				
+				if(document.activeElement.tagName == "INPUT" &&
+					(document.activeElement.id == "username" ||
+					document.activeElement.id == "password"))
+				{
+					if(code == 13)
+					{
+						login();
+					}
+				}
+			}
+		
+			if(localStorage.getItem('username'))
+			{
+				document.getElementById("table_spotlight").style.width = "600px";
+				document.getElementById("table_div").innerHTML = "<p style='margin-top: 20px; margin-bottom: 12px'>already logged in as " + localStorage.getItem('username') + "</p>";
+			}
+			else if(sessionStorage.getItem('username'))
+			{
+				document.getElementById("table_spotlight").style.width = "600px";
+				document.getElementById("table_div").innerHTML = "<p style='margin-top: 20px; margin-bottom: 12px'>already logged in as " + sessionStorage.getItem('username') + "</p>";
+			}
+		
+			document.getElementById('table_spotlight').style.width = (document.getElementById('table_div').offsetWidth + 70) + "px";
+		
+		
+		</script>
+
+		<!-- Footer -->
+		<div class="wrapper">
+			<div class="inner" style="text-align:center">
+				<noselect>
+					<p>
+						<a href="search.html" title='search'><i class="fas fa-search fa-2x"></i></a> &nbsp;
+						<a href="coins.html" title='coins'><i class="fas fa-coins fa-2x"></i></a> &nbsp;
+						<a href="watchlist.html" title='watchlist'><i class="fas fa-binoculars fa-2x"></i></a> &nbsp;
+						<a href="wallet.html" title='wallet tracker'><i class="fas fa-wallet fa-2x"></i></a> &nbsp;
+						<a href="config.html" title='config'><i class="fas fa-cogs fa-2x"></i></a> &nbsp;
+						<a href="manage_users.html" title='manage users'><i class="fas fa-user-cog fa-2x"></i></a> &nbsp;
+						<text id="login_footer_item" style="display: inline-block"><a href="login.html" title='login'><i class="fas fa-sign-in-alt fa-2x"></i></a></text><br>
+						
+						<a href="https://t.me/dexata_army" title='telegram'><i class="icon brands fa-telegram fa-2x"></i></a> &nbsp;
+						<a href="https://twitter.com/dexata_army" title='twitter'><i class="icon brands fa-twitter fa-2x"></i></a> &nbsp;
+						<a href="https://github.com/dexata-army" title='github'><i class="icon brands fa-github fa-2x"></i></a>
+					</p>
+		
+					<p style="margin-top: -30px">
+						<input id="footer_search_box" placeholder="search">
+					</p>
+		
+					<p class="copyright" style="margin-top:-20px">
+						&copy;<script>document.write(new Date().getFullYear())</script> Dexata
+					</p>
+				</noselect>
+			</div>
+		</div>
+		
+		<script>
+			window.addEventListener('keydown',this.keydown,false);
+		
+			function keydown(e)
+			{
+				var code = e.keyCode;
+				
+				if(document.activeElement.tagName == "INPUT")
+				{
+					if(code == 13)
+					{
+						if(document.activeElement.id == "footer_search_box" &&
+							document.getElementById('footer_search_box').value != "")
+						{
+							window.location.href = "search.html?term=" + document.getElementById('footer_search_box').value;
+						}
+					}
+				}
+			}
+		
+			window.addEventListener("pageshow", function (event) {
+				var historyTraversal = event.persisted || 
+				                     ( typeof window.performance != "undefined" && 
+				                          window.performance.navigation.type === 2 );
+				if(historyTraversal) 
+				{
+					// Handle page restore.
+					window.location.reload();
+				}
+			});
+		</script>
+
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+
+		<script>
+			//changes login to logout on page if logged in
+			if(localStorage.getItem("username"))
+			{
+				document.getElementById('login_menu_item').innerHTML = "<a onclick='logout()'>logout</a>";
+				document.getElementById('login_footer_item').innerHTML = "<a onclick='logout()' title='logout'><i class='fas fa-sign-out-alt fa-2x'></i></a>";
+			}
+			else
+			{
+				document.getElementById('login_menu_item').innerHTML = "<a href='login.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1) + "'>login</a>"
+				document.getElementById('login_footer_item').innerHTML = "<a href='login.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1) + "'><i class='fas fa-sign-in-alt fa-2x'></i></a>"
+			}
+		</script>
+	</body>
+</html>

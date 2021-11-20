@@ -2184,7 +2184,6 @@ input, select, textarea {
 		}
 
 	input[type="text"],
-	input[type="password"],
 	input[type="email"],
 	input[type="tel"],
 	input[type="search"],
@@ -2209,7 +2208,6 @@ input, select, textarea {
 	}
 
 		input[type="text"]:invalid,
-		input[type="password"]:invalid,
 		input[type="email"]:invalid,
 		input[type="tel"]:invalid,
 		input[type="search"]:invalid,
@@ -2220,7 +2218,6 @@ input, select, textarea {
 		}
 
 		input[type="text"]:focus,
-		input[type="password"]:focus,
 		input[type="email"]:focus,
 		input[type="tel"]:focus,
 		input[type="search"]:focus,
@@ -2240,7 +2237,6 @@ input, select, textarea {
 	}
 
 	input[type="text"],
-	input[type="password"],
 	input[type="email"],
 	input[type="tel"],
 	input[type="search"],
@@ -2261,6 +2257,7 @@ input, select, textarea {
 		select option {
 			color: rgba(255, 255, 255, 0.5);
 			background-color: #24242a;
+			padding-bottom: 50px !important;
 		}
 
 		select:focus::-ms-value {

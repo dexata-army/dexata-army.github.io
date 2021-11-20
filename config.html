@@ -11,11 +11,21 @@
 		<link rel="stylesheet" href="assets/css/print.css" />
 		<link rel="icon" type="image/svg" href="images/logo.png">
 		
+		<!-- Scripts -->
+		<script src="assets/js/params.js"></script>
 		<script src="assets/js/sleep.js"></script>
+		<script src="assets/js/wallet.js"></script>
 		<script src="assets/js/watchlist.js"></script>
+		<script src="assets/js/apex-charts/apexcharts.min.js"></script>
+		<script src="assets/js/crypto-js/crypto-js.js"></script>
 		
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.dropotron.min.js"></script>
+		<script src="assets/js/jquery.scrollex.min.js"></script>
+		<script src="assets/js/jquery.scrolly.min.js"></script>
+		
+		<!-- https://printjs.crabbly.com/ -->
+		<script src="assets/js/print.js"></script>
 		
 		<!-- Global site tag (gtag.js) - Google Analytics -->
 		<script async src="https://www.googletagmanager.com/gtag/js?id=G-D70JLR4EJM"></script>
@@ -26,6 +36,98 @@
 		
 		  gtag('config', 'G-D70JLR4EJM');
 		</script>
+
+		<script>
+			function logout()
+			{
+				localStorage.removeItem('no_dexata_tabs');
+				localStorage.removeItem('last_load_time');
+				localStorage.removeItem('username');
+				sessionStorage.removeItem('username');
+				localStorage.removeItem('password');
+				sessionStorage.removeItem('password');
+				location.reload();
+			}
+		
+			function check_for_logout(username)
+			{
+				sleep(2000).then(() => { 
+					if(!localStorage.getItem('username') || 
+						localStorage.getItem('username') != username)
+						location.reload();
+					else
+						check_for_logout(username);
+				});
+			}
+		
+			var session_timeout_sec = localStorage.getItem(user + '-session_timeout')*60;
+		
+			if(session_timeout_sec != undefined && session_timeout_sec > 0)
+			{
+				if(sessionStorage.getItem('username') || localStorage.getItem('username'))
+				{
+					var curr_time = Math.round((new Date()).getTime() / 1000);
+		
+					//checks last page load time
+					if(localStorage.getItem("last_load_time"))
+					{
+						if(curr_time - localStorage.getItem("last_load_time") > session_timeout_sec)
+							logout();
+						else
+							localStorage.setItem("last_load_time", curr_time);
+					}
+					else
+						logout();
+				}
+			}
+		
+			if(sessionStorage.getItem("username") && !localStorage.getItem("username"))
+			{
+				localStorage.setItem("no_dexata_tabs", 0);
+				localStorage.setItem("username", sessionStorage.getItem("username"));
+				localStorage.setItem("password", sessionStorage.getItem("password"));
+			}
+			else if(!sessionStorage.getItem("username") && localStorage.getItem("username"))
+			{
+				sessionStorage.setItem("username", localStorage.getItem("username"));
+				sessionStorage.setItem("password", localStorage.getItem("password"));
+			}
+		
+			var load_host = window.location.hostname;
+			if(localStorage.getItem("username"))
+			{
+				//updates number of dexata tabs open
+				if(localStorage.getItem('no_dexata_tabs') != undefined &&
+					localStorage.getItem('no_dexata_tabs') >= 0)
+					localStorage.setItem('no_dexata_tabs', parseFloat(localStorage.getItem('no_dexata_tabs'))+1);
+				else
+					localStorage.setItem('no_dexata_tabs', 1);
+		
+				window.addEventListener('beforeunload', function (e) {
+					if(localStorage.getItem('no_dexata_tabs'))
+					{
+					    localStorage.setItem('no_dexata_tabs', parseFloat(localStorage.getItem('no_dexata_tabs'))-1);
+		
+					    if(localStorage.getItem('no_dexata_tabs') == 0)
+					    {
+					    	localStorage.removeItem('no_dexata_tabs');
+					    	localStorage.removeItem('username');
+					    	localStorage.removeItem('password');
+					    }
+					}
+					else
+					{
+						sessionStorage.removeItem('username');
+						sessionStorage.removeItem('password');
+					}
+				});
+		
+				//reloads page if user has logged out
+				$(document).ready(function(){
+					check_for_logout(localStorage.getItem('username'));
+				});
+			}
+		</script>
 	</head>
 	<body class="is-preload">
 		<!-- Header -->
@@ -33,8 +135,9 @@
 			<div class="logo" style="margin-top: -25px">
 				<noselect>
 					<a href="index.html"><img src="images/logo.png" height="45px" style="vertical-align: middle"> Dexata</a> &nbsp; 
-					<a href="search.html"><i class="fas fa-search fa-1x" style="vertical-align:middle"></i></a> 
-					<a href="config.html"><i class="fas fa-cogs fa-1x" style="vertical-align:middle"></i></a> 
+					<a href="search.html" title='search'><i class="fas fa-search fa-1x" style="vertical-align:middle"></i></a> 
+					<a href="config.html" title='config'><i class="fas fa-cogs fa-1x" style="vertical-align:middle"></i></a> 
+					<a href="manage_users.html" title='manage users'><i class="fas fa-user-cog fa-1x" style="vertical-align:middle"></i></a> 
 				</noselect>
 			</div>
 		
@@ -44,6 +147,7 @@
 					<li><a href="coins.html">coins</a></li>
 					<li><a href="watchlist.html">watchlist</a></li>
 					<li><a href="wallet.html">wallet</a></li>
+					<li id="login_menu_item"><a href="login.html">login</a></li>
 				</ul>
 			</nav>
 		</header>
@@ -61,44 +165,145 @@
 								</div>
 							</div>
 		
-							<a onclick="save_config()"><i class="fas fa-save fa-3x"></i></a><br><br>
+							<div>
+								<select id="config_select" style="width: 300px; max-width: 100%; margin-bottom: 20px; display: inline-block" onchange="config_select_event()">
+									<option value="general" selected="selected">general</option>
+									<option value="watchlists">watchlists</option>
+									<option id="wallets_option" value="wallets">wallets</option>
+								</select>
 		
-							<div class="spotlight" style="max-width:500px">
-								<table>
+								<select id="watchlist_config_select" style="width: 300px; max-width: 100%; margin-bottom: 20px; display: none;" onchange="watchlist_config_select_event()">
+									<option value="add" selected="selected">add</option>
+									<option value="remove">remove</option>
+									<option value="edit">edit</option>
+								</select>
+		
+								<select id="wallet_config_select" style="width: 300px; max-width: 100%; margin-bottom: 20px; display: none" onchange="wallet_config_select_event()">
+									<option value="add" selected="selected">add</option>
+									<option value="remove">remove</option>
+									<option value="ignore">ignore</option>
+								</select>
+							</div>
+		
+							
+		
+							<div id="config_spotlight" class="spotlight" style="max-width:100%; display: inline-block">
+								<table id="config_table">
 									<tr>
 										<td>Refresh speed (sec)</td>
 										<td><input id="refresh_sec" spellcheck="false"></td>
 									</tr>
-									<tr>
-										<td>BSC address</td>
-										<td><input id="bsc_addr" spellcheck="false"></td>
+									<tr id="session_timeout_row">
+										<td>Session timeout (min)</td>
+										<td><input id="session_timeout" spellcheck="false"></td>
 									</tr>
-									<tr>
+									<tr id="bscscan_api_key_row">
 										<td>BSCScan API key</td>
 										<td><input id="bscscan_api_key" spellcheck="false"></td>
 									</tr>
-									<tr>
+									<tr id="covalenthq_api_key_row">
 										<td>CovalentHQ API key</td>
 										<td><input id="covalenthq_api_key" spellcheck="false"></td>
 									</tr>
 								</table>
+								<a onclick="save_general_config()"><i class="fas fa-save fa-3x" style="margin-bottom: 10px"></i></a>
 							</div>
 		
-							<div>
-								<p>
-									Watchlist<br>
-									<textarea id="watchlist" spellcheck="false" style="max-width:100%; width: 400px; height: 250px"></textarea>
-								</p>
+							<div id="add_watchlist_spotlight" class="spotlight" style="max-width:100%">
+								<div id="add_watchlist_div" class="xscroll">
+									<table id="add_watchlist_table">
+										<tr>
+											<td><input id="add_watchlist_input" spellcheck="false" placeholder="name"></td>
+										</tr>
+									</table>
+									<a onclick="add_watchlist()" title="add watchlist"><i class="fas fa-plus fa-2x" style="margin-bottom: 10px"></i></a>
+								</div>
+							</div>
 		
+							<div id="remove_watchlist_spotlight" class="spotlight" style="max-width:100%; width: 900px">
+								<div id="remove_watchlist_div" class="xscroll">
+									<table id="remove_watchlist_table">
+										<tr>
+											<td><select id="remove_watchlist_select" spellcheck="false" placeholder="name" style="width: 100%"></select></td>
+										</tr>
+										<tr>
+											<td><input id="remove_watchlist_password" spellcheck="false" placeholder="password" type="password"></td>
+										</tr>
+									</table>
+									<a onclick="remove_watchlist()" title="remove watchlist"><red><i class="fas fa-minus fa-2x"></i></red></a>
+								</div>
+							</div>
+		
+							<div id="no_watchlists_spotlight" class="spotlight" style="max-width: 100%; width: 400px; display: none; padding-top: 20px; padding-bottom: 20px">
+							</div>
+		
+							<div id="watchlist_div">
 								<p>
-									Ignore list<br>
-									<textarea id="ignorelist" spellcheck="false" style="max-width:100%; width: 400px; height: 250px"></textarea>
+									Watchlist
+									<select id="watchlist_select" onclick="watchlist_select_event()" style="max-width: 100%"></select>
+									<textarea id="watchlist" spellcheck="false" style="max-width:100%; width: 400px; height: 250px; margin-top: 10px; margin-bottom: 10px"></textarea>
+									<a onclick="save_watchlist()"><i class="fas fa-save fa-3x"></i></a>
 								</p>
 							</div>
 		
-							<p>
-								<img src="images/btc-illustration.png" style="max-width:80%; width: 150px; margin-top: 20px">
-							</p>
+							<div id="add_wallet_spotlight" class="spotlight" style="max-width:100%">
+								<div id="add_wallet_div" class="xscroll">
+									<table id="add_wallet_table">
+										<tr>
+											<td>
+												<select id="network_select" title="network">
+													<option disabled selected hidden>network</option>
+													<option value="42161">arbitrum</option>
+													<option value="43114">avalanche</option>
+													<option value="56">bsc</option>
+													<option value="1">ethereum</option>
+													<option value="250">fantom</option>
+													<option value="128">heco</option>
+													<option value="8217">klaytn</option>
+													<option value="137">matic</option>
+													<option value="1287">moonbeam</option>
+													<option value="71393">nervos</option>
+													<option value="11297108109">palm</option>
+													<option value="30">rsk</option>
+												</select>
+											</td>
+										</tr>
+										<tr>
+											<td><input id="add_wallet_name" spellcheck="false" placeholder="name"></td>
+										</tr>
+										<tr>
+											<td><input id="add_wallet_address" spellcheck="false" placeholder="address"></td>
+										</tr>
+									</table>
+									<a onclick="add_wallet()" title="add wallet"><i class="fas fa-plus fa-2x" style="margin-bottom: 10px"></i></a>
+								</div>
+							</div>
+		
+							<div id="remove_wallet_spotlight" class="spotlight" style="max-width:100%">
+								<div id="remove_wallet_div" class="xscroll">
+									<table id="remove_wallet_table">
+										<tr>
+											<td><select id="remove_wallet_select" spellcheck="false" placeholder="name"></select></td>
+										</tr>
+										<tr>
+											<td><input id="remove_wallet_password" spellcheck="false" placeholder="password" type="password"></td>
+										</tr>
+									</table>
+									<a onclick="remove_wallet()" title="remove wallet"><red><i class="fas fa-minus fa-2x" style="margin-bottom: 10px"></i></red></a>
+								</div>
+							</div>
+		
+							<div id="no_wallets_spotlight" class="spotlight" style="max-width: 100%; width: 400px; display: none; padding-top: 20px; padding-bottom: 20px">
+							</div>
+		
+							<div id="ignorelist_div">
+								<p>
+									Ignore list
+									<select id="wallet_select"></select>
+									<textarea id="ignorelist" spellcheck="false" style="max-width:100%; width: 400px; height: 250px; margin-top: 10px; margin-bottom: 10px"></textarea>
+									<a onclick="save_ignorelist()"><i class="fas fa-save fa-3x"></i></a>
+								</p>
+							</div>
 						</center>
 					</div>
 				</div>
@@ -108,33 +313,176 @@
 		
 		
 		<script>
+			//alert(JSON.stringify(localStorage));
 		
-			load_watchlist();
+			var user = "guest";
+		
+			if(localStorage.getItem('username'))
+				user = localStorage.getItem('username');
 		
 			function load_config()
 			{
-				if(localStorage.getItem('refresh_sec'))
-					document.getElementById("refresh_sec").value = localStorage.getItem('refresh_sec');
+				if(localStorage.getItem(user + '-refresh_sec'))
+					document.getElementById("refresh_sec").value = localStorage.getItem(user + '-refresh_sec');
 				else
 				{
-					localStorage.setItem('refresh_sec', 60);
+					localStorage.setItem(user + '-refresh_sec', 60);
 					document.getElementById("refresh_sec").value = 60;
 				}
 		
-				if(localStorage.getItem('bsc_addr'))
-					document.getElementById("bsc_addr").value = localStorage.getItem('bsc_addr');
+				if(localStorage.getItem(user + '-session_timeout'))
+					document.getElementById("session_timeout").value = localStorage.getItem(user + '-session_timeout');
+				else
+				{
+					localStorage.setItem(user + '-session_timeout', 30);
+					document.getElementById("session_timeout").value = 30;
+				}
 		
-				if(localStorage.getItem('bscscan_api_key'))
-					document.getElementById("bscscan_api_key").value = localStorage.getItem('bscscan_api_key');
+				if(localStorage.getItem(user + '-bscscan_api_key'))
+					document.getElementById("bscscan_api_key").value = CryptoJS.AES.decrypt(localStorage.getItem(user + '-bscscan_api_key'), CryptoJS.AES.decrypt(localStorage.getItem('password'), "Go hang a salami, I’m a lasagna hog.").toString(CryptoJS.enc.Utf8)).toString(CryptoJS.enc.Utf8);
 		
-				if(localStorage.getItem('covalenthq_api_key'))
-					document.getElementById("covalenthq_api_key").value = localStorage.getItem('covalenthq_api_key');
 		
-				if(localStorage.getItem('watchlist'))
-					document.getElementById("watchlist").value = localStorage.getItem('watchlist');
+				if(localStorage.getItem(user + '-covalenthq_api_key'))
+					document.getElementById("covalenthq_api_key").value = CryptoJS.AES.decrypt(localStorage.getItem(user + '-covalenthq_api_key'), CryptoJS.AES.decrypt(localStorage.getItem('password'), "Go hang a salami, I’m a lasagna hog.").toString(CryptoJS.enc.Utf8)).toString(CryptoJS.enc.Utf8);
+			}
 		
-				if(localStorage.getItem('ignorelist'))
-					document.getElementById("ignorelist").value = localStorage.getItem('ignorelist');
+			function update_watchlist_select(id)
+			{
+				var x = document.getElementById(id);
+				for(var i=x.options.length-1; i>=0; i--)
+					x.remove(i);
+		
+				var watchlists = fetch_watchlists();
+		
+				if(watchlists.length > 1)
+				{
+					for(var i=1; i<watchlists.length; i++)
+					{
+						var option = document.createElement("option");
+						option.text = watchlists[i];
+						x.add(option);
+					}
+		
+					document.getElementById('watchlist').value = localStorage.getItem(user + "-watchlist-" + document.getElementById('watchlist_select').value);
+				}
+				else
+				{
+					document.getElementById('remove_watchlist_spotlight').style.display = "none";
+					document.getElementById('watchlist_div').style.display = "none";
+					document.getElementById('no_watchlists_spotlight').style.display = "block";
+					document.getElementById('no_watchlists_spotlight').innerHTML = user + " does not have any watchlists";
+				}
+			}
+		
+			function update_wallet_select(id)
+			{
+				var x = document.getElementById(id);
+				for(var i=x.options.length-1; i>=0; i--)
+					x.remove(i);
+		
+				var wallets = fetch_wallets();
+		
+				if(wallets.length > 1)
+				{
+					for(var i=1; i<wallets.length; i++)
+					{
+						var option = document.createElement("option");
+						option.text = wallets[i];
+						x.add(option);
+					}
+		
+					document.getElementById('ignorelist').value = localStorage.getItem(user + "-ignorelist-" + document.getElementById('wallet_select').value);
+				}
+				else
+				{
+					document.getElementById('remove_wallet_spotlight').style.display = "none";
+					document.getElementById('wallet_div').style.display = "none";
+					document.getElementById('no_wallets_spotlight').style.display = "block";
+					document.getElementById('no_wallets_spotlight').innerHTML = user + " has not added any wallets";
+				}
+			}
+		
+			function watchlist_select_event()
+			{
+				document.getElementById('watchlist').value = localStorage.getItem(user + "-watchlist-" + document.getElementById('watchlist_select').value);
+			}
+		
+			function ignorelist_select_event()
+			{
+				document.getElementById('ignorelist').value = localStorage.getItem(user + "-ignorelist-" + document.getElementById('wallet_select').value);
+			}
+		
+			function watchlist_config_select_event()
+			{
+				document.getElementById('add_watchlist_spotlight').style.display = "none";
+				document.getElementById('remove_watchlist_spotlight').style.display = "none";
+				document.getElementById('no_watchlists_spotlight').style.display = "none";
+				document.getElementById('watchlist_div').style.display = "none";
+		
+		
+				if(document.getElementById('watchlist_config_select').value == "add")
+					document.getElementById('add_watchlist_spotlight').style.display = "block";
+				else if(document.getElementById('watchlist_config_select').value == "remove")
+				{
+					document.getElementById('remove_watchlist_spotlight').style.display = "block";
+					update_watchlist_select('remove_watchlist_select');
+				}
+				else
+				{
+					document.getElementById('watchlist_div').style.display = "block";
+					update_watchlist_select('watchlist_select');
+				}
+			}
+		
+			function wallet_config_select_event()
+			{
+				document.getElementById('add_wallet_spotlight').style.display = "none";
+				document.getElementById('remove_wallet_spotlight').style.display = "none";
+				document.getElementById('no_wallets_spotlight').style.display = "none";
+				document.getElementById('ignorelist_div').style.display = "none";
+		
+				if(document.getElementById('wallet_config_select').value == "add")
+					document.getElementById('add_wallet_spotlight').style.display = "block";
+				else if(document.getElementById('wallet_config_select').value == "remove")
+				{
+					document.getElementById('remove_wallet_spotlight').style.display = "block";
+					update_wallet_select('remove_wallet_select');
+				}
+				else
+				{
+					document.getElementById('ignorelist_div').style.display = "block";
+					update_wallet_select('wallet_select');
+				}
+			}
+		
+			function config_select_event()
+			{
+				document.getElementById('watchlist_config_select').style.display = "none";
+				document.getElementById('wallet_config_select').style.display = "none";
+		
+				document.getElementById('config_spotlight').style.display = "none";
+				document.getElementById('add_watchlist_spotlight').style.display = "none";
+				document.getElementById('remove_watchlist_spotlight').style.display = "none";
+				document.getElementById('remove_watchlist_spotlight').style.display = "none";
+				document.getElementById('watchlist_div').style.display = "none";
+				document.getElementById('add_wallet_spotlight').style.display = "none";
+				document.getElementById('remove_wallet_spotlight').style.display = "none";
+				document.getElementById('ignorelist_div').style.display = "none";
+		
+				if(document.getElementById('config_select').value == "general")
+				{
+					document.getElementById('config_spotlight').style.display = "block";
+				}
+				else if(document.getElementById('config_select').value == "watchlists")
+				{
+					document.getElementById('watchlist_config_select').style.display = "block";
+					watchlist_config_select_event();
+				}
+				else if(document.getElementById('config_select').value == "wallets")
+				{
+					document.getElementById('wallet_config_select').style.display = "block";
+					wallet_config_select_event();
+				}
 			}
 		
 			function remove_duplicates(x)
@@ -144,64 +492,179 @@
 				})
 			}
 		
-			function save_config()
+			function add_watchlist()
+			{
+				add_to_watchlists(document.getElementById('add_watchlist_input').value);
+				document.getElementById('add_watchlist_input').value = "";
+			}
+		
+			function remove_watchlist()
+			{
+				if(document.getElementById('remove_watchlist_password').value != CryptoJS.AES.decrypt(localStorage.getItem('password'), "Go hang a salami, I’m a lasagna hog.").toString(CryptoJS.enc.Utf8))
+				{
+					document.getElementById('remove_watchlist_password').value = "";
+					alert("password is incorrect");
+				}
+				else
+				{
+					remove_from_watchlists(document.getElementById('remove_watchlist_select').value);
+					update_watchlist_select('remove_watchlist_select');
+				}
+			}
+		
+			function save_watchlist()
+			{
+				var watchlist_name = "-" + document.getElementById("watchlist_select").value;
+		
+				if(document.getElementById("watchlist").value != "")
+				{
+					document.getElementById("watchlist").value = remove_duplicates(document.getElementById("watchlist").value.replace(/ /g,"").replace(/;/g, "\n").replace(/,/g, "\n").split("\n").sort()).join("\n");
+					localStorage.setItem(user + '-watchlist' + watchlist_name, document.getElementById("watchlist").value);
+				}
+				else
+					localStorage.removeItem(user + '-watchlist' + watchlist_name);
+		
+				alert("watchlist has been saved");
+			}
+		
+			function add_wallet()
+			{
+				add_to_wallets(document.getElementById('network_select').value, document.getElementById('add_wallet_name').value, document.getElementById('add_wallet_address').value);
+				document.getElementById('add_wallet_name').value = "";
+				document.getElementById('add_wallet_address').value = "";
+			}
+		
+			function remove_wallet()
+			{
+				if(document.getElementById('remove_wallet_password').value != CryptoJS.AES.decrypt(localStorage.getItem('password'), "Go hang a salami, I’m a lasagna hog.").toString(CryptoJS.enc.Utf8))
+				{
+					document.getElementById('remove_wallet_password').value = "";
+					alert("password is incorrect");
+				}
+				else
+				{
+					remove_from_wallets(document.getElementById('remove_wallet_select').value);
+					update_wallet_select('remove_wallet_select');
+				}
+			}
+		
+			function save_ignorelist()
+			{
+				var wallet_name = document.getElementById("wallet_select").value;
+		
+				if(document.getElementById("ignorelist").value != "")
+				{
+					document.getElementById("ignorelist").value = remove_duplicates(document.getElementById("ignorelist").value.replace(/;/g, "\n").replace(/,/g, "\n").split("\n").sort()).join("\n");
+					localStorage.setItem(user + '-ignorelist-' + wallet_name, document.getElementById("ignorelist").value);
+				}
+				else
+					localStorage.removeItem(user + '-ignorelist-' + wallet_name);
+		
+				alert("ignorelist has been saved");
+			}
+		
+			function save_general_config()
 			{
 				var valid_config = 1;
 		
 				if(document.getElementById("refresh_sec").value == "")
 				{
 					valid_config = 0;
-					alert("refresh time must be specified (use 0 to not refresh)");
+					alert("refresh speed must be specified (use 0 to not refresh)");
 				}
 				else if(document.getElementById("refresh_sec").value < 0)
 				{
 					valid_config = 0;
-					alert("refresh time must be a non-negative numer (use 0 to not refresh)");
+					alert("refresh speed must be a non-negative number (use 0 to not refresh)");
 				}
 				else if(document.getElementById("refresh_sec").value < 30)
 				{
 					valid_config = 0;
-					alert("refresh time too frequent (use 0 to not refresh)");
+					alert("refresh speed too frequent (use 0 to not refresh)");
+				}
+		
+				if(document.getElementById('session_timeout').value == "")
+				{
+					valid_config = 0;
+					alert("session timout must be specified (use 0 to not timeout)");
+				}
+				else if(document.getElementById('session_timeout').value < 0)
+				{
+					valid_config = 0;
+					alert("session timeout must be a non-negative number (use 0 to not timeout)");
+				}
+				else if(document.getElementById('session_timeout').value < 300)
+				{
+					valid_config = 0;
+					alert("specified session timout would get quite annoying, try a little longer!");
 				}
 		
 				if(valid_config)
 				{
-					localStorage.setItem('refresh_sec', document.getElementById("refresh_sec").value);
+					localStorage.setItem(user + '-refresh_sec', document.getElementById("refresh_sec").value);
 		
-					if(document.getElementById("bsc_addr").value != "")
-						localStorage.setItem('bsc_addr', document.getElementById("bsc_addr").value);
-					else
-						localStorage.removeItem('bsc_addr');
+					localStorage.setItem(user + '-session_timeout', document.getElementById("session_timeout").value);
 		
 					if(document.getElementById("bscscan_api_key").value != "")
-						localStorage.setItem('bscscan_api_key', document.getElementById("bscscan_api_key").value);
+						localStorage.setItem(user + '-bscscan_api_key', CryptoJS.AES.encrypt(document.getElementById("bscscan_api_key").value, CryptoJS.AES.decrypt(localStorage.getItem("password"), "Go hang a salami, I’m a lasagna hog.").toString(CryptoJS.enc.Utf8)));
 					else
-						localStorage.removeItem('bscscan_api_key');
+						localStorage.removeItem(user + '-bscscan_api_key');
 		
 					if(document.getElementById("covalenthq_api_key").value != "")
-						localStorage.setItem('covalenthq_api_key', document.getElementById("covalenthq_api_key").value);
+						localStorage.setItem(user + '-covalenthq_api_key', CryptoJS.AES.encrypt(document.getElementById("covalenthq_api_key").value, CryptoJS.AES.decrypt(localStorage.getItem("password"), "Go hang a salami, I’m a lasagna hog.").toString(CryptoJS.enc.Utf8)));
 					else
-						localStorage.removeItem('covalenthq_api_key');
-		
-					if(document.getElementById("watchlist").value != "")
 					{
-						document.getElementById("watchlist").value = remove_duplicates(document.getElementById("watchlist").value.replace(/ /g,"").replace(/;/g, "\n").replace(/,/g, "\n").split("\n").sort()).join("\n");
-						localStorage.setItem('watchlist', document.getElementById("watchlist").value);
+						localStorage.removeItem(user + '-covalenthq_api_key');
 					}
-					else
-						localStorage.removeItem('watchlist');
 		
-					if(document.getElementById("ignorelist").value != "")
-					{
-						document.getElementById("ignorelist").value = remove_duplicates(document.getElementById("ignorelist").value.replace(/ /g,"").replace(/;/g, "\n").replace(/,/g, "\n").split("\n").sort()).join("\n");
-						localStorage.setItem('ignorelist', document.getElementById("ignorelist").value);
-					}
-					
 					alert("config saved successfully");
 				}
 			}
 		
+			window.addEventListener('keydown',this.keydown,false);
+				
+			function keydown(e)
+			{
+				var code = e.keyCode;
+				
+				if(document.activeElement.tagName == "INPUT")
+				{
+					if(code == 13)
+					{
+						if(document.activeElement.id == "add_watchlist_input")
+							add_watchlist();
+						else if(document.activeElement.id == "remove_watchlist_password")
+							remove_watchlist();
+						else if(document.activeElement.id == "add_wallet_address")
+							add_wallet();
+						else if(document.activeElement.id == "remove_wallet_password")
+							remove_wallet();
+					}
+				}
+			}
+		
+			if(user == "guest")
+			{
+				document.getElementById('config_select').remove(2);
+				document.getElementById('session_timeout_row').style.display = "none";
+				document.getElementById('bscscan_api_key_row').style.display = "none";
+				document.getElementById('covalenthq_api_key_row').style.display = "none";
+			}
+		
+			document.getElementById('config_select').value = "general";
+		
+			document.getElementById('config_spotlight').style.width = (document.getElementById('config_table').offsetWidth + 70) + "px";
+		
+			document.getElementById('add_watchlist_spotlight').style.width = (document.getElementById('add_watchlist_div').offsetWidth + 70) + "px";
+			document.getElementById('remove_watchlist_spotlight').style.width = (document.getElementById('add_watchlist_div').offsetWidth + 70) + "px";
+			document.getElementById('watchlist_select').style.width = (document.getElementById('watchlist').offsetWidth) + "px";
+		
+			document.getElementById('add_wallet_spotlight').style.width = (document.getElementById('add_wallet_div').offsetWidth + 70) + "px";
+			document.getElementById('remove_wallet_spotlight').style.width = (document.getElementById('add_wallet_div').offsetWidth + 70) + "px";
+			document.getElementById('wallet_select').style.width = (document.getElementById('ignorelist').offsetWidth) + "px";
+		
 			load_config();
+			config_select_event();
 		</script>
 
 		<!-- Footer -->
@@ -209,13 +672,17 @@
 			<div class="inner" style="text-align:center">
 				<noselect>
 					<p>
-						<a href="search.html"><i class="fas fa-search fa-2x"></i></a> &nbsp;
-						<a href="config.html"><i class="fas fa-cogs fa-2x"></i></a> &nbsp;
-						<a href="coins.html"><i class="fas fa-coins fa-2x"></i></a> &nbsp;
-						<a href="watchlist.html"><i class="fas fa-binoculars fa-2x"></i></a> &nbsp;
-						<a href="wallet.html"><i class="fas fa-wallet fa-2x"></i></a> &nbsp;
-						<a href="https://t.me/dexata_army"><i class="icon brands fa-telegram fa-2x"></i></a> &nbsp;&nbsp;
-						<a href="https://twitter.com/dexata_army"><i class="icon brands fa-twitter fa-2x"></i></a>
+						<a href="search.html" title='search'><i class="fas fa-search fa-2x"></i></a> &nbsp;
+						<a href="coins.html" title='coins'><i class="fas fa-coins fa-2x"></i></a> &nbsp;
+						<a href="watchlist.html" title='watchlist'><i class="fas fa-binoculars fa-2x"></i></a> &nbsp;
+						<a href="wallet.html" title='wallet tracker'><i class="fas fa-wallet fa-2x"></i></a> &nbsp;
+						<a href="config.html" title='config'><i class="fas fa-cogs fa-2x"></i></a> &nbsp;
+						<a href="manage_users.html" title='manage users'><i class="fas fa-user-cog fa-2x"></i></a> &nbsp;
+						<text id="login_footer_item" style="display: inline-block"><a href="login.html" title='login'><i class="fas fa-sign-in-alt fa-2x"></i></a></text><br>
+						
+						<a href="https://t.me/dexata_army" title='telegram'><i class="icon brands fa-telegram fa-2x"></i></a> &nbsp;
+						<a href="https://twitter.com/dexata_army" title='twitter'><i class="icon brands fa-twitter fa-2x"></i></a> &nbsp;
+						<a href="https://github.com/dexata-army" title='github'><i class="icon brands fa-github fa-2x"></i></a>
 					</p>
 		
 					<p style="margin-top: -30px">
@@ -240,26 +707,44 @@
 				{
 					if(code == 13)
 					{
-						if(document.activeElement.id == "footer_search_box")
+						if(document.activeElement.id == "footer_search_box" &&
+							document.getElementById('footer_search_box').value != "")
 						{
 							window.location.href = "search.html?term=" + document.getElementById('footer_search_box').value;
 						}
 					}
 				}
 			}
+		
+			window.addEventListener("pageshow", function (event) {
+				var historyTraversal = event.persisted || 
+				                     ( typeof window.performance != "undefined" && 
+				                          window.performance.navigation.type === 2 );
+				if(historyTraversal) 
+				{
+					// Handle page restore.
+					window.location.reload();
+				}
+			});
 		</script>
 
-		<!-- Scripts -->
-		<script src="assets/js/jquery.min.js"></script>
-		<script src="assets/js/jquery.dropotron.min.js"></script>
-		<script src="assets/js/jquery.scrollex.min.js"></script>
-		<script src="assets/js/jquery.scrolly.min.js"></script>
 		<script src="assets/js/browser.min.js"></script>
 		<script src="assets/js/breakpoints.min.js"></script>
 		<script src="assets/js/util.js"></script>
 		<script src="assets/js/main.js"></script>
 
-		<!-- https://printjs.crabbly.com/ -->
-		<script src="assets/js/print.js"></script>
+		<script>
+			//changes login to logout on page if logged in
+			if(localStorage.getItem("username"))
+			{
+				document.getElementById('login_menu_item').innerHTML = "<a onclick='logout()'>logout</a>";
+				document.getElementById('login_footer_item').innerHTML = "<a onclick='logout()' title='logout'><i class='fas fa-sign-out-alt fa-2x'></i></a>";
+			}
+			else
+			{
+				document.getElementById('login_menu_item').innerHTML = "<a href='login.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1) + "'>login</a>"
+				document.getElementById('login_footer_item').innerHTML = "<a href='login.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1) + "'><i class='fas fa-sign-in-alt fa-2x'></i></a>"
+			}
+		</script>
 	</body>
 </html>
