@@ -244,10 +244,6 @@
 				}
 				else if(document.getElementById('add_user_password').value == document.getElementById('confirm_password').value)
 				{
-					localStorage.setItem('username', document.getElementById("add_user_username").value);
-					sessionStorage.setItem('username', document.getElementById("add_user_username").value);
-					localStorage.setItem('password', CryptoJS.AES.encrypt(document.getElementById("add_user_password").value, "Go hang a salami, I’m a lasagna hog."));
-					sessionStorage.setItem('password', CryptoJS.AES.encrypt(document.getElementById("add_user_password").value, "Go hang a salami, I’m a lasagna hog."));
 					localStorage.setItem(document.getElementById('add_user_username').value + '-encrypted_phrase', CryptoJS.AES.encrypt("Go hang a salami, I’m a lasagna hog.", document.getElementById('add_user_password').value));
 		
 					alert("successfully added " + document.getElementById('add_user_username').value);
