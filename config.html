@@ -593,7 +593,7 @@
 					valid_config = 0;
 					alert("session timeout must be a non-negative number (use 0 to not timeout)");
 				}
-				else if(document.getElementById('session_timeout').value < 300)
+				else if(document.getElementById('session_timeout').value < 10)
 				{
 					valid_config = 0;
 					alert("specified session timout would get quite annoying, try a little longer!");
