@@ -170,6 +170,9 @@
 							<div id="no_watchlists_spotlight" class="spotlight" style="max-width: 100%; width: 400px; display: none; padding-top: 20px; padding-bottom: 20px">
 							</div>
 		
+							<div id="empty_watchlist_spotlight" class="spotlight" style="max-width: 100%; width: 400px; display: none; padding: 20px 20px 20px 20px">
+							</div>
+		
 							<div id="table_spotlight" class="spotlight" style="max-width: 100%">
 								<div id="table_div" class="xscroll">
 									<img id="loading_gif" src="images/loading.gif" style="margin-top: 20px; max-width: 150px">
@@ -290,7 +293,11 @@
 				}
 				else
 				{
-					document.getElementById("table_div").innerHTML = "<p style='margin-top: 20px; margin-bottom: 10px'>Watchlist appears to be empty, you can watch and unwatch coins from their respective pages.</p>";
+					document.getElementById('table_spotlight').style.display = "none";
+		
+					document.getElementById('page_controls').style.display = "none";
+					document.getElementById('empty_watchlist_spotlight').style.display = "block";
+					document.getElementById("empty_watchlist_spotlight").innerHTML = "Watchlist appears to be empty, you can watch and unwatch coins from their respective pages.";
 				}
 			}
 		
@@ -350,9 +357,11 @@
 							document.getElementById('loading_gif').src = "";
 							document.getElementById('loading_gif').style.visibility = "hidden";
 							document.getElementById('loading_gif').style.display = "none";
-							document.getElementById("table_spotlight").style.width = "600px";
+							document.getElementById("table_spotlight").style.display = "none";
+							document.getElementById('page_controls').style.display = "none";
 		
-							document.getElementById("table_div").innerHTML = "<p style='margin-top: 20px; margin-bottom: 10px'>failed to fetch watchlist information, please refresh to try again.</p>";
+							document.getElementById("empty_watchlist_spotlight").style.display = "block";
+							document.getElementById("empty_watchlist_spotlight").innerHTML = "failed to fetch watchlist information, please refresh to try again.";
 						});
 					});
 				}
@@ -361,8 +370,11 @@
 					document.getElementById('loading_gif').src = "";
 					document.getElementById('loading_gif').style.visibility = "hidden";
 					document.getElementById('loading_gif').style.display = "none";
+					document.getElementById('table_spotlight').style.display = "none";
+					document.getElementById('page_controls').style.display = "none";
 		
-					document.getElementById("table_div").innerHTML = "<p style='margin-top: 20px; margin-bottom: 10px'>Watchlist appears to be empty, you can watch and unwatch coins from their respective pages.</p>";
+					document.getElementById("empty_watchlist_spotlight").style.display = "block";
+					document.getElementById("empty_watchlist_spotlight").innerHTML = "Watchlist appears to be empty, you can watch and unwatch coins from their respective pages.";
 				}
 			}
 		
@@ -469,9 +481,11 @@
 		
 			function watchlist_select_event()
 			{
-				localStorage.setItem(user + "-watchlist", document.getElementById('watchlist_select').value);
+				document.getElementById('empty_watchlist_spotlight').style.display = "none";
+				document.getElementById('table_spotlight').style.display = "block";
+				document.getElementById('page_controls').style.display = "block";
+				localStorage.setItem(user + "-watchlist", document.getElementById('watchlist_select').value); 
 				fetch_table_coingecko(document.getElementById('watchlist_select').value);
-				refresh_table();
 			}
 		
 			document.getElementById('table_spotlight').style.width = (document.getElementById('loading_gif').offsetWidth + 400) + "px";
@@ -479,6 +493,7 @@
 		
 			setup_watchlist_select();
 			watchlist_select_event();
+			refresh_table();
 		
 					
 		</script>

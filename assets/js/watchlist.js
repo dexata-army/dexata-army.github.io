@@ -43,6 +43,8 @@ function fetch_watchlist(name)
 
 function fetch_watchlist_str(name)
 {
+	if(!localStorage.getItem(user + "-watchlist-" + name))
+		localStorage.setItem(user + "-watchlist-" + name, "");
 	return localStorage.getItem(user + '-watchlist-' + name).replace(/ /g, "").replace(/;/g, ",").replace(/\n/g,",");
 }
 
@@ -124,6 +126,7 @@ function add_to_watchlists(name)
 
 	if(watchlists.indexOf(name) == -1)
 	{
+		localStorage.setItem(user + '-watchlist-' + name, "");
 		watchlists[watchlists.length] = name;
 		save_watchlists(watchlists);
 		alert("successfully added " + name + " to watchlists for " + user);
