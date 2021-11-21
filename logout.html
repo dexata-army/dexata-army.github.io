@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Dexata - index</title>
+		<title>Dexata - logout</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<meta name="description" content="" />
@@ -152,51 +152,14 @@
 			</nav>
 		</header>
 
-		<!-- Wrapper -->
-		<div id="wrapper">
-			<!-- One -->
-			<section id="one" class="wrapper style1">
-				<div class="inner">
-					<div class="spotlights">
-						<center>
-							<div class="spotlight" style="max-width:500px;">
-								<div class="content">
-									<h1><img src="images/logo.png" height="225px" style="vertical-align: middle";><noselect> Dexata</noselect></h1>
-								</div>
-							</div>
+		<script>
+			logout();
 		
-							<p style="max-width:600px; margin-top: 30px">
-								Dexata is a decentralised application for live data and charts acrosss various cryptocurrency markets. We provide you with the resources needed to analyse data from numerous markets, utilising several APIs to present data in a variety of formats to assist you with trading.
-							</p>
-		
-							<p>
-								<img src="images/rocket-illustration.png" style="max-width:80%; width: 350px">
-							</p><br><br>
-		
-							<h2>Powered by</h2>
-							<p>
-								<a href="https://apexcharts.com/"><img src="images/logos/apex-charts.png" style="max-height:  100px"></a>
-							</p>
-							<p>
-								<a href="https://bscscan.com/"><img src="images/logos/bscscan.png" style="max-height: 100px"></a>
-							</p>
-							<p>
-								<a href="https://www.coingecko.com/"><img src="images/logos/coingecko.png" style="max-height: 100px"></a>
-							</p>
-							<p>
-								<a href="https://www.covalenthq.com/"><img src="images/logos/covalent-hq.svg" style="max-height: 100px"></a>
-							</p>
-							<p>
-								<a href="hhttps://cryptojs.gitbook.io/docs/"><img src="images/logos/cryptojs.png" style="max-height: 100px"></a>
-							</p>
-							<p>
-								<a href="https://nift.dev"><img src="images/logos/nift.svg" style="max-height: 120px"></a>
-							</p>
-						</center>
-					</div>
-				</div>
-			</section>
-		</div>
+			if(param_map.get('return_to') != undefined)
+				window.location.href = param_map.get('return_to');
+			else
+				window.location.href = "index.html";
+		</script>
 
 		<!-- Footer -->
 		<div class="wrapper">

@@ -46,7 +46,7 @@
 				sessionStorage.removeItem('username');
 				localStorage.removeItem('password');
 				sessionStorage.removeItem('password');
-				location.reload();
+				//location.reload();
 			}
 		
 			function check_for_logout(username)
@@ -147,7 +147,7 @@
 					<li><a href="coins.html">coins</a></li>
 					<li><a href="watchlist.html">watchlist</a></li>
 					<li><a href="wallet.html">wallet</a></li>
-					<li id="login_menu_item"><a onclick='logout()'>logout</a></li>
+					<li id="login_menu_item"><a href='logout()'>logout</a></li>
 				</ul>
 			</nav>
 		</header>
@@ -570,8 +570,10 @@
 			//changes login to logout on page if logged in
 			if(localStorage.getItem("username"))
 			{
-				document.getElementById('login_menu_item').innerHTML = "<a onclick='logout()'>logout</a>";
-				document.getElementById('login_footer_item').innerHTML = "<a onclick='logout()' title='logout'><i class='fas fa-sign-out-alt fa-2x'></i></a>";
+				//document.getElementById('login_menu_item').innerHTML = "<a onclick='logout()'>logout</a>";
+				//document.getElementById('login_footer_item').innerHTML = "<a onclick='logout()' title='logout'><i class='fas fa-sign-out-alt fa-2x'></i></a>";
+				document.getElementById('login_menu_item').innerHTML = "<a href='logout.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1) + "'>logout</a>"
+				document.getElementById('login_footer_item').innerHTML = "<a href='logout.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1) + "'><i class='fas fa-sign-out-alt fa-2x'></i></a>"
 			}
 			else
 			{
