@@ -18,7 +18,12 @@ br, button, nav, select, noselect
 	-ms-user-select: none; /* IE10+ */
 }
 
-input, textarea
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active,
+input, 
+textarea
 {
 	background:  #6e4d4b;
 	line-height: normal;
