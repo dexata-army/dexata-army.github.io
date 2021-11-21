@@ -12,4 +12,9 @@
 		document.getElementById('login_menu_item').innerHTML = "<a href='@pathto(login)?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1) + "'>login</a>"
 		document.getElementById('login_footer_item').innerHTML = "<a href='@pathto(login)?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1) + "'><i class='fas fa-sign-in-alt fa-2x'></i></a>"
 	}
+
+	//prevent autocomplete
+	$(':input').on('focus', function () {
+		$(this).attr('autocomplete', 'off')
+	});
 </script>
