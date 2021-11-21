@@ -165,7 +165,7 @@
 								</div>
 							</div>
 		
-							<select id="wallet_select" onclick="wallet_select_event()" style="max-width: 100%; width: 300px; margin-bottom: 20px"></select>
+							<select id="wallet_select" onchange="wallet_select_event()" style="max-width: 100%; width: 300px; margin-bottom: 20px"></select>
 		
 							<div id="no_wallets_spotlight" class="spotlight" style="max-width: 100%; width: 400px; display: none; padding-top: 20px; padding-bottom: 20px">
 							</div>
@@ -468,12 +468,9 @@
 		
 			function wallet_select_event()
 			{
-				//alert("in");
 				wallet_name = document.getElementById('wallet_select').value;
 				wallet_network = localStorage.getItem(username + '-wallets-' + wallet_name + '-network');
-				//alert(wallet_network);
 				wallet_address = CryptoJS.AES.decrypt(localStorage.getItem(username + '-wallets-' + wallet_name + '-address'), CryptoJS.AES.decrypt(localStorage.getItem('password'), "Go hang a salami, I’m a lasagna hog.").toString(CryptoJS.enc.Utf8)).toString(CryptoJS.enc.Utf8);
-				//alert(wallet_address);
 				localStorage.setItem(username + "-wallet", wallet_name);
 				fetch_table_covalenthq();
 			}
