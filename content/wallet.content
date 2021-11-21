@@ -297,12 +297,10 @@
 
 			if(localStorage.getItem(username + "-wallet"))
 				document.getElementById('wallet_select').value = localStorage.getItem(username + "-wallet");
-			else
-			{
-				wallet_name = document.getElementById('wallet_select').value;
-				wallet_network = localStorage.getItem(username + '-wallets-' + wallet_name + "-network");
-				wallet_address = CryptoJS.AES.decrypt(localStorage.getItem(username + '-wallets-' + wallet_name + "-address"), CryptoJS.AES.decrypt(localStorage.getItem('password'), "Go hang a salami, I’m a lasagna hog.").toString(CryptoJS.enc.Utf8)).toString(CryptoJS.enc.Utf8);
-			}
+			
+			wallet_name = document.getElementById('wallet_select').value;
+			wallet_network = localStorage.getItem(username + '-wallets-' + wallet_name + "-network");
+			wallet_address = CryptoJS.AES.decrypt(localStorage.getItem(username + '-wallets-' + wallet_name + "-address"), CryptoJS.AES.decrypt(localStorage.getItem('password'), "Go hang a salami, I’m a lasagna hog.").toString(CryptoJS.enc.Utf8)).toString(CryptoJS.enc.Utf8);
 		}
 		else
 		{
@@ -321,7 +319,6 @@
 		wallet_address = CryptoJS.AES.decrypt(localStorage.getItem(username + '-wallets-' + wallet_name + '-address'), CryptoJS.AES.decrypt(localStorage.getItem('password'), "Go hang a salami, I’m a lasagna hog.").toString(CryptoJS.enc.Utf8)).toString(CryptoJS.enc.Utf8);
 		localStorage.setItem(username + "-wallet", wallet_name);
 		fetch_table_covalenthq();
-		//refresh_table();
 	}
 
 	document.getElementById('table_spotlight').style.width = (document.getElementById('loading_gif').offsetWidth + 400) + "px";

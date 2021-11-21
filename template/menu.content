@@ -4,6 +4,6 @@
 		<li><a href="@pathto(coins)">coins</a></li>
 		<li><a href="@pathto(watchlist)">watchlist</a></li>
 		<li><a href="@pathto(wallet)">wallet</a></li>
-		<li id="login_menu_item"><a href='logout()'>logout</a></li>
+		<li id="login_menu_item"></li>
 	</ul>
 </nav>
