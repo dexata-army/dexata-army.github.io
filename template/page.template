@@ -12,11 +12,11 @@
 
 		@input(template/footer.content)
 
+		@input(template/toggle_login.js)
+
 		<script src="@pathto(output/assets/js/browser.min.js)"></script>
 		<script src="@pathto(output/assets/js/breakpoints.min.js)"></script>
 		<script src="@pathto(output/assets/js/util.js)"></script>
 		<script src="@pathto(output/assets/js/main.js)"></script>
-
-		@input(template/toggle_login.js)
 	</body>
 </html>
