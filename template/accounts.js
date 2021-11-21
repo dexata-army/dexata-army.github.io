@@ -7,7 +7,7 @@
 		sessionStorage.removeItem('username');
 		localStorage.removeItem('password');
 		sessionStorage.removeItem('password');
-		location.reload();
+		//location.reload();
 	}
 
 	function check_for_logout(username)

@@ -1,0 +1,8 @@
+<script>
+	logout();
+
+	if(param_map.get('return_to') != undefined)
+		window.location.href = param_map.get('return_to');
+	else
+		window.location.href = "@pathto(index)";
+</script>

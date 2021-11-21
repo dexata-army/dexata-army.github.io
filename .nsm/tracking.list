@@ -22,6 +22,10 @@
 'login'
 'template/page.template'
 
+'logout'
+'logout'
+'template/page.template'
+
 'manage_users'
 'manage_users'
 'template/page.template'
