@@ -134,7 +134,7 @@
 		<header id="header" class="alt">
 			<div class="logo" style="margin-top: -25px">
 				<noselect>
-					<a href="index.html"><img src="images/logo.png" height="45px" style="vertical-align: middle"> Dexata</a> &nbsp; 
+					<a href="index.html"><img src="images/logo.png" height="45px" style="vertical-align: middle"> Dexfi</a> &nbsp; 
 					<a href="search.html" title='search'><i class="fas fa-search fa-1x" style="vertical-align:middle"></i></a> 
 					<a href="config.html" title='config'><i class="fas fa-cogs fa-1x" style="vertical-align:middle"></i></a> 
 					<a href="manage_users.html" title='manage users'><i class="fas fa-user-cog fa-1x" style="vertical-align:middle"></i></a> 
@@ -147,7 +147,7 @@
 					<li><a href="coins.html">coins</a></li>
 					<li><a href="watchlist.html">watchlist</a></li>
 					<li><a href="wallet.html">wallet</a></li>
-					<li id="login_menu_item"><a href='logout()'>logout</a></li>
+					<li id="login_menu_item"></li>
 				</ul>
 			</nav>
 		</header>
@@ -451,12 +451,10 @@
 		
 					if(localStorage.getItem(username + "-wallet"))
 						document.getElementById('wallet_select').value = localStorage.getItem(username + "-wallet");
-					else
-					{
-						wallet_name = document.getElementById('wallet_select').value;
-						wallet_network = localStorage.getItem(username + '-wallets-' + wallet_name + "-network");
-						wallet_address = CryptoJS.AES.decrypt(localStorage.getItem(username + '-wallets-' + wallet_name + "-address"), CryptoJS.AES.decrypt(localStorage.getItem('password'), "Go hang a salami, I’m a lasagna hog.").toString(CryptoJS.enc.Utf8)).toString(CryptoJS.enc.Utf8);
-					}
+					
+					wallet_name = document.getElementById('wallet_select').value;
+					wallet_network = localStorage.getItem(username + '-wallets-' + wallet_name + "-network");
+					wallet_address = CryptoJS.AES.decrypt(localStorage.getItem(username + '-wallets-' + wallet_name + "-address"), CryptoJS.AES.decrypt(localStorage.getItem('password'), "Go hang a salami, I’m a lasagna hog.").toString(CryptoJS.enc.Utf8)).toString(CryptoJS.enc.Utf8);
 				}
 				else
 				{
@@ -475,7 +473,6 @@
 				wallet_address = CryptoJS.AES.decrypt(localStorage.getItem(username + '-wallets-' + wallet_name + '-address'), CryptoJS.AES.decrypt(localStorage.getItem('password'), "Go hang a salami, I’m a lasagna hog.").toString(CryptoJS.enc.Utf8)).toString(CryptoJS.enc.Utf8);
 				localStorage.setItem(username + "-wallet", wallet_name);
 				fetch_table_covalenthq();
-				//refresh_table();
 			}
 		
 			document.getElementById('table_spotlight').style.width = (document.getElementById('loading_gif').offsetWidth + 400) + "px";
