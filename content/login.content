@@ -56,8 +56,10 @@
 		}
 		else
 		{
-			alert("username and password do not match any on this system");
-			document.getElementById('password').value = "";
+			sleep(1000).then(() => {
+				document.getElementById('password').value = "";
+				alert("username and password do not match any on this system");
+			});
 		}
 	}
 
