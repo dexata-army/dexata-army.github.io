@@ -481,7 +481,7 @@
 			document.getElementById('table_spotlight').style.width = (document.getElementById('loading_gif').offsetWidth + 400) + "px";
 			document.getElementById("table_div").scrollIntoView();
 		
-			if(wallet_name != undefined)
+			if(localStorage.getItem(user + "-wallets"))
 			{
 				setup_wallet_select();
 				document.getElementById('table_spotlight').style.width = (document.getElementById('loading_gif').offsetWidth + 400) + "px";
