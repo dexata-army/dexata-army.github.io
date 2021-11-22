@@ -362,7 +362,9 @@
 			    yaxis: {
 			      labels: {
 			        formatter: function (val) {
-			          if(val >= 1)
+			          if(val == 0)
+			          	return 0;
+			          else if(val >= 1)
 			          	return val.toLocaleString('en');
 			          else if(val > 0 && val < 0.001)
 			          	return val.toExponential(3);
@@ -545,12 +547,14 @@
 			{
 				var table = document.getElementById("data_table");
 		
-				if(data['market_data']['current_price']['usd'] > 999)
+				if(data['market_data']['current_price']['usd'] == 0)
+					table.rows[0].cells[1].innerHTML = "-";
+				else if(data['market_data']['current_price']['usd'] > 999)
 					table.rows[0].cells[1].innerHTML = "$" + data['market_data']['current_price']['usd'].toLocaleString('en');
 				else if(data['market_data']['current_price']['usd'] < 0.001)
 					table.rows[0].cells[1].innerHTML = "$" + data['market_data']['current_price']['usd'].toExponential(3);
 				else
-					table.rows[0].cells[1].innerHTML = "$" + data['market_data']['current_price']['usd'];
+					table.rows[0].cells[1].innerHTML = "$" + data['market_data']['current_price']['usd'].toFixed(5);
 		
 				if(data['market_data']['market_cap']['usd'] > 0)
 					table.rows[1].cells[1].innerHTML = "$" + data['market_data']['market_cap']['usd'].toLocaleString('en');

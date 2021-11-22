@@ -266,7 +266,9 @@
 						row.insertCell(2).innerHTML = watchlist_data[i]['symbol'];
 						row.insertCell(3).innerHTML = "<a href='coin.html?id=" + watchlist_data[i]['id'] + "'>" + watchlist_data[i]['name'] + "</a>";
 		
-						if(watchlist_data[i]['current_price'] > 999)
+						if(watchlist_data[i]['current_price'] == 0)
+							row.insertCell(4).innerHTML = "-";
+						else if(watchlist_data[i]['current_price'] > 999)
 							row.insertCell(4).innerHTML = "$" + parseFloat(watchlist_data[i]['current_price']).toLocaleString('en');
 						else if(watchlist_data[i]['current_price'] < 0.001)
 							row.insertCell(4).innerHTML = "$" + parseFloat(watchlist_data[i]['current_price']).toExponential(3);
