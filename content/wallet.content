@@ -137,7 +137,9 @@
 
 					if(coins_data['data']['items'][i]['quote_rate'] != undefined)
 					{
-						if(coins_data['data']['items'][i]['quote_rate'] > 1)
+						if(coins_data['data']['items'][i]['quote_rate'] == 0)
+							row.insertCell(3).innerHTML = "-";
+						else if(coins_data['data']['items'][i]['quote_rate'] > 1)
 							row.insertCell(3).innerHTML = "$" + parseFloat(coins_data['data']['items'][i]['quote_rate']).toLocaleString('en');
 						else if(coins_data['data']['items'][i]['quote_rate'] > 0 && coins_data['data']['items'][i]['quote_rate'] < 0.0001)
 							row.insertCell(3).innerHTML = "$" + parseFloat(coins_data['data']['items'][i]['quote_rate']).toExponential(3);
