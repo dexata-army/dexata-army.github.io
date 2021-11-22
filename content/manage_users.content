@@ -14,6 +14,8 @@
 					<select id="add_rem_select" style="max-width: 100%; margin-bottom: 20px;display: inline-block" onchange="add_rem_select_event()">
 						<option value="add" selected="selected">add user</option>
 						<option value="remove">remove user</option>
+						<option value="change_username">change username</option>
+						@/*<option value="change_password">change password</option>*/
 					</select><br>
 
 					<div id="add_user_spotlight" class="spotlight" style="max-width:100%; margin-bottom: 0px; display: inline-block">
@@ -45,6 +47,41 @@
 							<a onclick="remove_user()"><i class="fas fa-user-minus fa-2x" style="margin-bottom: 10px"></i></a><br>
 						</div>
 					</div>
+					<div id="change_password_spotlight" class="spotlight" style="max-width:100%; margin-bottom: 0px; display: none">
+						<div id="change_password_div" class="xscroll">
+							<table id="change_password_table">
+								<tr>
+									<td><input id="change_password_username" spellcheck="false" placeholder="username"></td>
+								</tr>
+								<tr>
+									<td><input id="old_password" spellcheck="false" placeholder="old password" type="password"></td>
+								</tr>
+								<tr>
+									<td><input id="new_password" spellcheck="false" placeholder="new password" type="password"></td>
+								</tr>
+								<tr>
+									<td><input id="confirm_new_password" spellcheck="false" placeholder="confirm password" type="password"></td>
+								</tr>
+							</table>
+							<a onclick="change_password()"><i class="fas fa-user-plus fa-2x" style="margin-bottom: 10px"></i></a><br>
+						</div>
+					</div>
+					<div id="change_username_spotlight" class="spotlight" style="max-width:100%; margin-bottom: 0px; display: none">
+						<div id="change_username_div" class="xscroll">
+							<table id="change_username_table">
+								<tr>
+									<td><input id="old_username" spellcheck="false" placeholder="old username"></td>
+								</tr>
+								<tr>
+									<td><input id="new_username" spellcheck="false" placeholder="new username"></td>
+								</tr>
+								<tr>
+									<td><input id="change_username_password" spellcheck="false" placeholder="password" type="password"></td>
+								</tr>
+							</table>
+							<a onclick="change_username()"><i class="fas fa-user-plus fa-2x" style="margin-bottom: 10px"></i></a><br>
+						</div>
+					</div>
 				</center>
 			</div>
 		</div>
@@ -58,21 +95,38 @@
 
 	function add_rem_select_event()
 	{
+		document.getElementById('add_user_spotlight').style.display = "none";
+		document.getElementById('remove_user_spotlight').style.display = "none";
+		document.getElementById('change_username_spotlight').style.display = "none";
+		document.getElementById('change_password_spotlight').style.display = "none";
+
 		if(document.getElementById('add_rem_select').value == "add")
 		{
 			document.getElementById('add_user_spotlight').style.display = "inline-block";
-			document.getElementById('remove_user_spotlight').style.display = "none";
 
 			document.getElementById('add_rem_select').style.width = (widthOffset + 70) + "px";
 			document.getElementById('add_user_spotlight').style.width = (widthOffset + 70) + "px";
 		}
 		else if(document.getElementById('add_rem_select').value == "remove")
 		{
-			document.getElementById('add_user_spotlight').style.display = "none";
 			document.getElementById('remove_user_spotlight').style.display = "inline-block";
 
 			document.getElementById('add_rem_select').style.width = (widthOffset + 70) + "px";
 			document.getElementById('remove_user_spotlight').style.width = (widthOffset + 70) + "px";
+		}
+		else if(document.getElementById('add_rem_select').value == "change_username")
+		{
+			document.getElementById('change_username_spotlight').style.display = "inline-block";
+
+			document.getElementById('add_rem_select').style.width = (widthOffset + 70) + "px";
+			document.getElementById('change_username_spotlight').style.width = (widthOffset + 70) + "px";
+		}
+		else if(document.getElementById('add_rem_select').value == "change_password")
+		{
+			document.getElementById('change_password_spotlight').style.display = "inline-block";
+
+			document.getElementById('add_rem_select').style.width = (widthOffset + 70) + "px";
+			document.getElementById('change_password_spotlight').style.width = (widthOffset + 70) + "px";
 		}
 	}
 
@@ -148,7 +202,152 @@
 		else
 		{
 			document.getElementById('remove_user_password').value = "";
-			alert("username and password do not match any on this system");
+			alert("username and password combination do not match any on this system");
+		}
+	}
+
+	function change_username()
+	{
+		if(localStorage.getItem(document.getElementById('new_username').value == ""))
+		{
+			document.getElementById('change_username_password').value = "";
+			alert("no new username specified");
+		}
+		else if(localStorage.getItem(document.getElementById('new_username').value == "guest"))
+		{
+			document.getElementById('new_username').value = "";
+			document.getElementById('change_username_password').value = "";
+			alert("cannot have username as guest");
+		}
+		else if(localStorage.getItem(document.getElementById('new_username').value + '-encrypted_phrase'))
+		{
+			document.getElementById('new_username').value = "";
+			document.getElementById('change_username_password').value = "";
+			alert("there is already a user called " + document.getElementById('new_username').value);
+		}
+		else if(localStorage.getItem(document.getElementById('old_username').value + '-encrypted_phrase') &&
+			CryptoJS.AES.decrypt(localStorage.getItem(document.getElementById('old_username').value + '-encrypted_phrase'), document.getElementById('change_username_password').value).toString(CryptoJS.enc.Utf8) == "Go hang a salami, I’m a lasagna hog.")
+		{
+			var old_username = document.getElementById('old_username').value;
+			var new_username = document.getElementById('new_username').value;
+
+			document.getElementById('old_username').value = "";
+			document.getElementById('new_username').value = "";
+			document.getElementById('change_username_password').value = "";
+
+			if(localStorage.getItem(old_username + '-encrypted_phrase'))
+			{
+				localStorage.setItem(new_username + '-encrypted_phrase', localStorage.getItem(old_username + '-encrypted_phrase'));
+				localStorage.removeItem(old_username + '-encrypted_phrase');
+			}
+
+			if(localStorage.getItem(old_username + '-refresh_speed'))
+			{
+				localStorage.setItem(new_username + '-refresh_speed', localStorage.getItem(old_username + '-refresh_speed'));
+				localStorage.removeItem(old_username + '-refresh_speed');
+			}
+
+			if(localStorage.getItem(old_username + '-session_timeout'))
+			{
+				localStorage.setItem(new_username + '-session_timeout', localStorage.getItem(old_username + '-session_timeout'));
+				localStorage.removeItem(old_username + '-session_timeout');
+			}
+
+			if(localStorage.getItem(old_username + '-bscscan_api_key'))
+			{
+				localStorage.setItem(new_username + '-bscscan_api_key', localStorage.getItem(old_username + '-bscscan_api_key'));
+				localStorage.removeItem(old_username + '-bscscan_api_key');
+			}
+
+			if(localStorage.getItem(old_username + '-covalenthq_api_key'))
+			{
+				localStorage.setItem(new_username + '-covalenthq_api_key', localStorage.getItem(old_username + '-covalenthq_api_key'));
+				localStorage.removeItem(old_username + '-covalenthq_api_key');
+			}
+
+			if(localStorage.getItem(old_username + '-chart_freq'))
+			{
+				localStorage.setItem(new_username + '-chart_freq', localStorage.getItem(old_username + '-chart_freq'));
+				localStorage.removeItem(old_username + '-chart_freq');
+			}
+
+			if(localStorage.getItem(old_username + '-chart_range'))
+			{
+				localStorage.setItem(new_username + '-chart_range', localStorage.getItem(old_username + '-chart_range'));
+				localStorage.removeItem(old_username + '-chart_range');
+			}
+
+
+			var watchlists = fetch_watchlists();
+			for(var i=0; i<watchlists.length; i++)
+			{
+				if(localStorage.getItem(old_username + '-watchlist-' + watchlists[i]))
+				{
+					localStorage.setItem(new_username + '-watchlist-' + watchlists[i], localStorage.getItem(old_username + '-watchlist-' + watchlists[i]));
+					localStorage.removeItem(old_username + '-watchlist-' + watchlists[i]);
+				}
+			}
+
+			if(localStorage.getItem(old_username + '-watchlist'))
+			{
+				localStorage.setItem(new_username + '-watchlist', localStorage.getItem(old_username + '-watchlist'));
+				localStorage.removeItem(old_username + '-watchlist');
+			}
+
+			if(localStorage.getItem(old_username + '-watchlists'))
+			{
+				localStorage.setItem(new_username + '-watchlists', localStorage.getItem(old_username + '-watchlists'));
+				localStorage.removeItem(old_username + '-watchlists');
+			}
+
+			var wallets = fetch_wallets();
+			for(var i=0; i<wallets.length; i++)
+			{
+				if(localStorage.getItem(old_username + '-wallets-' + wallets[i] + '-network'))
+				{
+					localStorage.setItem(new_username + '-wallets-' + wallets[i] + '-network', localStorage.getItem(old_username + '-wallets-' + wallets[i] + '-network'));
+					localStorage.removeItem(old_username + '-wallets-' + wallets[i] + '-network');
+				}
+
+				if(localStorage.getItem(old_username + '-wallets-' + wallets[i] + '-address'))
+				{
+					localStorage.setItem(new_username + '-wallets-' + wallets[i] + '-address', localStorage.getItem(old_username + '-wallets-' + wallets[i] + '-address'));
+					localStorage.removeItem(old_username + '-wallets-' + wallets[i] + '-address');
+				}
+
+				if(localStorage.getItem(old_username + '-ignorelist-' + wallets[i]))
+				{
+					localStorage.setItem(new_username + '-ignorelist-' + wallets[i], localStorage.getItem(old_username + '-ignorelist-' + wallets[i]));
+					localStorage.removeItem(old_username + '-ignorelist-' + wallets[i]);
+				}
+			}
+
+			if(localStorage.getItem(old_username + '-wallet'))
+			{
+				localStorage.setItem(new_username + '-wallet', localStorage.getItem(old_username + '-wallet'));
+				localStorage.removeItem(old_username + '-wallet');
+			}
+
+			if(localStorage.getItem(old_username + '-wallets'))
+			{
+				localStorage.setItem(new_username + '-wallets', localStorage.getItem(old_username + '-wallets'));
+				localStorage.removeItem(old_username + '-wallets');
+			}
+
+			if(localStorage.getItem("username") == old_username)
+				localStorage.setItem("username", new_username);
+
+			if(sessionStorage.getItem("username") == old_username)
+				sessionStorage.setItem("username", new_username);
+
+			alert("username changed from " + old_username + " to " + new_username);
+
+			location.reload();
+		}
+		else
+		{
+			document.getElementById('change_username_password').value = "";
+			alert("username and password combination do not match any on this system");
 		}
 	}
 
@@ -162,10 +361,16 @@
 				add_user();
 			else if(document.activeElement.id == "remove_user_password")
 				remove_user();
+			else if(document.activeElement.id == "change_username_password")
+				change_username();
+			else if(document.activeElement.id == "confirm_new_password")
+				change_password();
 		}
 	}
 
 	document.getElementById('add_rem_select').style.width = (document.getElementById('add_user_div').offsetWidth + 70) + "px";
 	document.getElementById('add_user_spotlight').style.width = (document.getElementById('add_user_div').offsetWidth + 70) + "px";
+	document.getElementById('change_username_spotlight').style.width = (document.getElementById('add_user_div').offsetWidth + 70) + "px";
+	document.getElementById('change_password_spotlight').style.width = (document.getElementById('add_user_div').offsetWidth + 70) + "px";
 
 </script>
