@@ -145,6 +145,8 @@ function remove_from_watchlists(name)
 		watchlists.splice(index, 1);
 		save_watchlists(watchlists);
 		localStorage.removeItem(user + "-watchlist-" + name);
+		if(localStorage.getItem(user + "-watchlist") == name)
+			localStorage.removeItem(user + "-watchlist");
 		alert("successfully removed " + name + " from watchlists for " + user)
 	}
 	else

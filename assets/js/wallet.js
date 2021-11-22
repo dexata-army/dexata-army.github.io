@@ -82,10 +82,12 @@ function remove_from_wallets(name)
 	{
 		wallets.splice(index, 1);
 		save_wallets(wallets);
-		localStorage.removeItem(username + "-wallet-" + name);
-		localStorage.removeItem(username + "-wallet-" + name + "-network");
-		localStorage.removeItem(username + "-wallet-" + name + "-address");
+		//localStorage.removeItem(username + "-wallet-" + name);
+		localStorage.removeItem(username + "-wallets-" + name + "-network");
+		localStorage.removeItem(username + "-wallets-" + name + "-address");
 		localStorage.removeItem(username + "-ignorelist-" + name);
+		if(localStorage.getItem(user + "-wallet") == name)
+			localStorage.removeItem(user + "-wallet");
 		alert("successfully removed " + name + " from wallets for " + username)
 	}
 	else

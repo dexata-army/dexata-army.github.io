@@ -383,7 +383,7 @@
 			function refresh_table()
 			{
 				if(refresh_ms > 0)
-					sleep(refresh_ms).then(() => { fetch_table_coingecko(); refresh_table(); });
+					sleep(refresh_ms).then(() => { fetch_table_coingecko(document.getElementById('watchlist_select').value);; refresh_table(); });
 			}
 		
 			function prev_page()
@@ -398,7 +398,7 @@
 					if(page_no == 1)
 						document.getElementById('prev_page_link').style.visibility = "hidden";
 		
-					fetch_table_coingecko();
+					fetch_table_coingecko(document.getElementById('watchlist_select').value);
 				}
 			}
 		
@@ -415,7 +415,7 @@
 						document.getElementById('next_page_link').style.visibility = "hidden";
 		
 		
-					fetch_table_coingecko();
+					fetch_table_coingecko(document.getElementById('watchlist_select').value);
 				}
 			}
 		
@@ -428,7 +428,7 @@
 				else if(page_no == no_pages)
 					document.getElementById('next_page_link').style.visibility = "hidden";
 		
-				fetch_table_coingecko();
+				fetch_table_coingecko(document.getElementById('watchlist_select').value);
 			}
 		
 			function keydown(e)
