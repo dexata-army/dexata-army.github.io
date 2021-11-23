@@ -72,10 +72,10 @@
 
 	window.addEventListener('keydown',this.keydown,false);
 
-	if(localStorage.getItem('refresh_sec'))
-		refresh_ms = 1000*localStorage.getItem('refresh_sec');
+	if(localStorage.getItem(username + 'refresh_sec'))
+		refresh_ms = 1000*localStorage.getItem(username + 'refresh_sec');
 	else
-		localStorage.setItem('refresh_sec', 60);
+		localStorage.setItem(username + 'refresh_sec', 60);
 
 	function clear_table()
 	{

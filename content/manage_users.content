@@ -195,7 +195,10 @@
 			alert("successfully removed " + remove_username);
 
 			if(localStorage.getItem('username') == remove_username)
+			{
 				logout();
+				location.reload();
+			}
 			else
 				location.reload();
 		}
