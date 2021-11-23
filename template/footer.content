@@ -57,4 +57,9 @@
 			window.location.reload();
 		}
 	});
+
+	window.onbeforeunload = function(){
+		if(sessionStorage.getItem('username') || localStorage.getItem('username'))
+				localStorage.setItem('last_seen', Math.round((new Date()).getTime() / 1000));
+	};
 </script>
