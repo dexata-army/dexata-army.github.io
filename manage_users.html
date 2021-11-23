@@ -187,7 +187,8 @@
 								<option value="add" selected="selected">add user</option>
 								<option value="remove">remove user</option>
 								<option value="change_username">change username</option>
-								</select><br>
+								<option value="change_password">change password</option>
+							</select><br>
 		
 							<div id="add_user_spotlight" class="spotlight" style="max-width:100%; margin-bottom: 0px; display: inline-block">
 								<div id="add_user_div" class="xscroll">
@@ -365,17 +366,62 @@
 		
 					alert("successfully removed " + remove_username);
 		
-					if(localStorage.getItem('username') == remove_username)
-					{
+					if(localStorage.getItem('username') &&
+					   localStorage.getItem('username') == remove_username)
 						logout();
-						location.reload();
-					}
-					else
-						location.reload();
+					location.reload();
 				}
 				else
 				{
 					document.getElementById('remove_user_password').value = "";
+					alert("username and password combination do not match any on this system");
+				}
+			}
+		
+			function change_password()
+			{
+				var change_password_username = document.getElementById('change_password_username').value;
+		
+				if(localStorage.getItem(change_password_username + '-encrypted_phrase') &&
+					CryptoJS.AES.decrypt(localStorage.getItem(change_password_username + '-encrypted_phrase'), document.getElementById('old_password').value).toString(CryptoJS.enc.Utf8) == "Go hang a salami, I’m a lasagna hog.")
+				{
+					if(document.getElementById('new_password').value != document.getElementById('confirm_new_password').value)
+					{
+						document.getElementById('old_password').value = document.getElementById('new_password').value = "";
+						alert("passwords do not match");
+					}
+					else
+					{
+						var old_password = document.getElementById('old_password').value;
+						var new_password = document.getElementById('new_password').value;
+		
+						localStorage.removeItem(change_password_username + '-encrypted_phrase');
+						localStorage.setItem(change_password_username + '-encrypted_phrase', CryptoJS.AES.encrypt("Go hang a salami, I’m a lasagna hog.", new_password));
+		
+						if(localStorage.getItem(change_password_username + '-bscscan_api_key'))
+							localStorage.setItem(change_password_username + '-bscscan_api_key', CryptoJS.AES.encrypt(CryptoJS.AES.decrypt(localStorage.getItem(change_password_username + '-bscscan_api_key'), old_password).toString(CryptoJS.enc.Utf8), new_password));
+		
+						if(localStorage.getItem(change_password_username + '-covalenthq_api_key'))
+							localStorage.setItem(change_password_username + '-covalenthq_api_key', CryptoJS.AES.encrypt(CryptoJS.AES.decrypt(localStorage.getItem(change_password_username + '-covalenthq_api_key'), old_password).toString(CryptoJS.enc.Utf8), new_password));
+		
+						var wallets = fetch_wallets();
+						for(var i=0; i<wallets.length; i++)
+							if(localStorage.getItem(change_password_username + '-wallets-' + wallets[i] + '-address'))
+								localStorage.setItem(change_password_username + '-wallets-' + wallets[i] + '-address', CryptoJS.AES.encrypt(CryptoJS.AES.decrypt(localStorage.getItem(change_password_username + '-wallets-' + wallets[i] + '-address'), old_password).toString(CryptoJS.enc.Utf8), new_password));
+		
+						old_password = new_password = "";
+		
+						alert("successfully changed the password for " + change_password_username);
+		
+						if(localStorage.getItem('username') &&
+						   localStorage.getItem('username') == change_password_username)
+							logout();
+						location.reload();
+					}
+				}
+				else
+				{
+					document.getElementById('old_password').value = document.getElementById('new_password').value = "";
 					alert("username and password combination do not match any on this system");
 				}
 			}
