@@ -72,12 +72,18 @@
 					if(localStorage.getItem("last_load_time"))
 					{
 						if(curr_time - localStorage.getItem("last_load_time") > session_timeout_sec)
+						{
 							logout();
+							location.reload();
+						}
 						else
 							localStorage.setItem("last_load_time", curr_time);
 					}
 					else
+					{
 						logout();
+						location.reload();
+					}
 				}
 			}
 		
@@ -348,7 +354,10 @@
 					alert("successfully removed " + remove_username);
 		
 					if(localStorage.getItem('username') == remove_username)
+					{
 						logout();
+						location.reload();
+					}
 					else
 						location.reload();
 				}

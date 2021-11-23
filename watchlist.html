@@ -72,12 +72,18 @@
 					if(localStorage.getItem("last_load_time"))
 					{
 						if(curr_time - localStorage.getItem("last_load_time") > session_timeout_sec)
+						{
 							logout();
+							location.reload();
+						}
 						else
 							localStorage.setItem("last_load_time", curr_time);
 					}
 					else
+					{
 						logout();
+						location.reload();
+					}
 				}
 			}
 		
@@ -226,10 +232,10 @@
 		
 			window.addEventListener('keydown',this.keydown,false);
 		
-			if(localStorage.getItem('refresh_sec'))
-				refresh_ms = 1000*localStorage.getItem('refresh_sec');
+			if(localStorage.getItem(username + 'refresh_sec'))
+				refresh_ms = 1000*localStorage.getItem(username + 'refresh_sec');
 			else
-				localStorage.setItem('refresh_sec', 60);
+				localStorage.setItem(username + 'refresh_sec', 60);
 		
 			function clear_table()
 			{
