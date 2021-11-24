@@ -3,7 +3,6 @@
 	{
 		localStorage.removeItem('no_dexata_tabs');
 		localStorage.removeItem('last_load_time');
-		localStorage.removeItem('last_seen');
 		localStorage.removeItem('username');
 		sessionStorage.removeItem('username');
 		localStorage.removeItem('password');
@@ -51,20 +50,9 @@
 
 	if(sessionStorage.getItem("username") && !localStorage.getItem("username"))
 	{
-		var curr_time = Math.round((new Date()).getTime() / 1000);
-		//alert(curr_time - localStorage.getItem("last_seen"));
-		if(!localStorage.getItem("last_seen") ||
-		     curr_time - localStorage.getItem("last_seen") > 2)
-		{
-			logout();
-			location.reload();
-		}
-		else
-		{
-			localStorage.setItem("no_dexata_tabs", 0);
-			localStorage.setItem("username", sessionStorage.getItem("username"));
-			localStorage.setItem("password", sessionStorage.getItem("password"));
-		}
+		localStorage.setItem("no_dexata_tabs", 0);
+		localStorage.setItem("username", sessionStorage.getItem("username"));
+		localStorage.setItem("password", sessionStorage.getItem("password"));
 	}
 	else if(!sessionStorage.getItem("username") && localStorage.getItem("username"))
 	{

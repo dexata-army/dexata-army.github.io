@@ -16,6 +16,8 @@
 						<option value="remove">remove user</option>
 						<option value="change_username">change username</option>
 						<option value="change_password">change password</option>
+						@/*<option value="backup_user">backup user</option>
+						<option value="restore_user">restore user</option>*/
 					</select><br>
 
 					<div id="add_user_spotlight" class="spotlight" style="max-width:100%; margin-bottom: 0px; display: inline-block">
@@ -82,6 +84,48 @@
 							<a onclick="change_username()"><i class="fas fa-user-plus fa-2x" style="margin-bottom: 10px"></i></a><br>
 						</div>
 					</div>
+					<div id="backup_user_spotlight" class="spotlight" style="max-width:100%; margin-bottom: 0px; display: none">
+						<div id="backup_user_div" class="xscroll">
+							<table id="backup_user_table">
+								<tr>
+									<td><input id="backup_user_username" spellcheck="false" placeholder="username"></td>
+								</tr>
+								<tr>
+									<td><input id="backup_user_password" spellcheck="false" placeholder="password" type="password"></td>
+								</tr>
+								<tr>
+									<td><input id="backup_user_passphrase" spellcheck="false" placeholder="passphrase" type="password"></td>
+								</tr>
+							</table>
+							<a onclick="backup_user()"><i class="fas fa-user-plus fa-2x" style="margin-bottom: 10px"></i></a><br>
+						</div>
+					</div>
+					<div id="backup_ta_div" style="display: none">
+						<p>
+							Save to file
+							<textarea id="backup_ta" spellcheck="false" style="max-width:100%; width: 400px; height: 250px; margin-top: 10px; margin-bottom: 10px"></textarea>
+						</p>
+					</div>
+					<div id="restore_user_spotlight" class="spotlight" style="max-width:100%; margin-bottom: 0px; display: none">
+						<div id="restore_user_div" class="xscroll">
+							<table id="restore_user_table">
+								<tr>
+									<td><input id="restore_user_passphrase" spellcheck="false" placeholder="passphrase" type="password"></td>
+								</tr>
+								<tr>
+									<td><input id="restore_username" spellcheck="false" placeholder="username"></td>
+								</tr>
+								<tr>
+									<td><input id="restore_password" spellcheck="false" placeholder="password" type="password"></td>
+								</tr>
+								<tr>
+									<td><input id="restore_confirm_password" spellcheck="false" placeholder="confirm password" type="password"></td>
+								</tr>
+							</table>
+							<a onclick="restore_user()"><i class="fas fa-user-plus fa-2x" style="margin-bottom: 10px"></i></a><br>
+							<i class="fas fa-exclamation-triangle fa-2x" style="vertical-align:middle; color: yellow"></i> removes existing user
+						</div>
+					</div>
 				</center>
 			</div>
 		</div>
@@ -99,6 +143,9 @@
 		document.getElementById('remove_user_spotlight').style.display = "none";
 		document.getElementById('change_username_spotlight').style.display = "none";
 		document.getElementById('change_password_spotlight').style.display = "none";
+		document.getElementById('backup_user_spotlight').style.display = "none";
+		document.getElementById('backup_ta_div').style.display = "none";
+		document.getElementById('restore_user_spotlight').style.display = "none";
 
 		if(document.getElementById('add_rem_select').value == "add")
 		{
@@ -127,6 +174,20 @@
 
 			document.getElementById('add_rem_select').style.width = (widthOffset + 70) + "px";
 			document.getElementById('change_password_spotlight').style.width = (widthOffset + 70) + "px";
+		}
+		else if(document.getElementById('add_rem_select').value == "backup_user")
+		{
+			document.getElementById('backup_user_spotlight').style.display = "inline-block";
+
+			document.getElementById('add_rem_select').style.width = (widthOffset + 70) + "px";
+			document.getElementById('backup_user_spotlight').style.width = (widthOffset + 70) + "px";
+		}
+		else if(document.getElementById('add_rem_select').value == "restore_user")
+		{
+			document.getElementById('restore_user_spotlight').style.display = "inline-block";
+
+			document.getElementById('add_rem_select').style.width = (widthOffset + 70) + "px";
+			document.getElementById('restore_user_spotlight').style.width = (widthOffset + 70) + "px";
 		}
 	}
 
@@ -397,6 +458,16 @@
 			document.getElementById('change_username_password').value = "";
 			alert("username and password combination do not match any on this system");
 		}
+	}
+
+	function backup_user()
+	{
+
+	}
+
+	function restore_user()
+	{
+
 	}
 
 	function keydown(e)
