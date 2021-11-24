@@ -198,7 +198,7 @@
 		for(var i=x.options.length-1; i>=0; i--)
 			x.remove(i);
 
-		var watchlists = fetch_watchlists();
+		var watchlists = fetch_watchlists(user);
 
 		if(watchlists.length > 1)
 		{
@@ -226,7 +226,7 @@
 		for(var i=x.options.length-1; i>=0; i--)
 			x.remove(i);
 
-		var wallets = fetch_wallets();
+		var wallets = fetch_wallets(user);
 
 		if(wallets.length > 1)
 		{
@@ -340,7 +340,7 @@
 
 	function add_watchlist()
 	{
-		add_to_watchlists(document.getElementById('add_watchlist_input').value);
+		add_to_watchlists(user, document.getElementById('add_watchlist_input').value);
 		document.getElementById('add_watchlist_input').value = "";
 	}
 
@@ -355,7 +355,7 @@
 		}
 		else
 		{
-			remove_from_watchlists(document.getElementById('remove_watchlist_select').value);
+			remove_from_watchlists(user, document.getElementById('remove_watchlist_select').value);
 			update_watchlist_select('remove_watchlist_select');
 		}
 	}
@@ -377,7 +377,7 @@
 
 	function add_wallet()
 	{
-		add_to_wallets(document.getElementById('network_select').value, document.getElementById('add_wallet_name').value, document.getElementById('add_wallet_address').value);
+		add_to_wallets(user, document.getElementById('network_select').value, document.getElementById('add_wallet_name').value, document.getElementById('add_wallet_address').value);
 		document.getElementById('add_wallet_name').value = "";
 		document.getElementById('add_wallet_address').value = "";
 	}
@@ -393,7 +393,7 @@
 		}
 		else
 		{
-			remove_from_wallets(document.getElementById('remove_wallet_select').value);
+			remove_from_wallets(user, document.getElementById('remove_wallet_select').value);
 			update_wallet_select('remove_wallet_select');
 		}
 	}

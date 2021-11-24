@@ -72,10 +72,10 @@
 
 	window.addEventListener('keydown',this.keydown,false);
 
-	if(localStorage.getItem(username + 'refresh_sec'))
-		refresh_ms = 1000*localStorage.getItem(username + 'refresh_sec');
+	if(localStorage.getItem(user + 'refresh_sec'))
+		refresh_ms = 1000*localStorage.getItem(user + 'refresh_sec');
 	else
-		localStorage.setItem(username + 'refresh_sec', 60);
+		localStorage.setItem(user + 'refresh_sec', 60);
 
 	function clear_table()
 	{
@@ -186,7 +186,7 @@
 
 	function fetch_table_coingecko(name)
 	{
-		var watchlist_str = fetch_watchlist_str(name);
+		var watchlist_str = fetch_watchlist_str(user, name);
 
 		if(watchlist_str != "")
 		{
@@ -303,7 +303,7 @@
 		for(var i=x.options.length-1; i>=0; i--)
 			x.remove(i);
 
-		var watchlists = fetch_watchlists();
+		var watchlists = fetch_watchlists(user);
 
 		if(watchlists.length > 1)
 		{

@@ -1,4 +1,11 @@
 <script>
+	var user = "guest";
+
+	if(localStorage.getItem('username'))
+		user = localStorage.getItem('username');
+	else if(sessionStorage.getItem('username'))
+		user = sessionStorage.getItem('username');
+
 	function logout()
 	{
 		localStorage.removeItem('no_dexata_tabs');

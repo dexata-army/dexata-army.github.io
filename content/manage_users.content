@@ -16,8 +16,8 @@
 						<option value="remove">remove user</option>
 						<option value="change_username">change username</option>
 						<option value="change_password">change password</option>
-						@/*<option value="backup_user">backup user</option>
-						<option value="restore_user">restore user</option>*/
+						<option value="backup_user">backup user</option>
+						<option value="restore_user">restore user</option>
 					</select><br>
 
 					<div id="add_user_spotlight" class="spotlight" style="max-width:100%; margin-bottom: 0px; display: inline-block">
@@ -65,7 +65,7 @@
 									<td><input id="confirm_new_password" spellcheck="false" placeholder="confirm password" type="password"></td>
 								</tr>
 							</table>
-							<a onclick="change_password()"><i class="fas fa-user-plus fa-2x" style="margin-bottom: 10px"></i></a><br>
+							<a onclick="change_password()"><i class="fas fa-user-edit fa-2x" style="margin-bottom: 10px"></i></a><br>
 						</div>
 					</div>
 					<div id="change_username_spotlight" class="spotlight" style="max-width:100%; margin-bottom: 0px; display: none">
@@ -81,26 +81,26 @@
 									<td><input id="change_username_password" spellcheck="false" placeholder="password" type="password"></td>
 								</tr>
 							</table>
-							<a onclick="change_username()"><i class="fas fa-user-plus fa-2x" style="margin-bottom: 10px"></i></a><br>
+							<a onclick="change_username()"><i class="fas fa-user-edit fa-2x" style="margin-bottom: 10px"></i></a><br>
 						</div>
 					</div>
 					<div id="backup_user_spotlight" class="spotlight" style="max-width:100%; margin-bottom: 0px; display: none">
 						<div id="backup_user_div" class="xscroll">
 							<table id="backup_user_table">
 								<tr>
-									<td><input id="backup_user_username" spellcheck="false" placeholder="username"></td>
+									<td><input id="backup_username" spellcheck="false" placeholder="username"></td>
 								</tr>
 								<tr>
-									<td><input id="backup_user_password" spellcheck="false" placeholder="password" type="password"></td>
+									<td><input id="backup_password" spellcheck="false" placeholder="password" type="password"></td>
 								</tr>
 								<tr>
-									<td><input id="backup_user_passphrase" spellcheck="false" placeholder="passphrase" type="password"></td>
+									<td><input id="backup_passphrase" spellcheck="false" placeholder="passphrase" type="password"></td>
 								</tr>
 							</table>
-							<a onclick="backup_user()"><i class="fas fa-user-plus fa-2x" style="margin-bottom: 10px"></i></a><br>
+							<a onclick="backup_user()"><i class="fas fa-check-circle fa-2x" style="margin-bottom: 10px"></i></a><br>
 						</div>
 					</div>
-					<div id="backup_ta_div" style="display: none">
+					<div id="backup_ta_div" style="display: none; margin-top: 30px">
 						<p>
 							Save to file
 							<textarea id="backup_ta" spellcheck="false" style="max-width:100%; width: 400px; height: 250px; margin-top: 10px; margin-bottom: 10px"></textarea>
@@ -110,7 +110,10 @@
 						<div id="restore_user_div" class="xscroll">
 							<table id="restore_user_table">
 								<tr>
-									<td><input id="restore_user_passphrase" spellcheck="false" placeholder="passphrase" type="password"></td>
+									<td><input id="encrypted_data" spellcheck="false" placeholder="encrypted data"></td>
+								</tr>
+								<tr>
+									<td><input id="restore_passphrase" spellcheck="false" placeholder="passphrase" type="password"></td>
 								</tr>
 								<tr>
 									<td><input id="restore_username" spellcheck="false" placeholder="username"></td>
@@ -122,8 +125,7 @@
 									<td><input id="restore_confirm_password" spellcheck="false" placeholder="confirm password" type="password"></td>
 								</tr>
 							</table>
-							<a onclick="restore_user()"><i class="fas fa-user-plus fa-2x" style="margin-bottom: 10px"></i></a><br>
-							<i class="fas fa-exclamation-triangle fa-2x" style="vertical-align:middle; color: yellow"></i> removes existing user
+							<a onclick="restore_user()"><i class="fas fa-check-circle fa-2x" style="margin-bottom: 10px"></i></a><br>
 						</div>
 					</div>
 				</center>
@@ -228,42 +230,50 @@
 			document.getElementById('remove_user_username').value = "";
 			document.getElementById('remove_user_password').value = "";
 
-			localStorage.removeItem(remove_username + '-encrypted_phrase');
-			localStorage.removeItem(remove_username + '-refresh_speed');
-			localStorage.removeItem(remove_username + '-session_timeout');
-			localStorage.removeItem(remove_username + '-bscscan_api_key');
-			localStorage.removeItem(remove_username + '-covalenthq_api_key');
+			var rem_user = confirm("are you sure you would like to remove user " + remove_username + "?");
 
-			localStorage.removeItem(remove_username + '-chart_freq');
-			localStorage.removeItem(remove_username + '-chart_range');
-
-			var watchlists = fetch_watchlists();
-			for(var i=0; i<watchlists.length; i++)
-				localStorage.removeItem(user + '-watchlist-' + watchlists[i]);
-			localStorage.removeItem(remove_username + '-watchlist');
-			localStorage.removeItem(remove_username + '-watchlists');
-
-			var wallets = fetch_wallets();
-			for(var i=0; i<wallets.length; i++)
+			if(rem_user)
 			{
-				localStorage.removeItem(user + '-wallet-' + wallets[i] + '-network');
-				localStorage.removeItem(user + '-wallet-' + wallets[i] + '-address');
-				localStorage.removeItem(user + '-ignorelist-' + wallets[i]);
+				localStorage.removeItem(remove_username + '-encrypted_phrase');
+				localStorage.removeItem(remove_username + '-refresh_speed');
+				localStorage.removeItem(remove_username + '-session_timeout');
+				localStorage.removeItem(remove_username + '-bscscan_api_key');
+				localStorage.removeItem(remove_username + '-covalenthq_api_key');
+
+				localStorage.removeItem(remove_username + '-chart_freq');
+				localStorage.removeItem(remove_username + '-chart_range');
+
+				var watchlists = fetch_watchlists(user);
+				for(var i=0; i<watchlists.length; i++)
+					localStorage.removeItem(user + '-watchlist-' + watchlists[i]);
+				localStorage.removeItem(remove_username + '-watchlist');
+				localStorage.removeItem(remove_username + '-watchlists');
+
+				var wallets = fetch_wallets(user);
+				for(var i=0; i<wallets.length; i++)
+				{
+					localStorage.removeItem(user + '-wallet-' + wallets[i] + '-network');
+					localStorage.removeItem(user + '-wallet-' + wallets[i] + '-address');
+					localStorage.removeItem(user + '-ignorelist-' + wallets[i]);
+				}
+				localStorage.removeItem(remove_username + '-wallet');
+				localStorage.removeItem(remove_username + '-wallets');
+
+				alert("successfully removed " + remove_username);
+
+				if(localStorage.getItem('username') &&
+				   localStorage.getItem('username') == remove_username)
+					logout();
+				location.reload();
 			}
-			localStorage.removeItem(remove_username + '-wallet');
-			localStorage.removeItem(remove_username + '-wallets');
 
-			alert("successfully removed " + remove_username);
-
-			if(localStorage.getItem('username') &&
-			   localStorage.getItem('username') == remove_username)
-				logout();
-			location.reload();
+			return rem_user;
 		}
 		else
 		{
 			document.getElementById('remove_user_password').value = "";
 			alert("username and password combination do not match any on this system");
+			return false;
 		}
 	}
 
@@ -387,7 +397,7 @@
 			}
 
 
-			var watchlists = fetch_watchlists();
+			var watchlists = fetch_watchlists(old_username);
 			for(var i=0; i<watchlists.length; i++)
 			{
 				if(localStorage.getItem(old_username + '-watchlist-' + watchlists[i]))
@@ -409,7 +419,7 @@
 				localStorage.removeItem(old_username + '-watchlists');
 			}
 
-			var wallets = fetch_wallets();
+			var wallets = fetch_wallets(old_username);
 			for(var i=0; i<wallets.length; i++)
 			{
 				if(localStorage.getItem(old_username + '-wallets-' + wallets[i] + '-network'))
@@ -462,12 +472,130 @@
 
 	function backup_user()
 	{
+		if(localStorage.getItem(document.getElementById('backup_username').value + '-encrypted_phrase') &&
+			CryptoJS.AES.decrypt(localStorage.getItem(document.getElementById('backup_username').value + '-encrypted_phrase'), document.getElementById('backup_password').value).toString(CryptoJS.enc.Utf8) == "Go hang a salami, I’m a lasagna hog.")
+		{
+			var backup_username = document.getElementById('backup_username').value;
 
+			var user_data = {};
+
+			if(localStorage.getItem(backup_username + '-refresh_speed'))
+				user_data['-refresh_speed'] = localStorage.getItem(backup_username + '-refresh_speed');
+
+			if(localStorage.getItem(backup_username + '-session_timeout'))
+				user_data['-session_timeout'] = localStorage.getItem(backup_username + '-session_timeout');
+
+			if(localStorage.getItem(backup_username + '-bscscan_api_key'))
+				user_data['-bscscan_api_key'] = CryptoJS.AES.decrypt(localStorage.getItem(backup_username + '-bscscan_api_key'), document.getElementById('backup_password').value).toString(CryptoJS.enc.Utf8);
+
+			if(localStorage.getItem(backup_username + '-covalenthq_api_key'))
+				user_data['-covalenthq_api_key'] = CryptoJS.AES.decrypt(localStorage.getItem(backup_username + '-covalenthq_api_key'), document.getElementById('backup_password').value).toString(CryptoJS.enc.Utf8);
+
+			if(localStorage.getItem(backup_username + '-chart_freq'))
+				user_data['-chart_freq'] = localStorage.getItem(backup_username + '-chart_freq');
+
+			if(localStorage.getItem(backup_username + '-chart_range'))
+				user_data['-chart_range'] = localStorage.getItem(backup_username + '-chart_range');
+
+			if(localStorage.getItem(backup_username + '-watchlist'))
+				user_data['-watchlist'] = localStorage.getItem(backup_username + '-watchlist');
+
+			if(localStorage.getItem(backup_username + '-watchlists'))
+				user_data['-watchlists'] = localStorage.getItem(backup_username + '-watchlists');
+
+			var watchlists = fetch_watchlists(backup_username);
+			for(var i=1; i<watchlists.length; i++)
+				if(localStorage.getItem(backup_username + '-watchlist-' + watchlists[i]))
+					user_data['-watchlist-' + watchlists[i]] = localStorage.getItem(backup_username + '-watchlist-' + watchlists[i]);
+
+			if(localStorage.getItem(backup_username + '-wallet'))
+				user_data['-wallet'] = localStorage.getItem(backup_username + '-wallet');
+
+			if(localStorage.getItem(backup_username + '-wallets'))
+				user_data['-wallets'] = localStorage.getItem(backup_username + '-wallets');
+
+			var wallets = fetch_wallets(backup_username);
+			for(var i=1; i<wallets.length; i++)
+			{
+				if(localStorage.getItem(backup_username + '-wallets-' + wallets[i] + "-network"))
+					user_data['-wallets-' + wallets[i] + '-network'] = localStorage.getItem(backup_username + '-wallets-' + wallets[i] + '-network');
+
+				if(localStorage.getItem(backup_username + '-wallets-' + wallets[i] + "-address"))
+					user_data['-wallets-' + wallets[i] + '-address'] = CryptoJS.AES.decrypt(localStorage.getItem(backup_username + '-wallets-' + wallets[i] + '-address'), document.getElementById('backup_password').value).toString(CryptoJS.enc.Utf8);
+
+				if(localStorage.getItem(backup_username + '-ignorelist-' + wallets[i]))
+					user_data['-ignorelist-' + wallets[i]] = localStorage.getItem(backup_username + '-ignorelist-' + wallets[i]);
+			}
+
+			document.getElementById('backup_ta_div').style.display = "block";
+			var user_data_str = JSON.stringify(user_data);
+			document.getElementById('backup_ta').value = CryptoJS.AES.encrypt(user_data_str, document.getElementById('backup_passphrase').value);
+		}
+
+		document.getElementById('backup_password').value = "";
+		document.getElementById('backup_passphrase').value = "";
 	}
 
 	function restore_user()
 	{
+		if(document.getElementById('restore_username').value == "")
+			alert("no username specified");
+		else if(document.getElementById('restore_username').value == "guest")
+			alert("cannot have username as guest");
+		else if(document.getElementById('restore_password').value.length < 5)
+			alert("password must be at least 5 characters long");
+		else if(document.getElementById('restore_password').value == document.getElementById('restore_confirm_password').value)
+		{
+			var decrypted_data;
 
+			try
+			{
+				decrypted_data = JSON.parse(CryptoJS.AES.decrypt(document.getElementById('encrypted_data').value, document.getElementById('restore_passphrase').value).toString(CryptoJS.enc.Utf8));
+			} catch(e)
+			{
+				alert("passphrase provided is incorrect");
+			}
+
+			var restore_username = document.getElementById('restore_username').value;
+			var restore_password = document.getElementById('restore_password').value;
+
+			if(localStorage.getItem(restore_username + '-encrypted_phrase') &&
+				CryptoJS.AES.decrypt(localStorage.getItem(restore_username + '-encrypted_phrase'), restore_password).toString(CryptoJS.enc.Utf8) == "Go hang a salami, I’m a lasagna hog.")
+			{
+				document.getElementById('remove_user_username').value = restore_username;
+				document.getElementById('remove_user_password').value = restore_password;
+
+				if(!remove_user())
+				{
+					document.getElementById('restore_passphrase').value = "";
+					document.getElementById('restore_password').value = "";
+					document.getElementById('restore_confirm_password').value = "";
+					return;
+				}
+			}
+
+			for(let i in decrypted_data)
+			{
+				localStorage.setItem(restore_username + '-encrypted_phrase', CryptoJS.AES.encrypt("Go hang a salami, I’m a lasagna hog.", restore_password));
+
+				if(i == "-bscscan_api_key")
+					localStorage.setItem(restore_username + '-bscscan_api_key', CryptoJS.AES.encrypt(decrypted_data[i], restore_password));
+				else if(i == "-covalenthq_api_key")
+					localStorage.setItem(restore_username + '-covalenthq_api_key', CryptoJS.AES.encrypt(decrypted_data[i], restore_password));
+				else if(i.substring(i.length-8) == "-address")
+					localStorage.setItem(restore_username + i, CryptoJS.AES.encrypt(decrypted_data[i], restore_password));
+				else
+					localStorage.setItem(restore_username +  i, decrypted_data[i]);
+			}
+
+			alert("successfully restored data to username " + restore_username);
+		}
+		else
+			alert("passwords do not match");
+
+		document.getElementById('restore_passphrase').value = "";
+		document.getElementById('restore_password').value = "";
+		document.getElementById('restore_confirm_password').value = "";
 	}
 
 	function keydown(e)
@@ -484,6 +612,10 @@
 				change_username();
 			else if(document.activeElement.id == "confirm_new_password")
 				change_password();
+			else if(document.activeElement.id == "backup_passphrase")
+				backup_user();
+			else if(document.activeElement.id == "restore_confirm_password")
+				restore_user();
 		}
 	}
 
@@ -491,5 +623,7 @@
 	document.getElementById('add_user_spotlight').style.width = (document.getElementById('add_user_div').offsetWidth + 70) + "px";
 	document.getElementById('change_username_spotlight').style.width = (document.getElementById('add_user_div').offsetWidth + 70) + "px";
 	document.getElementById('change_password_spotlight').style.width = (document.getElementById('add_user_div').offsetWidth + 70) + "px";
+	document.getElementById('backup_user_spotlight').style.width = (document.getElementById('add_user_div').offsetWidth + 70) + "px";
+	document.getElementById('restore_user_spotlight').style.width = (document.getElementById('add_user_div').offsetWidth + 70) + "px";
 
 </script>

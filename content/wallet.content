@@ -71,20 +71,20 @@
 	var coins_data;
 
 
-	if(localStorage.getItem(username + '-refresh_sec'))
-		refresh_ms = 1000*localStorage.getItem(username + '-refresh_sec');
+	if(localStorage.getItem(user + '-refresh_sec'))
+		refresh_ms = 1000*localStorage.getItem(user + '-refresh_sec');
 	else
-		localStorage.setItem(username + '-refresh_sec', 60);
+		localStorage.setItem(user + '-refresh_sec', 60);
 
-	if(localStorage.getItem(username + '-wallet'))
+	if(localStorage.getItem(user + '-wallet'))
 	{
-		wallet_name = localStorage.getItem(username + '-wallet');
-		wallet_network = localStorage.getItem(username + '-wallets-' + wallet_name + '-network');
-		wallet_address = CryptoJS.AES.decrypt(localStorage.getItem(username + '-wallets-' + wallet_name + '-address'), CryptoJS.AES.decrypt(localStorage.getItem('password'), "Go hang a salami, I’m a lasagna hog.").toString(CryptoJS.enc.Utf8)).toString(CryptoJS.enc.Utf8);
+		wallet_name = localStorage.getItem(user + '-wallet');
+		wallet_network = localStorage.getItem(user + '-wallets-' + wallet_name + '-network');
+		wallet_address = CryptoJS.AES.decrypt(localStorage.getItem(user + '-wallets-' + wallet_name + '-address'), CryptoJS.AES.decrypt(localStorage.getItem('password'), "Go hang a salami, I’m a lasagna hog.").toString(CryptoJS.enc.Utf8)).toString(CryptoJS.enc.Utf8);
 	}
 
-	if(localStorage.getItem(username + '-covalenthq_api_key'))
-		covalenthq_api_key = CryptoJS.AES.decrypt(localStorage.getItem(username + '-covalenthq_api_key'), CryptoJS.AES.decrypt(localStorage.getItem('password'), "Go hang a salami, I’m a lasagna hog.").toString(CryptoJS.enc.Utf8)).toString(CryptoJS.enc.Utf8);
+	if(localStorage.getItem(user + '-covalenthq_api_key'))
+		covalenthq_api_key = CryptoJS.AES.decrypt(localStorage.getItem(user + '-covalenthq_api_key'), CryptoJS.AES.decrypt(localStorage.getItem('password'), "Go hang a salami, I’m a lasagna hog.").toString(CryptoJS.enc.Utf8)).toString(CryptoJS.enc.Utf8);
 
 	function clear_table()
 	{
@@ -101,7 +101,7 @@
 		var table = document.getElementById("wallet_table");
 		var wallet_balance = 0.0;
 
-		var ignore_map = fetch_ignorelist_map(wallet_name);
+		var ignore_map = fetch_ignorelist_map(user, wallet_name);
 
 		document.getElementById('loading_gif').src = "";
 		document.getElementById('loading_gif').style.visibility = "hidden";
@@ -286,7 +286,7 @@
 		for(var i=x.options.length-1; i>=0; i--)
 			x.remove(i);
 
-		var wallets = fetch_wallets();
+		var wallets = fetch_wallets(user);
 
 		if(wallets.length > 1)
 		{
@@ -297,12 +297,12 @@
 				x.add(option);
 			}
 
-			if(localStorage.getItem(username + "-wallet"))
-				document.getElementById('wallet_select').value = localStorage.getItem(username + "-wallet");
+			if(localStorage.getItem(user + "-wallet"))
+				document.getElementById('wallet_select').value = localStorage.getItem(user + "-wallet");
 			
 			wallet_name = document.getElementById('wallet_select').value;
-			wallet_network = localStorage.getItem(username + '-wallets-' + wallet_name + "-network");
-			wallet_address = CryptoJS.AES.decrypt(localStorage.getItem(username + '-wallets-' + wallet_name + "-address"), CryptoJS.AES.decrypt(localStorage.getItem('password'), "Go hang a salami, I’m a lasagna hog.").toString(CryptoJS.enc.Utf8)).toString(CryptoJS.enc.Utf8);
+			wallet_network = localStorage.getItem(user + '-wallets-' + wallet_name + "-network");
+			wallet_address = CryptoJS.AES.decrypt(localStorage.getItem(user + '-wallets-' + wallet_name + "-address"), CryptoJS.AES.decrypt(localStorage.getItem('password'), "Go hang a salami, I’m a lasagna hog.").toString(CryptoJS.enc.Utf8)).toString(CryptoJS.enc.Utf8);
 		}
 		else
 		{
@@ -310,16 +310,16 @@
 			document.getElementById('balance_spotlight').style.display = "none";
 			document.getElementById('table_spotlight').style.display = "none";
 			document.getElementById('no_wallets_spotlight').style.display = "block";
-			document.getElementById('no_wallets_spotlight').innerHTML = username + " does not have any wallets";
+			document.getElementById('no_wallets_spotlight').innerHTML = user + " does not have any wallets";
 		}
 	}
 
 	function wallet_select_event()
 	{
 		wallet_name = document.getElementById('wallet_select').value;
-		wallet_network = localStorage.getItem(username + '-wallets-' + wallet_name + '-network');
-		wallet_address = CryptoJS.AES.decrypt(localStorage.getItem(username + '-wallets-' + wallet_name + '-address'), CryptoJS.AES.decrypt(localStorage.getItem('password'), "Go hang a salami, I’m a lasagna hog.").toString(CryptoJS.enc.Utf8)).toString(CryptoJS.enc.Utf8);
-		localStorage.setItem(username + "-wallet", wallet_name);
+		wallet_network = localStorage.getItem(user + '-wallets-' + wallet_name + '-network');
+		wallet_address = CryptoJS.AES.decrypt(localStorage.getItem(user + '-wallets-' + wallet_name + '-address'), CryptoJS.AES.decrypt(localStorage.getItem('password'), "Go hang a salami, I’m a lasagna hog.").toString(CryptoJS.enc.Utf8)).toString(CryptoJS.enc.Utf8);
+		localStorage.setItem(user + "-wallet", wallet_name);
 		fetch_table_covalenthq();
 	}
 
