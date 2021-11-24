@@ -158,7 +158,7 @@ tr
 /* Handle */
 ::-webkit-scrollbar-thumb 
 {
- 	background: #1f1f24;
+ 	background: #679267;
 	border-radius: 10px;
 }
 
@@ -176,7 +176,7 @@ textarea::-webkit-scrollbar-track
 /* Handle */
 textarea::-webkit-scrollbar-thumb 
 {
- 	background: #24242a;
+ 	background: #421114;
 	border-radius: 10px;
 }
 

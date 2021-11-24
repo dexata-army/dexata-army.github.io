@@ -1,33 +1,26 @@
-var username = "guest";
-
-if(localStorage.getItem('username'))
-	username = localStorage.getItem('username');
-else if(sessionStorage.getItem('username'))
-	username = sessionStorage.getItem('username');
-
-function fetch_ignorelist(name)
+function fetch_ignorelist(username, name)
 {
-	if(!localStorage.getItem(user + "-ignorelist-" + name))
-		localStorage.setItem(user + "-ignorelist-" + name, "");
-	return localStorage.getItem(user + "-ignorelist-" + name).toLowerCase().replace(/ /g, "").replace(/-/g, "").replace(/;/g, "\n").replace(/,/g, "\n").split("\n");
+	if(!localStorage.getItem(username + "-ignorelist-" + name))
+		localStorage.setItem(username + "-ignorelist-" + name, "");
+	return localStorage.getItem(username + "-ignorelist-" + name).toLowerCase().replace(/ /g, "").replace(/-/g, "").replace(/;/g, "\n").replace(/,/g, "\n").split("\n");
 }
 
 
-function fetch_ignorelist_str(name)
+function fetch_ignorelist_str(username, name)
 {
-	return localStorage.getItem(user + '-ignorelist-' + name).toLowerCase().replace(/ /g, "").replace(/-/g, "").replace(/;/g, ",").replace(/\n/g,",");
+	return localStorage.getItem(username + '-ignorelist-' + name).toLowerCase().replace(/ /g, "").replace(/-/g, "").replace(/;/g, ",").replace(/\n/g,",");
 }
 
-function fetch_ignorelist_map(name)
+function fetch_ignorelist_map(username, name)
 {
 	var map = {};
-	var ignorelist = fetch_ignorelist(name);
+	var ignorelist = fetch_ignorelist(username, name);
 	for(var i=0; i<ignorelist.length; i++)
 		map[ignorelist[i]] = true;
 	return map;
 }
 
-function fetch_wallets()
+function fetch_wallets(username)
 {
 	if(username == "guest")
 		return {};
@@ -38,7 +31,7 @@ function fetch_wallets()
 	return localStorage.getItem(username + "-wallets").replace(/ /g,"").replace(/;/g, "\n").replace(/,/g, "\n").split("\n");
 }
 
-function save_wallets(wallets)
+function save_wallets(username, wallets)
 {
 	var wallets_str = "";
 
@@ -53,7 +46,7 @@ function save_wallets(wallets)
 	localStorage.setItem(username + "-wallets", wallets_str);
 }
 
-function add_to_wallets(network, name, address)
+function add_to_wallets(username, network, name, address)
 {
 	var wallets = fetch_wallets();
 
@@ -73,7 +66,7 @@ function add_to_wallets(network, name, address)
 		alert(username + " already has a wallet called " + name);
 }
 
-function remove_from_wallets(name)
+function remove_from_wallets(username, name)
 {
 	var wallets = fetch_wallets();
 	var index = wallets.indexOf(name);
@@ -86,8 +79,8 @@ function remove_from_wallets(name)
 		localStorage.removeItem(username + "-wallets-" + name + "-network");
 		localStorage.removeItem(username + "-wallets-" + name + "-address");
 		localStorage.removeItem(username + "-ignorelist-" + name);
-		if(localStorage.getItem(user + "-wallet") == name)
-			localStorage.removeItem(user + "-wallet");
+		if(localStorage.getItem(username + "-wallet") == name)
+			localStorage.removeItem(username + "-wallet");
 		alert("successfully removed " + name + " from wallets for " + username)
 	}
 	else

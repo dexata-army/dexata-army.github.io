@@ -26,55 +26,49 @@ if(localStorage.getItem('watchlist'))
 	localStorage.removeItem('watchlist');
 }
 
-var user = "guest";
 
-if(localStorage.getItem('username'))
-	user = localStorage.getItem('username');
-else if(sessionStorage.getItem('username'))
-	user = sessionStorage.getItem('username');
-
-function fetch_watchlist(name)
+function fetch_watchlist(username, name)
 {
-	if(!localStorage.getItem(user + "-watchlist-" + name))
-		localStorage.setItem(user + "-watchlist-" + name, "");
-	return localStorage.getItem(user + "-watchlist-" + name).replace(/ /g,"").replace(/;/g, "\n").replace(/,/g, "\n").split("\n");
+	if(!localStorage.getItem(username + "-watchlist-" + name))
+		localStorage.setItem(username + "-watchlist-" + name, "");
+	return localStorage.getItem(username + "-watchlist-" + name).replace(/ /g,"").replace(/;/g, "\n").replace(/,/g, "\n").split("\n");
 }
 
 
-function fetch_watchlist_str(name)
+function fetch_watchlist_str(username, name)
 {
-	if(!localStorage.getItem(user + "-watchlist-" + name))
-		localStorage.setItem(user + "-watchlist-" + name, "");
-	return localStorage.getItem(user + '-watchlist-' + name).replace(/ /g, "").replace(/;/g, ",").replace(/\n/g,",");
+	if(!localStorage.getItem(username + "-watchlist-" + name))
+		localStorage.setItem(username + "-watchlist-" + name, "");
+	return localStorage.getItem(username + '-watchlist-' + name).replace(/ /g, "").replace(/;/g, ",").replace(/\n/g,",");
 }
 
-function watch(watchlist, name, id)
+function watch(username, watchlist, name, id)
 {
 	var index = watchlist.indexOf(id);
 	if(index == -1)
 	{
 		watchlist[watchlist.length] = id;
-		save_to_watchlist(watchlist, name);
-		alert("added " + id + " to watchlist " + name + " for " + user);
+		save_to_watchlist(username, watchlist, name);
+		alert("added " + id + " to watchlist " + name + " for " + username);
 	}
 	else
 		alert("already watching " + id);
 }
 
-function unwatch(watchlist, name, id)
+function unwatch(username, watchlist, name, id)
 {
 	var index = watchlist.indexOf(id);
 	if(index != -1)
 	{
 		watchlist.splice(index, 1);
-		save_to_watchlist(watchlist, name);
-		alert("removed " + id + " from watchlist " + name + " for " + user);
+		save_to_watchlist(username, watchlist, name);
+		alert("removed " + id + " from watchlist " + name + " for " + username);
 	}
 	else
 		alert("not watching " + id);
 }
 
-function save_to_watchlist(watchlist, name)
+function save_to_watchlist(username, watchlist, name)
 {
 	var watchlist_str;
 
@@ -86,18 +80,18 @@ function save_to_watchlist(watchlist, name)
 	for(var i=1; i<watchlist.length; i++)
 		watchlist_str += "\n" + watchlist[i];
 
-	localStorage.setItem(user + "-watchlist-" + name, watchlist_str);
+	localStorage.setItem(username + "-watchlist-" + name, watchlist_str);
 }
 
-function fetch_watchlists()
+function fetch_watchlists(username)
 {
-	if(!localStorage.getItem(user + "-watchlists"))
-		localStorage.setItem(user + "-watchlists", "");
+	if(!localStorage.getItem(username + "-watchlists"))
+		localStorage.setItem(username + "-watchlists", "");
 
-	return localStorage.getItem(user + "-watchlists").replace(/ /g,"").replace(/;/g, "\n").replace(/,/g, "\n").split("\n");
+	return localStorage.getItem(username + "-watchlists").replace(/ /g,"").replace(/;/g, "\n").replace(/,/g, "\n").split("\n");
 }
 
-function save_watchlists(watchlists)
+function save_watchlists(username, watchlists)
 {
 	var watchlists_str = "";
 
@@ -109,7 +103,7 @@ function save_watchlists(watchlists)
 	for(var i=1; i<watchlists.length; i++)
 		watchlists_str += "\n" + watchlists[i];
 
-	localStorage.setItem(user + "-watchlists", watchlists_str);
+	localStorage.setItem(username + "-watchlists", watchlists_str);
 }
 
 function fetch_map(array_var)
@@ -120,22 +114,22 @@ function fetch_map(array_var)
 	return map;
 }
 
-function add_to_watchlists(name)
+function add_to_watchlists(username, name)
 {
 	var watchlists = fetch_watchlists();
 
 	if(watchlists.indexOf(name) == -1)
 	{
-		localStorage.setItem(user + '-watchlist-' + name, "");
+		localStorage.setItem(username + '-watchlist-' + name, "");
 		watchlists[watchlists.length] = name;
 		save_watchlists(watchlists);
-		alert("successfully added " + name + " to watchlists for " + user);
+		alert("successfully added " + name + " to watchlists for " + username);
 	}
 	else
-		alert(user + " already has a watchlist called " + name);
+		alert(username + " already has a watchlist called " + name);
 }
 
-function remove_from_watchlists(name)
+function remove_from_watchlists(username, name)
 {
 	var watchlists = fetch_watchlists();
 	var index = watchlists.indexOf(name);
@@ -144,11 +138,11 @@ function remove_from_watchlists(name)
 	{
 		watchlists.splice(index, 1);
 		save_watchlists(watchlists);
-		localStorage.removeItem(user + "-watchlist-" + name);
-		if(localStorage.getItem(user + "-watchlist") == name)
-			localStorage.removeItem(user + "-watchlist");
-		alert("successfully removed " + name + " from watchlists for " + user)
+		localStorage.removeItem(username + "-watchlist-" + name);
+		if(localStorage.getItem(username + "-watchlist") == name)
+			localStorage.removeItem(username + "-watchlist");
+		alert("successfully removed " + name + " from watchlists for " + username)
 	}
 	else
-		alert(user + " has no watchlist called " + name);
+		alert(username + " has no watchlist called " + name);
 }

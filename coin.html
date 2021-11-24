@@ -38,6 +38,13 @@
 		</script>
 
 		<script>
+			var user = "guest";
+		
+			if(localStorage.getItem('username'))
+				user = localStorage.getItem('username');
+			else if(sessionStorage.getItem('username'))
+				user = sessionStorage.getItem('username');
+		
 			function logout()
 			{
 				localStorage.removeItem('no_dexata_tabs');
@@ -514,15 +521,15 @@
 				if(watching[id] == true)
 				{
 					document.getElementById('watchlist_icon').innerHTML = "<i class='fas fa-eye fa-2x'></i>";
-					unwatch(watchlist, watchlist_name, id);
+					unwatch(user, watchlist, watchlist_name, id);
 				}
 				else
 				{
 					document.getElementById('watchlist_icon').innerHTML = "<i class='fas fa-eye-slash fa-2x''></i>";
-					watch(watchlist, watchlist_name, id);
+					watch(user, watchlist, watchlist_name, id);
 				}
-				watchlist = fetch_watchlist(watchlist_name);
-				watching = fetch_map(watchlist);
+				watchlist = fetch_watchlist(user, watchlist_name);
+				watching = fetch_map(user, watchlist);
 			}
 		
 			function fill_details(data)
@@ -810,8 +817,8 @@
 			}
 		
 			watchlist_name = localStorage.getItem(user + "-watchlist");
-			watchlist = fetch_watchlist(watchlist_name);
-			watching = fetch_map(watchlist);
+			watchlist = fetch_watchlist(user, watchlist_name);
+			watching = fetch_map(user, watchlist);
 		
 		
 			fetch_info();
