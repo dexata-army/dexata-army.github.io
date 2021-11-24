@@ -42,7 +42,6 @@
 			{
 				localStorage.removeItem('no_dexata_tabs');
 				localStorage.removeItem('last_load_time');
-				localStorage.removeItem('last_seen');
 				localStorage.removeItem('username');
 				sessionStorage.removeItem('username');
 				localStorage.removeItem('password');
@@ -90,20 +89,9 @@
 		
 			if(sessionStorage.getItem("username") && !localStorage.getItem("username"))
 			{
-				var curr_time = Math.round((new Date()).getTime() / 1000);
-				//alert(curr_time - localStorage.getItem("last_seen"));
-				if(!localStorage.getItem("last_seen") ||
-				     curr_time - localStorage.getItem("last_seen") > 2)
-				{
-					logout();
-					location.reload();
-				}
-				else
-				{
-					localStorage.setItem("no_dexata_tabs", 0);
-					localStorage.setItem("username", sessionStorage.getItem("username"));
-					localStorage.setItem("password", sessionStorage.getItem("password"));
-				}
+				localStorage.setItem("no_dexata_tabs", 0);
+				localStorage.setItem("username", sessionStorage.getItem("username"));
+				localStorage.setItem("password", sessionStorage.getItem("password"));
 			}
 			else if(!sessionStorage.getItem("username") && localStorage.getItem("username"))
 			{
@@ -177,12 +165,21 @@
 				<div class="inner">
 					<div class="spotlights">
 						<center>
-							<div class="spotlight" style="max-width:500px;">
+							<div class="spotlight" style="max-width:550px;">
 								<div class="content">
-										<h1 id="coin_title" style="margin-top: 5px"></h1>
-										<noselect>
+									<h1 id="coin_title" style="margin-top: 5px"></h1>
+									<noselect>
 										<p style="margin-top:-30px; margin-bottom: 0px" id="coin_links"></p>
-										<noselect>
+										<div id="contract_table_div" class="xscroll" style="display: none; max-width: 100%">
+											<table id="contract_table" style="text-align:center">
+												<tr>
+													<td></td>
+													<td><b>contract</b></td>
+													<td></td>
+												</tr>
+											</table>
+										</div>
+									</noselect>
 								</div>
 							</div>
 							<div id="page_div">
@@ -551,14 +548,41 @@
 					{
 						document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="https://poocoin.app/tokens/' + data['contract_address'] + '"><img src="images/logos/poocoin-poocoin.svg" height="30px"></a>';
 		
-						document.getElementById("coin_links").innerHTML += '<br><b>contract</b><br>' + data['contract_address'] + '&nbsp;&nbsp;&nbsp;<a onclick="ctrl_c(\'' + data['contract_address'] + '\')"><img src="images/icons/copy.png" height="20px" style="display: inline-block; vertical-align: middle"></a>';
+						if(data['platforms'] != undefined)
+						{
+							document.getElementById('contract_table_div').style.display = "inline-block";
+		
+							var table = document.getElementById('contract_table');
+		
+							var r = 1;
+							for(let p in data['platforms'])
+							{
+								var row = table.insertRow(r++);
+		
+								row.insertCell(0).innerHTML = "<img src='images/icons/" + p + ".svg' style='min-width: 20px; max-height: 20px; vertical-align: middle' onerror='this.style.display=\"none\"'>";
+		
+								var cell = row.insertCell(1);
+								cell.innerHTML = data['platforms'][p];
+								cell.setAttribute('title', p);
+		
+								row.insertCell(2).innerHTML = "<a onclick=\"ctrl_c(\'" + data['platforms'][p] + "\')\"><i class='fas fa-copy fa-1x' style='vertical-align:middle'></i></a>";
+							}
+						}
+						else
+						{
+							var row = table.insertRow(1);
+		
+							row.insertCell(1).innerHTML = data['contract_address'];
+		
+							row.insertCell(2).innerHTML = "<a onclick=\"ctrl_c(\'" + data['contract_address'] + "\')\"><i class='fas fa-copy fa-1x' style='vertical-align:middle'></i></a>";
+						}
 					}
 				}
 		
 				if(watching[data['id']] == undefined)
-					document.getElementById("coin_links").innerHTML += "<br><p style='margin-top: 10px; margin-bottom: 0px'><a id='watchlist_icon' onclick='toggle_watching(\"" + data['id'] + "\")'><i class='fas fa-eye fa-2x'></i></a></p>";
+					document.getElementById("contract_table_div").innerHTML += "<p style='margin-top: 10px; margin-bottom: 0px'><a id='watchlist_icon' onclick='toggle_watching(\"" + data['id'] + "\")'><i class='fas fa-eye fa-2x'></i></a></p>";
 				else
-					document.getElementById("coin_links").innerHTML += "<br><p style='margin-top: 10px; margin-bottom: 0px'><a id='watchlist_icon' onclick='toggle_watching(\"" + data['id'] + "\")'><i class='fas fa-eye-slash fa-2x'></i></a></p>";
+					document.getElementById("contract_table_div").innerHTML += "<p style='margin-top: 10px; margin-bottom: 0px'><a id='watchlist_icon' onclick='toggle_watching(\"" + data['id'] + "\")'><i class='fas fa-eye-slash fa-2x'></i></a></p>";
 			}
 		
 			function fill_data(data)
@@ -842,11 +866,6 @@
 					window.location.reload();
 				}
 			});
-		
-			window.onbeforeunload = function(){
-				if(sessionStorage.getItem('username') || localStorage.getItem('username'))
-						localStorage.setItem('last_seen', Math.round((new Date()).getTime() / 1000));
-			};
 		</script>
 
 		<script>
