@@ -5,21 +5,28 @@
 		<div class="inner">
 			<div class="spotlights">
 				<center>
-					<div class="spotlight" style="max-width:550px;">
-						<div class="content">
+					<div id="title_spotlight" class="spotlight" style="max-width:100%; margin-bottom: 20px">
+						<div id="title_div" class="content">
 							<h1 id="coin_title" style="margin-top: 5px"></h1>
 							<noselect>
 								<p style="margin-top:-30px; margin-bottom: 0px" id="coin_links"></p>
-								<div id="contract_table_div" class="xscroll" style="display: none; max-width: 100%">
-									<table id="contract_table" style="text-align:center">
-										<tr>
-											<td></td>
-											<td><b>contract</b></td>
-											<td></td>
-										</tr>
-									</table>
+								<p style="margin-top:0px; margin-bottom: 0px" id="other_links"></p>
+								<div id="watching_div" style="max-width: 100%; margin-top: 0px">
 								</div>
 							</noselect>
+						</div>
+					</div>
+					<div id="desc_spotlight" class="spotlight" style="max-width: 100%; display: inline-block; margin-bottom: 10px;">
+					</div><br>
+					<div id="contract_spotlight" class="spotlight" style="max-width: 100%; display: none; margin-bottom: 20px;">
+						<div id="contract_table_div" class="xscroll" style="max-width: 100%">
+							<table id="contract_table" style="text-align:center">
+								<tr>
+									<td></td>
+									<td><b>contract</b></td>
+									<td></td>
+								</tr>
+							</table>
 						</div>
 					</div>
 					<div id="page_div">
@@ -107,7 +114,7 @@
 							</div><br>
 						</div>
 
-						<select name="chart_range" id="chart_range" style="width:130px; margin-bottom: 10px" onchange="change_chart_range()">
+						<select name="chart_range" id="chart_range" style="width:130px; margin-top: -20px; margin-bottom: 10px" onchange="change_chart_range()">
 							<option value="hour">hour</option>
 							<option value="day">day</option>
 							<option value="week">week</option>
@@ -123,6 +130,8 @@
 							<div id="total_volumes_chart" style="min-width: 200px; width: 90%; padding-top: 30px; padding-bottom:30px; margin: 0 auto">
 							</div><br>
 						</div>
+					</div>
+					<div id="last_updated" style="max-width: 100%; display: inline-block; margin-bottom: -50px; margin-top: 15px">
 					</div>
 				</center>
 			</div>
@@ -374,55 +383,67 @@
 		if(data['links']['chat_url'][0] != "")
 			document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="' + data['links']['chat_url'][0] + '"><i class="fas fa-comments fa-2x"></i></a>';
 
-		if((data['links']['blockchain_site'][0] != undefined &&
-			data['links']['blockchain_site'][0].search("bscscan") != -1) || 
-				(data['contract_address'] != undefined && 
-			 	 data['contract_address'].length > 10))
+
+		if(data['platforms']['binance-smart-chain'] != undefined)
 		{
-			document.getElementById("coin_links").innerHTML += '<br>';
+			document.getElementById("other_links").innerHTML += '<a href="https://bscscan.com/token/' + data['platforms']['binance-smart-chain'] + '"><img src="@pathtofile(output/images/icons/bscscan.png)" height="30px"></a>';
+			document.getElementById("other_links").innerHTML += '&nbsp;&nbsp;&nbsp;<a href="https://poocoin.app/tokens/' + data['contract_address'] + '"><img src="@pathtofile(output/images/logos/poocoin-poocoin.svg)" height="30px"></a>';
+		}
 
-			if(data['links']['blockchain_site'][0].search("bscscan") != -1)
-				document.getElementById("coin_links").innerHTML += '<a href="' + data['links']['blockchain_site'][0] + '"><img src="@pathtofile(output/images/logos/bscscan-icon.png)" height="30px"></a>';
+		if(data['platforms']['ethereum'] != undefined)
+		{
+			document.getElementById("other_links").innerHTML += '&nbsp;&nbsp;&nbsp;<a href="https://etherscan.io/token/' + data['platforms']['ethereum'] + '"><img src="@pathtofile(output/images/icons/etherscan.svg)" height="30px"></a>';
+			document.getElementById("other_links").innerHTML += '&nbsp;&nbsp;<a href="https://ethplorer.io/address/' + data['platforms']['ethereum'] + '"><img src="@pathtofile(output/images/icons/ethplorer.png)" height="30px"></a>';
+		}
 
-			if(data['contract_address'] != undefined && data['contract_address'].length > 10)
+		if(data['platforms']['polygon-pos'] != undefined)
+			document.getElementById("other_links").innerHTML += '&nbsp;&nbsp;<a href="https://polygonscan.com/token/' + data['platforms']['polygon-pos'] + '"><img src="@pathtofile(output/images/icons/polygonscan.png)" height="30px"></a>';
+
+		document.getElementById('title_spotlight').style.width = (document.getElementById('title_div').offsetWidth + 70) + "px";
+
+		if(data['contract_address'] != undefined && data['contract_address'].length > 10)
+		{
+			if(data['platforms'] != undefined)
 			{
-				document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="https://poocoin.app/tokens/' + data['contract_address'] + '"><img src="@pathtofile(output/images/logos/poocoin-poocoin.svg)" height="30px"></a>';
+				document.getElementById('contract_spotlight').style.display = "inline-block";
 
-				if(data['platforms'] != undefined)
+				var table = document.getElementById('contract_table');
+
+				var r = 1;
+				for(let p in data['platforms'])
 				{
-					document.getElementById('contract_table_div').style.display = "inline-block";
+					var row = table.insertRow(r++);
 
-					var table = document.getElementById('contract_table');
+					row.insertCell(0).innerHTML = "<img src='@pathto(output/images/icons)/" + p + ".svg' style='min-width: 20px; max-height: 20px; vertical-align: middle' onerror='this.style.display=\"none\"'>";
 
-					var r = 1;
-					for(let p in data['platforms'])
-					{
-						var row = table.insertRow(r++);
+					var cell = row.insertCell(1);
+					cell.innerHTML = data['platforms'][p];
+					cell.setAttribute('title', p);
 
-						row.insertCell(0).innerHTML = "<img src='@pathto(output/images/icons)/" + p + ".svg' style='min-width: 20px; max-height: 20px; vertical-align: middle' onerror='this.style.display=\"none\"'>";
-
-						var cell = row.insertCell(1);
-						cell.innerHTML = data['platforms'][p];
-						cell.setAttribute('title', p);
-
-						row.insertCell(2).innerHTML = "<a onclick=\"ctrl_c(\'" + data['platforms'][p] + "\')\"><i class='fas fa-copy fa-1x' style='vertical-align:middle'></i></a>";
-					}
-				}
-				else
-				{
-					var row = table.insertRow(1);
-
-					row.insertCell(1).innerHTML = data['contract_address'];
-
-					row.insertCell(2).innerHTML = "<a onclick=\"ctrl_c(\'" + data['contract_address'] + "\')\"><i class='fas fa-copy fa-1x' style='vertical-align:middle'></i></a>";
+					row.insertCell(2).innerHTML = "<a onclick=\"ctrl_c(\'" + data['platforms'][p] + "\')\"><i class='fas fa-copy fa-1x' style='vertical-align:middle'></i></a>";
 				}
 			}
+			else
+			{
+				var row = table.insertRow(1);
+
+				row.insertCell(1).innerHTML = data['contract_address'];
+
+				row.insertCell(2).innerHTML = "<a onclick=\"ctrl_c(\'" + data['contract_address'] + "\')\"><i class='fas fa-copy fa-1x' style='vertical-align:middle'></i></a>";
+			}
+
+			document.getElementById('contract_spotlight').style.width = document.getElementById('title_spotlight').style.width =  document.getElementById('desc_spotlight').style.width = (document.getElementById('contract_table').offsetWidth + 70) + "px";
 		}
 
 		if(watching[data['id']] == undefined)
-			document.getElementById("contract_table_div").innerHTML += "<p style='margin-top: 10px; margin-bottom: 0px'><a id='watchlist_icon' onclick='toggle_watching(\"" + data['id'] + "\")'><i class='fas fa-eye fa-2x'></i></a></p>";
+			document.getElementById("watching_div").innerHTML += "<p style='margin-top: 10px; margin-bottom: 0px'><a id='watchlist_icon' onclick='toggle_watching(\"" + data['id'] + "\")'><i class='fas fa-eye fa-2x'></i></a></p>";
 		else
-			document.getElementById("contract_table_div").innerHTML += "<p style='margin-top: 10px; margin-bottom: 0px'><a id='watchlist_icon' onclick='toggle_watching(\"" + data['id'] + "\")'><i class='fas fa-eye-slash fa-2x'></i></a></p>";
+			document.getElementById("watching_div").innerHTML += "<p style='margin-top: 10px; margin-bottom: 0px'><a id='watchlist_icon' onclick='toggle_watching(\"" + data['id'] + "\")'><i class='fas fa-eye-slash fa-2x'></i></a></p>";
+
+		if(data['description']['en'] != undefined)
+			document.getElementById('desc_spotlight').innerHTML = "<center><p style='max-width: 90%; margin-top: 10px; margin-bottom: 10px'>" + data['description']['en'] + "</p></center>";
+		else
+			document.getElementById('desc_spotlight').style.display = "none";
 	}
 
 	function fill_data(data)
@@ -462,8 +483,6 @@
 			table.rows[5].cells[1].innerHTML = data['market_data']['circulating_supply'].toLocaleString('en');
 		else
 			table.rows[5].cells[1].innerHTML = '-';
-
-		document.getElementById('data_table_spotlight').style.width = (document.getElementById('data_table').style.offsetWidth + 70) + "px";
 
 		table = document.getElementById("change_table");
 
@@ -548,10 +567,8 @@
 			table.rows[2].cells[4].innerHTML = daysSince(data['market_data']['ath_date']['usd']);
 		}
 
-		var max_width = Math.max(document.getElementById('change_table').offsetWidth, document.getElementById('at_table').offsetWidth);
-		document.getElementById('change_table_spotlight').style.width = (max_width + 70) + "px";
-		document.getElementById('at_table_spotlight').style.width = (max_width + 70) + "px";
-		document.getElementById('rhs_table_div').style.width = (max_width + 120) + "px";
+		if(data['last_updated'] != undefined)
+			document.getElementById('last_updated').innerHTML = "<p><b>data last updated:</b> " + new Date(data['last_updated']).toLocaleTimeString() + " " + new Date(data['last_updated']).toLocaleDateString() + "</p>";
 	}
 
 	function fetch_info_from_contract_address()
@@ -643,6 +660,11 @@
 
 
 	fetch_info();
+	document.getElementById('data_table_spotlight').style.width = (document.getElementById('data_table').offsetWidth + 30) + "px";
+	var max_width = Math.max(document.getElementById('change_table').offsetWidth, document.getElementById('at_table').offsetWidth);
+	document.getElementById('change_table_spotlight').style.width = (max_width + 120) + "px";
+	document.getElementById('at_table_spotlight').style.width = (max_width + 120) + "px";
+	document.getElementById('rhs_table_div').style.width = (max_width + 150) + "px";
 	refresh_data();
 	
 </script>
