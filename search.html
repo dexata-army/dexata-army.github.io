@@ -418,14 +418,12 @@
 				var historyTraversal = event.persisted || 
 				                     ( typeof window.performance != "undefined" && 
 				                          window.performance.navigation.type === 2 );
-				if(historyTraversal) 
+				if(historyTraversal &&
+					sessionStorage.getItem('username') &&
+					curr_time - localStorage.getItem('last_seen') > 2)
 				{
-					if(sessionStorage.getItem('username') &&
-						curr_time - localStorage.getItem('last_seen') > 2)
-					{
-						// Handle page restore.
-						window.location.reload();
-					}
+					// Handle page restore.
+					window.location.reload();
 				}
 			});
 		
