@@ -152,7 +152,7 @@ tr
 /* Track */
 ::-webkit-scrollbar-track 
 {
- 	background: #2e2e35; 
+ 	background: #2e2e35;
 }
  
 /* Handle */
@@ -170,7 +170,7 @@ tr
 
 textarea::-webkit-scrollbar-track 
 {
- 	background: #6e4d4b; 
+ 	background: #6e4d4b;
 }
  
 /* Handle */
@@ -188,4 +188,10 @@ textarea::-webkit-scrollbar-thumb:hover
 
 textarea::-webkit-resizer {
   background: #6e4d4b;
+}
+
+.spotlight::-webkit-scrollbar-track 
+{
+ 	background: #2e2e35; 
+ 	border-radius: 10px;
 }
