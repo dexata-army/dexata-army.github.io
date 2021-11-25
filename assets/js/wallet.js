@@ -42,7 +42,7 @@ function ignore(username, ignorelist, name, id)
 	{
 		ignorelist[ignorelist.length] = id;
 		save_to_ignorelist(username, ignorelist, name);
-		alert("added " + id + " to ignorelist " + name + " for " + username);
+		//alert("added " + id + " to ignorelist " + name + " for " + username);
 	}
 	else
 		alert("already ignoring " + id);
@@ -55,7 +55,7 @@ function unignore(username, ignorelist, name, id)
 	{
 		ignorelist.splice(index, 1);
 		save_to_ignorelist(username, ignorelist, name);
-		alert("removed " + id + " from ignorelist " + name + " for " + username);
+		//alert("removed " + id + " from ignorelist " + name + " for " + username);
 	}
 	else
 		alert("not ignoring " + id);

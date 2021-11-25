@@ -230,6 +230,7 @@
 									</table>
 								</div>
 							</div>
+							<a id="show_ignored_coins_button" onclick="toggle_show_ignored_coins()">show ignored coins</a>
 						</center>
 					</div>
 				</div>
@@ -255,6 +256,7 @@
 			var ignorelist;
 			var ignore_map;
 			var add_hide_buttons = false;
+			var show_ignored_coins = false;
 		
 		
 			if(localStorage.getItem(user + '-refresh_sec'))
@@ -300,9 +302,10 @@
 					{
 						if(coins_data['data']['items'][i]['contract_ticker_symbol'] != undefined &&
 							coins_data['data']['items'][i]['contract_name'] != undefined &&
-							ignore_map[coins_data['data']['items'][i]['contract_ticker_symbol'].toLowerCase().replace(/ /g, "").replace(/-/g, "")] != true &&
+							(show_ignored_coins ||
+							(ignore_map[coins_data['data']['items'][i]['contract_ticker_symbol'].toLowerCase().replace(/ /g, "").replace(/-/g, "")] != true &&
 						    ignore_map[coins_data['data']['items'][i]['contract_name'].toLowerCase().replace(/ /g, "").replace(/-/g, "")] != true &&
-						    ignore_map[id_map[coins_data['data']['items'][i]['contract_name'].replace(/ /g, "").replace(/-/g, "").toLowerCase()]] != true && 
+						    ignore_map[id_map[coins_data['data']['items'][i]['contract_name'].replace(/ /g, "").replace(/-/g, "").toLowerCase()]] != true)) && 
 						    coins_data['data']['items'][i]['quote'] > 0)
 						{
 							coins_data['data']['items'][i]['contract_ticker_symbol'] = coins_data['data']['items'][i]['contract_ticker_symbol'].toLowerCase();
@@ -340,7 +343,13 @@
 							row.insertCell(5).innerHTML = "$" + coins_data['data']['items'][i]['quote'].toLocaleString('en');
 		
 							if(add_hide_buttons)
-								row.insertCell(6).innerHTML = "<a onclick='ignore_coin(\"" + row.cells[2].innerText.replace(/ /g, "").replace(/-/g, "").toLowerCase() + "\")'><i class='fas fa-trash fa-1x' style='vertical-align:middle'></i></a>";
+							{
+								if(ignore_map[coins_data['data']['items'][i]['contract_name'].toLowerCase().replace(/ /g, "").replace(/-/g, "")] != true &&
+						   			ignore_map[id_map[coins_data['data']['items'][i]['contract_name'].replace(/ /g, "").replace(/-/g, "").toLowerCase()]] != true)
+									row.insertCell(6).innerHTML = "<a onclick='ignore_coin(\"" + row.cells[2].innerText.replace(/ /g, "").replace(/-/g, "").toLowerCase() + "\")'><i class='fas fa-trash fa-1x' style='vertical-align:middle'></i></a>";
+								else if(show_ignored_coins)
+									row.insertCell(6).innerHTML = "<a onclick='unignore_coin(\"" + row.cells[2].innerText.replace(/ /g, "").replace(/-/g, "").toLowerCase() + "\")'><i class='fas fa-trash-restore fa-1x' style='vertical-align:middle'></i></a>";
+							}
 		
 							wallet_balance += coins_data['data']['items'][i]['quote'];
 						}
@@ -519,6 +528,13 @@
 				draw_table();
 			}
 		
+			function unignore_coin(id)
+			{
+				ignorelist = fetch_ignorelist(user, wallet_name);
+				unignore(user, ignorelist, wallet_name, id);
+				draw_table();
+			}
+		
 			function toggle_hide_coins()
 			{
 				var table = document.getElementById('wallet_table');
@@ -535,11 +551,36 @@
 				{
 					add_hide_buttons = true;
 		
-					for(var r=1; r<no_rows; r++)
+					for(var r=1; r<document.getElementById('wallet_table').rows.length-1; r++)
 					{
-						table.rows[r].insertCell(6).innerHTML = "<a onclick='ignore_coin(\"" + table.rows[r].cells[2].innerText.replace(/ /g, "").replace(/-/g, "").toLowerCase() + "\")'><i class='fas fa-trash fa-1x' style='vertical-align:middle'></i></a>";
+						var coin_name = document.getElementById('wallet_table').rows[r].cells[2].innerText.toLowerCase().replace(/ /g, "").replace(/-/g, "");
+						if(ignore_map[coin_name] != true &&
+						   	ignore_map[coin_name] != true)
+						{
+							table.rows[r].insertCell(6).innerHTML = "<a onclick='ignore_coin(\"" + table.rows[r].cells[2].innerText.replace(/ /g, "").replace(/-/g, "").toLowerCase() + "\")'><i class='fas fa-trash fa-1x' style='vertical-align:middle'></i></a>";
+						}
+						else if(show_ignored_coins)
+						{
+							table.rows[r].insertCell(6).innerHTML = "<a onclick='unignore_coin(\"" + table.rows[r].cells[2].innerText.replace(/ /g, "").replace(/-/g, "").toLowerCase() + "\")'><i class='fas fa-trash-restore fa-1x' style='vertical-align:middle'></i></a>";
+						}
 					}
 				}
+			}
+		
+			function toggle_show_ignored_coins()
+			{
+				if(show_ignored_coins)
+				{
+					show_ignored_coins = false;
+					document.getElementById('show_ignored_coins_button').innerHTML = "show ignored coins";
+				}
+				else
+				{
+					show_ignored_coins = true;
+					document.getElementById('show_ignored_coins_button').innerHTML = "hide ignored coins";
+				}
+		
+				draw_table();
 			}
 		
 			document.getElementById('table_spotlight').style.width = (document.getElementById('loading_gif').offsetWidth + 400) + "px";
