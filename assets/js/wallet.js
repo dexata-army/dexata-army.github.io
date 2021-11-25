@@ -20,6 +20,47 @@ function fetch_ignorelist_map(username, name)
 	return map;
 }
 
+function save_to_ignorelist(username, ignorelist, name)
+{
+	var ignorelist_str;
+
+	ignorelist.sort();
+
+	if(ignorelist.length)
+		ignorelist_str = ignorelist[0];
+
+	for(var i=1; i<ignorelist.length; i++)
+		ignorelist_str += "\n" + ignorelist[i];
+
+	localStorage.setItem(username + "-ignorelist-" + name, ignorelist_str);
+}
+
+function ignore(username, ignorelist, name, id)
+{
+	var index = ignorelist.indexOf(id);
+	if(index == -1)
+	{
+		ignorelist[ignorelist.length] = id;
+		save_to_ignorelist(username, ignorelist, name);
+		alert("added " + id + " to ignorelist " + name + " for " + username);
+	}
+	else
+		alert("already ignoring " + id);
+}
+
+function unignore(username, ignorelist, name, id)
+{
+	var index = ignorelist.indexOf(id);
+	if(index != -1)
+	{
+		ignorelist.splice(index, 1);
+		save_to_ignorelist(username, ignorelist, name);
+		alert("removed " + id + " from ignorelist " + name + " for " + username);
+	}
+	else
+		alert("not ignoring " + id);
+}
+
 function fetch_wallets(username)
 {
 	if(username == "guest")
@@ -48,7 +89,7 @@ function save_wallets(username, wallets)
 
 function add_to_wallets(username, network, name, address)
 {
-	var wallets = fetch_wallets();
+	var wallets = fetch_wallets(username);
 
 	if(network == "network")
 	{
@@ -59,7 +100,7 @@ function add_to_wallets(username, network, name, address)
 		localStorage.setItem(username + "-wallets-" + name + "-network", network);
 		localStorage.setItem(username + "-wallets-" + name + "-address", CryptoJS.AES.encrypt(address, CryptoJS.AES.decrypt(localStorage.getItem('password'), "Go hang a salami, I’m a lasagna hog.").toString(CryptoJS.enc.Utf8)));
 		wallets[wallets.length] = name;
-		save_wallets(wallets);
+		save_wallets(username, wallets);
 		alert("successfully added " + name + " to wallets for " + username);
 	}
 	else
@@ -68,13 +109,13 @@ function add_to_wallets(username, network, name, address)
 
 function remove_from_wallets(username, name)
 {
-	var wallets = fetch_wallets();
+	var wallets = fetch_wallets(username);
 	var index = wallets.indexOf(name);
 
 	if(index != -1)
 	{
 		wallets.splice(index, 1);
-		save_wallets(wallets);
+		save_wallets(username, wallets);
 		//localStorage.removeItem(username + "-wallet-" + name);
 		localStorage.removeItem(username + "-wallets-" + name + "-network");
 		localStorage.removeItem(username + "-wallets-" + name + "-address");

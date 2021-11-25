@@ -6,6 +6,12 @@ img, iframe
 	-ms-user-select: none; /* IE10+ */
 }
 
+/*.footer
+{
+	background-image: url("../../images/background.png");
+	background-size: cover;
+}*/
+
 menu
 {
 	background-color: black !important;

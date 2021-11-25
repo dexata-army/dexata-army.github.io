@@ -213,6 +213,7 @@
 												<th><a onclick="toggle_sort('quote_rate')">price</a></th>
 												<th><a onclick="toggle_sort('balance')">quantity</a></th>
 												<th><a onclick="toggle_sort('quote')">value</a></th>
+												<th><a onclick="toggle_hide_coins()"><i class='fas fa-minus-circle fa-1x' style='vertical-align:middle'></i></a></th>
 											</tr>
 										</thead>
 										<tfoot>
@@ -223,6 +224,7 @@
 												<th><a onclick="toggle_sort('quote_rate')">price</a></th>
 												<th><a onclick="toggle_sort('balance')">quantity</a></th>
 												<th><a onclick="toggle_sort('quote')">value</a></th>
+												<th><a onclick="toggle_hide_coins()"><i class='fas fa-minus-circle fa-1x' style='vertical-align:middle'></i></a></th>
 											</tr>
 										</tfoot>
 									</table>
@@ -248,6 +250,11 @@
 			var sort_attrib = 'quote';
 			var sort_dir = -1;
 			var coins_data;
+		
+			var ignorelist_name;
+			var ignorelist;
+			var ignore_map;
+			var add_hide_buttons = false;
 		
 		
 			if(localStorage.getItem(user + '-refresh_sec'))
@@ -280,7 +287,7 @@
 				var table = document.getElementById("wallet_table");
 				var wallet_balance = 0.0;
 		
-				var ignore_map = fetch_ignorelist_map(user, wallet_name);
+				ignore_map = fetch_ignorelist_map(user, wallet_name);
 		
 				document.getElementById('loading_gif').src = "";
 				document.getElementById('loading_gif').style.visibility = "hidden";
@@ -331,6 +338,9 @@
 							row.insertCell(4).innerHTML = coins_data['data']['items'][i]['balance'].toLocaleString('en');
 		
 							row.insertCell(5).innerHTML = "$" + coins_data['data']['items'][i]['quote'].toLocaleString('en');
+		
+							if(add_hide_buttons)
+								row.insertCell(6).innerHTML = "<a onclick='ignore_coin(\"" + row.cells[2].innerText.replace(/ /g, "").replace(/-/g, "").toLowerCase() + "\")'><i class='fas fa-trash fa-1x' style='vertical-align:middle'></i></a>";
 		
 							wallet_balance += coins_data['data']['items'][i]['quote'];
 						}
@@ -502,6 +512,36 @@
 				fetch_table_covalenthq();
 			}
 		
+			function ignore_coin(id)
+			{
+				ignorelist = fetch_ignorelist(user, wallet_name);
+				ignore(user, ignorelist, wallet_name, id);
+				draw_table();
+			}
+		
+			function toggle_hide_coins()
+			{
+				var table = document.getElementById('wallet_table');
+				var no_rows = table.rows.length - 1;
+		
+				if(add_hide_buttons)
+				{
+					add_hide_buttons = false;
+		
+					for(var r=1; r<no_rows; r++)
+						table.rows[r].deleteCell(6);
+				}
+				else
+				{
+					add_hide_buttons = true;
+		
+					for(var r=1; r<no_rows; r++)
+					{
+						table.rows[r].insertCell(6).innerHTML = "<a onclick='ignore_coin(\"" + table.rows[r].cells[2].innerText.replace(/ /g, "").replace(/-/g, "").toLowerCase() + "\")'><i class='fas fa-trash fa-1x' style='vertical-align:middle'></i></a>";
+					}
+				}
+			}
+		
 			document.getElementById('table_spotlight').style.width = (document.getElementById('loading_gif').offsetWidth + 400) + "px";
 			document.getElementById("table_div").scrollIntoView();
 		
@@ -530,7 +570,7 @@
 		</script>
 
 		<!-- Footer -->
-		<div class="wrapper">
+		<div class="footer wrapper">
 			<div class="inner" style="text-align:center">
 				<noselect>
 					<p>

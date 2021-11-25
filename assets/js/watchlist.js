@@ -42,6 +42,21 @@ function fetch_watchlist_str(username, name)
 	return localStorage.getItem(username + '-watchlist-' + name).replace(/ /g, "").replace(/;/g, ",").replace(/\n/g,",");
 }
 
+function save_to_watchlist(username, watchlist, name)
+{
+	var watchlist_str;
+
+	watchlist.sort();
+
+	if(watchlist.length)
+		watchlist_str = watchlist[0];
+
+	for(var i=1; i<watchlist.length; i++)
+		watchlist_str += "\n" + watchlist[i];
+
+	localStorage.setItem(username + "-watchlist-" + name, watchlist_str);
+}
+
 function watch(username, watchlist, name, id)
 {
 	var index = watchlist.indexOf(id);
@@ -66,21 +81,6 @@ function unwatch(username, watchlist, name, id)
 	}
 	else
 		alert("not watching " + id);
-}
-
-function save_to_watchlist(username, watchlist, name)
-{
-	var watchlist_str;
-
-	watchlist.sort();
-
-	if(watchlist.length)
-		watchlist_str = watchlist[0];
-
-	for(var i=1; i<watchlist.length; i++)
-		watchlist_str += "\n" + watchlist[i];
-
-	localStorage.setItem(username + "-watchlist-" + name, watchlist_str);
 }
 
 function fetch_watchlists(username)
@@ -116,13 +116,13 @@ function fetch_map(array_var)
 
 function add_to_watchlists(username, name)
 {
-	var watchlists = fetch_watchlists();
+	var watchlists = fetch_watchlists(username);
 
 	if(watchlists.indexOf(name) == -1)
 	{
 		localStorage.setItem(username + '-watchlist-' + name, "");
 		watchlists[watchlists.length] = name;
-		save_watchlists(watchlists);
+		save_watchlists(username, watchlists);
 		alert("successfully added " + name + " to watchlists for " + username);
 	}
 	else
@@ -131,13 +131,13 @@ function add_to_watchlists(username, name)
 
 function remove_from_watchlists(username, name)
 {
-	var watchlists = fetch_watchlists();
+	var watchlists = fetch_watchlists(username);
 	var index = watchlists.indexOf(name);
 
 	if(index != -1)
 	{
 		watchlists.splice(index, 1);
-		save_watchlists(watchlists);
+		save_watchlists(username, watchlists);
 		localStorage.removeItem(username + "-watchlist-" + name);
 		if(localStorage.getItem(username + "-watchlist") == name)
 			localStorage.removeItem(username + "-watchlist");
