@@ -207,7 +207,7 @@
 									<table id="wallet_table" style="display: none;">
 										<thead>
 											<tr>
-												<th>logo</th>
+												<th></th>
 												<th><a onclick="toggle_sort('contract_ticker_symbol')">symbol</a></th>
 												<th><a onclick="toggle_sort('contract_name')">name</a></th>
 												<th><a onclick="toggle_sort('quote_rate')">price</a></th>
@@ -217,7 +217,7 @@
 										</thead>
 										<tfoot>
 											<tr>
-												<th>logo</th>
+												<th></th>
 												<th><a onclick="toggle_sort('contract_ticker_symbol')">symbol</a></th>
 												<th><a onclick="toggle_sort('contract_name')">name</a></th>
 												<th><a onclick="toggle_sort('quote_rate')">price</a></th>
@@ -303,7 +303,7 @@
 							var row = table.insertRow(r+1);
 							r++;
 							if(coins_data['data']['items'][i]['logo_url'] != "")
-								row.insertCell(0).innerHTML = "<img height='23px' style='vertical-align:middle' class='rounded' onerror='this.style.display=\"none\"' src='" + coins_data['data']['items'][i]['logo_url'] + "'>";
+								row.insertCell(0).innerHTML = "<img style='min-width; 23px; max-height: 23px; vertical-align:middle' class='rounded' onerror='this.style.display=\"none\"' src='" + coins_data['data']['items'][i]['logo_url'] + "'>";
 		
 							row.insertCell(1).innerHTML = coins_data['data']['items'][i]['contract_ticker_symbol'];
 		

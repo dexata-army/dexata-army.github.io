@@ -288,24 +288,24 @@
 													</tr>
 												</table>
 											</div>
-									</div><br>
+									</div>
 								</div>
-								<div id="exchange_spotlight" class="spotlight" style="max-width: 100%; display: none; margin-bottom: 20px;">
+								<div id="exchange_spotlight" class="spotlight" style="max-width: 100%; margin-bottom: 30px; margin-top: 20px">
 									<div id="exchange_table_div" class="xscroll" style="max-width: 100%">
 										<table id="exchange_table" style="text-align:center">
-											<thead>
-												<tr>
-													<td>exchange</td>
-													<td>pair</td>
-													<td>price</td>
-													<td>24h volume</td>
-												</tr>
-											</thead>
+											<tr>
+												<td></td>
+												<td><b>exchange</b></td>
+												<td><b>pair</b></td>
+												<td><b>price</b></td>
+												<td><b>24h volume</b></td>
+												<td><b>trust</b></td>
+											</tr>
 										</table>
 									</div>
 								</div>
 		
-								<select name="chart_range" id="chart_range" style="width:130px; margin-top: -20px; margin-bottom: 10px" onchange="change_chart_range()">
+								<select name="chart_range" id="chart_range" style="width:130px; margin-top: 0px; margin-bottom: 10px" onchange="change_chart_range()">
 									<option value="hour">hour</option>
 									<option value="day">day</option>
 									<option value="week">week</option>
@@ -313,11 +313,11 @@
 									<option value="year">year</option>
 									<option value="max">max</option>
 								</select>
-								<div class="spotlight" style="width: 100%;">
+								<div id="prices_chart_spotlight" class="spotlight" style="width: 100%;">
 									<div id="prices_chart" style="min-width: 200px; width: 90%; padding-top: 30px; padding-bottom:30px; margin: 0 auto">
 									</div><br>
 								</div>
-								<div class="spotlight" style="width: 100%;">
+								<div id="total_volumes_chart_spotlight" class="spotlight" style="width: 100%;">
 									<div id="total_volumes_chart" style="min-width: 200px; width: 90%; padding-top: 30px; padding-bottom:30px; margin: 0 auto">
 									</div><br>
 								</div>
@@ -497,6 +497,8 @@
 									document.getElementById('prices_chart').innerHTML = "";
 								}
 								price_chart = draw_chart(coin_data['name'], chart_type, y_title, data[chart_type]);
+		
+								document.getElementById('prices_chart_spotlight').style.height = (document.getElementById('prices_chart').offsetHeight + 10) + "px";
 							}
 							else
 							{
@@ -506,6 +508,9 @@
 									document.getElementById('total_volumes_chart').innerHTML = "";
 								}
 								vol_chart = draw_chart(coin_data['name'], chart_type, y_title, data[chart_type]);
+		
+		
+								document.getElementById('total_volumes_chart_spotlight').style.height = (document.getElementById('total_volumes_chart').offsetHeight + 10) + "px";
 							}
 					}).fail(function() {
 						clear_page();
@@ -594,8 +599,6 @@
 		
 				document.getElementById('title_spotlight').style.width = (document.getElementById('title_div').offsetWidth + 70) + "px";
 		
-				alert(data['tickers']);
-		
 				if(data['contract_address'] != undefined && data['contract_address'].length > 10)
 				{
 					if(data['platforms'] != undefined)
@@ -630,13 +633,41 @@
 					document.getElementById('contract_spotlight').style.width = document.getElementById('title_spotlight').style.width = (document.getElementById('contract_table').offsetWidth + 70) + "px";
 				}
 		
+				if(data['tickers'] != undefined)
+				{
+					document.getElementById('exchange_spotlight').style.display = "block";
+		
+					for(var r=0; r<data['tickers'].length; r++)
+					{
+						if(data['tickers'][r]['market']['name'] != undefined)
+						{
+							var row = document.getElementById('exchange_table').insertRow(r+1);
+		
+							row.insertCell(0).innerHTML = "<img src='images/exchanges/" + data['tickers'][r]['market']['identifier'] + ".svg' style='min-width: 23px; max-height: 23px; vertical-align: middle' onerror='this.style.display=\"none\"'>";
+		
+							row.insertCell(1).innerHTML = data['tickers'][r]['market']['name'];
+		
+							row.insertCell(2).innerHTML = "<a href='" + data['tickers'][r]['trade_url'] + "'>" + data['tickers'][r]['coin_id'] + "/" + data['tickers'][r]['target_coin_id'] + "</a>";
+		
+							row.insertCell(3).innerHTML = "$" + data['tickers'][r]['converted_last']['usd'];
+		
+							row.insertCell(4).innerHTML = "$" + data['tickers'][r]['converted_volume']['usd'].toLocaleString();
+		
+							if(data['tickers'][r]['trust_score'] == "green")
+								row.insertCell(5).innerHTML = "<green><i class='fas fa-circle fa-1x' style='vertical-align:middle'></i></green>";
+							else
+								row.insertCell(5).innerHTML = "<red><i class='fas fa-circle fa-1x' style='vertical-align:middle'></i></red>";
+						}
+					}
+				}
+		
 				if(watching[data['id']] == undefined)
 					document.getElementById("watching_div").innerHTML += "<p style='margin-top: 10px; margin-bottom: 0px'><a id='watchlist_icon' onclick='toggle_watching(\"" + data['id'] + "\")'><i class='fas fa-eye fa-2x'></i></a></p>";
 				else
 					document.getElementById("watching_div").innerHTML += "<p style='margin-top: 10px; margin-bottom: 0px'><a id='watchlist_icon' onclick='toggle_watching(\"" + data['id'] + "\")'><i class='fas fa-eye-slash fa-2x'></i></a></p>";
 		
 				if(data['description']['en'] != undefined)
-					document.getElementById('desc_spotlight').innerHTML = "<h3 style='margin-top: 15px; margin-bottom: 10px'>About</h3><center><p style='max-width: 90%; margin-top: 10px; margin-bottom: 10px'>" + data['description']['en'] + "</p></center>";
+					document.getElementById('desc_spotlight').innerHTML = "<h3 style='margin-top: 15px; margin-bottom: 10px'>About</h3><center><p style='max-width: 90%; margin-top: 10px; margin-bottom: 20px'>" + data['description']['en'] + "</p></center>";
 				else
 					document.getElementById('desc_spotlight').style.display = "none";
 			}
@@ -856,6 +887,7 @@
 		
 			fetch_info();
 			document.getElementById('data_table_spotlight').style.width = (document.getElementById('data_table').offsetWidth + 30) + "px";
+			document.getElementById('exchange_spotlight').style.width = (document.getElementById('exchange_table_div').offsetWidth + 200) + "px";
 			var max_width = Math.max(document.getElementById('change_table').offsetWidth, document.getElementById('at_table').offsetWidth);
 			document.getElementById('change_table_spotlight').style.width = (max_width + 120) + "px";
 			document.getElementById('at_table_spotlight').style.width = (max_width + 120) + "px";
