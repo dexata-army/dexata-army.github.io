@@ -6,11 +6,11 @@ img, iframe
 	-ms-user-select: none; /* IE10+ */
 }
 
-/*.footer
+.spotlightt
 {
-	background-image: url("../../images/background.png");
-	background-size: cover;
-}*/
+	background-image: url("../../images/tile.png") !important;
+	/*background-size: cover;*/
+}
 
 menu
 {
