@@ -5,6 +5,7 @@
 			<p>
 				<a href="https://dexata.net/@pathto(search)" title='search'><i class="fas fa-search fa-2x"></i></a> &nbsp;
 				<a href="https://dexata.net/@pathto(coins)" title='coins'><i class="fas fa-coins fa-2x"></i></a> &nbsp;
+				<a href="https://dexata.net/@pathto(charts)" title='charts'><i class="fas fa-chart-area fa-2x"></i></a> &nbsp;
 				<a href="https://dexata.net/@pathto(watchlist)" title='watchlist'><i class="fas fa-binoculars fa-2x"></i></a> &nbsp;
 				<a href="https://dexata.net/@pathto(wallet)" title='wallet tracker'><i class="fas fa-wallet fa-2x"></i></a>
 				<a href="https://dexata.net/@pathto(config)" title='config'><i class="fas fa-cogs fa-2x"></i></a> &nbsp;

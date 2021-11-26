@@ -257,6 +257,7 @@
 			document.getElementById('loading_gif').style.visibility = "hidden";
 			document.getElementById('loading_gif').style.display = "none";
 			document.getElementById("balance_spotlight").style.display = "none";
+			document.getElementById('show_ignored_coins_button').style.display = "none";
 			document.getElementById("table_spotlight").style.width = "600px";
 
 
@@ -297,6 +298,7 @@
 				document.getElementById('loading_gif').style.visibility = "hidden";
 				document.getElementById('loading_gif').style.display = "none";
 				document.getElementById("balance_spotlight").style.display = "none";
+				document.getElementById('show_ignored_coins_button').style.display = "none";
 				document.getElementById("table_spotlight").style.width = "600px";
 
 
@@ -334,6 +336,7 @@
 			document.getElementById('wallet_select').style.display = "none";
 			document.getElementById('balance_spotlight').style.display = "none";
 			document.getElementById('table_spotlight').style.display = "none";
+			document.getElementById('show_ignored_coins_button').style.display = "none";
 			document.getElementById('no_wallets_spotlight').style.display = "block";
 			document.getElementById('no_wallets_spotlight').innerHTML = user + " does not have any wallets";
 		}
@@ -431,6 +434,7 @@
 		document.getElementById('loading_gif').style.display = "none";
 		document.getElementById("wallet_select").style.display = "none";
 		document.getElementById("balance_spotlight").style.display = "none";
+		document.getElementById('show_ignored_coins_button').style.display = "none";
 		document.getElementById("table_spotlight").style.width = "600px";
 
 		if(localStorage.getItem("username"))

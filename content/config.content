@@ -145,7 +145,7 @@
 					<div id="ignorelist_div">
 						<p>
 							Ignore list
-							<select id="wallet_select"></select>
+							<select id="wallet_select" onclick="ignorelist_select_event()"></select>
 							<textarea id="ignorelist" spellcheck="false" style="max-width:100%; width: 400px; height: 250px; margin-top: 10px; margin-bottom: 10px"></textarea>
 							<a onclick="save_ignorelist()"><i class="fas fa-save fa-3x"></i></a>
 						</p>

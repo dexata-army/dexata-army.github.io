@@ -2,6 +2,10 @@
 '404'
 'template/404.template'
 
+'charts'
+'charts'
+'template/page.template'
+
 'coin'
 'coin'
 'template/page.template'
