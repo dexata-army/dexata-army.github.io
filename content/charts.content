@@ -202,6 +202,7 @@
 	function close_chart(id)
 	{
 		var index = chart_ids.indexOf(id);
+		alert(index);
 		if(index != -1)
 		{
 			if(charts[id] != undefined)
