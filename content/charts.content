@@ -66,7 +66,7 @@
 	var no_charts = 0;
 	var chart_to_update = 0;
 	var chart_id = 0;
-	var chart_ids = {};
+	var chart_ids = [];
 	var chart_info = {};
 	var charts = {};
 
@@ -201,8 +201,7 @@
 
 	function close_chart(id)
 	{
-		var index = chart_ids.indexOf(id);
-		alert(index);
+		var index = chart_ids.indexOf(parseFloat(id));
 		if(index != -1)
 		{
 			if(charts[id] != undefined)
@@ -281,7 +280,8 @@
 
 		chart_info[chart_id] = [chart_type, chart_range, chart_freq, y_title, coin_id, coin_name];
 		fetch_chart(chart_id, chart_type, chart_range, chart_freq, y_title, coin_id, coin_name);
-		chart_ids[chart_ids.length] = chart_id++;
+		chart_ids[chart_ids.length] = chart_id;
+		chart_id++;
 		no_charts++;
 	}
 
