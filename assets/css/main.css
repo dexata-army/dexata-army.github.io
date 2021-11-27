@@ -191,7 +191,7 @@ input, select, textarea {
 		color: #ffffff;
 		font-weight: 700;
 		line-height: 1.5;
-		margin: 0 0 2.0625rem 0;
+		margin: 0 0 0.75rem 0;
 	}
 
 		h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
@@ -259,7 +259,7 @@ input, select, textarea {
 		}
 
 		h1, h2, h3, h4, h5, p {
-			margin: 0 0 2rem 0;
+			margin: 0 0 0.75rem 0;
 		}
 
 	}
@@ -3063,7 +3063,7 @@ input, select, textarea {
 
 	.spotlights {
 		margin-top: 5px;
-		margin-bottom: 1.75rem;
+		margin-bottom: 0.75rem;
 	}
 
 		.spotlights > :last-child {
@@ -3081,7 +3081,7 @@ input, select, textarea {
 			align-items: center;
 			background: #2e2e35;
 			border-radius: 7px;
-			margin-bottom: 0.8125rem;
+			margin-bottom: 0.75rem;
 			overflow: hidden;
 		}
 
@@ -3119,7 +3119,7 @@ input, select, textarea {
 			@media screen and (max-width: 1280px) {
 
 				.spotlights .spotlight {
-					margin-bottom: 1.125rem;
+					margin-bottom: 0.75rem;
 				}
 
 					.spotlights .spotlight .content {
@@ -3139,7 +3139,7 @@ input, select, textarea {
 					-webkit-flex-wrap: wrap;
 					-ms-flex-wrap: wrap;
 					flex-wrap: wrap;
-					margin-bottom: 2.75rem;
+					margin-bottom: 0.75rem;
 					max-height: 100%;
 					overflow: auto;
 				}
@@ -3182,7 +3182,7 @@ input, select, textarea {
 			@media screen and (max-width: 736px) {
 
 				.spotlights .spotlight {
-					margin-bottom: 1.75rem;
+					margin-bottom: 0.75rem;
 				}
 
 					.spotlights .spotlight .image {

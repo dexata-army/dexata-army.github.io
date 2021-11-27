@@ -197,6 +197,10 @@
 							<div id="no_wallets_spotlight" class="spotlight" style="max-width: 100%; width: 400px; display: none; padding-top: 20px; padding-bottom: 20px">
 							</div>
 		
+							<div style="margin-bottom: 10px; margin-top: -10px ;max-width: 40px">
+								<a id="charts_link" style="display: none" title="charts"><i class="fas fa-chart-area fa-2x" style="vertical-align: middle"></i></a>
+							</div>
+		
 							<div id="balance_spotlight" class="spotlight" style="max-width:300px;">
 								<div id="balance_div" class="xscroll" style="margin-top:10px">
 									<b>balance: </b>
@@ -232,9 +236,17 @@
 									</table>
 								</div>
 							</div>
-							<a id="show_ignored_coins_button" onclick="toggle_show_ignored_coins()">show ignored coins</a>
-							<div style="margin-bottom: 0px; margin-top: 10px ;max-width: 40px">
-								<a id="charts_link" style="display: none" title="charts"><i class="fas fa-chart-area fa-2x" style="vertical-align: middle"></i></a>
+							<a id="show_ignored_coins_button" onclick="toggle_show_ignored_coins()">show ignored coins</a><br><br>
+		
+							<div id="balance_chart_div" style="display: none">
+								<h3>Balance Chart</h3>
+								<select id="chart_select" placeholder="" onchange="fetch_chart()" style="max-width: 100%; width: 300px; margin-bottom: 20px;">
+									<option disabled selected hidden>coin</option>
+								</select>
+								<div id="balance_chart_spotlight" class="spotlight" style="width: 100%; display: none">
+									<div id="balance_chart" style="min-width: 200px; width: 90%; padding-top: 30px; padding-bottom:30px; margin: 0 auto">
+									</div><br>
+								</div>
 							</div>
 						</center>
 					</div>
@@ -264,11 +276,18 @@
 			var add_hide_buttons = false;
 			var show_ignored_coins = false;
 		
+			var balance_data;
+			var balance_chart;
+			var display_balance_div = false;
+		
 		
 			if(localStorage.getItem(user + '-refresh_sec'))
 				refresh_ms = 1000*localStorage.getItem(user + '-refresh_sec');
 			else
 				localStorage.setItem(user + '-refresh_sec', 60);
+		
+			if(localStorage.getItem(user + '-chart_range'))
+				chart_range = localStorage.getItem(user + '-chart_range');
 		
 			if(localStorage.getItem(user + '-wallet'))
 			{
@@ -280,13 +299,22 @@
 			if(localStorage.getItem(user + '-covalenthq_api_key'))
 				covalenthq_api_key = CryptoJS.AES.decrypt(localStorage.getItem(user + '-covalenthq_api_key'), CryptoJS.AES.decrypt(localStorage.getItem('password'), "Go hang a salami, I’m a lasagna hog.").toString(CryptoJS.enc.Utf8)).toString(CryptoJS.enc.Utf8);
 		
+			function clear_chart_select()
+			{
+				var x = document.getElementById('chart_select');
+				for(var i=x.options.length-1; i>0; i--)
+					x.remove(i);
+			}
+		
 			function clear_table()
 			{
 				var table = document.getElementById("wallet_table");
 		
 				var no_rows = table.rows.length-2;
 				for(var i=0; i < no_rows; i++)
-					table.deleteRow(1);		
+					table.deleteRow(1);	
+		
+				clear_chart_select();
 			}
 		
 			function draw_table()
@@ -331,6 +359,11 @@
 								if(coins_str.length > 0)
 									coins_str += ",";
 								coins_str += id_map[coins_data['data']['items'][i]['contract_name'].replace(/ /g, "").replace(/-/g, "").toLowerCase()];
+		
+								var option = document.createElement("option");
+								option.text = coins_data['data']['items'][i]['contract_name'];
+								option.value = coins_data['data']['items'][i]['contract_address'];
+								document.getElementById('chart_select').add(option);
 							}
 							else if(id_map[coins_data['data']['items'][i]['contract_ticker_symbol']] != undefined)
 							{
@@ -338,6 +371,11 @@
 								if(coins_str.length > 0)
 									coins_str += ",";
 								coins_str += id_map[coins_data['data']['items'][i]['contract_ticker_symbol'].replace(/ /g, "").replace(/-/g, "").toLowerCase()];
+		
+								var option = document.createElement("option");
+								option.text = coins_data['data']['items'][i]['contract_name'];
+								option.value = coins_data['data']['items'][i]['contract_address'];
+								document.getElementById('chart_select').add(option);
 							}
 							else
 								row.insertCell(2).innerHTML = coins_data['data']['items'][i]['contract_name'];
@@ -616,6 +654,140 @@
 				draw_table();
 			}
 		
+			function draw_chart(title, data)
+			{
+				var options = {
+			      series: [{
+			      name: 'date',
+			      data: data
+			    }],
+			      chart: {
+			      type: 'area',
+			      stacked: false,
+			      background: 'none',
+			      height: 350,
+			      zoom: {
+			        type: 'xy',
+			        enabled: true,
+			      },
+			      toolbar: {
+			        autoSelected: 'zoom'
+			      }
+			    },
+			    colors:['#C600EB', '#E91E63', '#9C27B0'],
+			    dataLabels: {
+			      enabled: false
+			    },
+			    markers: {
+			      size: 0,
+			    },
+			    title: {
+			      text: title,
+			      align: 'left',
+			      textColor: '#ff1493',
+			    },
+			    fill: {
+			      type: 'gradient',
+			      gradient: {
+			        shadeIntensity: 0.4,
+			        inverseColors: false,
+			        opacityFrom: 0.8,
+			        opacityTo: 0.4,
+			        stops: [0, 90, 100]
+			      },
+			    },
+			    yaxis: {
+			      labels: {
+			        formatter: function (val) {
+			          var abs_val = Math.abs(val);
+			          if(val == 0)
+			          	return 0;
+			          else if(abs_val >= 1)
+			          	return val.toLocaleString('en');
+			          else if(abs_val > 0 && abs_val < 0.001)
+			          	return val.toExponential(3);
+			          else
+			          	return val.toFixed(5);
+			        },
+			      },
+			      tickAmount: 4,
+			      title: {
+			        text: "value",
+			      },
+			    },
+			    xaxis: {
+			      type: 'datetime',
+		          tickAmount: 5,
+			      labels: {
+			        formatter: function (val) {
+			          return new Date(val).toLocaleDateString();
+			        },
+			      },
+			    },
+			    theme: {
+			    	mode: 'dark',
+			    },
+			    stroke: {
+				    width: 2,    
+				},
+			    tooltip: {
+			      shared: false,
+			      y: {
+			        formatter: function (val) {
+			          return (val / 1000000).toFixed(0);
+			        }
+			      }
+			    }
+			    };
+		
+			    balance_chart = new ApexCharts(document.querySelector("#balance_chart"), options);
+			    balance_chart.render();
+			}
+		
+			function fetch_balance_data()
+			{
+				$(document).ready(function(){
+					//alert('https://api.covalenthq.com/v1/' + wallet_network + '/address/' + wallet_address + '/portfolio_v2/?key=' + covalenthq_api_key);
+					$.get(
+						'https://api.covalenthq.com/v1/' + wallet_network + '/address/' + wallet_address + '/portfolio_v2/?key=' + covalenthq_api_key,
+						function(data) {
+							balance_data = data;
+							document.getElementById('balance_chart_div').style.display = "block";
+					}).fail(function() {
+						document.getElementById('balance_chart_div').style.display = "none";
+						alert("could not find balance chart for " + document.getElementById('chart_select').text);
+					});
+				});
+			}
+		
+			function fetch_chart()
+			{
+				var coin_address = document.getElementById('chart_select').value;
+				var chart_data = [];
+		
+				if(balance_chart != undefined)
+				{
+					balance_chart.destroy();
+					document.getElementById('balance_chart').innerHTML = "";
+				}
+		
+				for(var i=0; i<balance_data['items'].length; i++)
+				{
+					if(balance_data['items'][i]['contract_address'] == coin_address)
+					{
+						for(var j=0; j<balance_data['items'][i]['holdings'].length; j++)
+							if(balance_data['items'][i]['holdings'][j]['close']['quote'] != undefined)
+								chart_data[j] = [balance_data['items'][i]['holdings'][j]['timestamp'], balance_data['items'][i]['holdings'][j]['close']['quote']];
+							
+						draw_chart(balance_data['items'][i]['contract_name'], chart_data);
+						break;
+					}
+				}
+		
+				document.getElementById('balance_chart_spotlight').style.display = "block";
+				document.getElementById('balance_chart_spotlight').style.height = (document.getElementById('balance_chart').offsetHeight + 10) + "px";
+			}
+		
 			document.getElementById('table_spotlight').style.width = (document.getElementById('loading_gif').offsetWidth + 400) + "px";
 			document.getElementById("table_div").scrollIntoView();
 		
@@ -625,6 +797,7 @@
 				document.getElementById('table_spotlight').style.width = (document.getElementById('loading_gif').offsetWidth + 400) + "px";
 				document.getElementById("table_div").scrollIntoView();
 				fetch_coins_list();
+				fetch_balance_data();
 			}
 			else
 			{
