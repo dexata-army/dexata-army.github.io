@@ -63,6 +63,7 @@
 		if(!localStorage.getItem("last_seen") ||
 		     curr_time - localStorage.getItem("last_seen") > 2)
 		{
+			alert(curr_time - localStorage.getItem('last_seen'));
 			logout();
 			location.reload();
 		}
@@ -122,7 +123,6 @@
 			sessionStorage.getItem('username') &&
 			curr_time - localStorage.getItem('last_seen') > 2)
 		{
-			alert(curr_time - localStorage.getItem('last_seen') > 2);
 			// Handle page restore.
 			window.location.reload();
 		}
