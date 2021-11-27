@@ -235,6 +235,9 @@
 								<input id="page_input" style="width: 75px; vertical-align: middle"> &nbsp;&nbsp;
 								<a id="next_page_link" onclick="next_page()"><i class="fas fa-arrow-circle-right fa-3x" style="vertical-align: middle"></i></a>
 							</noselect>
+							<div style="margin-bottom: -30px">
+								<a id="charts_link" style="display: none" title="charts"><i class="fas fa-chart-area fa-2x" style="vertical-align: middle"></i></a>
+							</div>
 						</center>
 					</div>
 				</div>
@@ -245,6 +248,7 @@
 			var page_no = 1;
 			var no_pages = 0;
 			var refresh_ms = 60000;
+			var chart_range = "week";
 		
 			var sort_attrib = 'market_cap';
 			var sort_dir = -1;
@@ -256,6 +260,9 @@
 				refresh_ms = 1000*localStorage.getItem(user + 'refresh_sec');
 			else
 				localStorage.setItem(user + 'refresh_sec', 60);
+		
+			if(localStorage.getItem(user + '-chart_range'))
+				chart_range = localStorage.getItem(user + '-chart_range');
 		
 			function clear_table()
 			{
@@ -283,8 +290,14 @@
 		
 				if(watchlist_data.length > 0)
 				{
+					var coins_str = "";
+		
 					for(var i=0; i<watchlist_data.length; i++)
 					{
+						if(i > 0)
+							coins_str += ",";
+						coins_str += watchlist_data[i]['id'];
+		
 						var row = table.insertRow(i+1);
 						row.insertCell(0).innerHTML = watchlist_data[i]['market_cap_rank'];
 						if(watchlist_data[i]['image'] != "")
@@ -318,6 +331,9 @@
 					}
 		
 					document.getElementById('table_spotlight').style.width = (document.getElementById('watchlist_table').offsetWidth + 70) + "px";
+		
+					document.getElementById('charts_link').href = "charts.html?width=250&height=350&range=" + chart_range + "&coins=" + coins_str;
+					document.getElementById('charts_link').style.display = "block";
 				}
 				else
 				{
