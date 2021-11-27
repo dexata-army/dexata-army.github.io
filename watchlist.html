@@ -152,6 +152,25 @@
 					check_for_logout(localStorage.getItem('username'));
 				});
 			}
+		
+			window.addEventListener("pageshow", function (event) {
+				var historyTraversal = event.persisted || 
+				                     ( typeof window.performance != "undefined" && 
+				                          window.performance.navigation.type === 2 );
+				if(historyTraversal &&
+					sessionStorage.getItem('username') &&
+					curr_time - localStorage.getItem('last_seen') > 2)
+				{
+					alert(curr_time - localStorage.getItem('last_seen') > 2);
+					// Handle page restore.
+					window.location.reload();
+				}
+			});
+		
+			window.onbeforeunload = function(){
+				if(sessionStorage.getItem('username') || localStorage.getItem('username'))
+						localStorage.setItem('last_seen', Math.round((new Date()).getTime() / 1000));
+			};
 		</script>
 	</head>
 	<body class="is-preload">
@@ -594,24 +613,6 @@
 					}
 				}
 			}
-		
-			window.addEventListener("pageshow", function (event) {
-				var historyTraversal = event.persisted || 
-				                     ( typeof window.performance != "undefined" && 
-				                          window.performance.navigation.type === 2 );
-				if(historyTraversal &&
-					sessionStorage.getItem('username') &&
-					curr_time - localStorage.getItem('last_seen') > 2)
-				{
-					// Handle page restore.
-					window.location.reload();
-				}
-			});
-		
-			window.onbeforeunload = function(){
-				if(sessionStorage.getItem('username') || localStorage.getItem('username'))
-						localStorage.setItem('last_seen', Math.round((new Date()).getTime() / 1000));
-			};
 		</script>
 
 		<script>
