@@ -55,7 +55,7 @@
 						<input id="page_input" style="width: 75px; vertical-align: middle"> &nbsp;&nbsp;
 						<a id="next_page_link" onclick="next_page()"><i class="fas fa-arrow-circle-right fa-3x" style="vertical-align: middle"></i></a>
 					</noselect>
-					<div style="margin-bottom: -30px">
+					<div style="margin-bottom: 0px; margin-top: 30px ;max-width: 40px">
 						<a id="charts_link" style="display: none" title="charts"><i class="fas fa-chart-area fa-2x" style="vertical-align: middle"></i></a>
 					</div>
 				</center>
