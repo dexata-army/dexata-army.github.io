@@ -120,11 +120,11 @@
 							<option value="year">year</option>
 							<option value="max">max</option>
 						</select>
-						<div id="prices_chart_spotlight" class="spotlight" style="width: 100%;">
+						<div id="prices_chart_spotlight" class="spotlight" style="width: 100%; overflow: hidden">
 							<div id="prices_chart" style="min-width: 200px; width: 90%; padding-top: 30px; padding-bottom:30px; margin: 0 auto">
 							</div><br>
 						</div>
-						<div id="total_volumes_chart_spotlight" class="spotlight" style="width: 100%;">
+						<div id="total_volumes_chart_spotlight" class="spotlight" style="width: 100%; overflow: hidden">
 							<div id="total_volumes_chart" style="min-width: 200px; width: 90%; padding-top: 30px; padding-bottom:30px; margin: 0 auto">
 							</div><br>
 						</div>
