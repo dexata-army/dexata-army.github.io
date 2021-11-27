@@ -23,7 +23,8 @@
 								</thead>
 								<tr>
 									<td>
-										<select id="type_select" spellcheck="false" placeholder="type" style="width: 100%">
+										<select id="type_select" spellcheck="false" style="width: 100%">
+											<option disabled selected hidden>type</option>
 											<option value="prices">price</option>
 											<option value="market_caps">market cap</option>
 											<option value="total_volumes">volume</option>
@@ -32,7 +33,8 @@
 								</tr>
 								<tr>
 									<td>
-										<select id="range_select" spellcheck="false" placeholder="range" style="width: 100%">
+										<select id="range_select" spellcheck="false" style="width: 100%">
+											<option disabled selected hidden>range</option>
 											<option value="hour">hour</option>
 											<option value="day">day</option>
 											<option value="week">week</option>
@@ -238,6 +240,17 @@
 		var coin_name;
 		var coin_str = document.getElementById('id_input').value;
 		var coin_str_cmpr = coin_str.toLowerCase().replace(/ /g, "").replace(/-/g, "");
+
+		if(document.getElementById('type_select').value == "type")
+		{
+			alert("please select the type of chart you would like to add");
+			return;
+		}
+		else if(document.getElementById('range_select').value == "range")
+		{
+			alert("please select the data range you would like");
+			return;
+		}
 
 		document.getElementById('id_input').value = "";
 

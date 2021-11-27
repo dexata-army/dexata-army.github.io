@@ -19,6 +19,10 @@
 					<div id="empty_watchlist_spotlight" class="spotlight" style="max-width: 100%; width: 400px; display: none; padding: 20px 20px 20px 20px">
 					</div>
 
+					<div style="margin-bottom: 10px; margin-top: -10px ;max-width: 40px">
+						<a id="charts_link" style="display: none" title="charts"><i class="fas fa-chart-area fa-2x" style="vertical-align: middle"></i></a>
+					</div>
+
 					<div id="table_spotlight" class="spotlight" style="max-width: 100%">
 						<div id="table_div" class="xscroll">
 							<img id="loading_gif" src="@pathtofile(output/images/loading.gif)" style="margin-top: 20px; max-width: 150px">
@@ -55,9 +59,6 @@
 						<input id="page_input" style="width: 75px; vertical-align: middle"> &nbsp;&nbsp;
 						<a id="next_page_link" onclick="next_page()"><i class="fas fa-arrow-circle-right fa-3x" style="vertical-align: middle"></i></a>
 					</noselect>
-					<div style="margin-bottom: 0px; margin-top: 30px ;max-width: 40px">
-						<a id="charts_link" style="display: none" title="charts"><i class="fas fa-chart-area fa-2x" style="vertical-align: middle"></i></a>
-					</div>
 				</center>
 			</div>
 		</div>
