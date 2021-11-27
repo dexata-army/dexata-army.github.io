@@ -1,0 +1,182 @@
+<!-- Wrapper -->
+<div id="wrapper">
+	<!-- One -->
+	<section id="one" class="wrapper style1">
+		<div class="inner">
+			<div class="spotlights">
+				<center>
+					<div class="spotlight" style="max-width:500px; margin-bottom: 50px">
+						<div class="content">
+							<h1><i class="fas fa-bomb fa-4x" style="vertical-align:middle"></i><br><noselect>Scam Search</noselect></h1>
+						</div>
+					</div>
+
+					<input id="search_input" placeholder="search" style="margin-bottom:15px">
+
+					<div id="table_spotlight" class="spotlight" style="max-width: 100%; visibility: hidden">
+						<div id="table_div" class="xscroll">
+							<div id="no_results_msg" style=""></div>
+							<img id="loading_gif" src="" style="margin-top: 20px; max-width: 150px; display: none;">
+							<table id="search_table" class="scam" style="display: none; white-space: normal; word-wrap: break-word; line-height: 1.5">
+								<thead>
+									<tr>
+										<th>name</th>
+										<th>url</th>
+										<th>category</th>
+										<th>subcategory</th>
+										<th style="max-width: 200px; word-wrap: break-word">description</th>
+									</tr>
+								</thead>
+								<tfoot>
+									<tr>
+										<th>name</th>
+										<th>url</th>
+										<th>category</th>
+										<th>subcategory</th>
+										<th>description</th>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+					</div>
+				</center>
+			</div>
+		</div>
+	</section>
+</div>
+
+<script>
+	var coins_data;
+
+	window.addEventListener('keydown',this.keydown,false);
+
+	function clear_table()
+	{
+		var table = document.getElementById("search_table");
+
+		var no_rows = table.rows.length-1;
+		for(var i=0; i < no_rows; i++)
+			table.deleteRow(1);		
+
+		document.getElementById('no_results_msg').style.display = "none";
+	}
+
+	function search_coins()
+	{
+		var table = document.getElementById("search_table");
+		var no_coins_found = 0;
+
+		var search_term = document.getElementById("search_input").value.toLowerCase();
+
+		for(var i=0; i<coins_data['result'].length; i++)
+		{
+			if(coins_data['result'][i]['name'] == search_term ||
+				coins_data['result'][i]['url'] == search_term ||
+				coins_data['result'][i]['category'] == search_term ||
+				coins_data['result'][i]['subcategory'] == search_term ||
+				coins_data['result'][i]['description'] == search_term)
+			{
+				var row = table.insertRow(1);
+				no_coins_found++;
+
+				row.insertCell(0).innerHTML = coins_data['result'][i]['name'];
+				row.insertCell(1).innerHTML = coins_data['result'][i]['url'];
+				row.insertCell(2).innerHTML = coins_data['result'][i]['category'];
+				row.insertCell(3).innerHTML = coins_data['result'][i]['subcategory'];
+				row.insertCell(4).innerHTML = coins_data['result'][i]['description'];
+			}
+			else if((coins_data['result'][i]['name'] != undefined && coins_data['result'][i]['name'].toLowerCase().search(search_term) != -1) ||
+				(coins_data['result'][i]['url'] != undefined && coins_data['result'][i]['url'].toLowerCase().search(search_term) != -1) ||
+				(coins_data['result'][i]['category'] != undefined && coins_data['result'][i]['category'].toLowerCase().search(search_term) != -1) ||
+				(coins_data['result'][i]['subcategory'] != undefined && coins_data['result'][i]['subcategory'].toLowerCase().search(search_term) != -1) ||
+				(coins_data['result'][i]['description'] != undefined && coins_data['result'][i]['description'].toLowerCase().search(search_term) != -1))
+			{
+				var row = table.insertRow(no_coins_found+1);
+				no_coins_found++;
+
+				row.insertCell(0).innerHTML = coins_data['result'][i]['name'];
+				row.insertCell(1).innerHTML = coins_data['result'][i]['url'];
+				row.insertCell(2).innerHTML = coins_data['result'][i]['category'];
+				row.insertCell(3).innerHTML = coins_data['result'][i]['subcategory'];
+				row.insertCell(4).innerHTML = coins_data['result'][i]['description'];
+			}
+		}
+
+		document.getElementById("loading_gif").src = "";
+		document.getElementById("loading_gif").style.display = "none";
+		document.getElementById("loading_gif").style.visibility = "hidden";
+		document.getElementById("search_table").style.display = "inline";
+
+		if(no_coins_found > 0)
+			document.getElementById('table_spotlight').style.width = (document.getElementById('search_table').offsetWidth + 70) + "px";
+		else
+		{
+			document.getElementById("search_table").style.display = "none";
+			document.getElementById('table_spotlight').style.width = "500px";
+			document.getElementById('no_results_msg').innerHTML = "<p style='margin-top: 20px; margin-bottom: 10px'>No scam coins found for '" + search_term + "'</p><p style='margin-bottom: 10px'><b>Note:</b> Not all scams are known to us yet</p>";
+			document.getElementById('no_results_msg').style.display = "inline";
+		}
+	}
+
+	function fetch_coins_list()
+	{
+		$(document).ready(function(){
+			$.get(
+	    	    'https://api.cryptoscamdb.org/v1/scams',              
+				function(data) {
+					coins_data = data;
+					if(document.getElementById('search_input').value != "")
+					{
+						clear_table();
+						search_coins();
+						document.getElementById("search_input").scrollIntoView();
+					}
+			}).fail(function() {
+				clear_table();
+				document.getElementById('loading_gif').src = "";
+				document.getElementById('loading_gif').style.visibility = "hidden";
+				document.getElementById('loading_gif').style.display = "none";
+				document.getElementById("table_spotlight").style.width = "600px";
+
+				document.getElementById("table_div").innerHTML = "<p style='margin-top: 20px; margin-bottom: 10px'>failed to fetch scam coins information, please refresh to try again.</p>";
+			});
+		});
+	}
+
+	function keydown(e)
+	{
+		var code = e.keyCode;
+		
+		if(document.activeElement.tagName == "INPUT")
+		{
+			if(code == 13)
+			{
+				if(document.activeElement.id == "search_input")
+				{
+					clear_table();
+					document.getElementById("search_table").style.display = "none";
+					document.getElementById("loading_gif").style.display = "inline";
+					document.getElementById("loading_gif").src = "@pathto(output/images/loading.gif)";
+					document.getElementById("loading_gif").style.visibility = "visible";
+					document.getElementById("table_spotlight").style.visibility = "visible";
+					sleep(50).then(() => { search_coins() });
+				}
+			}
+		}
+	}
+
+	if(param_map.get('term') != undefined)
+	{
+		document.getElementById('search_input').value = param_map.get('term');
+
+		document.getElementById("search_table").style.display = "none";
+		document.getElementById("loading_gif").style.display = "inline";
+		document.getElementById("loading_gif").src = "@pathto(output/images/loading.gif)";
+		document.getElementById("loading_gif").style.visibility = "visible";
+		document.getElementById("table_spotlight").style.visibility = "visible";
+	}
+
+	document.getElementById('table_spotlight').style.width = (document.getElementById('loading_gif').offsetWidth + 400) + "px";
+
+	fetch_coins_list();
+</script>
