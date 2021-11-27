@@ -63,7 +63,7 @@
 							<option disabled selected hidden>coin</option>
 						</select>
 						<div id="balance_chart_spotlight" class="spotlight" style="width: 100%; display: none; overflow: hidden">
-							<div id="balance_chart" style="width: 90%; height: 90%; padding-top: 20px; padding-left: 10px; padding-right: 10px; margin: 0 auto">
+							<div id="balance_chart" style="width: 100%; height: 100%; padding-left: 10px; padding-right: 10px;padding-top: 10px; padding-bottom: 10px; margin: 0 auto">
 							</div><br>
 						</div>
 					</div>
