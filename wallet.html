@@ -243,8 +243,8 @@
 								<select id="chart_select" placeholder="" onchange="fetch_chart()" style="max-width: 100%; width: 300px; margin-bottom: 20px;">
 									<option disabled selected hidden>coin</option>
 								</select>
-								<div id="balance_chart_spotlight" class="spotlight" style="width: 100%; display: none">
-									<div id="balance_chart" style="min-width: 200px; width: 90%; padding-top: 30px; padding-bottom:30px; margin: 0 auto">
+								<div id="balance_chart_spotlight" class="spotlight" style="width: 100%; display: none; overflow: hidden">
+									<div id="balance_chart" style="width: 90%; height: 90%; padding-top: 20px; padding-left: 10px; padding-right: 10px; margin: 0 auto">
 									</div><br>
 								</div>
 							</div>
@@ -778,7 +778,7 @@
 						for(var j=0; j<balance_data['items'][i]['holdings'].length; j++)
 							if(balance_data['items'][i]['holdings'][j]['close']['quote'] != undefined)
 								chart_data[j] = [balance_data['items'][i]['holdings'][j]['timestamp'], balance_data['items'][i]['holdings'][j]['close']['quote']];
-							
+		
 						draw_chart(balance_data['items'][i]['contract_name'], chart_data);
 						break;
 					}
