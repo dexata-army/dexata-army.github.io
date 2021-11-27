@@ -184,7 +184,7 @@ input, select, textarea {
 	}
 
 	p {
-		margin: 0 0 2.75rem 0;
+		margin: 0 0 0.75rem 0;
 	}
 
 	h1, h2, h3, h4, h5, h6 {
@@ -2840,7 +2840,7 @@ input, select, textarea {
 /* Wrapper */
 
 	.wrapper {
-		padding: 2rem 0 2.25rem 0 ;
+		padding: 2rem 0 0.25rem 0 ;
 		position: relative;
 		z-index: 10000;
 	}
@@ -2879,7 +2879,7 @@ input, select, textarea {
 		@media screen and (max-width: 1280px) {
 
 			.wrapper {
-				padding: 3rem 0 0.25rem 0 ;
+				padding: 2rem 0 0.25rem 0 ;
 			}
 
 		}
@@ -2926,19 +2926,19 @@ input, select, textarea {
 /* Header */
 
 	header.major {
-		margin: 0 auto 1.875rem auto;
+		margin: 0 auto 0.75rem auto;
 		max-width: calc(100% - 28rem);
 		text-align: center;
 	}
 
 		header.major.small {
-			margin: 0 auto 1.75rem auto;
+			margin: 0 auto 0.75rem auto;
 		}
 
 	@media screen and (max-width: 1280px) {
 
 		header.major {
-			margin: 0 auto 1.75rem auto;
+			margin: 0 auto 0.75rem auto;
 			max-width: calc(100% - 25rem);
 		}
 
@@ -2947,7 +2947,7 @@ input, select, textarea {
 	@media screen and (max-width: 980px) {
 
 		header.major {
-			margin: 0 auto 1.75rem auto;
+			margin: 0 auto 0.75rem auto;
 			max-width: 90%;
 		}
 
@@ -2956,7 +2956,7 @@ input, select, textarea {
 	@media screen and (max-width: 736px) {
 
 		header.major {
-			margin: 0 auto 1rem auto;
+			margin: 0 auto 0.75rem auto;
 		}
 
 	}
@@ -3793,7 +3793,7 @@ input, select, textarea {
 			order: 1;
 			margin-left: auto;
 			margin-right: auto;
-			margin-bottom: 2.75rem;
+			margin-bottom: 0.75rem;
 			width: 30rem;
 			max-width: 100%;
 		}
@@ -3883,7 +3883,7 @@ input, select, textarea {
 	}
 
 		#footer .contact-form {
-			margin-bottom: 1.25rem;
+			margin-bottom: 0.75rem;
 		}
 
 			#footer .contact-form ul {
@@ -3907,7 +3907,7 @@ input, select, textarea {
 			-webkit-justify-content: space-between;
 			-ms-justify-content: space-between;
 			justify-content: space-between;
-			margin: 0 auto 1.5rem auto;
+			margin: 0 auto 0.75rem auto;
 			padding-left: 2rem;
 			width: 40rem;
 		}
@@ -3922,7 +3922,7 @@ input, select, textarea {
 				-ms-align-items: center;
 				align-items: center;
 				height: 2.75rem;
-				margin-bottom: 1.75rem;
+				margin-bottom: 0.75rem;
 				text-align: left;
 				width: 18rem;
 			}
@@ -3954,12 +3954,12 @@ input, select, textarea {
 				}
 
 			#footer .inner .icon.alt {
-				margin: 0 1.75rem 0 0;
+				margin: 0 0.75rem 0 0;
 			}
 
 		#footer .copyright {
 			color: rgba(255, 255, 255, 0.5);
-			margin: 0 auto 2.5rem auto;
+			margin: 0 auto 0.75rem auto;
 			max-width: 80rem;
 			text-align: center;
 		}
@@ -3975,7 +3975,7 @@ input, select, textarea {
 			}
 
 			#footer .contact-form {
-				margin-bottom: 1.5rem;
+				margin-bottom: 0.75rem;
 			}
 
 		}
@@ -4004,19 +4004,19 @@ input, select, textarea {
 			}
 
 				#footer .inner .icon.alt {
-					margin: 0 2.0625rem 0 0;
+					margin: 0 0.75rem 0 0;
 				}
 
 			#footer .copyright {
 				max-width: 100%;
-				margin: 0 auto 1.75rem auto;
+				margin: 0 auto 0.75rem auto;
 				width: 100%;
 			}
 
 			#footer .contact-info {
 				padding-left: 0;
 				width: 100%;
-				margin: 0 auto 1.75rem auto;
+				margin: 0 auto 0.75rem auto;
 			}
 
 				#footer .contact-info .item {
