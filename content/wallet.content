@@ -52,6 +52,9 @@
 						</div>
 					</div>
 					<a id="show_ignored_coins_button" onclick="toggle_show_ignored_coins()">show ignored coins</a>
+					<div style="margin-bottom: -30px; margin-top: 10px">
+						<a id="charts_link" style="display: none" title="charts"><i class="fas fa-chart-area fa-2x" style="vertical-align: middle"></i></a>
+					</div>
 				</center>
 			</div>
 		</div>
@@ -60,6 +63,7 @@
 
 <script>
 	var refresh_ms = 60000;
+	var chart_range = "week";
 
 	var wallet_network;
 	var wallet_name;
@@ -119,6 +123,8 @@
 
 		if(coins_data['data']['items'].length > 0)
 		{
+			var coins_str = "";
+
 			for(var i=0, r=0; i<coins_data['data']['items'].length; i++)
 			{
 				if(coins_data['data']['items'][i]['contract_ticker_symbol'] != undefined &&
@@ -139,9 +145,19 @@
 					row.insertCell(1).innerHTML = coins_data['data']['items'][i]['contract_ticker_symbol'];
 
 					if(id_map[coins_data['data']['items'][i]['contract_name'].replace(/ /g, "").replace(/-/g, "").toLowerCase()] != undefined)
+					{
 						row.insertCell(2).innerHTML = "<a href='@pathto(coin)?id=" + id_map[coins_data['data']['items'][i]['contract_name'].replace(/ /g, "").replace(/-/g, "").toLowerCase()] + "'>" + coins_data['data']['items'][i]['contract_name'] + "</a>";
+						if(coins_str.length > 0)
+							coins_str += ",";
+						coins_str += id_map[coins_data['data']['items'][i]['contract_name'].replace(/ /g, "").replace(/-/g, "").toLowerCase()];
+					}
 					else if(id_map[coins_data['data']['items'][i]['contract_ticker_symbol']] != undefined)
+					{
 						row.insertCell(2).innerHTML = "<a href='@pathto(coin)?id=" + id_map[coins_data['data']['items'][i]['contract_ticker_symbol']] + "'>" + coins_data['data']['items'][i]['contract_name'] + "</a>";
+						if(coins_str.length > 0)
+							coins_str += ",";
+						coins_str += id_map[coins_data['data']['items'][i]['contract_ticker_symbol'].replace(/ /g, "").replace(/-/g, "").toLowerCase()];
+					}
 					else
 						row.insertCell(2).innerHTML = coins_data['data']['items'][i]['contract_name'];
 
@@ -186,6 +202,9 @@
 
 			document.getElementById("balance_div").innerHTML = "<b>balance:</b> $" + wallet_balance.toLocaleString();
 			document.getElementById('balance_spotlight').style.width = (document.getElementById('balance_div').offsetWidth + 70) + "px";
+
+			document.getElementById('charts_link').href = "@pathto(charts)?width=250&height=350&range=" + chart_range + "&coins=" + coins_str;
+			document.getElementById('charts_link').style.display = "block";
 		}
 	}
 

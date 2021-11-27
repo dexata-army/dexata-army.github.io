@@ -192,6 +192,12 @@
 						document.getElementById('chart_' + chart_id + "_div").innerHTML = "";
 					}
 
+					if(param_map.get('width'))
+						document.getElementById('chart_' + chart_id + '_spotlight').style.width = param_map.get('width') + "px";
+
+					if(param_map.get('height'))
+						document.getElementById('chart_' + chart_id + '_spotlight').style.height = param_map.get('height') + "px";
+
 					create_chart(chart_id, coin_name, chart_type, chart_range, y_title, data[chart_type]);
 			}).fail(function() {
 				alert("failed to fetch chart data");
@@ -285,6 +291,25 @@
 		no_charts++;
 	}
 
+	function add_param_charts()
+	{
+		if(param_map.get('coins'))
+		{
+			var coins_list = param_map.get('coins').split(',');
+
+			if(param_map.get('range'))
+				document.getElementById('range_select').value = param_map.get('range');
+			else
+				document.getElementById('range_select').value = 'week';
+
+			for(var i=0; i<coins_list.length; i++)
+			{
+				document.getElementById('id_input').value = coins_list[i];
+				add_chart();
+			}
+		}
+	}
+
 	function fetch_coins_list()
 	{
 		$(document).ready(function(){
@@ -292,6 +317,7 @@
 	    	    'https://api.coingecko.com/api/v3/coins/list',              
 				function(data) {
 					coins_data = data;
+					add_param_charts();
 					document.getElementById('add_chart_spotlight').style.display = "inline-block";
 			}).fail(function() {
 				alert("failed to fetch coins list, please refresh");
