@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Dexata - charts</title>
+		<title>Dexata - scams</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<meta name="description" content="" />
@@ -186,52 +186,39 @@
 				<div class="inner">
 					<div class="spotlights">
 						<center>
-							<div class="spotlight" style="max-width:500px; margin-bottom: 30px">
+							<div class="spotlight" style="max-width:500px; margin-bottom: 50px">
 								<div class="content">
-									<h1><i class="fas fa-chart-area fa-4x" style="vertical-align:middle"></i><br><noselect>Charts</noselect></h1>
+									<h1><i class="fas fa-bomb fa-4x" style="vertical-align:middle"></i><br><noselect>Scam Search</noselect></h1>
 								</div>
 							</div>
 		
-							<div id="add_chart_spotlight" class="spotlight" style="max-width:100%; width: 250px; margin-bottom: 20px; display: none">
-								<div id="add_chart_div" class="xscroll">
-									<table id="add_chart_table">
+							<input id="search_input" placeholder="search" style="margin-bottom:15px">
+		
+							<div id="table_spotlight" class="spotlight" style="max-width: 100%; visibility: hidden">
+								<div id="table_div" class="xscroll">
+									<div id="no_results_msg" style=""></div>
+									<img id="loading_gif" src="" style="margin-top: 20px; max-width: 150px; display: none;">
+									<table id="search_table" class="scam" style="display: none; white-space: normal; word-wrap: break-word; line-height: 1.5">
 										<thead>
 											<tr>
-												<td>
-													add chart
-												</td>
+												<th>name</th>
+												<th>url</th>
+												<th>category</th>
+												<th>subcategory</th>
+												<th style="max-width: 200px; word-wrap: break-word">description</th>
 											</tr>
 										</thead>
-										<tr>
-											<td>
-												<select id="type_select" spellcheck="false" placeholder="type" style="width: 100%">
-													<option value="prices">price</option>
-													<option value="market_caps">market cap</option>
-													<option value="total_volumes">volume</option>
-												</select>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<select id="range_select" spellcheck="false" placeholder="range" style="width: 100%">
-													<option value="hour">hour</option>
-													<option value="day">day</option>
-													<option value="week">week</option>
-													<option value="month">month</option>
-													<option value="year">year</option>
-													<option value="max">max</option>
-												</select>
-											</td>
-										</tr>
-										<tr>
-											<td><input id="id_input" spellcheck="false" placeholder="coin"></td>
-										</tr>
+										<tfoot>
+											<tr>
+												<th>name</th>
+												<th>url</th>
+												<th>category</th>
+												<th>subcategory</th>
+												<th>description</th>
+											</tr>
+										</tfoot>
 									</table>
-									<a onclick="add_chart()"><i class="fas fa-plus fa-2x" style="margin-bottom: 10px"></i></a><br>
 								</div>
-							</div>
-		
-							<div id="charts_div">
 							</div>
 						</center>
 					</div>
@@ -242,252 +229,73 @@
 		<script>
 			var coins_data;
 		
-			var refresh_ms = 1000*60;
-		
-			var no_charts = 0;
-			var chart_to_update = 0;
-			var chart_id = 0;
-			var chart_ids = [];
-			var chart_info = {};
-			var charts = {};
-		
 			window.addEventListener('keydown',this.keydown,false);
 		
-			function create_chart(chart_id, title, chart_type, chart_range, y_title, data)
+			function clear_table()
 			{
-				var options = {
-			      series: [{
-			      name: 'date',
-			      data: data
-			    }],
-			      chart: {
-			      type: 'area',
-			      stacked: false,
-			      background: 'none',
-			      height: '90%',
-			      zoom: {
-			        type: 'xy',
-			        enabled: true,
-			      },
-			      toolbar: {
-			        autoSelected: 'zoom'
-			      }
-			    },
-			    colors:['#C600EB', '#E91E63', '#9C27B0'],
-			    dataLabels: {
-			      enabled: false
-			    },
-			    markers: {
-			      size: 0,
-			    },
-			    title: {
-			      text: title,
-			      align: 'left',
-			      textColor: '#ff1493',
-			    },
-			    fill: {
-			      type: 'gradient',
-			      gradient: {
-			        shadeIntensity: 0.4,
-			        inverseColors: false,
-			        opacityFrom: 0.8,
-			        opacityTo: 0.4,
-			        stops: [0, 90, 100]
-			      },
-			    },
-			    yaxis: {
-			      labels: {
-			        formatter: function (val) {
-			          if(val == 0)
-			          	return 0;
-			          else if(val >= 1)
-			          	return val.toLocaleString('en');
-			          else if(val > 0 && val < 0.001)
-			          	return val.toExponential(3);
-			          else
-			          	return val.toFixed(5);
-			        },
-			      },
-			      tickAmount: 4,
-			      title: {
-			        text: y_title,
-			      },
-			    },
-			    xaxis: {
-			      type: 'datetime',
-		          tickAmount: 5,
-			      labels: {
-			        formatter: function (val) {
-			          if(chart_range == "hour" || chart_range == "day")
-				      	return new Date(val).toLocaleTimeString();
-				      else
-				      	return new Date(val).toLocaleDateString();
-			        },
-			      },
-			    },
-			    theme: {
-			    	mode: 'dark',
-			    },
-			    stroke: {
-				    width: 2,    
-				},
-			    tooltip: {
-			      shared: false,
-			      y: {
-			        formatter: function (val) {
-			          return (val / 1000000).toFixed(0);
-			        }
-			      }
-			    }
-			    };
+				var table = document.getElementById("search_table");
 		
-			    charts[chart_id] = new ApexCharts(document.querySelector("#chart_" + chart_id + "_div"), options);
-			    charts[chart_id].render();
+				var no_rows = table.rows.length-1;
+				for(var i=0; i < no_rows; i++)
+					table.deleteRow(1);		
+		
+				document.getElementById('no_results_msg').style.display = "none";
 			}
 		
-			function fetch_chart(chart_id, chart_type, chart_range, chart_freq, y_title, coin_id, coin_name)
+			function search_coins()
 			{
-				var data_range;
+				var table = document.getElementById("search_table");
+				var no_coins_found = 0;
 		
-				if(chart_range == "hour")
-					data_range = 0.041666667;
-				else if(chart_range == "day")
-					data_range = 1;
-				else if(chart_range == "week")
-					data_range = 7;
-				else if(chart_range == "month")
-					data_range = 30;
-				else if(chart_range == "year")
-					data_range = 365;
-				else if(chart_range == "max")
-					data_range = "max";
+				var search_term = document.getElementById("search_input").value.toLowerCase();
 		
-				$(document).ready(function(){
-					//alert('https://api.coingecko.com/api/v3/coins/' + coin_id + '/market_chart?vs_currency=usd&days=' + data_range + '&interval=' + chart_freq);
-					$.get(
-						'https://api.coingecko.com/api/v3/coins/' + coin_id + '/market_chart?vs_currency=usd&days=' + data_range + '&interval=' + chart_freq,
-						function(data) {
-							if(charts[chart_id] != undefined)
-							{
-								charts[chart_id].destroy();
-								document.getElementById('chart_' + chart_id + "_div").innerHTML = "";
-							}
-		
-							if(param_map.get('width'))
-								document.getElementById('chart_' + chart_id + '_spotlight').style.width = param_map.get('width') + "px";
-		
-							if(param_map.get('height'))
-								document.getElementById('chart_' + chart_id + '_spotlight').style.height = param_map.get('height') + "px";
-		
-							create_chart(chart_id, coin_name, chart_type, chart_range, y_title, data[chart_type]);
-					}).fail(function() {
-						alert("failed to fetch chart data");
-					});
-				});
-			}
-		
-			function close_chart(id)
-			{
-				var index = chart_ids.indexOf(parseFloat(id));
-				if(index != -1)
+				for(var i=0; i<coins_data['result'].length; i++)
 				{
-					if(charts[id] != undefined)
+					if(coins_data['result'][i]['name'] == search_term ||
+						coins_data['result'][i]['url'] == search_term ||
+						coins_data['result'][i]['category'] == search_term ||
+						coins_data['result'][i]['subcategory'] == search_term ||
+						coins_data['result'][i]['description'] == search_term)
 					{
-						charts[id].destroy();
-						delete charts[id];
+						var row = table.insertRow(1);
+						no_coins_found++;
+		
+						row.insertCell(0).innerHTML = coins_data['result'][i]['name'];
+						row.insertCell(1).innerHTML = coins_data['result'][i]['url'];
+						row.insertCell(2).innerHTML = coins_data['result'][i]['category'];
+						row.insertCell(3).innerHTML = coins_data['result'][i]['subcategory'];
+						row.insertCell(4).innerHTML = coins_data['result'][i]['description'];
 					}
-		
-					document.getElementById("chart_" + id + "_spotlight").innerHTML = "";
-					document.getElementById("chart_" + id + "_spotlight").style.display = "none";
-		
-					chart_ids.splice(index, 1);
-		
-					if(chart_to_update < chart_id)
-						chart_to_update--;
-		
-					no_charts--;
-				}
-			}
-		
-			function add_chart()
-			{
-				var chart_type = document.getElementById('type_select').value;
-				var chart_range = document.getElementById('range_select').value;
-				var chart_freq;
-				var y_title = $('#type_select option:selected').text();
-				var coin_id;
-				var coin_name;
-				var coin_str = document.getElementById('id_input').value;
-				var coin_str_cmpr = coin_str.toLowerCase().replace(/ /g, "").replace(/-/g, "");
-		
-				document.getElementById('id_input').value = "";
-		
-				if(coin_str_cmpr == "")
-				{
-					alert("please specify a coin");
-					return;
-				}
-		
-				for(var i=0; i<coins_data.length; i++)
-				{
-					if(coins_data[i]['id'].toLowerCase().replace(/ /g, "").replace(/-/g, "") == coin_str_cmpr ||
-						coins_data[i]['name'].toLowerCase().replace(/ /g, "").replace(/-/g, "") == coin_str_cmpr ||
-						coins_data[i]['symbol'].toLowerCase().replace(/ /g, "").replace(/-/g, "") == coin_str_cmpr)
+					else if((coins_data['result'][i]['name'] != undefined && coins_data['result'][i]['name'].toLowerCase().search(search_term) != -1) ||
+						(coins_data['result'][i]['url'] != undefined && coins_data['result'][i]['url'].toLowerCase().search(search_term) != -1) ||
+						(coins_data['result'][i]['category'] != undefined && coins_data['result'][i]['category'].toLowerCase().search(search_term) != -1) ||
+						(coins_data['result'][i]['subcategory'] != undefined && coins_data['result'][i]['subcategory'].toLowerCase().search(search_term) != -1) ||
+						(coins_data['result'][i]['description'] != undefined && coins_data['result'][i]['description'].toLowerCase().search(search_term) != -1))
 					{
-						coin_id = coins_data[i]['id'];
-						coin_name = coins_data[i]['name'];
-						break;
+						var row = table.insertRow(no_coins_found+1);
+						no_coins_found++;
+		
+						row.insertCell(0).innerHTML = coins_data['result'][i]['name'];
+						row.insertCell(1).innerHTML = coins_data['result'][i]['url'];
+						row.insertCell(2).innerHTML = coins_data['result'][i]['category'];
+						row.insertCell(3).innerHTML = coins_data['result'][i]['subcategory'];
+						row.insertCell(4).innerHTML = coins_data['result'][i]['description'];
 					}
 				}
 		
-				if(coin_id == undefined)
+				document.getElementById("loading_gif").src = "";
+				document.getElementById("loading_gif").style.display = "none";
+				document.getElementById("loading_gif").style.visibility = "hidden";
+				document.getElementById("search_table").style.display = "inline";
+		
+				if(no_coins_found > 0)
+					document.getElementById('table_spotlight').style.width = (document.getElementById('search_table').offsetWidth + 70) + "px";
+				else
 				{
-					alert("could not find " + coin_str);
-					return;
-				}
-		
-				document.getElementById('charts_div').insertAdjacentHTML('beforeend',
-					'<div id="chart_' + chart_id + '_spotlight" class="spotlight" style="width: 100%; height: 400px; min-width: 250px; max-width: 100%; min-height: 250px; max-height: 600px; margin-left: 5px; margin-right: 5px; margin-bottom: 0px; resize: both; display: inline-block; overflow: hidden"> \
-						<div style="position: absolute; top: 5px; left: 10px"> \
-							<a href="coin.html?id=' + coin_id + '" target=”_blank”><i class="fas fa-link fa-1x" ></i></a> \
-						</div> \
-						<div style="position: absolute; top: 5px; right: 10px"> \
-							<a onclick="close_chart(\'' + chart_id + '\')"><i class="fas fa-window-close fa-1x" ></i></a> \
-						</div> \
-						<div id="chart_' + chart_id + '_div" style="width: 90%; height: 90%; padding-top: 20px; padding-left: 10px; padding-right: 10px; margin: 0 auto"> \
-						</div><br> \
-					</div>');
-		
-				if(chart_range == "hour")
-					chart_freq = "minute";
-				else if(chart_range == "day" || chart_range == "week")
-					chart_freq = "hourly";
-				else if(chart_range == "month" || chart_range == "year" || chart_range == "max")
-					chart_freq = "daily";
-		
-				chart_info[chart_id] = [chart_type, chart_range, chart_freq, y_title, coin_id, coin_name];
-				fetch_chart(chart_id, chart_type, chart_range, chart_freq, y_title, coin_id, coin_name);
-				chart_ids[chart_ids.length] = chart_id;
-				chart_id++;
-				no_charts++;
-			}
-		
-			function add_param_charts()
-			{
-				if(param_map.get('coins'))
-				{
-					var coins_list = param_map.get('coins').split(',');
-		
-					if(param_map.get('range'))
-						document.getElementById('range_select').value = param_map.get('range');
-					else
-						document.getElementById('range_select').value = 'week';
-		
-					for(var i=0; i<coins_list.length; i++)
-					{
-						document.getElementById('id_input').value = coins_list[i];
-						add_chart();
-					}
+					document.getElementById("search_table").style.display = "none";
+					document.getElementById('table_spotlight').style.width = "500px";
+					document.getElementById('no_results_msg').innerHTML = "<p style='margin-top: 20px; margin-bottom: 10px'>No scam coins found for '" + search_term + "'</p><p style='margin-bottom: 10px'><b>Note:</b> Not all scams are known to us yet</p>";
+					document.getElementById('no_results_msg').style.display = "inline";
 				}
 			}
 		
@@ -495,42 +303,25 @@
 			{
 				$(document).ready(function(){
 					$.get(
-			    	    'https://api.coingecko.com/api/v3/coins/list',              
+			    	    'https://api.cryptoscamdb.org/v1/scams',              
 						function(data) {
 							coins_data = data;
-							add_param_charts();
-							document.getElementById('add_chart_spotlight').style.display = "inline-block";
+							if(document.getElementById('search_input').value != "")
+							{
+								clear_table();
+								search_coins();
+								document.getElementById("search_input").scrollIntoView();
+							}
 					}).fail(function() {
-						alert("failed to fetch coins list, please refresh");
+						clear_table();
+						document.getElementById('loading_gif').src = "";
+						document.getElementById('loading_gif').style.visibility = "hidden";
+						document.getElementById('loading_gif').style.display = "none";
+						document.getElementById("table_spotlight").style.width = "600px";
+		
+						document.getElementById("table_div").innerHTML = "<p style='margin-top: 20px; margin-bottom: 10px'>failed to fetch scam coins information, please refresh to try again.</p>";
 					});
 				});
-			}
-		
-			function refresh_data()
-			{
-				if(refresh_ms > 0)
-				{
-					if(no_charts > 0)
-					{
-						sleep(refresh_ms/no_charts).then(() => { 
-							fetch_chart(chart_to_update, 
-							            chart_info[chart_to_update][0], 
-							            chart_info[chart_to_update][1], 
-							            chart_info[chart_to_update][2], 
-							            chart_info[chart_to_update][3], 
-							            chart_info[chart_to_update][4], 
-							            chart_info[chart_to_update][5]);
-							chart_to_update = (chart_to_update+1)%no_charts;
-							refresh_data();
-						});
-					}
-					else
-					{
-						sleep(5000).then(() => { 
-							refresh_data();
-						});
-					}
-				}
 			}
 		
 			function keydown(e)
@@ -541,14 +332,34 @@
 				{
 					if(code == 13)
 					{
-						if(document.activeElement.id == "id_input")
-							add_chart();
+						if(document.activeElement.id == "search_input")
+						{
+							clear_table();
+							document.getElementById("search_table").style.display = "none";
+							document.getElementById("loading_gif").style.display = "inline";
+							document.getElementById("loading_gif").src = "images/loading.gif";
+							document.getElementById("loading_gif").style.visibility = "visible";
+							document.getElementById("table_spotlight").style.visibility = "visible";
+							sleep(50).then(() => { search_coins() });
+						}
 					}
 				}
 			}
 		
+			if(param_map.get('term') != undefined)
+			{
+				document.getElementById('search_input').value = param_map.get('term');
+		
+				document.getElementById("search_table").style.display = "none";
+				document.getElementById("loading_gif").style.display = "inline";
+				document.getElementById("loading_gif").src = "images/loading.gif";
+				document.getElementById("loading_gif").style.visibility = "visible";
+				document.getElementById("table_spotlight").style.visibility = "visible";
+			}
+		
+			document.getElementById('table_spotlight').style.width = (document.getElementById('loading_gif').offsetWidth + 400) + "px";
+		
 			fetch_coins_list();
-			refresh_data();
 		</script>
 
 		<!-- Footer -->
