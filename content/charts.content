@@ -268,7 +268,7 @@
 		document.getElementById('charts_div').insertAdjacentHTML('beforeend',
 			'<div id="chart_' + chart_id + '_spotlight" class="spotlight" style="width: 100%; height: 400px; min-width: 250px; max-width: 100%; min-height: 250px; max-height: 600px; margin-left: 5px; margin-right: 5px; margin-bottom: 0px; resize: both; display: inline-block; overflow: hidden"> \
 				<div style="position: absolute; top: 5px; left: 10px"> \
-					<a href="@pathto(coin)?id=' + coin_id + '" target=”_blank”><i class="fas fa-external-link-square-alt fa-1x" ></i></a> \
+					<a href="@pathto(coin)?id=' + coin_id + '" target=”_blank”><i class="fas fa-link fa-1x" ></i></a> \
 				</div> \
 				<div style="position: absolute; top: 5px; right: 10px"> \
 					<a onclick="close_chart(\'' + chart_id + '\')"><i class="fas fa-window-close fa-1x" ></i></a> \
