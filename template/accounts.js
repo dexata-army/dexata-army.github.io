@@ -73,6 +73,7 @@
 		if(!localStorage.getItem("last_seen") ||
 		     curr_time - localStorage.getItem("last_seen") > 5)
 		{
+			alert("wtf");
 			logout();
 			location.reload();
 		}
