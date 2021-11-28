@@ -23,6 +23,7 @@
 
 	function check_for_logout(username)
 	{
+		return;
 		sleep(2000).then(() => { 
 			if(!localStorage.getItem('username') || 
 				localStorage.getItem('username') != username)
