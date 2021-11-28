@@ -45,11 +45,11 @@
 			else if(sessionStorage.getItem('username'))
 				user = sessionStorage.getItem('username');
 		
-			alert(user);
+			//alert(user);
 		
 			function logout()
 			{
-				alert("logged out debug message");
+				//alert("logged out debug message");
 				localStorage.removeItem('no_dexata_tabs');
 				localStorage.removeItem('last_load_time');
 				localStorage.removeItem('last_seen');
@@ -105,7 +105,7 @@
 				if(!localStorage.getItem("last_seen") ||
 				     curr_time - localStorage.getItem("last_seen") > 2)
 				{
-					alert(curr_time - localStorage.getItem('last_seen'));
+					//alert(curr_time - localStorage.getItem('last_seen'));
 					logout();
 					location.reload();
 				}
