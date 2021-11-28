@@ -10,6 +10,7 @@
 
 	function logout()
 	{
+		alert("logged out debug message");
 		localStorage.removeItem('no_dexata_tabs');
 		localStorage.removeItem('last_load_time');
 		localStorage.removeItem('last_seen');
