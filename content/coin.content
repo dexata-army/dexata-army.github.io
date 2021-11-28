@@ -40,6 +40,10 @@
 										<td></td>
 									</tr>
 									<tr>
+										<td><b>undiluted<br>market cap:</b></td>
+										<td></td>
+									</tr>
+									<tr>
 										<td><b>volume:</b></td>
 										<td></td>
 									</tr>
@@ -513,25 +517,31 @@
 		else
 			table.rows[1].cells[1].innerHTML = '-';
 
-		if(data['market_data']['market_cap']['usd'] > 0)
-			table.rows[2].cells[1].innerHTML = "$" + data['market_data']['total_volume']['usd'].toLocaleString('en');
+		if(data['market_data']['current_price']['usd'] > 0 &&
+			data['market_data']['total_supply'])
+			table.rows[2].cells[1].innerHTML = "$" + (data['market_data']['current_price']['usd']*data['market_data']['total_supply']).toLocaleString('en');
 		else
 			table.rows[2].cells[1].innerHTML = '-';
 
-		if(data['market_data']['total_supply'] > 0)
-			table.rows[3].cells[1].innerHTML = data['market_data']['total_supply'].toLocaleString('en');
+		if(data['market_data']['market_cap']['usd'] > 0)
+			table.rows[3].cells[1].innerHTML = "$" + data['market_data']['total_volume']['usd'].toLocaleString('en');
 		else
 			table.rows[3].cells[1].innerHTML = '-';
 
-		if(data['market_data']['max_supply'] > 0)
-			table.rows[4].cells[1].innerHTML = data['market_data']['max_supply'].toLocaleString('en');
+		if(data['market_data']['total_supply'] > 0)
+			table.rows[4].cells[1].innerHTML = data['market_data']['total_supply'].toLocaleString('en');
 		else
 			table.rows[4].cells[1].innerHTML = '-';
 
-		if(data['market_data']['circulating_supply'] > 0)
-			table.rows[5].cells[1].innerHTML = data['market_data']['circulating_supply'].toLocaleString('en');
+		if(data['market_data']['max_supply'] > 0)
+			table.rows[5].cells[1].innerHTML = data['market_data']['max_supply'].toLocaleString('en');
 		else
 			table.rows[5].cells[1].innerHTML = '-';
+
+		if(data['market_data']['circulating_supply'] > 0)
+			table.rows[6].cells[1].innerHTML = data['market_data']['circulating_supply'].toLocaleString('en');
+		else
+			table.rows[6].cells[1].innerHTML = '-';
 
 		table = document.getElementById("change_table");
 
