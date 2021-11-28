@@ -73,8 +73,8 @@
 		
 			function update_last_seen()
 			{
+				localStorage.setItem('last_seen', Math.round((new Date()).getTime() / 1000));
 				sleep(2000).then(() => {
-					localStorage.setItem('last_seen', Math.round((new Date()).getTime() / 1000));
 					update_last_seen();
 				});
 			}
@@ -114,8 +114,8 @@
 				     curr_time - localStorage.getItem("last_seen") > 5)
 				{
 					//alert(curr_time - localStorage.getItem('last_seen'));
-					logout();
-					location.reload();
+					//logout();
+					//location.reload();
 				}
 				else
 				{
