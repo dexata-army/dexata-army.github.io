@@ -109,13 +109,11 @@
 			if(sessionStorage.getItem("username") && !localStorage.getItem("username"))
 			{
 				var curr_time = Math.round((new Date()).getTime() / 1000);
-				//alert(curr_time - localStorage.getItem("last_seen"));
 				if(!localStorage.getItem("last_seen") ||
 				     curr_time - localStorage.getItem("last_seen") > 5)
 				{
-					//alert(curr_time - localStorage.getItem('last_seen'));
-					//logout();
-					//location.reload();
+					logout();
+					location.reload();
 				}
 				else
 				{
@@ -184,9 +182,9 @@
 			};
 		
 			//updates last seen every 2 seconds
-			$(document).ready(function(){
+			/*$(document).ready(function(){
 				update_last_seen();
-			});
+			});*/
 		</script>
 	</head>
 	<body class="is-preload">
