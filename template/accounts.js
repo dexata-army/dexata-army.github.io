@@ -71,9 +71,8 @@
 	{
 		var curr_time = Math.round((new Date()).getTime() / 1000);
 		if(!localStorage.getItem("last_seen") ||
-		     curr_time - localStorage.getItem("last_seen") > 5)
+		     curr_time - localStorage.getItem("last_seen") > 2)
 		{
-			alert("wtf");
 			logout();
 			location.reload();
 		}
@@ -131,7 +130,7 @@
 		                          window.performance.navigation.type === 2 );
 		if(historyTraversal &&
 			sessionStorage.getItem('username') &&
-			curr_time - localStorage.getItem('last_seen') > 5)
+			curr_time - localStorage.getItem('last_seen') > 2)
 		{
 			// Handle page restore.
 			window.location.reload();
