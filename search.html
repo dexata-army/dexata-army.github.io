@@ -45,11 +45,8 @@
 			else if(sessionStorage.getItem('username'))
 				user = sessionStorage.getItem('username');
 		
-			//alert(user);
-		
 			function logout()
 			{
-				//alert("logged out debug message");
 				localStorage.removeItem('no_dexata_tabs');
 				localStorage.removeItem('last_load_time');
 				localStorage.removeItem('last_seen');
@@ -68,14 +65,6 @@
 						location.reload();
 					else
 						check_for_logout(username);
-				});
-			}
-		
-			function update_last_seen()
-			{
-				localStorage.setItem('last_seen', Math.round((new Date()).getTime() / 1000));
-				sleep(2000).then(() => {
-					update_last_seen();
 				});
 			}
 		
@@ -180,11 +169,6 @@
 				if(sessionStorage.getItem('username') || localStorage.getItem('username'))
 					localStorage.setItem('last_seen', Math.round((new Date()).getTime() / 1000));
 			};
-		
-			//updates last seen every 2 seconds
-			/*$(document).ready(function(){
-				update_last_seen();
-			});*/
 		</script>
 	</head>
 	<body class="is-preload">
