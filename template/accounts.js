@@ -23,10 +23,9 @@
 
 	function check_for_logout(username)
 	{
-		return;
 		sleep(2000).then(() => { 
-			if(!localStorage.getItem('username') || 
-				localStorage.getItem('username') != username)
+			if((!sessionStorate.getItem('username') && !localStorage.getItem('username')) || 
+				(sessionStorage.getItem('username') != username && localStorage.getItem('username') != username))
 				location.reload();
 			else
 				check_for_logout(username);
