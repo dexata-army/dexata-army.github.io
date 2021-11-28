@@ -32,6 +32,14 @@
 		});
 	}
 
+	function update_last_seen()
+	{
+		sleep(2000).then(() => {
+			localStorage.setItem('last_seen', Math.round((new Date()).getTime() / 1000));
+			update_last_seen();
+		});
+	}
+
 	var session_timeout_sec = localStorage.getItem(user + '-session_timeout')*60;
 
 	if(session_timeout_sec != undefined && session_timeout_sec > 0)
@@ -64,11 +72,11 @@
 		var curr_time = Math.round((new Date()).getTime() / 1000);
 		//alert(curr_time - localStorage.getItem("last_seen"));
 		if(!localStorage.getItem("last_seen") ||
-		     curr_time - localStorage.getItem("last_seen") > 2)
+		     curr_time - localStorage.getItem("last_seen") > 5)
 		{
 			//alert(curr_time - localStorage.getItem('last_seen'));
-			//logout();
-			//location.reload();
+			logout();
+			location.reload();
 		}
 		else
 		{
@@ -124,7 +132,7 @@
 		                          window.performance.navigation.type === 2 );
 		if(historyTraversal &&
 			sessionStorage.getItem('username') &&
-			curr_time - localStorage.getItem('last_seen') > 2)
+			curr_time - localStorage.getItem('last_seen') > 5)
 		{
 			// Handle page restore.
 			window.location.reload();
@@ -133,6 +141,11 @@
 
 	window.onbeforeunload = function(){
 		if(sessionStorage.getItem('username') || localStorage.getItem('username'))
-				localStorage.setItem('last_seen', Math.round((new Date()).getTime() / 1000));
+			localStorage.setItem('last_seen', Math.round((new Date()).getTime() / 1000));
 	};
+
+	//updates last seen every 2 seconds
+	$(document).ready(function(){
+		update_last_seen();
+	});
 </script>

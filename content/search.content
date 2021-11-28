@@ -13,6 +13,7 @@
 					
 					<center>
 						<select name="network_select" id="network_select" style="width:130px" onchange="change_search_network()">
+							<option disabled selected hidden>network</option>
 							<option value="binance-smart-chain">bsc</option>
 							<option value="ethereum">eth</option>
 							<option value="polygon">polygon</option>
