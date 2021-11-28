@@ -67,8 +67,8 @@
 		     curr_time - localStorage.getItem("last_seen") > 2)
 		{
 			//alert(curr_time - localStorage.getItem('last_seen'));
-			logout();
-			location.reload();
+			//logout();
+			//location.reload();
 		}
 		else
 		{
