@@ -6,6 +6,8 @@
 	else if(sessionStorage.getItem('username'))
 		user = sessionStorage.getItem('username');
 
+	alert(user);
+
 	function logout()
 	{
 		localStorage.removeItem('no_dexata_tabs');
