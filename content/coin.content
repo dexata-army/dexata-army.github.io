@@ -715,7 +715,7 @@
 
 	watchlist_name = localStorage.getItem(user + "-watchlist");
 	watchlist = fetch_watchlist(user, watchlist_name);
-	watching = fetch_map(user, watchlist);
+	watching = fetch_map(watchlist);
 
 
 	fetch_info();
