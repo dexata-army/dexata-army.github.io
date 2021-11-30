@@ -3,9 +3,19 @@ body
 	line-height: 1.5;
 }
 
-img, iframe
+img
 {
 	max-width: 85%;
+	-webkit-user-select: none; /* Chrome/Safari */
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* IE10+ */
+}
+
+iframe
+{
+	max-width: 100%;
+	border-radius: 5px;
+	overflow-y: hidden !important;
 	-webkit-user-select: none; /* Chrome/Safari */
 	-moz-user-select: none; /* Firefox */
 	-ms-user-select: none; /* IE10+ */
