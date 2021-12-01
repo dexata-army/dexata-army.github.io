@@ -67,6 +67,9 @@
 							</div><br>
 						</div>
 					</div>
+
+					<div id="newsfeed_div" style="max-height: 350px; overflow-y: scroll; background-color: #2E2E35; border-radius: 5px; scrollbar-color: grey #2e2e35;">
+					</div>
 				</center>
 			</div>
 		</div>
@@ -152,6 +155,7 @@
 		if(coins_data['data']['items'].length > 0)
 		{
 			var coins_str = "";
+			var ids_str = "";
 
 			for(var i=0, r=0; i<coins_data['data']['items'].length; i++)
 			{
@@ -176,8 +180,12 @@
 					{
 						row.insertCell(2).innerHTML = "<a href='@pathto(coin)?id=" + id_map[coins_data['data']['items'][i]['contract_name'].replace(/ /g, "").replace(/-/g, "").toLowerCase()] + "'>" + coins_data['data']['items'][i]['contract_name'] + "</a>";
 						if(coins_str.length > 0)
+						{
 							coins_str += ",";
+							ids_str += ",";
+						}
 						coins_str += id_map[coins_data['data']['items'][i]['contract_name'].replace(/ /g, "").replace(/-/g, "").toLowerCase()];
+						ids_str += coins_data['data']['items'][i]['contract_ticker_symbol'].toUpperCase();
 
 						var option = document.createElement("option");
 						option.text = coins_data['data']['items'][i]['contract_name'];
@@ -188,8 +196,12 @@
 					{
 						row.insertCell(2).innerHTML = "<a href='@pathto(coin)?id=" + id_map[coins_data['data']['items'][i]['contract_ticker_symbol']] + "'>" + coins_data['data']['items'][i]['contract_name'] + "</a>";
 						if(coins_str.length > 0)
+						{
 							coins_str += ",";
+							ids_str += ",";
+						}
 						coins_str += id_map[coins_data['data']['items'][i]['contract_ticker_symbol'].replace(/ /g, "").replace(/-/g, "").toLowerCase()];
+						ids_str += coins_data['data']['items'][i]['contract_ticker_symbol'].toUpperCase();
 
 						var option = document.createElement("option");
 						option.text = coins_data['data']['items'][i]['contract_name'];
@@ -243,6 +255,9 @@
 
 			document.getElementById('charts_link').href = "@pathto(charts)?width=250&height=350&range=" + chart_range + "&coins=" + coins_str;
 			document.getElementById('charts_link').style.display = "block";
+
+			document.getElementById('newsfeed_div').innerHTML = 
+				'<iframe id="newsfeed_iframe" scrolling="no" width="100%" height="650px" allowtransparency="true" frameborder="0" src="https://cryptopanic.com/widgets/news/?bg_color=2E2E35&amp;currencies=' + ids_str + '&amp;font_family=sans&amp;header_bg_color=30343B&amp;header_text_color=FFFFFF&amp;link_color=679267&amp;news_feed=recent&amp;posts_limit=10&amp;text_color=FFFFFF&amp;title=News"></iframe>';
 		}
 	}
 
