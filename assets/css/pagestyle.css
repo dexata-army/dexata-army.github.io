@@ -1,6 +1,6 @@
 body
 {
-	line-height: 1.5;
+	line-height: 2;
 }
 
 img
@@ -190,6 +190,11 @@ tr
 	border-radius: 10px;
 }
 
+::-webkit-scrollbar-corner 
+{
+ 	background: #2e2e35;
+}
+
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover 
 {
@@ -214,6 +219,10 @@ textarea::-webkit-scrollbar-thumb:hover
  	background: #421114; 
 }
 
+textarea::-webkit-scrollbar-corner {
+  background: #6e4d4b;
+}
+
 textarea::-webkit-resizer {
   background: #6e4d4b;
 }
@@ -222,4 +231,9 @@ textarea::-webkit-resizer {
 {
  	background: #2e2e35; 
  	border-radius: 10px;
+}
+
+.spotlight
+{
+	scrollbar-color: grey #2e2e35; 
 }
