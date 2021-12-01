@@ -104,6 +104,9 @@
 						<a href="https://www.covalenthq.com/"><img src="@pathtofile(output/images/logos/covalent-hq.svg)" style="max-height: 100px"></a>
 					</p>
 					<p>
+						<a href="https://cryptopanic.com/"><img src="@pathtofile(output/images/logos/cryptopanic.png)" style="max-height: 100px"></a>
+					</p>
+					<p>
 						<a href="https://cryptoscamdb.org/"><img src="@pathtofile(output/images/logos/cryptoscamdb.svg)" style="max-height: 100px; height: 65px"></a>
 					</p>
 					<p>
