@@ -75,90 +75,97 @@
 
 	function create_chart(chart_id, title, chart_type, chart_range, y_title, data)
 	{
-		var options = {
+var options = {
 	      series: [{
-	      name: 'date',
-	      data: data
-	    }],
+		      name: y_title,
+		      data: data
+		  }],
 	      chart: {
-	      type: 'area',
-	      stacked: false,
-	      background: 'none',
-	      height: '90%',
-	      zoom: {
-	        type: 'xy',
-	        enabled: true,
-	      },
-	      toolbar: {
-	        autoSelected: 'zoom'
-	      }
-	    },
-	    colors:['#C600EB', '#E91E63', '#9C27B0'],
-	    dataLabels: {
-	      enabled: false
-	    },
-	    markers: {
-	      size: 0,
-	    },
-	    title: {
-	      text: title,
-	      align: 'left',
-	      textColor: '#ff1493',
-	    },
-	    fill: {
-	      type: 'gradient',
-	      gradient: {
-	        shadeIntensity: 0.4,
-	        inverseColors: false,
-	        opacityFrom: 0.8,
-	        opacityTo: 0.4,
-	        stops: [0, 90, 100]
-	      },
-	    },
-	    yaxis: {
-	      labels: {
-	        formatter: function (val) {
-	          if(val == 0)
-	          	return 0;
-	          else if(val >= 1)
-	          	return val.toLocaleString('en');
-	          else if(val > 0 && val < 0.001)
-	          	return val.toExponential(3);
-	          else
-	          	return val.toFixed(5);
-	        },
-	      },
-	      tickAmount: 4,
-	      title: {
-	        text: y_title,
-	      },
-	    },
-	    xaxis: {
-	      type: 'datetime',
-          tickAmount: 5,
-	      labels: {
-	        formatter: function (val) {
-	          if(chart_range == "hour" || chart_range == "day")
-		      	return new Date(val).toLocaleTimeString();
-		      else
-		      	return new Date(val).toLocaleDateString();
-	        },
-	      },
-	    },
-	    theme: {
-	    	mode: 'dark',
-	    },
-	    stroke: {
-		    width: 2,    
-		},
-	    tooltip: {
-	      shared: false,
-	      y: {
-	        formatter: function (val) {
-	          return (val / 1000000).toFixed(0);
-	        }
-	      }
-	    }
+		      type: 'area',
+		      stacked: false,
+		      background: 'none',
+		      height: '90%',
+		      zoom: {
+		        type: 'xy',
+		        enabled: true,
+		      },
+		      toolbar: {
+		        autoSelected: 'zoom'
+		      }
+		    },
+		  colors:['#C600EB', '#E91E63', '#9C27B0'],
+		  dataLabels: {
+		      enabled: false
+		  },
+		  markers: {
+		    size: 0,
+		  },
+		  title: {
+		    text: title,
+		    align: 'left',
+		    textColor: '#ff1493',
+		  },
+		  fill: {
+		    type: 'gradient',
+		    gradient: {
+		      shadeIntensity: 0.4,
+		      inverseColors: false,
+		      opacityFrom: 0.8,
+		      opacityTo: 0.4,
+		      stops: [0, 90, 100]
+		    },
+		  },
+		  yaxis: {
+		    labels: {
+		      formatter: function (val) {
+		        if(val == 0)
+		        	return 0;
+		        else if(val >= 1)
+		        	return val.toLocaleString('en');
+		        else if(val > 0 && val < 0.001)
+		        	return val.toExponential(3);
+		        else
+		        	return val.toFixed(5);
+		      },
+		    },
+		    tickAmount: 4,
+		    title: {
+		      text: y_title,
+		    },
+		  },
+		  xaxis: {
+		    type: 'datetime',
+	        tickAmount: 5,
+		    labels: {
+		      formatter: function (val) {
+		        if(chart_range == "hour" || chart_range == "day")
+			    	return new Date(val).toLocaleTimeString();
+			    else
+			    	return new Date(val).toLocaleDateString();
+		      },
+		    },
+		  },
+		  theme: {
+		  	mode: 'dark',
+		  },
+		  stroke: {
+		   width: 2,    
+		  },
+		  tooltip: {
+		    shared: false,
+		    y: {
+		      formatter: function (val) {
+		        if(val == 0)
+		        	return 0;
+		        else if(val >= 1)
+		        	return val.toLocaleString('en');
+		        else if(val > 0 && val < 0.001)
+		        	return val.toExponential(3);
+		        else
+		        	return val.toFixed(5);
+		      }
+		    }
+		  }
 	    };
 
 	    charts[chart_id] = new ApexCharts(document.querySelector("#chart_" + chart_id + "_div"), options);
