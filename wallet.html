@@ -555,9 +555,10 @@
 			{
 				for(var i=0; i<cg_coins_data.length; i++)
 				{
-					id_map[cg_coins_data[i]['id'].replace(/ /g, "").replace(/-/g, "").toLowerCase().toLowerCase()] = cg_coins_data[i]['id'];
-					id_map[cg_coins_data[i]['name'].replace(/ /g, "").replace(/-/g, "").toLowerCase().toLowerCase()] = cg_coins_data[i]['id'];
-					id_map[cg_coins_data[i]['symbol'].toLowerCase()] = cg_coins_data[i]['id'];
+					if(id_map[cg_coins_data[i]['symbol'].toLowerCase()] == undefined)
+						id_map[cg_coins_data[i]['symbol'].toLowerCase()] = cg_coins_data[i]['id'];
+					id_map[cg_coins_data[i]['name'].replace(/ /g, "").replace(/-/g, "").toLowerCase()] = cg_coins_data[i]['id'];
+					id_map[cg_coins_data[i]['id'].replace(/ /g, "").replace(/-/g, "").toLowerCase()] = cg_coins_data[i]['id'];
 				}
 			}
 		
@@ -826,7 +827,16 @@
 				{
 					if(balance_data['items'][i]['contract_address'] == coin_address)
 					{
-						for(var j=0; j<balance_data['items'][i]['holdings'].length; j++)
+						var j=balance_data['items'][i]['holdings'].length-1;
+		
+						for(; j>=0; j--)
+							if(balance_data['items'][i]['holdings'][j]['close']['quote'] != undefined && balance_data['items'][i]['holdings'][j]['close']['quote'] > 0)
+								break;
+		
+						if(j+1 < balance_data['items'][i]['holdings'].length)
+							j++;
+		
+						for(; j>=0; j--)
 							if(balance_data['items'][i]['holdings'][j]['close']['quote'] != undefined)
 								chart_data[j] = [balance_data['items'][i]['holdings'][j]['timestamp'], balance_data['items'][i]['holdings'][j]['close']['quote']];
 		
