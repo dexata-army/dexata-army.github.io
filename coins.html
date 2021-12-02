@@ -241,9 +241,9 @@
 								</div>
 							</div>
 							<noselect id="page_controls">
-								<a id="prev_page_link" onclick="prev_page()" style="visibility: hidden;"><i class="fas fa-arrow-circle-left fa-3x" style="vertical-align: middle"></i></a> &nbsp;&nbsp;
+								<a id="prev_page_link" onclick="prev_page(); document.getElementById('table_div').scrollIntoView();" style="visibility: hidden;"><i class="fas fa-arrow-circle-left fa-3x" style="vertical-align: middle"></i></a> &nbsp;&nbsp;
 								<input id="page_input" style="width: 75px; vertical-align: middle"> &nbsp;&nbsp;
-								<a id="next_page_link" onclick="next_page()"><i class="fas fa-arrow-circle-right fa-3x" style="vertical-align: middle"></i></a>
+								<a id="next_page_link" onclick="next_page(); document.getElementById('table_div').scrollIntoView();"><i class="fas fa-arrow-circle-right fa-3x" style="vertical-align: middle"></i></a>
 							</noselect>
 						</center>
 					</div>
