@@ -1,9 +1,9 @@
 04:20:50 Monday December 06 2021
-'logout'
-'logout'
+'news'
+'news'
 'template/page.template'
 
-'content/logout.content'
+'content/news.content'
 'template/accounts.js'
 'template/footer.content'
 'template/head.content'

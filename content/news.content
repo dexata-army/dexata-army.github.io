@@ -1,0 +1,126 @@
+<!-- Wrapper -->
+<div id="wrapper">
+	<!-- One -->
+	<section id="one" class="wrapper style1">
+		<div class="inner">
+			<div class="spotlights">
+				<center>
+					<div class="spotlight" style="max-width:500px;">
+						<div class="content">
+							<h1><img src="@pathtofile(output/images/logo.png)" height="225px" style="vertical-align: middle";><noselect> Dexata</noselect></h1>
+						</div>
+					</div>
+
+					<div id="news_spotlight" class="spotlight" style="max-width:100%; overflow-y: scroll; margin-bottom: 30px; margin-top: 20px">
+						<div style="max-height: 350px; margin: 0 auto">
+							<div id="news_div" class="xscroll" style="max-width: 700px;">
+								<h2 style="margin-top: 15px">News</h2>
+								<select id="sort_select" style="width: 300px; max-width: 100%; margin-bottom: 20px; display: none" onchange="sort_select_event()">
+									<option value="hot" selected="selected">hot</option>
+									<option value="new">new</option>
+									<option value="top">top</option>
+								</select>
+								<select id="news_range_select" style="width: 300px; max-width: 100%; margin-bottom: 20px; display: none" onchange="news_range_select_event()">
+									<option value="day" selected="selected">day</option>
+									<option value="week">week</option>
+									<option value="month">month</option>
+									<option value="year">year</option>
+									<option value="all">all</option>
+								</select>
+								<img id="loading_gif" src="@pathtofile(output/images/loading.gif)" style="margin-top: 20px; max-width: 150px">
+								<table id="news_table" style="display: none; max-width: 100%; text-align: left; white-space: normal;">
+								</table>
+							</div>
+						</div>
+					</div>
+				</center>
+			</div>
+		</div>
+	</section>
+</div>
+
+<script>
+	var sort_by = "hot";
+	var news_range = "day";
+
+	function clear_table()
+	{
+		var table = document.getElementById("news_table");
+
+		var no_rows = table.rows.length;
+		for(var i=0; i < no_rows; i++)
+			table.deleteRow(0);		
+	}
+
+	function fill_news_table(data)
+	{
+		clear_table();
+		var table = document.getElementById("news_table");
+		var no_rows = 0;
+
+		document.getElementById('loading_gif').src = "";
+		document.getElementById('loading_gif').style.visibility = "hidden";
+		document.getElementById('loading_gif').style.display = "none";
+		document.getElementById("news_table").style.display = "block";
+		document.getElementById("sort_select").style.display = "block";
+
+		for(var i=0; i<data['data']['children'].length; i++)
+		{
+			if(data['data']['children'][i]['data']['is_self'] == false)
+			{
+				var row = table.insertRow(no_rows);
+
+				row.insertCell(0).innerHTML = "<a href='" + data['data']['children'][i]['data']['url'] + "'><img src='" + data['data']['children'][i]['data']['thumbnail'] + "' style='max-width: 100px; vertcial-align: middle; border-radius: 5px' onerror='this.src=\"@pathtofile(output/images/news.png)\"'></a>";
+				//row.insertCell(0).innerHTML = "<img src='" + data['data']['children'][i]['thumbnail_url'] + "'>";
+
+				row.insertCell(1).innerHTML = "<a href='" + data['data']['children'][i]['data']['url'] + "'>" + data['data']['children'][i]['data']['title'] + "</a>";
+
+				no_rows++;
+			}
+		}
+
+		document.getElementById('news_spotlight').style.width = (document.getElementById('news_table').offsetWidth + 70) + "px";
+	}
+
+	function fetch_reddit_posts()
+	{
+		$(document).ready(function(){
+			$.get(
+	    	    //'https://old.reddit.com/r/cryptocurrency.json?sort=' + sort_by + '&t=month&limit=100',              
+	    	    'https://old.reddit.com/r/cryptocurrency/' + sort_by + '.json?limit=100&t=' + news_range,              
+				function(data) {
+					fill_news_table(data);
+			}).fail(function() {
+				clear_table();
+				document.getElementById('loading_gif').src = "";
+				document.getElementById('loading_gif').style.visibility = "hidden";
+				document.getElementById('loading_gif').style.display = "none";
+				document.getElementById("table_spotlight").style.width = "600px";
+
+				document.getElementById("table_div").innerHTML = "<p style='margin-top: 20px; margin-bottom: 10px'>failed to fetch coins information, please refresh to try again.</p>";
+			});
+		});
+	}
+
+	function sort_select_event()
+	{
+		if(document.getElementById('sort_select').value == "top")
+			document.getElementById('news_range_select').style.display = "block";
+		else
+		{
+			document.getElementById('news_range_select').style.display = "none";
+			document.getElementById('news_range_select').value = "day";
+		}
+
+		sort_by = document.getElementById('sort_select').value;
+		fetch_reddit_posts();
+	}
+
+	function news_range_select_event()
+	{
+		news_range = document.getElementById('news_range_select').value;
+		fetch_reddit_posts();
+	}
+
+	fetch_reddit_posts();
+</script>
