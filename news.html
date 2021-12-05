@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Dexata - coins</title>
+		<title>Dexata - news</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<meta name="description" content="" />
@@ -204,48 +204,34 @@
 				<div class="inner">
 					<div class="spotlights">
 						<center>
-							<div class="spotlight" style="max-width:500px; margin-bottom: 50px">
+							<div class="spotlight" style="max-width:500px;">
 								<div class="content">
-									<h1><i class="fas fa-coins fa-4x" style="vertical-align:middle"></i><br><noselect>Coins</noselect></h1>
+									<h1><img src="images/logo.png" height="225px" style="vertical-align: middle";><noselect> Dexata</noselect></h1>
 								</div>
 							</div>
 		
-							<div id="table_spotlight" class="spotlight" style="max-width:100%">
-								<div id="table_div" class="xscroll">
-									<img id="loading_gif" src="images/loading.gif" style="margin-top: 20px; max-width: 150px">
-									<table id="coins_table" style="display: none">
-										<thead>
-											<tr>
-												<th>rank</th>
-												<th></th>
-												<th><a onclick="toggle_sort('symbol')">symbol</a></th>
-												<th><a onclick="toggle_sort('name')">name</a></th>
-												<th><a onclick="toggle_sort('current_price')">price</a></th>
-												<th><a onclick="toggle_sort('price_change_percentage_24h')">change</a></th>
-												<th><a onclick="toggle_sort('market_cap')">market cap</a></th>
-												<th><a onclick="toggle_sort('total_volume')">volume</a></th>
-											</tr>
-										</thead>
-										<tfoot>
-											<tr>
-												<th>rank</th>
-												<th></th>
-												<th><a onclick="toggle_sort('symbol')">symbol</a></th>
-												<th><a onclick="toggle_sort('name')">name</a></th>
-												<th><a onclick="toggle_sort('current_price')">price</a></th>
-												<th><a onclick="toggle_sort('price_change_percentage_24h')">change</a></th>
-												<th><a onclick="toggle_sort('market_cap')">market cap</a></th>
-												<th><a onclick="toggle_sort('total_volume')">volume</a></th>
-											</tr>
-										</tfoot>
-									</table>
+							<div id="news_spotlight" class="spotlight" style="max-width:100%; overflow-y: scroll; margin-bottom: 30px; margin-top: 20px">
+								<div style="max-height: 350px; margin: 0 auto">
+									<div id="news_div" class="xscroll" style="max-width: 700px;">
+										<h2 style="margin-top: 15px">News</h2>
+										<select id="sort_select" style="width: 300px; max-width: 100%; margin-bottom: 20px; display: none" onchange="sort_select_event()">
+											<option value="hot" selected="selected">hot</option>
+											<option value="new">new</option>
+											<option value="top">top</option>
+										</select>
+										<select id="news_range_select" style="width: 300px; max-width: 100%; margin-bottom: 20px; display: none" onchange="news_range_select_event()">
+											<option value="day" selected="selected">day</option>
+											<option value="week">week</option>
+											<option value="month">month</option>
+											<option value="year">year</option>
+											<option value="all">all</option>
+										</select>
+										<img id="loading_gif" src="images/loading.gif" style="margin-top: 20px; max-width: 150px">
+										<table id="news_table" style="display: none; max-width: 100%; text-align: left; white-space: normal;">
+										</table>
+									</div>
 								</div>
 							</div>
-							<noselect id="page_controls">
-								<a id="prev_page_link" onclick="prev_page(); document.getElementById('table_div').scrollIntoView();" style="visibility: hidden;"><i class="fas fa-arrow-circle-left fa-3x" style="vertical-align: middle"></i></a> &nbsp;&nbsp;
-								<input id="page_input" style="width: 75px; vertical-align: middle"> &nbsp;&nbsp;
-								<a id="next_page_link" onclick="next_page(); document.getElementById('table_div').scrollIntoView();"><i class="fas fa-arrow-circle-right fa-3x" style="vertical-align: middle"></i></a>
-							</noselect>
 						</center>
 					</div>
 				</div>
@@ -253,259 +239,89 @@
 		</div>
 		
 		<script>
-			var page_no = 1;
-			var refresh_ms = 60000;
-		
-			var sort_attrib = 'market_cap';
-			var sort_dir = -1;
-			var coins_data;
-		
-			window.addEventListener('keydown',this.keydown,false);
-			//window.addEventListener('keyup',this.keyup,false);
-		
-			if(localStorage.getItem('refresh_sec'))
-				refresh_ms = 1000*localStorage.getItem('refresh_sec');
-			else
-				localStorage.setItem('refresh_sec', 60);
+			var sort_by = "hot";
+			var news_range = "day";
 		
 			function clear_table()
 			{
-				var table = document.getElementById("coins_table");
+				var table = document.getElementById("news_table");
 		
-				var no_rows = table.rows.length-2;
+				var no_rows = table.rows.length;
 				for(var i=0; i < no_rows; i++)
-					table.deleteRow(1);		
+					table.deleteRow(0);		
 			}
 		
-			function draw_table()
+			function fill_news_table(data)
 			{
 				clear_table();
-				var table = document.getElementById("coins_table");
-				document.getElementById("page_input").value = page_no;
+				var table = document.getElementById("news_table");
+				var no_rows = 0;
 		
 				document.getElementById('loading_gif').src = "";
 				document.getElementById('loading_gif').style.visibility = "hidden";
 				document.getElementById('loading_gif').style.display = "none";
-				document.getElementById("coins_table").style.display = "inline";
+				document.getElementById("news_table").style.display = "block";
+				document.getElementById("sort_select").style.display = "block";
 		
-				for(var i=0; i<100; i++)
+				for(var i=0; i<data['data']['children'].length; i++)
 				{
-					var row = table.insertRow(i+1);
-					row.insertCell(0).innerHTML = coins_data[i]['market_cap_rank'];
-					if(coins_data[i]['image'] != "")
-						row.insertCell(1).innerHTML = "<img style='min-width: 23px; max-height: 23px; vertical-align:middle' class='rounded' onerror='this.style.display=\"none\"' src='" + coins_data[i]['image'] + "'>";
-					row.insertCell(2).innerHTML = coins_data[i]['symbol'];
-					row.insertCell(3).innerHTML = "<a href='coin.html?id=" + coins_data[i]['id'] + "'>" + coins_data[i]['name'] + "</a>";
-		
-					if(coins_data[i]['current_price'] == null || coins_data[i]['current_price'] == 0)
-						row.insertCell(4).innerHTML = "-";
-					else if(coins_data[i]['current_price'] > 1)
-						row.insertCell(4).innerHTML = "$" + parseFloat(coins_data[i]['current_price']).toLocaleString('en') ;
-					else if(coins_data[i]['current_price'] > 0 && coins_data[i]['current_price'] < 0.0001)
-						row.insertCell(4).innerHTML = "$" + parseFloat(coins_data[i]['current_price']).toExponential(3) ;
-					else
-						row.insertCell(4).innerHTML = "$" + coins_data[i]['current_price'].toFixed(3);
-		
-					if(coins_data[i]['price_change_percentage_24h'] == null)
-						row.insertCell(5).innerHTML = "-";
-					else if(parseFloat(coins_data[i]['price_change_percentage_24h']) < 0)
-						row.insertCell(5).innerHTML = "<red>" + parseFloat(coins_data[i]['price_change_percentage_24h']).toLocaleString('en') + "%</red>";
-					else
-						row.insertCell(5).innerHTML = "<green>" + parseFloat(coins_data[i]['price_change_percentage_24h']).toLocaleString('en') + "%</green>";
-		
-					if(coins_data[i]['market_cap'] > 0)
-						row.insertCell(6).innerHTML = "$" + parseFloat(coins_data[i]['market_cap']).toLocaleString('en') ;
-					else
-						row.insertCell(6).innerHTML = "-";
-		
-					if(coins_data[i]['total_volume'] > 0)
-						row.insertCell(7).innerHTML = "$" + coins_data[i]['total_volume'].toLocaleString('en') ;
-					else
-						row.insertCell(7).innerHTML = "-";
-				}
-		
-				document.getElementById('table_spotlight').style.width = (document.getElementById('coins_table').offsetWidth + 70) + "px";
-			}
-		
-			function sort_data()
-			{
-				if(sort_attrib == "symbol" || sort_attrib == "name")
-				{
-					coins_data.sort(function(obj1, obj2) {
-						if(obj1[sort_attrib].toLowerCase() > obj2[sort_attrib].toLowerCase())
-							return sort_dir*1;
-						else if(obj1[sort_attrib] == obj2[sort_attrib])
-							return 0;
-						else return sort_dir*-1;
-					});
-				}
-				else
-				{
-					coins_data.sort(function(obj1, obj2) {
-						return sort_dir*(obj1[sort_attrib] - obj2[sort_attrib]);
-					});
-				}
-		
-				draw_table();
-			}
-		
-			function toggle_sort(attrib)
-			{
-				if(sort_attrib == attrib)
-					sort_dir *= -1;
-				else
-				{
-					sort_attrib = attrib;
-					sort_dir = -1;
-				}
-		
-				sort_data();
-			}
-		
-			function fetch_table_coingecko()
-			{
-				//alert('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=' + page_no + '&sparkline=false');
-				$(document).ready(function(){
-					$.get(
-			    	    'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=' + page_no + '&sparkline=false',              
-						function(data) {
-							coins_data = data;
-		
-							if(sort_attrib == "market_cap" && sort_dir == -1)
-								draw_table();
-							else
-								sort_data();
-					}).fail(function() {
-						clear_table();
-						document.getElementById('loading_gif').src = "";
-						document.getElementById('loading_gif').style.visibility = "hidden";
-						document.getElementById('loading_gif').style.display = "none";
-						document.getElementById("table_spotlight").style.width = "600px";
-		
-						document.getElementById("table_div").innerHTML = "<p style='margin-top: 20px; margin-bottom: 10px'>failed to fetch coins information, please refresh to try again.</p>";
-					});
-				});
-			}
-		
-			function fetch_table_coinlore()
-			{
-				$(document).ready(function(){
-					$.get(
-			    	    'https://api.coinlore.net/api/tickers/',              
-						function(data) {
-							clear_table();
-							var table = document.getElementById("coins_table");
-		
-							document.getElementById('loading_gif').src = "";
-							document.getElementById('loading_gif').style.visibility = "hidden";
-							document.getElementById('loading_gif').style.display = "none";
-							document.getElementById("coins_table").style.display = "inline";
-		
-							for(var i=0; i<100; i++)
-							{
-								var row = table.insertRow(i+1);
-								row.insertCell(0).innerHTML = data['data'][i]['rank'];
-								row.insertCell(1).innerHTML = "<img height='23px' style='vertical-align:middle' onerror='this.style.display=\"none\"' src='https://cryptologos.cc/logos/" + data['data'][i]['name'].toLowerCase().replace(/ /g,"-") + "-" + data['data'][i]['symbol'].toLowerCase() + "-logo.svg?v=014'>";
-								row.insertCell(2).innerHTML = data['data'][i]['symbol'];
-								row.insertCell(3).innerHTML = "<a href='coin.html?id=" + data['data'][i]['name'].replace(/ /g,"-") + "'>" + data['data'][i]['name'] + "</a>";
-		
-								if(data['data'][i]['price_usd'] > 999)
-									row.insertCell(4).innerHTML = "$" + parseFloat(data['data'][i]['price_usd']).toLocaleString('en') ;
-								else
-									row.insertCell(4).innerHTML = "$" + data['data'][i]['price_usd'] ;
-		
-								if(parseFloat(data['data'][i]['percent_change_1h']) < 0)
-									row.insertCell(5).innerHTML = "<red>" + parseFloat(data['data'][i]['percent_change_1h']).toLocaleString('en') + "%</red>";
-								else
-									row.insertCell(5).innerHTML = "<green>" + parseFloat(data['data'][i]['percent_change_24h']).toLocaleString('en') + "%</green>";
-		
-								if(parseFloat(data['data'][i]['percent_change_24h']) < 0)
-									row.insertCell(6).innerHTML = "<red>" + parseFloat(data['data'][i]['percent_change_24h']).toLocaleString('en') + "%</red>";
-								else
-									row.insertCell(6).innerHTML = "<green>" + parseFloat(data['data'][i]['percent_change_24h']).toLocaleString('en') + "%</green>";
-		
-								if(parseFloat(data['data'][i]['percent_change_7d']) < 0)
-									row.insertCell(7).innerHTML = "<red>" + parseFloat(data['data'][i]['percent_change_7d']).toLocaleString('en') + "%</red>";
-								else
-									row.insertCell(7).innerHTML = "<green>" + parseFloat(data['data'][i]['percent_change_7d']).toLocaleString('en') + "%</green>";
-		
-								row.insertCell(8).innerHTML = "$" + parseFloat(data['data'][i]['market_cap_usd']).toLocaleString('en') ;
-								row.insertCell(9).innerHTML = "$" + data['data'][i]['volume24'].toLocaleString('en') ;
-							}
-		
-							document.getElementById('table_spotlight').style.width = (document.getElementById('coins_table').offsetWidth + 70) + "px";
-					}).fail(function() {
-						clear_table();
-						document.getElementById('loading_gif').src = "";
-						document.getElementById('loading_gif').style.visibility = "hidden";
-						document.getElementById('loading_gif').style.display = "none";
-						document.getElementById("table_spotlight").style.width = "600px";
-		
-						document.getElementById("table_div").innerHTML = "<p style='margin-top: 20px; margin-bottom: 10px'>failed to fetch coins information, please refresh to try again.</p>";
-					});
-				});
-			}
-		
-			function refresh_table()
-			{
-				if(refresh_ms > 0)
-					sleep(refresh_ms).then(() => { fetch_table_coingecko(); refresh_table(); });
-			}
-		
-			function prev_page()
-			{
-				if(page_no > 1)
-				{
-					page_no--;
-					fetch_table_coingecko();
-				}
-		
-				if(page_no == 1)
-					document.getElementById('prev_page_link').style.visibility = "hidden";
-			}
-		
-			function next_page()
-			{
-				if(page_no == 1)
-					document.getElementById('prev_page_link').style.visibility = "visible";
-		
-				page_no++;
-				fetch_table_coingecko();
-			}
-		
-			function goto_page()
-			{
-				page_no = document.getElementById(document.activeElement.id).value;
-				fetch_table_coingecko();
-			}
-		
-			function keydown(e)
-			{
-				var code = e.keyCode;
-				
-				if(document.activeElement.tagName == "INPUT")
-				{
-					if(code == 13)
-						goto_page();	
-				}
-				else
-				{
-					switch (code) 
+					if(data['data']['children'][i]['data']['is_self'] == false)
 					{
-						
-						case 37: prev_page(); break; //Left key
-						case 39: next_page(); break; //Right key
+						var row = table.insertRow(no_rows);
+		
+						row.insertCell(0).innerHTML = "<a href='" + data['data']['children'][i]['data']['url'] + "'><img src='" + data['data']['children'][i]['data']['thumbnail'] + "' style='max-width: 100px; vertcial-align: middle; border-radius: 5px' onerror='this.src=\"images/news.png\"'></a>";
+						//row.insertCell(0).innerHTML = "<img src='" + data['data']['children'][i]['thumbnail_url'] + "'>";
+		
+						row.insertCell(1).innerHTML = "<a href='" + data['data']['children'][i]['data']['url'] + "'>" + data['data']['children'][i]['data']['title'] + "</a>";
+		
+						no_rows++;
 					}
 				}
+		
+				document.getElementById('news_spotlight').style.width = (document.getElementById('news_table').offsetWidth + 70) + "px";
 			}
 		
-			document.getElementById('table_spotlight').style.width = (document.getElementById('loading_gif').offsetWidth + 400) + "px";
+			function fetch_reddit_posts()
+			{
+				$(document).ready(function(){
+					$.get(
+			    	    //'https://old.reddit.com/r/cryptocurrency.json?sort=' + sort_by + '&t=month&limit=100',              
+			    	    'https://old.reddit.com/r/cryptocurrency/' + sort_by + '.json?limit=100&t=' + news_range,              
+						function(data) {
+							fill_news_table(data);
+					}).fail(function() {
+						clear_table();
+						document.getElementById('loading_gif').src = "";
+						document.getElementById('loading_gif').style.visibility = "hidden";
+						document.getElementById('loading_gif').style.display = "none";
+						document.getElementById("table_spotlight").style.width = "600px";
 		
-			document.getElementById("table_div").scrollIntoView();
+						document.getElementById("table_div").innerHTML = "<p style='margin-top: 20px; margin-bottom: 10px'>failed to fetch coins information, please refresh to try again.</p>";
+					});
+				});
+			}
 		
-			fetch_table_coingecko();
-			refresh_table();
-					
+			function sort_select_event()
+			{
+				if(document.getElementById('sort_select').value == "top")
+					document.getElementById('news_range_select').style.display = "block";
+				else
+				{
+					document.getElementById('news_range_select').style.display = "none";
+					document.getElementById('news_range_select').value = "day";
+				}
+		
+				sort_by = document.getElementById('sort_select').value;
+				fetch_reddit_posts();
+			}
+		
+			function news_range_select_event()
+			{
+				news_range = document.getElementById('news_range_select').value;
+				fetch_reddit_posts();
+			}
+		
+			fetch_reddit_posts();
 		</script>
 
 		<!-- Footer -->
