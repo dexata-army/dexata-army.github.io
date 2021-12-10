@@ -40,7 +40,7 @@
 										<td></td>
 									</tr>
 									<tr>
-										<td><b>undiluted<br>market cap:</b></td>
+										<td><b>diluted<br>market cap:</b></td>
 										<td></td>
 									</tr>
 									<tr>
@@ -351,8 +351,7 @@
 						document.getElementById('total_volumes_chart_spotlight').style.height = (document.getElementById('total_volumes_chart').offsetHeight + 10) + "px";
 					}
 			}).fail(function() {
-				clear_page();
-				document.getElementById("page_div").innerHTML = "<p>could not find " + param_map.get('contract_address') + " on the " + param_map.get('network') + " network</p>";
+				alert("failed to fetch chart data");
 			});
 		});
 	}
