@@ -215,7 +215,7 @@
 									</noselect>
 								</div>
 							</div>
-							<div id="contract_spotlight" class="spotlight" style="max-width: 100%; display: none; margin-bottom: 20px;">
+							<div id="contract_spotlight" class="spotlight" style="max-width: 100%; max-height: 250px; overflow-y: scroll; display: none; margin-bottom: 20px;">
 								<div id="contract_table_div" class="xscroll" style="max-width: 100%">
 									<table id="contract_table" style="text-align:center">
 										<tr>
@@ -336,7 +336,7 @@
 									</div><br>
 								</div>
 							</div>
-							<div id="exchange_spotlight" class="spotlight" style="max-width: 100%; max-height: 230px; overflow-y: scroll; margin-bottom: 30px; margin-top: 20px">
+							<div id="exchange_spotlight" class="spotlight" style="max-width: 100%; max-height: 330px; overflow-y: scroll; margin-bottom: 30px; margin-top: 20px">
 								<div id="exchange_table_div" class="xscroll" style="max-width: 100%">
 									<table id="exchange_table" style="text-align:center">
 										<tr>
@@ -350,7 +350,7 @@
 									</table>
 								</div>
 							</div>
-							<div id="desc_spotlight" class="spotlight" style="max-width: 100%; display: inline-block; margin-bottom: 10px;">
+							<div id="desc_spotlight" class="spotlight" style="max-width: 100%; max-height: 450px; overflow-y: scroll; display: inline-block; margin-bottom: 10px;">
 							</div><br>
 		
 							<div id="newsfeed_div" style="max-height: 350px; overflow-y: scroll; background-color: #2E2E35; border-radius: 5px; scrollbar-color: grey #2e2e35;">
@@ -626,7 +626,7 @@
 						if(coin_data['tickers'][r]['market']['name'] != undefined)
 						{
 							var row = document.getElementById('exchange_table').insertRow(r+1);
-							
+		
 							row.insertCell(0).innerHTML = "<img class='round' src='images/exchanges/" + coin_data['tickers'][r]['market']['identifier'] + ".png' style='min-width: 23px; max-height: 23px; vertical-align: middle' onerror='this.style.display=\"none\"'>";
 		
 							row.insertCell(1).innerHTML = coin_data['tickers'][r]['market']['name'];
