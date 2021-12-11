@@ -738,7 +738,7 @@
 		
 				if(data['platforms']['ethereum'] != undefined)
 				{
-					document.getElementById("other_links").innerHTML += '&nbsp;&nbsp;&nbsp;<a href="https://etherscan.io/token/' + data['platforms']['ethereum'] + '"><img src="images/icons/etherscan.svg" height="30px"></a>';
+					document.getElementById("other_links").innerHTML += '&nbsp;&nbsp;&nbsp;<a href="https://etherscan.io/token/' + data['platforms']['ethereum'] + '"><img src="images/icons/etherscan.png" height="30px"></a>';
 					document.getElementById("other_links").innerHTML += '&nbsp;&nbsp;<a href="https://ethplorer.io/address/' + data['platforms']['ethereum'] + '"><img src="images/icons/ethplorer.png" height="30px"></a>';
 				}
 		
@@ -760,7 +760,7 @@
 						{
 							var row = table.insertRow(r++);
 		
-							row.insertCell(0).innerHTML = "<img src='images/icons/" + p + ".svg' style='min-width: 20px; max-height: 20px; vertical-align: middle' onerror='this.style.display=\"none\"'>";
+							row.insertCell(0).innerHTML = "<img src='images/icons/" + p + ".png' class='round' style='min-width: 20px; max-height: 20px; vertical-align: middle' onerror='this.style.display=\"none\"'>";
 		
 							var cell = row.insertCell(1);
 							cell.innerHTML = data['platforms'][p];
