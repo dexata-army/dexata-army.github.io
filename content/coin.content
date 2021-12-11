@@ -36,6 +36,10 @@
 										<td></td>
 									</tr>
 									<tr>
+										<td><b>market cap rank:</b></td>
+										<td></td>
+									</tr>
+									<tr>
 										<td><b>market cap:</b></td>
 										<td></td>
 									</tr>
@@ -138,11 +142,11 @@
 							<table id="exchange_table" style="text-align:center">
 								<tr>
 									<td></td>
-									<td><b>exchange</b></td>
-									<td><b>pair</b></td>
-									<td><b>price</b></td>
-									<td><b>24h volume</b></td>
-									<td><b>trust</b></td>
+									<td><a onclick="toggle_sort('exchange')"><b>exchange</b></a></td>
+									<td><a onclick="toggle_sort('target_coin_id')"><b>pair</b></a></td>
+									<td><a onclick="toggle_sort('price')"><b>price</b></a></td>
+									<td><a onclick="toggle_sort('24h volume')"><b>24h volume</b></a></td>
+									<td><a onclick="toggle_sort('trust_score')"><b>trust</b></a></td>
 								</tr>
 							</table>
 						</div>
@@ -170,6 +174,10 @@
 	var chart_range = "hour";
 	var chart_freq = "minute";
 	var price_chart, vol_chart;
+
+	var sort_attrib = 'trust';
+	var sort_dir = -1;
+	var coin_data;
 
 	var watchlist_name;
 	var watchlist;
@@ -397,6 +405,108 @@
 		watching = fetch_map(user, watchlist);
 	}
 
+	function clear_table()
+	{
+		var table = document.getElementById("exchange_table");
+
+		var no_rows = table.rows.length-1;
+		for(var i=0; i < no_rows; i++)
+			table.deleteRow(1);		
+	}
+
+	function draw_exchange_table()
+	{
+		clear_table();
+
+		if(coin_data['tickers'] != undefined)
+		{
+			document.getElementById('exchange_spotlight').style.display = "block";
+
+			for(var r=0; r<coin_data['tickers'].length; r++)
+			{
+				if(coin_data['tickers'][r]['market']['name'] != undefined)
+				{
+					var row = document.getElementById('exchange_table').insertRow(r+1);
+
+					row.insertCell(0).innerHTML = "<img src='@pathto(output/images/exchanges)/" + coin_data['tickers'][r]['market']['identifier'] + ".svg' style='min-width: 23px; max-height: 23px; vertical-align: middle' onerror='this.style.display=\"none\"'>";
+
+					row.insertCell(1).innerHTML = coin_data['tickers'][r]['market']['name'];
+
+					row.insertCell(2).innerHTML = "<a href='" + coin_data['tickers'][r]['trade_url'] + "'>" + coin_data['tickers'][r]['coin_id'] + "/" + coin_data['tickers'][r]['target_coin_id'] + "</a>";
+
+					row.insertCell(3).innerHTML = "$" + coin_data['tickers'][r]['converted_last']['usd'];
+
+					row.insertCell(4).innerHTML = "$" + coin_data['tickers'][r]['converted_volume']['usd'].toLocaleString();
+
+					if(coin_data['tickers'][r]['trust_score'] == "green")
+						row.insertCell(5).innerHTML = "<green><i class='fas fa-circle fa-1x' style='vertical-align:middle'></i></green>";
+					else
+						row.insertCell(5).innerHTML = "<red><i class='fas fa-circle fa-1x' style='vertical-align:middle'></i></red>";
+				}
+			}
+		}
+	}
+
+	function sort_data()
+	{
+		if(sort_attrib == "trust_score" || sort_attrib == "target_coin_id")
+		{
+			coin_data['tickers'].sort(function(obj1, obj2) {
+				if(obj1[sort_attrib] == undefined)
+				{
+					if(obj2[sort_attrib] == undefined)
+						return 0;
+					else
+						return sort_dir*1;
+				}
+				else if(obj2[sort_attrib] == undefined)
+					return sort_dir*-1;
+				else if(obj1[sort_attrib].toLowerCase() > obj2[sort_attrib].toLowerCase())
+					return sort_dir*1;
+				else if(obj1[sort_attrib] == obj2[sort_attrib])
+					return 0;
+				else return sort_dir*-1;
+			});
+		}
+		else if(sort_attrib == "exchange")
+		{
+			coin_data['tickers'].sort(function(obj1, obj2) {
+				if(obj1['market']['name'].toLowerCase() > obj2['market']['name'].toLowerCase())
+					return sort_dir*1;
+				else if(obj1['market']['name'] == obj2['market']['name'])
+					return 0;
+				else return sort_dir*-1;
+			});
+		}
+		else if(sort_attrib == "price")
+		{
+			coin_data['tickers'].sort(function(obj1, obj2) {
+				return sort_dir*(obj1['converted_last']['usd'] - obj2['converted_last']['usd']);
+			});
+		}
+		else if(sort_attrib == "24h volume")
+		{
+			coin_data['tickers'].sort(function(obj1, obj2) {
+				return sort_dir*(obj1['converted_volume']['usd'] - obj2['converted_volume']['usd']);
+			});
+		}
+
+		draw_exchange_table();
+	}
+
+	function toggle_sort(attrib)
+	{
+		if(sort_attrib == attrib)
+			sort_dir *= -1;
+		else
+		{
+			sort_attrib = attrib;
+			sort_dir = -1;
+		}
+
+		sort_data();
+	}
+
 	function fill_details(data)
 	{
 		document.title = "Dexata - " + data['symbol'];
@@ -470,35 +580,8 @@
 			document.getElementById('contract_spotlight').style.width = document.getElementById('title_spotlight').style.width = (document.getElementById('contract_table').offsetWidth + 70) + "px";
 		}
 
-		if(data['tickers'] != undefined)
-		{
-			document.getElementById('exchange_spotlight').style.display = "block";
-
-			for(var r=0; r<data['tickers'].length; r++)
-			{
-				if(data['tickers'][r]['market']['name'] != undefined)
-				{
-					var row = document.getElementById('exchange_table').insertRow(r+1);
-
-					row.insertCell(0).innerHTML = "<img src='@pathto(output/images/exchanges)/" + data['tickers'][r]['market']['identifier'] + ".svg' style='min-width: 23px; max-height: 23px; vertical-align: middle' onerror='this.style.display=\"none\"'>";
-
-					row.insertCell(1).innerHTML = data['tickers'][r]['market']['name'];
-
-					row.insertCell(2).innerHTML = "<a href='" + data['tickers'][r]['trade_url'] + "'>" + data['tickers'][r]['coin_id'] + "/" + data['tickers'][r]['target_coin_id'] + "</a>";
-
-					row.insertCell(3).innerHTML = "$" + data['tickers'][r]['converted_last']['usd'];
-
-					row.insertCell(4).innerHTML = "$" + data['tickers'][r]['converted_volume']['usd'].toLocaleString();
-
-					if(data['tickers'][r]['trust_score'] == "green")
-						row.insertCell(5).innerHTML = "<green><i class='fas fa-circle fa-1x' style='vertical-align:middle'></i></green>";
-					else
-						row.insertCell(5).innerHTML = "<red><i class='fas fa-circle fa-1x' style='vertical-align:middle'></i></red>";
-				}
-			}
-
-			document.getElementById('exchange_spotlight').style.width = (document.getElementById('exchange_table_div').offsetWidth + 250) + "px";
-		}
+		draw_exchange_table();
+		document.getElementById('exchange_spotlight').style.width = (document.getElementById('exchange_table').offsetWidth + 250) + "px";
 
 		if(watching[data['id']] == undefined)
 			document.getElementById("watching_div").innerHTML += "<p style='margin-top: 10px; margin-bottom: 0px'><a id='watchlist_icon' onclick='toggle_watching(\"" + data['id'] + "\")'><i class='fas fa-eye fa-2x'></i></a></p>";
@@ -538,36 +621,41 @@
 		else
 			table.rows[0].cells[1].innerHTML = "$" + data['market_data']['current_price']['usd'].toFixed(5);
 
-		if(data['market_data']['market_cap']['usd'] > 0)
-			table.rows[1].cells[1].innerHTML = "$" + data['market_data']['market_cap']['usd'].toLocaleString('en');
+		if(data['market_data']['market_cap_rank'] > 0)
+			table.rows[1].cells[1].innerHTML = data['market_data']['market_cap_rank'].toLocaleString('en');
 		else
 			table.rows[1].cells[1].innerHTML = '-';
 
-		if(data['market_data']['current_price']['usd'] > 0 &&
-			data['market_data']['total_supply'])
-			table.rows[2].cells[1].innerHTML = "$" + (data['market_data']['current_price']['usd']*data['market_data']['total_supply']).toLocaleString('en');
+		if(data['market_data']['market_cap']['usd'] > 0)
+			table.rows[2].cells[1].innerHTML = "$" + data['market_data']['market_cap']['usd'].toLocaleString('en');
 		else
 			table.rows[2].cells[1].innerHTML = '-';
 
-		if(data['market_data']['market_cap']['usd'] > 0)
-			table.rows[3].cells[1].innerHTML = "$" + data['market_data']['total_volume']['usd'].toLocaleString('en');
+		if(data['market_data']['current_price']['usd'] > 0 &&
+			data['market_data']['total_supply'])
+			table.rows[3].cells[1].innerHTML = "$" + (data['market_data']['current_price']['usd']*data['market_data']['total_supply']).toLocaleString('en');
 		else
 			table.rows[3].cells[1].innerHTML = '-';
 
-		if(data['market_data']['total_supply'] > 0)
-			table.rows[4].cells[1].innerHTML = data['market_data']['total_supply'].toLocaleString('en');
+		if(data['market_data']['market_cap']['usd'] > 0)
+			table.rows[4].cells[1].innerHTML = "$" + data['market_data']['total_volume']['usd'].toLocaleString('en');
 		else
 			table.rows[4].cells[1].innerHTML = '-';
 
-		if(data['market_data']['max_supply'] > 0)
-			table.rows[5].cells[1].innerHTML = data['market_data']['max_supply'].toLocaleString('en');
+		if(data['market_data']['total_supply'] > 0)
+			table.rows[5].cells[1].innerHTML = data['market_data']['total_supply'].toLocaleString('en');
 		else
 			table.rows[5].cells[1].innerHTML = '-';
 
-		if(data['market_data']['circulating_supply'] > 0)
-			table.rows[6].cells[1].innerHTML = data['market_data']['circulating_supply'].toLocaleString('en');
+		if(data['market_data']['max_supply'] > 0)
+			table.rows[6].cells[1].innerHTML = data['market_data']['max_supply'].toLocaleString('en');
 		else
 			table.rows[6].cells[1].innerHTML = '-';
+
+		if(data['market_data']['circulating_supply'] > 0)
+			table.rows[7].cells[1].innerHTML = data['market_data']['circulating_supply'].toLocaleString('en');
+		else
+			table.rows[7].cells[1].innerHTML = '-';
 
 		table = document.getElementById("change_table");
 
@@ -662,6 +750,7 @@
 			$.get(
 	    	    'https://api.coingecko.com/api/v3/coins/' + param_map.get('network') + '/contract/' + param_map.get('contract_address'),              
 				function(data) {
+					coin_data = data;
 					if(!details_filled)
 					{
 						details_filled = 1;
@@ -683,6 +772,7 @@
 			$.get(
 	    	    'https://api.coingecko.com/api/v3/coins/' + param_map.get('id'),              
 				function(data) {
+					coin_data = data;
 					if(!details_filled)
 					{
 						details_filled = 1;
