@@ -427,8 +427,8 @@
 				if(coin_data['tickers'][r]['market']['name'] != undefined)
 				{
 					var row = document.getElementById('exchange_table').insertRow(r+1);
-
-					row.insertCell(0).innerHTML = "<img src='@pathto(output/images/exchanges)/" + coin_data['tickers'][r]['market']['identifier'] + ".svg' style='min-width: 23px; max-height: 23px; vertical-align: middle' onerror='this.style.display=\"none\"'>";
+					
+					row.insertCell(0).innerHTML = "<img class='round' src='@pathto(output/images/exchanges)/" + coin_data['tickers'][r]['market']['identifier'] + ".png' style='min-width: 23px; max-height: 23px; vertical-align: middle' onerror='this.style.display=\"none\"'>";
 
 					row.insertCell(1).innerHTML = coin_data['tickers'][r]['market']['name'];
 
@@ -438,7 +438,9 @@
 
 					row.insertCell(4).innerHTML = "$" + coin_data['tickers'][r]['converted_volume']['usd'].toLocaleString();
 
-					if(coin_data['tickers'][r]['trust_score'] == "green")
+					if(coin_data['tickers'][r]['trust_score'] == undefined)
+						row.insertCell(5).innerHTML = "";
+					else if(coin_data['tickers'][r]['trust_score'] == "green")
 						row.insertCell(5).innerHTML = "<green><i class='fas fa-circle fa-1x' style='vertical-align:middle'></i></green>";
 					else
 						row.insertCell(5).innerHTML = "<red><i class='fas fa-circle fa-1x' style='vertical-align:middle'></i></red>";
