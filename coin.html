@@ -597,12 +597,11 @@
 				}
 				else
 				{
-					alert("wtf"_);
 					document.getElementById('watchlist_icon').innerHTML = "<i class='fas fa-eye-slash fa-2x''></i>";
 					watch(user, watchlist, watchlist_name, id);
 				}
 				watchlist = fetch_watchlist(user, watchlist_name);
-				watching = fetch_map(user, watchlist);
+				watching = fetch_map(watchlist);
 			}
 		
 			function clear_table()
