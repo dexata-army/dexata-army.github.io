@@ -546,6 +546,9 @@
 		if(data['platforms']['polygon-pos'] != undefined)
 			document.getElementById("other_links").innerHTML += '&nbsp;&nbsp;<a href="https://polygonscan.com/token/' + data['platforms']['polygon-pos'] + '"><img src="@pathtofile(output/images/icons/polygonscan.png)" height="30px"></a>';
 
+		if(data['platforms']['solana'] != undefined)
+			document.getElementById("other_links").innerHTML += '&nbsp;&nbsp;<a href="https://solscan.io/token/' + data['platforms']['solana'] + '"><img src="@pathtofile(output/images/icons/solscan.png)" height="30px"></a>';
+
 		document.getElementById('title_spotlight').style.width = (document.getElementById('title_div').offsetWidth + 70) + "px";
 
 		if(data['contract_address'] != undefined && data['contract_address'].length > 10)
