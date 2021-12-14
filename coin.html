@@ -718,35 +718,66 @@
 				document.getElementById("coin_links").innerHTML = "";
 		
 				if(data['links']['homepage'][0] != "")
-					document.getElementById("coin_links").innerHTML += '<a href="' + data['links']['homepage'][0] + '"><i class="fas fa-home fa-2x"></i></a></a>';
+					document.getElementById("coin_links").innerHTML += '<a href="' + data['links']['homepage'][0] + '" title="homepage"><i class="fas fa-home fa-2x"></i></a></a>';
 		
-				if(data['links']['telegram_channel_identifier'] != "")
-					document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="https://t.me/' + data['links']['telegram_channel_identifier'] + '"><i class="icon brands fa-telegram fa-2x"></i></a>';
+				if(data['links']['facebook_username'] != null)
+				{
+					if(data['community_data']['facebook_likes'] != null)
+						document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="https://facebook.com/' + data['links']['facebook_username'] + '" title="Facebook - ' + data['community_data']['facebook_likes'] + ' likes"><i class="icon brands fa-facebook-f fa-2x"></a>';
+					else
+						document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="https://facebook.com/' + data['links']['facebook_username'] + '" title="Facebook"><i class="icon brands fa-facebook-f fa-2x"></a>';
+				}
 		
-				if(data['links']['twitter_screen_name'] != "")
-					document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="https://twitter.com/' + data['links']['twitter_screen_name'] + '"><i class="icon brands fa-twitter fa-2x"></a>';
+				if(data['links']['subreddit_url'] != null)
+				{
+					if(data['community_data']['reddit_subscribers'] != null)
+						document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="' + data['links']['subreddit_url'].replace("www", "old") + '" title="Reddit - ' + data['community_data']['reddit_subscribers'] + ' subscribers"><i class="icon brands fa-reddit-alien fa-2x"></i></a>';
+					else
+						document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="' + data['links']['subreddit_url'].replace("www", "old") + '" title="Reddit"><i class="icon brands fa-reddit-alien fa-2x"></i></a>';
+				}
 		
-				if(data['links']['chat_url'][0] != "")
-					document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="' + data['links']['chat_url'][0] + '"><i class="fas fa-comments fa-2x"></i></a>';
+				if(data['links']['telegram_channel_identifier'] != null)
+				{
+					if(data['community_data']['telegram_channel_user_count'] != null)
+						document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="https://t.me/' + data['links']['telegram_channel_identifier'] + '" title="Telegram - ' + data['community_data']['telegram_channel_user_count'] + ' users"><i class="icon brands fa-telegram-plane fa-2x"></i></a>';
+					else
+						document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="https://t.me/' + data['links']['telegram_channel_identifier'] + '" title="Telegram"><i class="icon brands fa-telegram-plane fa-2x"></i></a>';
+				}
+		
+				if(data['links']['twitter_screen_name'] != null)
+				{
+					if(data['community_data']['twitter_followers'] != null)
+						document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="https://twitter.com/' + data['links']['twitter_screen_name'] + '" title="Twitter - ' + data['community_data']['twitter_followers'] + ' followers"><i class="icon brands fa-twitter fa-2x"></a>';
+					else
+						document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="https://twitter.com/' + data['links']['twitter_screen_name'] + '" title="Twitter"><i class="icon brands fa-twitter fa-2x"></a>';
+				}
+		
+				if(data['links']['chat_url'][0] != null)
+				{
+					if(data['links']['chat_url'][0].search("discord") != -1)
+						document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="' + data['links']['chat_url'][0] + '" title="Discord"><i class="fab fa-discord fa-2x"></i></a>';
+					else
+						document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="' + data['links']['chat_url'][0] + '" title="chat"><i class="fas fa-comments fa-2x"></i></a>';
+				}
 		
 		
 				if(data['platforms']['binance-smart-chain'] != undefined)
 				{
-					document.getElementById("other_links").innerHTML += '<a href="https://bscscan.com/token/' + data['platforms']['binance-smart-chain'] + '"><img src="images/icons/bscscan.png" height="30px"></a>';
-					document.getElementById("other_links").innerHTML += '&nbsp;&nbsp;&nbsp;<a href="https://poocoin.app/tokens/' + data['contract_address'] + '"><img src="images/logos/poocoin-poocoin.svg" height="30px"></a>';
+					document.getElementById("other_links").innerHTML += '<a href="https://bscscan.com/token/' + data['platforms']['binance-smart-chain'] + '" title="BSCScan"><img src="images/icons/bscscan.png" height="30px"></a>';
+					document.getElementById("other_links").innerHTML += '&nbsp;&nbsp;&nbsp;<a href="https://poocoin.app/tokens/' + data['contract_address'] + '" title="Poocoin"><img src="images/logos/poocoin-poocoin.svg" height="30px"></a>';
 				}
 		
 				if(data['platforms']['ethereum'] != undefined)
 				{
-					document.getElementById("other_links").innerHTML += '&nbsp;&nbsp;&nbsp;<a href="https://etherscan.io/token/' + data['platforms']['ethereum'] + '"><img src="images/icons/etherscan.png" height="30px"></a>';
-					document.getElementById("other_links").innerHTML += '&nbsp;&nbsp;<a href="https://ethplorer.io/address/' + data['platforms']['ethereum'] + '"><img src="images/icons/ethplorer.png" height="30px"></a>';
+					document.getElementById("other_links").innerHTML += '&nbsp;&nbsp;&nbsp;<a href="https://etherscan.io/token/' + data['platforms']['ethereum'] + '" title="EtherScan"><img src="images/icons/etherscan.png" height="30px"></a>';
+					document.getElementById("other_links").innerHTML += '&nbsp;&nbsp;<a href="https://ethplorer.io/address/' + data['platforms']['ethereum'] + '" title="Ethplorer"><img src="images/icons/ethplorer.png" height="30px"></a>';
 				}
 		
 				if(data['platforms']['polygon-pos'] != undefined)
-					document.getElementById("other_links").innerHTML += '&nbsp;&nbsp;<a href="https://polygonscan.com/token/' + data['platforms']['polygon-pos'] + '"><img src="images/icons/polygonscan.png" height="30px"></a>';
+					document.getElementById("other_links").innerHTML += '&nbsp;&nbsp;<a href="https://polygonscan.com/token/' + data['platforms']['polygon-pos'] + '" title="PolygonScan"><img src="images/icons/polygonscan.png" height="30px"></a>';
 		
 				if(data['platforms']['solana'] != undefined)
-					document.getElementById("other_links").innerHTML += '&nbsp;&nbsp;<a href="https://solscan.io/token/' + data['platforms']['solana'] + '"><img src="images/icons/solscan.png" height="30px"></a>';
+					document.getElementById("other_links").innerHTML += '&nbsp;&nbsp;<a href="https://solscan.io/token/' + data['platforms']['solana'] + '" title="SolScan"><img src="images/icons/solscan.png" height="30px"></a>';
 		
 				document.getElementById('title_spotlight').style.width = (document.getElementById('title_div').offsetWidth + 70) + "px";
 		
@@ -1062,9 +1093,9 @@
 						<a href="watchlist.html" title='watchlist'><i class="fas fa-binoculars fa-2x"></i></a> &nbsp;
 						<a href="wallet.html" title='wallet tracker'><i class="fas fa-wallet fa-2x"></i></a><br>
 						
-						<a href="https://t.me/dexata_army" title='telegram'><i class="icon brands fa-telegram fa-2x"></i></a> &nbsp;
+						<a href="https://t.me/dexata_army" title='telegram'><i class="icon brands fa-telegram-plane fa-2x"></i></a> &nbsp;
 						<a href="https://twitter.com/dexata_army" title='twitter'><i class="icon brands fa-twitter fa-2x"></i></a> &nbsp;
-						<a href="https://github.com/dexata-army" title='github'><i class="icon brands fa-github fa-2x"></i></a> &nbsp;
+						<a href="https://github.com/dexata-army" title='github'><i class="icon brands fa-github-alt fa-2x"></i></a> &nbsp;
 						<a href="config.html" title='config'><i class="fas fa-cogs fa-2x"></i></a> &nbsp;
 						<a href="manage_users.html" title='manage users'><i class="fas fa-user-cog fa-2x"></i></a> &nbsp;
 						<text id="login_footer_item" style="display: inline-block"><a href="login.html" title='login'><i class="fas fa-sign-in-alt fa-2x"></i></a></text>
