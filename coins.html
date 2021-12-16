@@ -216,7 +216,7 @@
 									<table id="coins_table" style="display: none">
 										<thead>
 											<tr>
-												<th>rank</th>
+												<th><a onclick="toggle_sort('rank')">rank</a></th>
 												<th></th>
 												<th><a onclick="toggle_sort('symbol')">symbol</a></th>
 												<th><a onclick="toggle_sort('name')">name</a></th>
@@ -228,7 +228,7 @@
 										</thead>
 										<tfoot>
 											<tr>
-												<th>rank</th>
+												<th><a onclick="toggle_sort('rank')">rank</a></th>
 												<th></th>
 												<th><a onclick="toggle_sort('symbol')">symbol</a></th>
 												<th><a onclick="toggle_sort('name')">name</a></th>
@@ -288,7 +288,7 @@
 				document.getElementById('loading_gif').style.display = "none";
 				document.getElementById("coins_table").style.display = "inline";
 		
-				for(var i=0; i<100; i++)
+				for(var i=0; i<coins_data.length; i++)
 				{
 					var row = table.insertRow(i+1);
 					row.insertCell(0).innerHTML = coins_data[i]['market_cap_rank'];
