@@ -1,0 +1,213 @@
+<!-- Wrapper -->
+<div id="wrapper">
+	<!-- One -->
+	<section id="one" class="wrapper style1">
+		<div class="inner">
+			<div class="spotlights">
+				<center>
+					<div class="spotlight" style="max-width:500px; margin-bottom: 50px">
+						<div class="content">
+							<h1><i class="fas fa-search fa-4x" style="vertical-align:middle"></i><br><noselect>Search</noselect></h1>
+						</div>
+					</div>
+					
+					<center>
+						<select name="network_select" id="network_select" style="width:170px" onchange="change_search_network()">
+							<option disabled selected hidden>network</option>
+							<option value="algorand">algorand</option>
+							<option value="arbitrum-one">arbitrum-one</option>
+							<option value="avalanche">avalanche</option>
+							<option value="binance-smart-chain">bsc</option>
+							<option value="cosmos">cosmos</option>
+							<option value="ethereum">ethereum</option>
+							<option value="factom">factom</option>
+							<option value="fantom">fantom</option>
+							<option value="harmony-shard-0">harmony</option>
+							<option value="iotex">iotex</option>
+							<option value="kava">kava</option>
+							<option value="komodo">komodo</option>
+							<option value="kusama">kusama</option>
+							<option value="mdex">mdex</option>
+							<option value="moonriver">moonriver</option>
+							<option value="nuls">nuls</option>
+							<option value="polkadot">polkadot</option>
+							<option value="polygon">polygon</option>
+							<option value="solana">solana</option>
+							<option value="stellar">stellar</option>
+							<option value="telos">telos</option>
+							<option value="terra">terra</option>
+						</select>
+					</center>
+					<input id="contract_input" placeholder="contract" style="margin-top:10px"><br><br>
+
+					<input id="search_input" placeholder="search" style="margin-bottom:15px">
+
+					<div id="table_spotlight" class="spotlight" style="max-width: 100%; visibility: hidden">
+						<div id="table_div" class="xscroll">
+							<div id="no_results_msg" style=""></div>
+							<img id="loading_gif" src="" style="margin-top: 20px; max-width: 150px; display: none;">
+							<table id="search_table" style="display: none">
+								<thead>
+									<tr>
+										<th>symbol</th>
+										<th>name</th>
+									</tr>
+								</thead>
+								<tfoot>
+									<tr>
+										<th>symbol</th>
+										<th>name</th>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+					</div>
+				</center>
+			</div>
+		</div>
+	</section>
+</div>
+
+<script>
+	var search_network = "bsc";
+	var coins_data;
+
+	if(localStorage.getItem(user + '-search_network'))
+		search_network = localStorage.getItem(user + '-search_network');
+	else
+		localStorage.setItem(user + '-search_network', 'bsc');
+
+	document.getElementById('network_select').value = search_network;
+
+	window.addEventListener('keydown',this.keydown,false);
+
+	function change_search_network()
+	{
+		search_network = document.getElementById('network_select').value;
+		localStorage.setItem(user + '-search_network', search_network);
+	}
+
+	function clear_table()
+	{
+		var table = document.getElementById("search_table");
+
+		var no_rows = table.rows.length-1;
+		for(var i=0; i < no_rows; i++)
+			table.deleteRow(1);		
+
+		document.getElementById('no_results_msg').style.display = "none";
+	}
+
+	function search_coins()
+	{
+		var table = document.getElementById("search_table");
+		var no_coins_found = 0;
+
+		var search_term = document.getElementById("search_input").value.toLowerCase();
+
+		for(var i=0; i<coins_data.length; i++)
+		{
+			if(coins_data[i]['symbol'] == search_term ||
+				coins_data[i]['name'] == search_term ||
+				coins_data[i]['id'] == search_term)
+			{
+				var row = table.insertRow(1);
+				no_coins_found++;
+
+				row.insertCell(0).innerHTML = coins_data[i]['symbol'];
+				row.insertCell(1).innerHTML = "<a href=@pathto(coin)?id=" + coins_data[i]['id'] + ">" + coins_data[i]['name'] + "</a>";
+			}
+			else if(coins_data[i]['symbol'].toLowerCase().search(search_term) != -1 ||
+				coins_data[i]['name'].toLowerCase().search(search_term) != -1 ||
+				coins_data[i]['id'].toLowerCase().search(search_term) != -1)
+			{
+				var row = table.insertRow(no_coins_found+1);
+				no_coins_found++;
+
+				row.insertCell(0).innerHTML = coins_data[i]['symbol'];
+				row.insertCell(1).innerHTML = "<a href=@pathto(coin)?id=" + coins_data[i]['id'] + ">" + coins_data[i]['name'] + "</a>";
+			}
+		}
+
+		document.getElementById("loading_gif").src = "";
+		document.getElementById("loading_gif").style.display = "none";
+		document.getElementById("loading_gif").style.visibility = "hidden";
+		document.getElementById("search_table").style.display = "inline";
+
+		if(no_coins_found > 0)
+			document.getElementById('table_spotlight').style.width = (document.getElementById('search_table').offsetWidth + 70) + "px";
+		else
+		{
+			document.getElementById("search_table").style.display = "none";
+			document.getElementById('table_spotlight').style.width = "500px";
+			document.getElementById('no_results_msg').innerHTML = "<p style='margin-top: 20px; margin-bottom: 10px'>No coins found for '" + search_term + "'</p>";
+			document.getElementById('no_results_msg').style.display = "inline";
+		}
+	}
+
+	function fetch_coins_list()
+	{
+		$(document).ready(function(){
+			$.get(
+	    	    'https://api.coingecko.com/api/v3/coins/list',              
+				function(data) {
+					coins_data = data;
+					if(document.getElementById('search_input').value != "")
+					{
+						clear_table();
+						search_coins();
+						document.getElementById("search_input").scrollIntoView();
+					}
+			}).fail(function() {
+				clear_table();
+				document.getElementById('loading_gif').src = "";
+				document.getElementById('loading_gif').style.visibility = "hidden";
+				document.getElementById('loading_gif').style.display = "none";
+				document.getElementById("table_spotlight").style.width = "600px";
+
+				document.getElementById("table_div").innerHTML = "<p style='margin-top: 20px; margin-bottom: 10px'>failed to fetch coins information, please refresh to try again.</p>";
+			});
+		});
+	}
+
+	function keydown(e)
+	{
+		var code = e.keyCode;
+		
+		if(document.activeElement.tagName == "INPUT")
+		{
+			if(code == 13)
+			{
+				if(document.activeElement.id == "contract_input")
+					window.location.href = "@pathto(coin)?network=" + search_network + "&contract_address=" + document.getElementById('contract_input').value;
+				else if(document.activeElement.id == "search_input")
+				{
+					clear_table();
+					document.getElementById("search_table").style.display = "none";
+					document.getElementById("loading_gif").style.display = "inline";
+					document.getElementById("loading_gif").src = "@pathto(output/images/loading.gif)";
+					document.getElementById("loading_gif").style.visibility = "visible";
+					document.getElementById("table_spotlight").style.visibility = "visible";
+					sleep(50).then(() => { search_coins() });
+				}
+			}
+		}
+	}
+
+	if(param_map.get('term') != undefined)
+	{
+		document.getElementById('search_input').value = param_map.get('term');
+
+		document.getElementById("search_table").style.display = "none";
+		document.getElementById("loading_gif").style.display = "inline";
+		document.getElementById("loading_gif").src = "@pathto(output/images/loading.gif)";
+		document.getElementById("loading_gif").style.visibility = "visible";
+		document.getElementById("table_spotlight").style.visibility = "visible";
+	}
+
+	document.getElementById('table_spotlight').style.width = (document.getElementById('loading_gif').offsetWidth + 400) + "px";
+
+	fetch_coins_list();
+
+
+</script>
