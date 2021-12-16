@@ -271,10 +271,10 @@
 			var search_network = "bsc";
 			var coins_data;
 		
-			if(localStorage.getItem('search_network'))
-				search_network = localStorage.getItem('search_network');
+			if(localStorage.getItem(user + '-search_network'))
+				search_network = localStorage.getItem(user + '-search_network');
 			else
-				localStorage.setItem('search_network', 'bsc');
+				localStorage.setItem(user + '-search_network', 'bsc');
 		
 			document.getElementById('network_select').value = search_network;
 		
@@ -283,7 +283,7 @@
 			function change_search_network()
 			{
 				search_network = document.getElementById('network_select').value;
-				localStorage.setItem('search_network', search_network);
+				localStorage.setItem(user + '-search_network', search_network);
 			}
 		
 			function clear_table()

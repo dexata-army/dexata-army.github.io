@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Dexata - coins</title>
+		<title>Dexata - search2</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<meta name="description" content="" />
@@ -206,9 +206,40 @@
 						<center>
 							<div class="spotlight" style="max-width:500px; margin-bottom: 50px">
 								<div class="content">
-									<h1><i class="fas fa-coins fa-4x" style="vertical-align:middle"></i><br><noselect>Coins</noselect></h1>
+									<h1><i class="fas fa-search fa-4x" style="vertical-align:middle"></i><br><noselect>Search</noselect></h1>
 								</div>
 							</div>
+		
+							<center>
+								<select name="network_select" id="network_select" style="width:130px" onchange="change_search_network()">
+									<option disabled selected hidden>network</option>
+									<option value="algorand">algorand</option>
+									<option value="arbitrum-one">arbitrum-one</option>
+									<option value="avalanche">avalanche</option>
+									<option value="binance-smart-chain">bsc</option>
+									<option value="cosmos">cosmos</option>
+									<option value="ethereum">ethereum</option>
+									<option value="factom">factom</option>
+									<option value="fantom">fantom</option>
+									<option value="harmony-shard-0">harmony</option>
+									<option value="iotex">iotex</option>
+									<option value="kava">kava</option>
+									<option value="komodo">komodo</option>
+									<option value="kusama">kusama</option>
+									<option value="mdex">mdex</option>
+									<option value="moonriver">moonriver</option>
+									<option value="nuls">nuls</option>
+									<option value="polkadot">polkadot</option>
+									<option value="polygon">polygon</option>
+									<option value="solana">solana</option>
+									<option value="stellar">stellar</option>
+									<option value="telos">telos</option>
+									<option value="terra">terra</option>
+								</select>
+							</center>
+							<input id="contract_input" placeholder="contract" style="margin-top:10px"><br><br>
+		
+							<input id="search_input" placeholder="search" style="margin-bottom:15px">
 		
 							<div id="table_spotlight" class="spotlight" style="max-width:100%">
 								<div id="table_div" class="xscroll">
@@ -243,8 +274,8 @@
 							</div>
 							<noselect id="page_controls">
 								<a id="prev_page_link" onclick="prev_page(); document.getElementById('table_div').scrollIntoView();" style="visibility: hidden;"><i class="fas fa-arrow-circle-left fa-3x" style="vertical-align: middle"></i></a> &nbsp;&nbsp;
-								<input id="page_input" style="width: 75px; vertical-align: middle"> &nbsp;&nbsp;
-								<a id="next_page_link" onclick="next_page(); document.getElementById('table_div').scrollIntoView();"><i class="fas fa-arrow-circle-right fa-3x" style="vertical-align: middle"></i></a>
+								<input id="page_input" style="width: 75px; vertical-align: middle; visibility: hidden"> &nbsp;&nbsp;
+								<a id="next_page_link" onclick="next_page(); document.getElementById('table_div').scrollIntoView();" style="visibility: hidden"><i class="fas fa-arrow-circle-right fa-3x" style="vertical-align: middle"></i></a>
 							</noselect>
 						</center>
 					</div>
@@ -253,12 +284,18 @@
 		</div>
 		
 		<script>
+			var search_network = "bsc";
+		
 			var page_no = 1;
+			var no_pages = 0;
 			var refresh_ms = 60000;
 		
 			var sort_attrib = 'market_cap';
 			var sort_dir = -1;
 			var coins_data;
+			var all_coins_data;
+		
+			var ids;
 		
 			window.addEventListener('keydown',this.keydown,false);
 			//window.addEventListener('keyup',this.keyup,false);
@@ -267,6 +304,19 @@
 				refresh_ms = 1000*localStorage.getItem(user + '-refresh_sec');
 			else
 				localStorage.setItem(user + '-refresh_sec', 60);
+		
+			if(localStorage.getItem(user + '-search_network'))
+				search_network = localStorage.getItem(user + '-search_network');
+			else
+				localStorage.setItem(user + '-search_network', 'bsc');
+		
+			document.getElementById('network_select').value = search_network;
+		
+			function change_search_network()
+			{
+				search_network = document.getElementById('network_select').value;
+				localStorage.setItem(user + '-search_network', search_network);
+			}
 		
 			function clear_table()
 			{
@@ -364,10 +414,11 @@
 		
 			function fetch_table_coingecko()
 			{
+				alert(ids.length);
 				//alert('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=' + page_no + '&sparkline=false');
 				$(document).ready(function(){
 					$.get(
-			    	    'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=' + page_no + '&sparkline=false',              
+			    	    'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=' + ids.join(',') + '&order=market_cap_desc&per_page=50&page=' + page_no + '&sparkline=false',              
 						function(data) {
 							coins_data = data;
 		
@@ -382,66 +433,7 @@
 						document.getElementById('loading_gif').style.display = "none";
 						document.getElementById("table_spotlight").style.width = "600px";
 		
-						document.getElementById("table_div").innerHTML = "<p style='margin-top: 20px; margin-bottom: 10px'>failed to fetch coins information, please refresh to try again.</p>";
-					});
-				});
-			}
-		
-			function fetch_table_coinlore()
-			{
-				$(document).ready(function(){
-					$.get(
-			    	    'https://api.coinlore.net/api/tickers/',              
-						function(data) {
-							clear_table();
-							var table = document.getElementById("coins_table");
-		
-							document.getElementById('loading_gif').src = "";
-							document.getElementById('loading_gif').style.visibility = "hidden";
-							document.getElementById('loading_gif').style.display = "none";
-							document.getElementById("coins_table").style.display = "inline";
-		
-							for(var i=0; i<100; i++)
-							{
-								var row = table.insertRow(i+1);
-								row.insertCell(0).innerHTML = data['data'][i]['rank'];
-								row.insertCell(1).innerHTML = "<img height='23px' style='vertical-align:middle' onerror='this.style.display=\"none\"' src='https://cryptologos.cc/logos/" + data['data'][i]['name'].toLowerCase().replace(/ /g,"-") + "-" + data['data'][i]['symbol'].toLowerCase() + "-logo.svg?v=014'>";
-								row.insertCell(2).innerHTML = data['data'][i]['symbol'];
-								row.insertCell(3).innerHTML = "<a href='coin.html?id=" + data['data'][i]['name'].replace(/ /g,"-") + "'>" + data['data'][i]['name'] + "</a>";
-		
-								if(data['data'][i]['price_usd'] > 999)
-									row.insertCell(4).innerHTML = "$" + parseFloat(data['data'][i]['price_usd']).toLocaleString('en') ;
-								else
-									row.insertCell(4).innerHTML = "$" + data['data'][i]['price_usd'] ;
-		
-								if(parseFloat(data['data'][i]['percent_change_1h']) < 0)
-									row.insertCell(5).innerHTML = "<red>" + parseFloat(data['data'][i]['percent_change_1h']).toLocaleString('en') + "%</red>";
-								else
-									row.insertCell(5).innerHTML = "<green>" + parseFloat(data['data'][i]['percent_change_24h']).toLocaleString('en') + "%</green>";
-		
-								if(parseFloat(data['data'][i]['percent_change_24h']) < 0)
-									row.insertCell(6).innerHTML = "<red>" + parseFloat(data['data'][i]['percent_change_24h']).toLocaleString('en') + "%</red>";
-								else
-									row.insertCell(6).innerHTML = "<green>" + parseFloat(data['data'][i]['percent_change_24h']).toLocaleString('en') + "%</green>";
-		
-								if(parseFloat(data['data'][i]['percent_change_7d']) < 0)
-									row.insertCell(7).innerHTML = "<red>" + parseFloat(data['data'][i]['percent_change_7d']).toLocaleString('en') + "%</red>";
-								else
-									row.insertCell(7).innerHTML = "<green>" + parseFloat(data['data'][i]['percent_change_7d']).toLocaleString('en') + "%</green>";
-		
-								row.insertCell(8).innerHTML = "$" + parseFloat(data['data'][i]['market_cap_usd']).toLocaleString('en') ;
-								row.insertCell(9).innerHTML = "$" + data['data'][i]['volume24'].toLocaleString('en') ;
-							}
-		
-							document.getElementById('table_spotlight').style.width = (document.getElementById('coins_table').offsetWidth + 70) + "px";
-					}).fail(function() {
-						clear_table();
-						document.getElementById('loading_gif').src = "";
-						document.getElementById('loading_gif').style.visibility = "hidden";
-						document.getElementById('loading_gif').style.display = "none";
-						document.getElementById("table_spotlight").style.width = "600px";
-		
-						document.getElementById("table_div").innerHTML = "<p style='margin-top: 20px; margin-bottom: 10px'>failed to fetch coins information, please refresh to try again.</p>";
+						alert("failed to fetch coins information, please try again");
 					});
 				});
 			}
@@ -454,14 +446,17 @@
 		
 			function prev_page()
 			{
+				if(page_no + 1 > no_pages)
+					document.getElementById('next_page_link').style.visibility = "visible";
+		
 				if(page_no > 1)
 				{
 					page_no--;
 					fetch_table_coingecko();
-				}
 		
-				if(page_no == 1)
-					document.getElementById('prev_page_link').style.visibility = "hidden";
+					if(page_no == 1)
+						document.getElementById('prev_page_link').style.visibility = "hidden";
+				}
 			}
 		
 			function next_page()
@@ -469,14 +464,110 @@
 				if(page_no == 1)
 					document.getElementById('prev_page_link').style.visibility = "visible";
 		
-				page_no++;
-				fetch_table_coingecko();
+				alert((page_no + 1) + " " + no_pages);
+		
+				if(page_no + 1 <= no_pages)
+				{
+					page_no++;
+					fetch_table_coingecko();
+		
+					if(page_no + 1 > no_pages)
+						document.getElementById('next_page_link').style.visibility = "hidden";
+				}
 			}
 		
 			function goto_page()
 			{
-				page_no = document.getElementById(document.activeElement.id).value;
+				page_no = document.getElementById('page_input').value;
+		
+				if(page_no > no_pages)
+				{
+					document.getElementById('page_input').value = no_pages;
+					page_no = no_pages;
+				}
+				else if(page_no < 1)
+				{
+					document.getElementById('page_input').value = 1;
+					page_no = 1;
+				}
+				
 				fetch_table_coingecko();
+			}
+		
+			function search_coins()
+			{
+				page_no = 1;
+				ids = [];
+				var no_coins_found = 0;
+		
+				var search_term = document.getElementById("search_input").value.toLowerCase();
+		
+				document.getElementById('table_spotlight').style.display = "block";
+				document.getElementById('next_page_link').style.visibility = "visible";
+				document.getElementById('page_input').style.visibility = "visible";
+				document.getElementById('prev_page_link').style.visibility = "hidden";
+		
+				for(var i=0; i<all_coins_data.length; i++)
+				{
+					if(all_coins_data[i]['symbol'].toLowerCase().search(search_term) != -1 ||
+						all_coins_data[i]['name'].toLowerCase().search(search_term) != -1 ||
+						all_coins_data[i]['id'].toLowerCase().search(search_term) != -1)
+					{
+						no_coins_found++;
+		
+						ids[ids.length] = all_coins_data[i]['id'];
+					}
+				}
+		
+				/*document.getElementById("loading_gif").src = "";
+				document.getElementById("loading_gif").style.display = "none";
+				document.getElementById("loading_gif").style.visibility = "hidden";
+				document.getElementById("coins_table").style.display = "inline";*/
+		
+				if(no_coins_found > 0)
+				{
+					no_pages = Math.ceil(no_coins_found/50);
+					if(no_pages == 1)
+					{
+						document.getElementById('next_page_link').style.visibility = "hidden";
+						document.getElementById('page_input').style.visibility = "hidden";
+					}
+		
+					fetch_table_coingecko();
+					//refresh_table();
+				}
+				else
+				{
+					document.getElementById("search_table").style.display = "none";
+					document.getElementById('table_spotlight').style.width = "500px";
+					document.getElementById('no_results_msg').innerHTML = "<p style='margin-top: 20px; margin-bottom: 10px'>No coins found for '" + search_term + "'</p>";
+					document.getElementById('no_results_msg').style.display = "inline";
+				}
+			}
+		
+			function fetch_coins_list()
+			{
+				$(document).ready(function(){
+					$.get(
+			    	    'https://api.coingecko.com/api/v3/coins/list',              
+						function(data) {
+							all_coins_data = data;
+							if(document.getElementById('search_input').value != "")
+							{
+								clear_table();
+								search_coins();
+								document.getElementById("search_input").scrollIntoView();
+							}
+					}).fail(function() {
+						clear_table();
+						document.getElementById('loading_gif').src = "";
+						document.getElementById('loading_gif').style.visibility = "hidden";
+						document.getElementById('loading_gif').style.display = "none";
+						document.getElementById("table_spotlight").style.width = "600px";
+		
+						document.getElementById("table_div").innerHTML = "<p style='margin-top: 20px; margin-bottom: 10px'>failed to fetch coins information, please refresh to try again.</p>";
+					});
+				});
 			}
 		
 			function keydown(e)
@@ -486,7 +577,22 @@
 				if(document.activeElement.tagName == "INPUT")
 				{
 					if(code == 13)
-						goto_page();	
+					{
+						if(document.activeElement.id == "page_input")
+							goto_page();
+						else if(document.activeElement.id == "contract_input")
+							window.location.href = "coin.html?network=" + search_network + "&contract_address=" + document.getElementById('contract_input').value;
+						else if(document.activeElement.id == "search_input")
+						{
+							clear_table();
+							/*document.getElementById("search_table").style.display = "none";
+							document.getElementById("loading_gif").style.display = "inline";
+							document.getElementById("loading_gif").src = "images/loading.gif";
+							document.getElementById("loading_gif").style.visibility = "visible";
+							document.getElementById("table_spotlight").style.visibility = "visible";*/
+							sleep(50).then(() => { search_coins() });
+						}
+					}
 				}
 				else
 				{
@@ -501,10 +607,7 @@
 		
 			document.getElementById('table_spotlight').style.width = (document.getElementById('loading_gif').offsetWidth + 400) + "px";
 		
-			document.getElementById("table_div").scrollIntoView();
-		
-			fetch_table_coingecko();
-			refresh_table();
+			fetch_coins_list();
 					
 		</script>
 
