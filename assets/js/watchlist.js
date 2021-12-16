@@ -1,32 +1,3 @@
-//can remove this later
-/*if(localStorage.getItem('dexata_watchlist'))
-{
-	localStorage.setItem('watchlist', localStorage.getItem('dexata_watchlist'));
-	localStorage.setItem('ignorelist', localStorage.getItem('dexata_ignorelist'));
-	localStorage.removeItem('dexata_watchlist');
-	localStorage.removeItem('dexata_ignorelist');
-}*/
-
-if(localStorage.getItem('refresh_sec'))
-{
-	localStorage.setItem('guest-refresh_sec', localStorage.getItem('refresh_sec'));
-	localStorage.removeItem('refresh_sec');
-}
-if(localStorage.getItem('bsc_address'))
-	localStorage.removeItem('bsc_address');
-if(localStorage.getItem('bscscan_api_key'))
-	localStorage.removeItem('bscscan_api_key');
-if(localStorage.getItem('covalenthq_api_key'))
-	localStorage.removeItem('covalenthq_api_key');
-if(localStorage.getItem('watchlist'))
-{
-	localStorage.setItem('guest-watchlists', "\nmain");
-	localStorage.setItem('guest-watchlist', "main");
-	localStorage.setItem('guest-watchlist-main', localStorage.getItem('watchlist'));
-	localStorage.removeItem('watchlist');
-}
-
-
 function fetch_watchlist(username, name)
 {
 	if(!localStorage.getItem(username + "-watchlist-" + name))
@@ -40,6 +11,13 @@ function fetch_watchlist_str(username, name)
 	if(!localStorage.getItem(username + "-watchlist-" + name))
 		localStorage.setItem(username + "-watchlist-" + name, "");
 	return localStorage.getItem(username + '-watchlist-' + name).replace(/ /g, "").replace(/;/g, ",").replace(/\n/g,",");
+}
+
+function remove_duplicates(x)
+{
+	return x.filter(function(item, pos) {
+	    return x.indexOf(item) == pos;
+	})
 }
 
 function save_to_watchlist(username, watchlist, name)
@@ -57,8 +35,10 @@ function save_to_watchlist(username, watchlist, name)
 	localStorage.setItem(username + "-watchlist-" + name, watchlist_str);
 }
 
-function watch(username, watchlist, name, id)
+function watch(username, name, id)
 {
+	var watchlist = fetch_watchlist(username, name);
+
 	var index = watchlist.indexOf(id);
 	if(index == -1)
 	{
@@ -70,8 +50,10 @@ function watch(username, watchlist, name, id)
 		alert("already watching " + id);
 }
 
-function unwatch(username, watchlist, name, id)
+function unwatch(username, name, id)
 {
+	var watchlist = fetch_watchlist(username, name);
+
 	var index = watchlist.indexOf(id);
 	if(index != -1)
 	{

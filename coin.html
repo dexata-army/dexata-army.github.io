@@ -593,12 +593,12 @@
 				if(watching[id] == true)
 				{
 					document.getElementById('watchlist_icon').innerHTML = "<i class='fas fa-eye fa-2x'></i>";
-					unwatch(user, watchlist, watchlist_name, id);
+					unwatch(user, watchlist_name, id);
 				}
 				else
 				{
 					document.getElementById('watchlist_icon').innerHTML = "<i class='fas fa-eye-slash fa-2x''></i>";
-					watch(user, watchlist, watchlist_name, id);
+					watch(user, watchlist_name, id);
 				}
 				watchlist = fetch_watchlist(user, watchlist_name);
 				watching = fetch_map(watchlist);
