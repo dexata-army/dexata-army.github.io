@@ -628,6 +628,9 @@
 				}
 			}
 		
+			if(param_map.get('term') != undefined)
+				document.getElementById('search_input').value = param_map.get('term');
+		
 			document.getElementById('table_spotlight').style.width = (document.getElementById('loading_gif').offsetWidth + 400) + "px";
 		
 			fetch_coins_list();
