@@ -209,6 +209,12 @@
 		{
 			localStorage.setItem(document.getElementById('add_user_username').value + '-encrypted_phrase', CryptoJS.AES.encrypt("Go hang a salami, I’m a lasagna hog.", document.getElementById('add_user_password').value));
 
+			localStorage.setItem(document.getElementById('add_user_username').value + '-change_hour', true);
+			localStorage.setItem(document.getElementById('add_user_username').value + '-change_day', true);
+			localStorage.setItem(document.getElementById('add_user_username').value + '-change_week', true);
+			localStorage.setItem(document.getElementById('add_user_username').value + '-change_month', true);
+			localStorage.setItem(document.getElementById('add_user_username').value + '-change_year', true);
+
 			alert("successfully added " + document.getElementById('add_user_username').value);
 
 			location.reload();	
@@ -237,6 +243,11 @@
 				localStorage.removeItem(remove_username + '-encrypted_phrase');
 				localStorage.removeItem(remove_username + '-refresh_speed');
 				localStorage.removeItem(remove_username + '-session_timeout');
+				localStorage.removeItem(remove_username + '-change_hour');
+				localStorage.removeItem(remove_username + '-change_day');
+				localStorage.removeItem(remove_username + '-change_week');
+				localStorage.removeItem(remove_username + '-change_month');
+				localStorage.removeItem(remove_username + '-change_year');
 				localStorage.removeItem(remove_username + '-bscscan_api_key');
 				localStorage.removeItem(remove_username + '-covalenthq_api_key');
 
@@ -370,6 +381,36 @@
 			{
 				localStorage.setItem(new_username + '-session_timeout', localStorage.getItem(old_username + '-session_timeout'));
 				localStorage.removeItem(old_username + '-session_timeout');
+			}
+
+			if(localStorage.getItem(old_username + '-change_hour'))
+			{
+				localStorage.setItem(new_username + '-change_hour', localStorage.getItem(old_username + '-change_hour'));
+				localStorage.removeItem(old_username + '-change_hour');
+			}
+
+			if(localStorage.getItem(old_username + '-change_day'))
+			{
+				localStorage.setItem(new_username + '-change_day', localStorage.getItem(old_username + '-change_day'));
+				localStorage.removeItem(old_username + '-change_day');
+			}
+
+			if(localStorage.getItem(old_username + '-change_week'))
+			{
+				localStorage.setItem(new_username + '-change_week', localStorage.getItem(old_username + '-change_week'));
+				localStorage.removeItem(old_username + '-change_week');
+			}
+
+			if(localStorage.getItem(old_username + '-change_month'))
+			{
+				localStorage.setItem(new_username + '-change_month', localStorage.getItem(old_username + '-change_month'));
+				localStorage.removeItem(old_username + '-change_month');
+			}
+
+			if(localStorage.getItem(old_username + '-change_year'))
+			{
+				localStorage.setItem(new_username + '-change_year', localStorage.getItem(old_username + '-change_year'));
+				localStorage.removeItem(old_username + '-change_year');
 			}
 
 			if(localStorage.getItem(old_username + '-bscscan_api_key'))

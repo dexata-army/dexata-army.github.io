@@ -34,7 +34,11 @@
 										<th><a onclick="toggle_sort('symbol')">symbol</a></th>
 										<th><a onclick="toggle_sort('name')">name</a></th>
 										<th><a onclick="toggle_sort('current_price')">price</a></th>
-										<th><a onclick="toggle_sort('price_change_percentage_24h')">change</a></th>
+										<th id="change_hour_row_head"><a onclick="toggle_sort('price_change_percentage_1h')">hour</a></th>
+										<th id="change_day_row_head"><a onclick="toggle_sort('price_change_percentage_24h')">day</a></th>
+										<th id="change_week_row_head"><a onclick="toggle_sort('price_change_percentage_7d')">week</a></th>
+										<th id="change_month_row_head"><a onclick="toggle_sort('price_change_percentage_30d')">month</a></th>
+										<th id="change_year_row_head"><a onclick="toggle_sort('price_change_percentage_1y')">year</a></th>
 										<th><a onclick="toggle_sort('market_cap')">market cap</a></th>
 										<th><a onclick="toggle_sort('total_volume')">volume</a></th>
 									</tr>
@@ -46,7 +50,11 @@
 										<th><a onclick="toggle_sort('symbol')">symbol</a></th>
 										<th><a onclick="toggle_sort('name')">name</a></th>
 										<th><a onclick="toggle_sort('current_price')">price</a></th>
-										<th><a onclick="toggle_sort('price_change_percentage_24h')">change</a></th>
+										<th id="change_hour_row_foot"><a onclick="toggle_sort('price_change_percentage_1h')">hour</a></th>
+										<th id="change_day_row_foot"><a onclick="toggle_sort('price_change_percentage_24h')">day</a></th>
+										<th id="change_week_row_foot"><a onclick="toggle_sort('price_change_percentage_7d')">week</a></th>
+										<th id="change_month_row_foot"><a onclick="toggle_sort('price_change_percentage_30d')">month</a></th>
+										<th id="change_year_row_foot"><a onclick="toggle_sort('price_change_percentage_1y')">year</a></th>
 										<th><a onclick="toggle_sort('market_cap')">market cap</a></th>
 										<th><a onclick="toggle_sort('total_volume')">volume</a></th>
 									</tr>
@@ -87,6 +95,49 @@
 
 	if(localStorage.getItem(user + '-chart_range'))
 		chart_range = localStorage.getItem(user + '-chart_range');
+
+		if(!localStorage.getItem(user + "-change_hour") &&
+	   !localStorage.getItem(user + "-change_day") &&
+	   !localStorage.getItem(user + "-change_week") &&
+	   !localStorage.getItem(user + "-change_month") &&
+	   !localStorage.getItem(user + "-change_year"))
+	{
+		localStorage.setItem(user + "-change_hour", true);
+		localStorage.setItem(user + "-change_day", true);
+		localStorage.setItem(user + "-change_week", true);
+		localStorage.setItem(user + "-change_month", true);
+		localStorage.setItem(user + "-change_year", true);
+	}
+
+	if(!localStorage.getItem(user + "-change_hour"))
+	{
+		document.getElementById('change_hour_row_head').style.display = "none";
+		document.getElementById('change_hour_row_foot').style.display = "none";
+	}
+
+	if(!localStorage.getItem(user + "-change_day"))
+	{
+		document.getElementById('change_day_row_head').style.display = "none";
+		document.getElementById('change_day_row_foot').style.display = "none";
+	}
+
+	if(!localStorage.getItem(user + "-change_week"))
+	{
+		document.getElementById('change_week_row_head').style.display = "none";
+		document.getElementById('change_week_row_foot').style.display = "none";
+	}
+
+	if(!localStorage.getItem(user + "-change_month"))
+	{
+		document.getElementById('change_month_row_head').style.display = "none";
+		document.getElementById('change_month_row_foot').style.display = "none";
+	}
+
+	if(!localStorage.getItem(user + "-change_year"))
+	{
+		document.getElementById('change_year_row_head').style.display = "none";
+		document.getElementById('change_year_row_foot').style.display = "none";
+	}
 
 	function clear_table()
 	{
@@ -143,20 +194,86 @@
 				else
 					row.insertCell(4).innerHTML = "$" + watchlist_data[i]['current_price'].toFixed(5);
 
-				if(parseFloat(watchlist_data[i]['price_change_percentage_24h']) < 0)
-					row.insertCell(5).innerHTML = "<red>" + parseFloat(watchlist_data[i]['price_change_percentage_24h']).toLocaleString('en') + "%</red>";
+				if(localStorage.getItem(user + '-change_hour'))
+				{
+					if(watchlist_data[i]['price_change_percentage_1h_in_currency'] == null)
+						row.insertCell(5).innerHTML = "-";
+					else if(parseFloat(watchlist_data[i]['price_change_percentage_1h_in_currency']) < 0)
+						row.insertCell(5).innerHTML = "<red>" + parseFloat(watchlist_data[i]['price_change_percentage_1h_in_currency']).toLocaleString('en') + "%</red>";
+					else
+						row.insertCell(5).innerHTML = "<green>" + parseFloat(watchlist_data[i]['price_change_percentage_1h_in_currency']).toLocaleString('en') + "%</green>";
+				}
 				else
-					row.insertCell(5).innerHTML = "<green>" + parseFloat(watchlist_data[i]['price_change_percentage_24h']).toLocaleString('en') + "%</green>";
+					row.insertCell(5);
+
+				if(localStorage.getItem(user + '-change_day'))
+				{
+					if(watchlist_data[i]['price_change_percentage_24h'] == null)
+						row.insertCell(6).innerHTML = "-";
+					else if(parseFloat(watchlist_data[i]['price_change_percentage_24h']) < 0)
+						row.insertCell(6).innerHTML = "<red>" + parseFloat(watchlist_data[i]['price_change_percentage_24h']).toLocaleString('en') + "%</red>";
+					else
+						row.insertCell(6).innerHTML = "<green>" + parseFloat(watchlist_data[i]['price_change_percentage_24h']).toLocaleString('en') + "%</green>";
+				}
+				else
+					row.insertCell(6);
+
+				if(localStorage.getItem(user + '-change_week'))
+				{
+					if(watchlist_data[i]['price_change_percentage_7d_in_currency'] == null)
+						row.insertCell(7).innerHTML = "-";
+					else if(parseFloat(watchlist_data[i]['price_change_percentage_7d_in_currency']) < 0)
+						row.insertCell(7).innerHTML = "<red>" + parseFloat(watchlist_data[i]['price_change_percentage_7d_in_currency']).toLocaleString('en') + "%</red>";
+					else
+						row.insertCell(7).innerHTML = "<green>" + parseFloat(watchlist_data[i]['price_change_percentage_7d_in_currency']).toLocaleString('en') + "%</green>";
+				}
+				else
+					row.insertCell(7);
+
+				if(localStorage.getItem(user + '-change_month'))
+				{
+					if(watchlist_data[i]['price_change_percentage_30d_in_currency'] == null)
+						row.insertCell(8).innerHTML = "-";
+					else if(parseFloat(watchlist_data[i]['price_change_percentage_30d_in_currency']) < 0)
+						row.insertCell(8).innerHTML = "<red>" + parseFloat(watchlist_data[i]['price_change_percentage_30d_in_currency']).toLocaleString('en') + "%</red>";
+					else
+						row.insertCell(8).innerHTML = "<green>" + parseFloat(watchlist_data[i]['price_change_percentage_30d_in_currency']).toLocaleString('en') + "%</green>";
+				}
+				else
+					row.insertCell(8);
+
+				if(localStorage.getItem(user + '-change_year'))
+				{
+					if(watchlist_data[i]['price_change_percentage_1y_in_currency'] == null)
+						row.insertCell(9).innerHTML = "-";
+					else if(parseFloat(watchlist_data[i]['price_change_percentage_1y_in_currency']) < 0)
+						row.insertCell(9).innerHTML = "<red>" + parseFloat(watchlist_data[i]['price_change_percentage_1y_in_currency']).toLocaleString('en') + "%</red>";
+					else
+						row.insertCell(9).innerHTML = "<green>" + parseFloat(watchlist_data[i]['price_change_percentage_1y_in_currency']).toLocaleString('en') + "%</green>";
+				}
+				else
+					row.insertCell(9);
 
 				if(watchlist_data[i]['market_cap'] > 0)
-					row.insertCell(6).innerHTML = "$" + parseFloat(watchlist_data[i]['market_cap']).toLocaleString('en') ;
+					row.insertCell(10).innerHTML = "$" + parseFloat(watchlist_data[i]['market_cap']).toLocaleString('en') ;
 				else
-					row.insertCell(6).innerHTML = "-";
+					row.insertCell(10).innerHTML = "-";
 
 				if(watchlist_data[i]['total_volume'] > 0)
-					row.insertCell(7).innerHTML = "$" + watchlist_data[i]['total_volume'].toLocaleString('en') ;
+					row.insertCell(11).innerHTML = "$" + watchlist_data[i]['total_volume'].toLocaleString('en') ;
 				else
-					row.insertCell(7).innerHTML = "-";
+					row.insertCell(11).innerHTML = "-";
+
+				if(!localStorage.getItem(user + '-change_year'))
+					row.deleteCell(9);
+				if(!localStorage.getItem(user + '-change_month'))
+					row.deleteCell(8);
+				if(!localStorage.getItem(user + '-change_week'))
+					row.deleteCell(7);
+				if(!localStorage.getItem(user + '-change_day'))
+					row.deleteCell(6);
+				if(!localStorage.getItem(user + '-change_hour'))
+					row.deleteCell(5);
 			}
 
 			document.getElementById('table_spotlight').style.width = (document.getElementById('watchlist_table').offsetWidth + 70) + "px";
@@ -230,7 +347,7 @@
 		{
 			$(document).ready(function(){
 				$.get(
-					'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=' + watchlist_str + '&order=market_cap_desc&per_page=100&page=' + page_no + '&sparkline=false',             
+					'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=' + watchlist_str + '&order=market_cap_desc&per_page=100&page=' + page_no + '&sparkline=false&price_change_percentage=1h,24h,7d,30d,1y',             
 					function(data) {
 						watchlist_data = data;
 

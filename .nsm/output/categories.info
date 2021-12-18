@@ -1,9 +1,9 @@
 08:45:57 Sunday December 19 2021
-'index'
-'index'
+'categories'
+'categories'
 'template/page.template'
 
-'content/index.content'
+'content/categories.content'
 'template/accounts.js'
 'template/footer.content'
 'template/head.content'

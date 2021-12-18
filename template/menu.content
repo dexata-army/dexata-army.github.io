@@ -2,6 +2,7 @@
 	<ul>
 		<li><a href="@pathto(index)">home</a></li>
 		<li><a href="@pathto(coins)">coins</a></li>
+		<li><a href="@pathto(categories)">categories</a></li>
 		<li><a href="@pathto(charts)">charts</a></li>
 		<li><a href="@pathto(news)">news</a></li>
 		<li><a href="@pathto(scams)">scams</a></li>

@@ -1,0 +1,192 @@
+<!-- Wrapper -->
+<div id="wrapper">
+	<!-- One -->
+	<section id="one" class="wrapper style1">
+		<div class="inner">
+			<div class="spotlights">
+				<center>
+					<div class="spotlight" style="max-width:500px; margin-bottom: 50px">
+						<div class="content">
+							<h1><i class="fas fa-cubes fa-4x" style="vertical-align:middle"></i><br><noselect>Categories</noselect></h1>
+						</div>
+					</div>
+
+					<div id="table_spotlight" class="spotlight" style="max-width:100%">
+						<div id="table_div" class="xscroll">
+							<img id="loading_gif" src="@pathtofile(output/images/loading.gif)" style="margin-top: 20px; max-width: 150px">
+							<table id="categories_table" style="display: none">
+								<thead>
+									<tr>
+										<th>rank</th>
+										<th></th>
+										<th><a onclick="toggle_sort('name')">name</a></th>
+										<th><a onclick="toggle_sort('market_cap')">market cap</a></th>
+										<th><a onclick="toggle_sort('market_cap_change_24h')">change</a></th>
+										<th><a onclick="toggle_sort('volume_24h')">volume</a></th>
+									</tr>
+								</thead>
+								<tfoot>
+									<tr>
+										<th>rank</th>
+										<th></th>
+										<th><a onclick="toggle_sort('name')">name</a></th>
+										<th><a onclick="toggle_sort('market_cap')">market cap</a></th>
+										<th><a onclick="toggle_sort('market_cap_change_24h')">change</a></th>
+										<th><a onclick="toggle_sort('volume_24h')">volume</a></th>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+					</div>
+				</center>
+			</div>
+		</div>
+	</section>
+</div>
+
+<script>
+	var refresh_ms = 60000;
+
+	var sort_attrib = 'market_cap';
+	var sort_dir = -1;
+	var coins_data;
+
+	if(localStorage.getItem(user + '-refresh_sec'))
+		refresh_ms = 1000*localStorage.getItem(user + '-refresh_sec');
+	else
+		localStorage.setItem(user + '-refresh_sec', 60);
+
+	function clear_table()
+	{
+		var table = document.getElementById("categories_table");
+
+		var no_rows = table.rows.length-2;
+		for(var i=0; i < no_rows; i++)
+			table.deleteRow(1);		
+	}
+
+	function draw_table()
+	{
+		clear_table();
+		var table = document.getElementById("categories_table");
+
+		document.getElementById('loading_gif').src = "";
+		document.getElementById('loading_gif').style.visibility = "hidden";
+		document.getElementById('loading_gif').style.display = "none";
+		document.getElementById("categories_table").style.display = "inline";
+
+		for(var i=0, r=0; i<coins_data.length; i++)
+		{
+			if(coins_data[i]['id'] != undefined && coins_data[i]['name'] != undefined)
+			{
+				var row = table.insertRow(++r);
+				row.insertCell(0).innerHTML = coins_data[i]['rank'];
+
+				if(coins_data[i]['top_3_coins'] != undefined)
+					row.insertCell(1).innerHTML = "<img style='min-width: 23px; max-height: 23px; vertical-align:middle' class='rounded' onerror='this.style.display=\"none\"' src='" + coins_data[i]['top_3_coins'][0] + "'> <img style='min-width: 23px; max-height: 23px; vertical-align:middle' class='rounded' onerror='this.style.display=\"none\"' src='" + coins_data[i]['top_3_coins'][1] + "'> <img style='min-width: 23px; max-height: 23px; vertical-align:middle' class='rounded' onerror='this.style.display=\"none\"' src='" + coins_data[i]['top_3_coins'][2] + "'>";
+				else
+					row.insertCell(1);
+
+				if(coins_data[i]['content'] != undefined)
+					row.insertCell(2).innerHTML = "<a href='@pathto(coins)?category=" + coins_data[i]['id'] + "' title='" + coins_data[i]['content'] + "'>" + coins_data[i]['name'] + "</a>";
+				else
+					row.insertCell(2).innerHTML = "<a href='@pathto(coins)?category=" + coins_data[i]['id'] + "'>" + coins_data[i]['name'] + "</a>";
+
+				if(coins_data[i]['market_cap'] > 0)
+					row.insertCell(3).innerHTML = "$" + parseFloat(coins_data[i]['market_cap']).toLocaleString('en') ;
+				else
+					row.insertCell(3).innerHTML = "-";
+
+				if(coins_data[i]['market_cap_change_24h'] == null)
+					row.insertCell(4).innerHTML = "-";
+				else if(parseFloat(coins_data[i]['market_cap_change_24h']) < 0)
+					row.insertCell(4).innerHTML = "<red>" + parseFloat(coins_data[i]['market_cap_change_24h']).toLocaleString('en') + "%</red>";
+				else
+					row.insertCell(4).innerHTML = "<green>" + parseFloat(coins_data[i]['market_cap_change_24h']).toLocaleString('en') + "%</green>";
+
+				if(coins_data[i]['volume_24h'] > 0)
+					row.insertCell(5).innerHTML = "$" + coins_data[i]['volume_24h'].toLocaleString('en') ;
+				else
+					row.insertCell(5).innerHTML = "-";
+			}
+		}
+
+		document.getElementById('table_spotlight').style.width = (document.getElementById('categories_table').offsetWidth + 70) + "px";
+	}
+
+	function sort_data()
+	{
+		if(sort_attrib == "symbol" || sort_attrib == "name")
+		{
+			coins_data.sort(function(obj1, obj2) {
+				if(obj1[sort_attrib].toLowerCase() > obj2[sort_attrib].toLowerCase())
+					return sort_dir*1;
+				else if(obj1[sort_attrib] == obj2[sort_attrib])
+					return 0;
+				else return sort_dir*-1;
+			});
+		}
+		else
+		{
+			coins_data.sort(function(obj1, obj2) {
+				return sort_dir*(obj1[sort_attrib] - obj2[sort_attrib]);
+			});
+		}
+
+		draw_table();
+	}
+
+	function toggle_sort(attrib)
+	{
+		if(sort_attrib == attrib)
+			sort_dir *= -1;
+		else
+		{
+			sort_attrib = attrib;
+			sort_dir = -1;
+		}
+
+		sort_data();
+	}
+
+	function fetch_table_coingecko()
+	{
+		//alert('https://api.coingecko.com/api/v3/coins/categories');
+		$(document).ready(function(){
+			$.get(
+	    	    'https://api.coingecko.com/api/v3/coins/categories',              
+				function(data) {
+					coins_data = data;
+
+					for(var i=0; i<coins_data.length; i++)
+						coins_data[i]['rank'] = i+1;
+
+					if(sort_attrib == "market_cap" && sort_dir == -1)
+						draw_table();
+					else
+						sort_data();
+			}).fail(function() {
+				clear_table();
+				document.getElementById('loading_gif').src = "";
+				document.getElementById('loading_gif').style.visibility = "hidden";
+				document.getElementById('loading_gif').style.display = "none";
+				document.getElementById("table_spotlight").style.width = "600px";
+
+				document.getElementById("table_div").innerHTML = "<p style='margin-top: 20px; margin-bottom: 10px'>failed to fetch categories information, please refresh to try again.</p>";
+			});
+		});
+	}
+
+	function refresh_table()
+	{
+		if(refresh_ms > 0)
+			sleep(refresh_ms).then(() => { fetch_table_coingecko(); refresh_table(); });
+	}
+
+	document.getElementById('table_spotlight').style.width = (document.getElementById('loading_gif').offsetWidth + 400) + "px";
+
+	document.getElementById("table_div").scrollIntoView();
+
+	fetch_table_coingecko();
+	refresh_table();
+</script>

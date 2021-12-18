@@ -2,6 +2,10 @@
 '404'
 'template/404.template'
 
+'categories'
+'categories'
+'template/page.template'
+
 'charts'
 'charts'
 'template/page.template'
