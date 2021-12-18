@@ -415,7 +415,7 @@
 				if(localStorage.getItem(user + '-change_month'))
 					document.getElementById('change_month').checked = true;
 				if(localStorage.getItem(user + '-change_year'))
-					document.getElementById('change_hour').checked = true;
+					document.getElementById('change_year').checked = true;
 		
 				if(localStorage.getItem(user + '-bscscan_api_key'))
 					document.getElementById("bscscan_api_key").value = CryptoJS.AES.decrypt(localStorage.getItem(user + '-bscscan_api_key'), CryptoJS.AES.decrypt(localStorage.getItem('password'), "Go hang a salami, I’m a lasagna hog.").toString(CryptoJS.enc.Utf8)).toString(CryptoJS.enc.Utf8);
