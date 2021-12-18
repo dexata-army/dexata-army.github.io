@@ -1,0 +1,474 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Dexata - categories</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/pagestyle.css" />
+		<link rel="stylesheet" href="assets/css/print.css" />
+		<link rel="icon" type="image/svg" href="images/logo.png">
+		
+		<!-- Scripts -->
+		<script src="assets/js/params.js"></script>
+		<script src="assets/js/sleep.js"></script>
+		<script src="assets/js/wallet.js"></script>
+		<script src="assets/js/watchlist.js"></script>
+		<script src="assets/js/apex-charts/apexcharts.min.js"></script>
+		<script src="assets/js/crypto-js/crypto-js.js"></script>
+		
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.dropotron.min.js"></script>
+		<script src="assets/js/jquery.scrollex.min.js"></script>
+		<script src="assets/js/jquery.scrolly.min.js"></script>
+		
+		<!-- https://printjs.crabbly.com/ -->
+		<script src="assets/js/print.js"></script>
+		
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-D70JLR4EJM"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+		
+		  gtag('config', 'G-D70JLR4EJM');
+		</script>
+
+		<script>
+			var user = "guest";
+		
+			if(localStorage.getItem('username'))
+				user = localStorage.getItem('username');
+			else if(sessionStorage.getItem('username'))
+				user = sessionStorage.getItem('username');
+		
+			function logout()
+			{
+				localStorage.removeItem('no_dexata_tabs');
+				localStorage.removeItem('last_load_time');
+				localStorage.removeItem('last_seen');
+				localStorage.removeItem('username');
+				sessionStorage.removeItem('username');
+				localStorage.removeItem('password');
+				sessionStorage.removeItem('password');
+				//location.reload();
+			}
+		
+			function check_for_logout(username)
+			{
+				sleep(2000).then(() => { 
+					if((!sessionStorate.getItem('username') && !localStorage.getItem('username')) || 
+						(sessionStorage.getItem('username') != username && localStorage.getItem('username') != username))
+						location.reload();
+					else
+						check_for_logout(username);
+				});
+			}
+		
+			var session_timeout_sec = localStorage.getItem(user + '-session_timeout')*60;
+		
+			if(session_timeout_sec != undefined && session_timeout_sec > 0)
+			{
+				if(sessionStorage.getItem('username') || localStorage.getItem('username'))
+				{
+					var curr_time = Math.round((new Date()).getTime() / 1000);
+		
+					//checks last page load time
+					if(localStorage.getItem("last_load_time"))
+					{
+						if(curr_time - localStorage.getItem("last_load_time") > session_timeout_sec)
+						{
+							logout();
+							location.reload();
+						}
+						else
+							localStorage.setItem("last_load_time", curr_time);
+					}
+					else
+					{
+						logout();
+						location.reload();
+					}
+				}
+			}
+		
+			if(sessionStorage.getItem("username") && !localStorage.getItem("username"))
+			{
+				var curr_time = Math.round((new Date()).getTime() / 1000);
+				if(!localStorage.getItem("last_seen") ||
+				     curr_time - localStorage.getItem("last_seen") > 2)
+				{
+					logout();
+					location.reload();
+				}
+				else
+				{
+					localStorage.setItem("no_dexata_tabs", 0);
+					localStorage.setItem("username", sessionStorage.getItem("username"));
+					localStorage.setItem("password", sessionStorage.getItem("password"));
+				}
+			}
+			else if(!sessionStorage.getItem("username") && localStorage.getItem("username"))
+			{
+				sessionStorage.setItem("username", localStorage.getItem("username"));
+				sessionStorage.setItem("password", localStorage.getItem("password"));
+			}
+		
+			var load_host = window.location.hostname;
+			if(localStorage.getItem("username"))
+			{
+				//updates number of dexata tabs open
+				if(localStorage.getItem('no_dexata_tabs') != undefined &&
+					localStorage.getItem('no_dexata_tabs') >= 0)
+					localStorage.setItem('no_dexata_tabs', parseFloat(localStorage.getItem('no_dexata_tabs'))+1);
+				else
+					localStorage.setItem('no_dexata_tabs', 1);
+		
+				window.addEventListener('beforeunload', function (e) {
+					if(localStorage.getItem('no_dexata_tabs'))
+					{
+					    localStorage.setItem('no_dexata_tabs', parseFloat(localStorage.getItem('no_dexata_tabs'))-1);
+		
+					    if(localStorage.getItem('no_dexata_tabs') == 0)
+					    {
+					    	localStorage.removeItem('no_dexata_tabs');
+					    	localStorage.removeItem('username');
+					    	localStorage.removeItem('password');
+					    }
+					}
+					else
+					{
+						sessionStorage.removeItem('username');
+						sessionStorage.removeItem('password');
+					}
+				});
+		
+				//reloads page if user has logged out
+				$(document).ready(function(){
+					check_for_logout(localStorage.getItem('username'));
+				});
+			}
+		
+			window.addEventListener("pageshow", function (event) {
+				var historyTraversal = event.persisted || 
+				                     ( typeof window.performance != "undefined" && 
+				                          window.performance.navigation.type === 2 );
+				if(historyTraversal &&
+					sessionStorage.getItem('username') &&
+					curr_time - localStorage.getItem('last_seen') > 2)
+				{
+					// Handle page restore.
+					window.location.reload();
+				}
+			});
+		
+			window.onbeforeunload = function(){
+				if(sessionStorage.getItem('username') || localStorage.getItem('username'))
+					localStorage.setItem('last_seen', Math.round((new Date()).getTime() / 1000));
+			};
+		</script>
+	</head>
+	<body class="is-preload">
+		<!-- Header -->
+		<header id="header" class="alt">
+			<div class="logo" style="margin-top: -25px">
+				<noselect>
+					<a href="index.html"><img src="images/logo.png" height="45px" style="vertical-align: middle"> Dexata</a> &nbsp; 
+					<a href="search.html" title='search'><i class="fas fa-search fa-1x" style="vertical-align:middle"></i></a> 
+					<a href="config.html" title='config'><i class="fas fa-cogs fa-1x" style="vertical-align:middle"></i></a> 
+					<a href="manage_users.html" title='manage users'><i class="fas fa-user-cog fa-1x" style="vertical-align:middle"></i></a> 
+				</noselect>
+			</div>
+		
+			<nav id="nav">
+				<ul>
+					<li><a href="index.html">home</a></li>
+					<li><a href="coins.html">coins</a></li>
+					<li><a href="categories.html">categories</a></li>
+					<li><a href="charts.html">charts</a></li>
+					<li><a href="news.html">news</a></li>
+					<li><a href="scams.html">scams</a></li>
+					<li><a href="watchlist.html">watchlist</a></li>
+					<li><a href="wallet.html">wallet</a></li>
+					<li id="login_menu_item"></li>
+				</ul>
+			</nav>
+		</header>
+
+		<!-- Wrapper -->
+		<div id="wrapper">
+			<!-- One -->
+			<section id="one" class="wrapper style1">
+				<div class="inner">
+					<div class="spotlights">
+						<center>
+							<div class="spotlight" style="max-width:500px; margin-bottom: 50px">
+								<div class="content">
+									<h1><i class="fas fa-cubes fa-4x" style="vertical-align:middle"></i><br><noselect>Categories</noselect></h1>
+								</div>
+							</div>
+		
+							<div id="table_spotlight" class="spotlight" style="max-width:100%">
+								<div id="table_div" class="xscroll">
+									<img id="loading_gif" src="images/loading.gif" style="margin-top: 20px; max-width: 150px">
+									<table id="categories_table" style="display: none">
+										<thead>
+											<tr>
+												<th>rank</th>
+												<th></th>
+												<th><a onclick="toggle_sort('name')">name</a></th>
+												<th><a onclick="toggle_sort('market_cap')">market cap</a></th>
+												<th><a onclick="toggle_sort('market_cap_change_24h')">change</a></th>
+												<th><a onclick="toggle_sort('volume_24h')">volume</a></th>
+											</tr>
+										</thead>
+										<tfoot>
+											<tr>
+												<th>rank</th>
+												<th></th>
+												<th><a onclick="toggle_sort('name')">name</a></th>
+												<th><a onclick="toggle_sort('market_cap')">market cap</a></th>
+												<th><a onclick="toggle_sort('market_cap_change_24h')">change</a></th>
+												<th><a onclick="toggle_sort('volume_24h')">volume</a></th>
+											</tr>
+										</tfoot>
+									</table>
+								</div>
+							</div>
+						</center>
+					</div>
+				</div>
+			</section>
+		</div>
+		
+		<script>
+			var refresh_ms = 60000;
+		
+			var sort_attrib = 'market_cap';
+			var sort_dir = -1;
+			var coins_data;
+		
+			if(localStorage.getItem(user + '-refresh_sec'))
+				refresh_ms = 1000*localStorage.getItem(user + '-refresh_sec');
+			else
+				localStorage.setItem(user + '-refresh_sec', 60);
+		
+			function clear_table()
+			{
+				var table = document.getElementById("categories_table");
+		
+				var no_rows = table.rows.length-2;
+				for(var i=0; i < no_rows; i++)
+					table.deleteRow(1);		
+			}
+		
+			function draw_table()
+			{
+				clear_table();
+				var table = document.getElementById("categories_table");
+		
+				document.getElementById('loading_gif').src = "";
+				document.getElementById('loading_gif').style.visibility = "hidden";
+				document.getElementById('loading_gif').style.display = "none";
+				document.getElementById("categories_table").style.display = "inline";
+		
+				for(var i=0, r=0; i<coins_data.length; i++)
+				{
+					if(coins_data[i]['id'] != undefined && coins_data[i]['name'] != undefined)
+					{
+						var row = table.insertRow(++r);
+						row.insertCell(0).innerHTML = coins_data[i]['rank'];
+		
+						if(coins_data[i]['top_3_coins'] != undefined)
+							row.insertCell(1).innerHTML = "<img style='min-width: 23px; max-height: 23px; vertical-align:middle' class='rounded' onerror='this.style.display=\"none\"' src='" + coins_data[i]['top_3_coins'][0] + "'> <img style='min-width: 23px; max-height: 23px; vertical-align:middle' class='rounded' onerror='this.style.display=\"none\"' src='" + coins_data[i]['top_3_coins'][1] + "'> <img style='min-width: 23px; max-height: 23px; vertical-align:middle' class='rounded' onerror='this.style.display=\"none\"' src='" + coins_data[i]['top_3_coins'][2] + "'>";
+						else
+							row.insertCell(1);
+		
+						if(coins_data[i]['content'] != undefined)
+							row.insertCell(2).innerHTML = "<a href='coins.html?category=" + coins_data[i]['id'] + "' title='" + coins_data[i]['content'] + "'>" + coins_data[i]['name'] + "</a>";
+						else
+							row.insertCell(2).innerHTML = "<a href='coins.html?category=" + coins_data[i]['id'] + "'>" + coins_data[i]['name'] + "</a>";
+		
+						if(coins_data[i]['market_cap'] > 0)
+							row.insertCell(3).innerHTML = "$" + parseFloat(coins_data[i]['market_cap']).toLocaleString('en') ;
+						else
+							row.insertCell(3).innerHTML = "-";
+		
+						if(coins_data[i]['market_cap_change_24h'] == null)
+							row.insertCell(4).innerHTML = "-";
+						else if(parseFloat(coins_data[i]['market_cap_change_24h']) < 0)
+							row.insertCell(4).innerHTML = "<red>" + parseFloat(coins_data[i]['market_cap_change_24h']).toLocaleString('en') + "%</red>";
+						else
+							row.insertCell(4).innerHTML = "<green>" + parseFloat(coins_data[i]['market_cap_change_24h']).toLocaleString('en') + "%</green>";
+		
+						if(coins_data[i]['volume_24h'] > 0)
+							row.insertCell(5).innerHTML = "$" + coins_data[i]['volume_24h'].toLocaleString('en') ;
+						else
+							row.insertCell(5).innerHTML = "-";
+					}
+				}
+		
+				document.getElementById('table_spotlight').style.width = (document.getElementById('categories_table').offsetWidth + 70) + "px";
+			}
+		
+			function sort_data()
+			{
+				if(sort_attrib == "symbol" || sort_attrib == "name")
+				{
+					coins_data.sort(function(obj1, obj2) {
+						if(obj1[sort_attrib].toLowerCase() > obj2[sort_attrib].toLowerCase())
+							return sort_dir*1;
+						else if(obj1[sort_attrib] == obj2[sort_attrib])
+							return 0;
+						else return sort_dir*-1;
+					});
+				}
+				else
+				{
+					coins_data.sort(function(obj1, obj2) {
+						return sort_dir*(obj1[sort_attrib] - obj2[sort_attrib]);
+					});
+				}
+		
+				draw_table();
+			}
+		
+			function toggle_sort(attrib)
+			{
+				if(sort_attrib == attrib)
+					sort_dir *= -1;
+				else
+				{
+					sort_attrib = attrib;
+					sort_dir = -1;
+				}
+		
+				sort_data();
+			}
+		
+			function fetch_table_coingecko()
+			{
+				//alert('https://api.coingecko.com/api/v3/coins/categories');
+				$(document).ready(function(){
+					$.get(
+			    	    'https://api.coingecko.com/api/v3/coins/categories',              
+						function(data) {
+							coins_data = data;
+		
+							for(var i=0; i<coins_data.length; i++)
+								coins_data[i]['rank'] = i+1;
+		
+							if(sort_attrib == "market_cap" && sort_dir == -1)
+								draw_table();
+							else
+								sort_data();
+					}).fail(function() {
+						clear_table();
+						document.getElementById('loading_gif').src = "";
+						document.getElementById('loading_gif').style.visibility = "hidden";
+						document.getElementById('loading_gif').style.display = "none";
+						document.getElementById("table_spotlight").style.width = "600px";
+		
+						document.getElementById("table_div").innerHTML = "<p style='margin-top: 20px; margin-bottom: 10px'>failed to fetch categories information, please refresh to try again.</p>";
+					});
+				});
+			}
+		
+			function refresh_table()
+			{
+				if(refresh_ms > 0)
+					sleep(refresh_ms).then(() => { fetch_table_coingecko(); refresh_table(); });
+			}
+		
+			document.getElementById('table_spotlight').style.width = (document.getElementById('loading_gif').offsetWidth + 400) + "px";
+		
+			document.getElementById("table_div").scrollIntoView();
+		
+			fetch_table_coingecko();
+			refresh_table();
+		</script>
+
+		<!-- Footer -->
+		<div class="footer wrapper">
+			<div class="inner" style="text-align:center">
+				<noselect>
+					<p>
+						<a href="search.html" title='search'><i class="fas fa-search fa-2x"></i></a> &nbsp;
+						<a href="coins.html" title='coins'><i class="fas fa-coins fa-2x"></i></a> &nbsp;
+						<a href="categories.html" title='categories'><i class="fas fa-cubes fa-2x"></i></a> &nbsp;
+						<a href="charts.html" title='charts'><i class="fas fa-chart-area fa-2x"></i></a> &nbsp;
+						<a href="news.html" title='news'><i class="fas fa-newspaper fa-2x"></i></a> &nbsp;
+						<a href="scams.html" title='scams'><i class="fas fa-bomb fa-2x"></i></a> &nbsp;
+						<a href="watchlist.html" title='watchlist'><i class="fas fa-binoculars fa-2x"></i></a> &nbsp;
+						<a href="wallet.html" title='wallet tracker'><i class="fas fa-wallet fa-2x"></i></a><br>
+						
+						<a href="https://t.me/dexata_army" title='telegram'><i class="icon brands fa-telegram-plane fa-2x"></i></a> &nbsp;
+						<a href="https://twitter.com/dexata_army" title='twitter'><i class="icon brands fa-twitter fa-2x"></i></a> &nbsp;
+						<a href="https://github.com/dexata-army" title='github'><i class="icon brands fa-github-alt fa-2x"></i></a> &nbsp;
+						<a href="config.html" title='config'><i class="fas fa-cogs fa-2x"></i></a> &nbsp;
+						<a href="manage_users.html" title='manage users'><i class="fas fa-user-cog fa-2x"></i></a> &nbsp;
+						<text id="login_footer_item" style="display: inline-block"><a href="login.html" title='login'><i class="fas fa-sign-in-alt fa-2x"></i></a></text>
+					</p>
+		
+					<p>
+						<input id="footer_search_box" placeholder="search">
+					</p>
+		
+					<p class="copyright">
+						&copy;<script>document.write(new Date().getFullYear())</script> Dexata
+					</p>
+				</noselect>
+			</div>
+		</div>
+		
+		<script>
+			window.addEventListener('keydown',this.keydown,false);
+		
+			function keydown(e)
+			{
+				var code = e.keyCode;
+				
+				if(document.activeElement.tagName == "INPUT")
+				{
+					if(code == 13)
+					{
+						if(document.activeElement.id == "footer_search_box" &&
+							document.getElementById('footer_search_box').value != "")
+						{
+							window.location.href = "search.html?term=" + document.getElementById('footer_search_box').value;
+						}
+					}
+				}
+			}
+		</script>
+
+		<script>
+			//changes login to logout on page if logged in
+			if(localStorage.getItem("username"))
+			{
+				//document.getElementById('login_menu_item').innerHTML = "<a onclick='logout()'>logout</a>";
+				//document.getElementById('login_footer_item').innerHTML = "<a onclick='logout()' title='logout'><i class='fas fa-sign-out-alt fa-2x'></i></a>";
+				document.getElementById('login_menu_item').innerHTML = "<a href='logout.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1) + "'>logout</a>"
+				document.getElementById('login_footer_item').innerHTML = "<a href='logout.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1) + "'><i class='fas fa-sign-out-alt fa-2x'></i></a>"
+			}
+			else
+			{
+				document.getElementById('login_menu_item').innerHTML = "<a href='login.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1) + "'>login</a>"
+				document.getElementById('login_footer_item').innerHTML = "<a href='login.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1) + "'><i class='fas fa-sign-in-alt fa-2x'></i></a>"
+			}
+		
+			//prevent autocomplete
+			$(':input').on('focus', function () {
+				$(this).attr('autocomplete', 'off')
+			});
+		</script>
+
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+	</body>
+</html>

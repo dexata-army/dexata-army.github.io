@@ -187,6 +187,7 @@
 				<ul>
 					<li><a href="index.html">home</a></li>
 					<li><a href="coins.html">coins</a></li>
+					<li><a href="categories.html">categories</a></li>
 					<li><a href="charts.html">charts</a></li>
 					<li><a href="news.html">news</a></li>
 					<li><a href="scams.html">scams</a></li>
@@ -253,7 +254,11 @@
 												<th><a onclick="toggle_sort('symbol')">symbol</a></th>
 												<th><a onclick="toggle_sort('name')">name</a></th>
 												<th><a onclick="toggle_sort('current_price')">price</a></th>
-												<th><a onclick="toggle_sort('price_change_percentage_24h')">change</a></th>
+												<th id="change_hour_row_head"><a onclick="toggle_sort('price_change_percentage_1h')">hour</a></th>
+												<th id="change_day_row_head"><a onclick="toggle_sort('price_change_percentage_24h')">day</a></th>
+												<th id="change_week_row_head"><a onclick="toggle_sort('price_change_percentage_7d')">week</a></th>
+												<th id="change_month_row_head"><a onclick="toggle_sort('price_change_percentage_30d')">month</a></th>
+												<th id="change_year_row_head"><a onclick="toggle_sort('price_change_percentage_1y')">year</a></th>
 												<th><a onclick="toggle_sort('market_cap')">market cap</a></th>
 												<th><a onclick="toggle_sort('total_volume')">volume</a></th>
 											</tr>
@@ -265,7 +270,11 @@
 												<th><a onclick="toggle_sort('symbol')">symbol</a></th>
 												<th><a onclick="toggle_sort('name')">name</a></th>
 												<th><a onclick="toggle_sort('current_price')">price</a></th>
-												<th><a onclick="toggle_sort('price_change_percentage_24h')">change</a></th>
+												<th id="change_hour_row_foot"><a onclick="toggle_sort('price_change_percentage_1h')">hour</a></th>
+												<th id="change_day_row_foot"><a onclick="toggle_sort('price_change_percentage_24h')">day</a></th>
+												<th id="change_week_row_foot"><a onclick="toggle_sort('price_change_percentage_7d')">week</a></th>
+												<th id="change_month_row_foot"><a onclick="toggle_sort('price_change_percentage_30d')">month</a></th>
+												<th id="change_year_row_foot"><a onclick="toggle_sort('price_change_percentage_1y')">year</a></th>
 												<th><a onclick="toggle_sort('market_cap')">market cap</a></th>
 												<th><a onclick="toggle_sort('total_volume')">volume</a></th>
 											</tr>
@@ -313,6 +322,49 @@
 		
 			document.getElementById('network_select').value = search_network;
 		
+				if(!localStorage.getItem(user + "-change_hour") &&
+			   !localStorage.getItem(user + "-change_day") &&
+			   !localStorage.getItem(user + "-change_week") &&
+			   !localStorage.getItem(user + "-change_month") &&
+			   !localStorage.getItem(user + "-change_year"))
+			{
+				localStorage.setItem(user + "-change_hour", true);
+				localStorage.setItem(user + "-change_day", true);
+				localStorage.setItem(user + "-change_week", true);
+				localStorage.setItem(user + "-change_month", true);
+				localStorage.setItem(user + "-change_year", true);
+			}
+		
+			if(!localStorage.getItem(user + "-change_hour"))
+			{
+				document.getElementById('change_hour_row_head').style.display = "none";
+				document.getElementById('change_hour_row_foot').style.display = "none";
+			}
+		
+			if(!localStorage.getItem(user + "-change_day"))
+			{
+				document.getElementById('change_day_row_head').style.display = "none";
+				document.getElementById('change_day_row_foot').style.display = "none";
+			}
+		
+			if(!localStorage.getItem(user + "-change_week"))
+			{
+				document.getElementById('change_week_row_head').style.display = "none";
+				document.getElementById('change_week_row_foot').style.display = "none";
+			}
+		
+			if(!localStorage.getItem(user + "-change_month"))
+			{
+				document.getElementById('change_month_row_head').style.display = "none";
+				document.getElementById('change_month_row_foot').style.display = "none";
+			}
+		
+			if(!localStorage.getItem(user + "-change_year"))
+			{
+				document.getElementById('change_year_row_head').style.display = "none";
+				document.getElementById('change_year_row_foot').style.display = "none";
+			}
+		
 			function change_search_network()
 			{
 				search_network = document.getElementById('network_select').value;
@@ -356,22 +408,86 @@
 					else
 						row.insertCell(4).innerHTML = "$" + coins_data[i]['current_price'].toFixed(3);
 		
-					if(coins_data[i]['price_change_percentage_24h'] == null)
-						row.insertCell(5).innerHTML = "-";
-					else if(parseFloat(coins_data[i]['price_change_percentage_24h']) < 0)
-						row.insertCell(5).innerHTML = "<red>" + parseFloat(coins_data[i]['price_change_percentage_24h']).toLocaleString('en') + "%</red>";
+					if(localStorage.getItem(user + '-change_hour'))
+					{
+						if(coins_data[i]['price_change_percentage_1h_in_currency'] == null)
+							row.insertCell(5).innerHTML = "-";
+						else if(parseFloat(coins_data[i]['price_change_percentage_1h_in_currency']) < 0)
+							row.insertCell(5).innerHTML = "<red>" + parseFloat(coins_data[i]['price_change_percentage_1h_in_currency']).toLocaleString('en') + "%</red>";
+						else
+							row.insertCell(5).innerHTML = "<green>" + parseFloat(coins_data[i]['price_change_percentage_1h_in_currency']).toLocaleString('en') + "%</green>";
+					}
 					else
-						row.insertCell(5).innerHTML = "<green>" + parseFloat(coins_data[i]['price_change_percentage_24h']).toLocaleString('en') + "%</green>";
+						row.insertCell(5);
+		
+					if(localStorage.getItem(user + '-change_day'))
+					{
+						if(coins_data[i]['price_change_percentage_24h'] == null)
+							row.insertCell(6).innerHTML = "-";
+						else if(parseFloat(coins_data[i]['price_change_percentage_24h']) < 0)
+							row.insertCell(6).innerHTML = "<red>" + parseFloat(coins_data[i]['price_change_percentage_24h']).toLocaleString('en') + "%</red>";
+						else
+							row.insertCell(6).innerHTML = "<green>" + parseFloat(coins_data[i]['price_change_percentage_24h']).toLocaleString('en') + "%</green>";
+					}
+					else
+						row.insertCell(6);
+		
+					if(localStorage.getItem(user + '-change_week'))
+					{
+						if(coins_data[i]['price_change_percentage_7d_in_currency'] == null)
+							row.insertCell(7).innerHTML = "-";
+						else if(parseFloat(coins_data[i]['price_change_percentage_7d_in_currency']) < 0)
+							row.insertCell(7).innerHTML = "<red>" + parseFloat(coins_data[i]['price_change_percentage_7d_in_currency']).toLocaleString('en') + "%</red>";
+						else
+							row.insertCell(7).innerHTML = "<green>" + parseFloat(coins_data[i]['price_change_percentage_7d_in_currency']).toLocaleString('en') + "%</green>";
+					}
+					else
+						row.insertCell(7);
+		
+					if(localStorage.getItem(user + '-change_month'))
+					{
+						if(coins_data[i]['price_change_percentage_30d_in_currency'] == null)
+							row.insertCell(8).innerHTML = "-";
+						else if(parseFloat(coins_data[i]['price_change_percentage_30d_in_currency']) < 0)
+							row.insertCell(8).innerHTML = "<red>" + parseFloat(coins_data[i]['price_change_percentage_30d_in_currency']).toLocaleString('en') + "%</red>";
+						else
+							row.insertCell(8).innerHTML = "<green>" + parseFloat(coins_data[i]['price_change_percentage_30d_in_currency']).toLocaleString('en') + "%</green>";
+					}
+					else
+						row.insertCell(8);
+		
+					if(localStorage.getItem(user + '-change_year'))
+					{
+						if(coins_data[i]['price_change_percentage_1y_in_currency'] == null)
+							row.insertCell(9).innerHTML = "-";
+						else if(parseFloat(coins_data[i]['price_change_percentage_1y_in_currency']) < 0)
+							row.insertCell(9).innerHTML = "<red>" + parseFloat(coins_data[i]['price_change_percentage_1y_in_currency']).toLocaleString('en') + "%</red>";
+						else
+							row.insertCell(9).innerHTML = "<green>" + parseFloat(coins_data[i]['price_change_percentage_1y_in_currency']).toLocaleString('en') + "%</green>";
+					}
+					else
+						row.insertCell(9);
 		
 					if(coins_data[i]['market_cap'] > 0)
-						row.insertCell(6).innerHTML = "$" + parseFloat(coins_data[i]['market_cap']).toLocaleString('en') ;
+						row.insertCell(10).innerHTML = "$" + parseFloat(coins_data[i]['market_cap']).toLocaleString('en') ;
 					else
-						row.insertCell(6).innerHTML = "-";
+						row.insertCell(10).innerHTML = "-";
 		
 					if(coins_data[i]['total_volume'] > 0)
-						row.insertCell(7).innerHTML = "$" + coins_data[i]['total_volume'].toLocaleString('en') ;
+						row.insertCell(11).innerHTML = "$" + coins_data[i]['total_volume'].toLocaleString('en') ;
 					else
-						row.insertCell(7).innerHTML = "-";
+						row.insertCell(11).innerHTML = "-";
+		
+					if(!localStorage.getItem(user + '-change_year'))
+						row.deleteCell(9);
+					if(!localStorage.getItem(user + '-change_month'))
+						row.deleteCell(8);
+					if(!localStorage.getItem(user + '-change_week'))
+						row.deleteCell(7);
+					if(!localStorage.getItem(user + '-change_day'))
+						row.deleteCell(6);
+					if(!localStorage.getItem(user + '-change_hour'))
+						row.deleteCell(5);
 				}
 		
 				document.getElementById('table_spotlight').style.width = (document.getElementById('coins_table').offsetWidth + 70) + "px";
@@ -414,10 +530,10 @@
 		
 			function fetch_table_coingecko()
 			{
-				//alert('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=' + ids.join(',') + '&order=market_cap_desc&per_page=50&page=' + page_no + '&sparkline=false');
+				//alert('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=' + ids.join(',') + '&order=market_cap_desc&per_page=50&page=' + page_no + '&sparkline=false&price_change_percentage=1h,24h,7d,30d,1y');
 				$(document).ready(function(){
 					$.get(
-			    	    'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=' + ids.join(',') + '&order=market_cap_desc&per_page=50&page=' + page_no + '&sparkline=false',              
+			    	    'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=' + ids.join(',') + '&order=market_cap_desc&per_page=50&page=' + page_no + '&sparkline=false&price_change_percentage=1h,24h,7d,30d,1y',              
 						function(data) {
 							coins_data = data;
 		
@@ -644,6 +760,7 @@
 					<p>
 						<a href="search.html" title='search'><i class="fas fa-search fa-2x"></i></a> &nbsp;
 						<a href="coins.html" title='coins'><i class="fas fa-coins fa-2x"></i></a> &nbsp;
+						<a href="categories.html" title='categories'><i class="fas fa-cubes fa-2x"></i></a> &nbsp;
 						<a href="charts.html" title='charts'><i class="fas fa-chart-area fa-2x"></i></a> &nbsp;
 						<a href="news.html" title='news'><i class="fas fa-newspaper fa-2x"></i></a> &nbsp;
 						<a href="scams.html" title='scams'><i class="fas fa-bomb fa-2x"></i></a> &nbsp;
