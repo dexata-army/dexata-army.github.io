@@ -208,13 +208,13 @@
 
 		if(localStorage.getItem(user + '-change_hour'))
 			document.getElementById('change_hour').checked = true;
-		else if(localStorage.getItem(user + '-change_day'))
+		if(localStorage.getItem(user + '-change_day'))
 			document.getElementById('change_day').checked = true;
-		else if(localStorage.getItem(user + '-change_week'))
+		if(localStorage.getItem(user + '-change_week'))
 			document.getElementById('change_week').checked = true;
-		else if(localStorage.getItem(user + '-change_month'))
+		if(localStorage.getItem(user + '-change_month'))
 			document.getElementById('change_month').checked = true;
-		else if(localStorage.getItem(user + '-change_year'))
+		if(localStorage.getItem(user + '-change_year'))
 			document.getElementById('change_hour').checked = true;
 
 		if(localStorage.getItem(user + '-bscscan_api_key'))
