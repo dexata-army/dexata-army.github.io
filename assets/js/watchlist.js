@@ -44,7 +44,7 @@ function watch(username, name, id)
 	{
 		watchlist[watchlist.length] = id;
 		save_to_watchlist(username, watchlist, name);
-		alert("added " + id + " to watchlist " + name + " for " + username);
+		//alert("added " + id + " to watchlist " + name + " for " + username);
 	}
 	else
 		alert("already watching " + id);
@@ -59,7 +59,7 @@ function unwatch(username, name, id)
 	{
 		watchlist.splice(index, 1);
 		save_to_watchlist(username, watchlist, name);
-		alert("removed " + id + " from watchlist " + name + " for " + username);
+		//alert("removed " + id + " from watchlist " + name + " for " + username);
 	}
 	else
 		alert("not watching " + id);
@@ -73,13 +73,12 @@ function fetch_watchlists(username)
 	return localStorage.getItem(username + "-watchlists").replace(/ /g,"").replace(/;/g, "\n").replace(/,/g, "\n").split("\n");
 }
 
-function fetch_combined_watchlists_str(username)
+function fetch_combined_watchlists_str(username, names)
 {
-	var watchlists = fetch_watchlists(username);
 	var ids = [];
 
-	for(var i=0; i<watchlists.length; i++)
-		ids = ids.concat(fetch_watchlist(username, watchlists[i]));
+	for(var i=0; i<names.length; i++)
+		ids = ids.concat(fetch_watchlist(username, names[i]));
 
 	return remove_duplicates(ids).join(",");
 }

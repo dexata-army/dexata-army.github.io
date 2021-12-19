@@ -54,6 +54,24 @@ select::-webkit-scrollbar /*For WebKit Browsers*/
     height: 0;
 }
 
+select[multiple] 
+{
+  background:#6e4d4b;
+  width:auto;
+  padding:0;
+  margin:0;
+  border-width: 2px;
+  border-style: inset;
+  -moz-appearance: menulist;
+  -webkit-appearance: menulist;
+  appearance: menulist;
+}
+
+select[multiple]:unfocus
+{
+	display:  none;
+}
+
 i
 {
 	margin-left: 3px;
