@@ -11,7 +11,9 @@
 							<noselect>
 								<p style="margin-top:0px; margin-bottom: 0px" id="coin_links"></p>
 								<p style="margin-top:5px; margin-bottom: 0px" id="other_links"></p>
-								<div id="watching_div" style="max-width: 100%; margin-top: 0px">
+								<a id="show_watchlist_icon" onclick="show_watchlists_table()" style="max-width: 100%; margin-top: 0px"><i class='fas fa-eye fa-2x'></i></a>
+								<div id="watchlists_spotlight" class="spotlight" onfocusout="hide_watchlists_table()" style="display: none">
+									<table id="watchlists_table" style="text-align: left; margin-left: 40px"></table>
 								</div>
 							</noselect>
 						</div>
@@ -182,6 +184,9 @@
 	var watchlist_name;
 	var watchlist;
 	var watching;
+
+	var watchlist_names;
+	var watchlists = {};
 
 	if(localStorage.getItem(user + '-refresh_sec'))
 		refresh_ms = 1000*localStorage.getItem(user + '-refresh_sec');
@@ -389,7 +394,25 @@
 		textArea.style.visibility = "hidden";
 	}
 
-	function toggle_watching(id)
+	function toggle_watching(name)
+	{
+		for(var i=0; i<watchlists[name].length; i++)
+		{
+			if(watchlists[name][i] == param_map.get('id'))
+			{
+				unwatch(user, name, param_map.get('id'));
+				watchlists[name] = fetch_watchlist(user, name);
+				//hide_watchlists_table();
+				return;
+			}
+		}
+
+		watch(user, name, param_map.get('id'));
+		watchlists[name] = fetch_watchlist(user, name);
+		//hide_watchlists_table();
+	}
+
+	function toggle_watching_old(id)
 	{
 		if(watching[id] == true)
 		{
@@ -619,10 +642,25 @@
 		draw_exchange_table();
 		document.getElementById('exchange_spotlight').style.width = (document.getElementById('exchange_table').offsetWidth + 250) + "px";
 
-		if(watching[data['id']] == undefined)
-			document.getElementById("watching_div").innerHTML += "<p style='margin-top: 10px; margin-bottom: 0px'><a id='watchlist_icon' onclick='toggle_watching(\"" + data['id'] + "\")'><i class='fas fa-eye fa-2x'></i></a></p>";
-		else
-			document.getElementById("watching_div").innerHTML += "<p style='margin-top: 10px; margin-bottom: 0px'><a id='watchlist_icon' onclick='toggle_watching(\"" + data['id'] + "\")'><i class='fas fa-eye-slash fa-2x'></i></a></p>";
+		var table = document.getElementById('watchlists_table');
+		for(var i=1; i<watchlist_names.length; i++)
+		{
+			var row = table.insertRow(i-1);
+			row.insertCell(0).innerHTML = "<div style='margin-bottom:-20px'><input id='" + watchlist_names[i] + "' type='checkbox'><label for='" + watchlist_names[i] + "'>" + watchlist_names[i] + "</label></div>";
+
+			document.getElementById(watchlist_names[i]).addEventListener('change', (event) => {
+				toggle_watching(event.currentTarget.id);
+			})
+
+			for(var j=0; j<watchlists[watchlist_names[i]].length; j++)
+			{
+				if(watchlists[watchlist_names[i] ][j] == param_map.get('id'))
+				{
+					document.getElementById(watchlist_names[i]).checked = true;
+					break;
+				}
+			}
+		}
 
 		if(data['description']['en'] != undefined && 
 			data['description']['en'] != "")
@@ -865,10 +903,24 @@
 			sleep(refresh_ms).then(() => { fetch_info(); refresh_data(); });
 	}
 
-	watchlist_name = localStorage.getItem(user + "-watchlist");
-	watchlist = fetch_watchlist(user, watchlist_name);
-	watching = fetch_map(watchlist);
+	function show_watchlists_table()
+	{
+		document.getElementById('show_watchlist_icon').style.display = "none";
+		document.getElementById('watchlists_spotlight').style.display = "block";
+	}
 
+	function hide_watchlists_table()
+	{
+		if(!$("div#watchlists_spotlight").is(":active"))
+		{
+			document.getElementById('show_watchlist_icon').style.display = "block";
+			document.getElementById('watchlists_spotlight').style.display = "none";
+		}
+	}
+
+	watchlist_names = fetch_watchlists(user);
+	for(var i=0; i<watchlist_names.length; i++)
+		watchlists[watchlist_names[i]] = fetch_watchlist(user, watchlist_names[i]);
 
 	fetch_info();
 	document.getElementById('data_table_spotlight').style.width = (document.getElementById('data_table').offsetWidth + 60) + "px";

@@ -11,7 +11,10 @@
 						</div>
 					</div>
 
-					<select id="watchlist_select" onchange="watchlist_select_event()" style="max-width: 100%; width: 300px; margin-bottom: 20px"></select>
+					<div id="show_watchlist_select_link" class="spotlight" style="width: 300px; cursor: pointer" onclick="show_watchlist_select()">
+						<noselect style="margin: 0 auto"><div id="selected_watchlists"></div></noselect>
+					</div>
+					<select id="watchlist_select" onfocusout="hide_watchlist_select()" style="max-width: 100%; width: 300px; margin-bottom: 20px; display: none" multiple></select>
 
 					<div id="no_watchlists_spotlight" class="spotlight" style="max-width: 100%; width: 400px; display: none; padding-top: 20px; padding-bottom: 20px">
 					</div>
@@ -85,6 +88,8 @@
 	var sort_attrib = 'market_cap';
 	var sort_dir = -1;
 	var watchlist_data;
+
+	var selected_watchlists;
 
 	window.addEventListener('keydown',this.keydown,false);
 
@@ -338,14 +343,14 @@
 		sort_data();
 	}
 
-	function fetch_table_coingecko(name)
+	function fetch_table_coingecko(names)
 	{
 		var watchlist_str;
 
-		if(name == "all")
-			watchlist_str = fetch_combined_watchlists_str(user);
+		if(names.length > 1)
+			watchlist_str = fetch_combined_watchlists_str(user, names);
 		else
-			watchlist_str = fetch_watchlist_str(user, name);
+			watchlist_str = fetch_watchlist_str(user, names[0]);
 
 		no_pages = Math.ceil(watchlist_str.split(',').length/50);
 
@@ -390,7 +395,10 @@
 	function refresh_table()
 	{
 		if(refresh_ms > 0)
-			sleep(refresh_ms).then(() => { fetch_table_coingecko(document.getElementById('watchlist_select').value);; refresh_table(); });
+			sleep(refresh_ms).then(() => { 
+				fetch_table_coingecko(selected_watchlists);
+				refresh_table(); 
+			});
 	}
 
 	function prev_page()
@@ -405,7 +413,7 @@
 			if(page_no == 1)
 				document.getElementById('prev_page_link').style.visibility = "hidden";
 
-			fetch_table_coingecko(document.getElementById('watchlist_select').value);
+			fetch_table_coingecko(selected_watchlists);
 		}
 	}
 
@@ -422,7 +430,7 @@
 				document.getElementById('next_page_link').style.visibility = "hidden";
 
 
-			fetch_table_coingecko(document.getElementById('watchlist_select').value);
+			fetch_table_coingecko(selected_watchlists);
 		}
 	}
 
@@ -443,7 +451,7 @@
 				document.getElementById('next_page_link').style.visibility = "visible";
 		}
 
-		fetch_table_coingecko(document.getElementById('watchlist_select').value);
+		fetch_table_coingecko(selected_watchlists);
 	}
 
 	function keydown(e)
@@ -466,6 +474,19 @@
 		}
 	}
 
+	function show_watchlist_select()
+	{
+		document.getElementById('show_watchlist_select_link').style.display = "none";
+		document.getElementById('watchlist_select').style.display = "block";
+	}
+
+	function hide_watchlist_select()
+	{
+		document.getElementById('show_watchlist_select_link').style.display = "block";
+		document.getElementById('watchlist_select').style.display = "none";
+		watchlist_select_event();
+	}
+
 	function setup_watchlist_select()
 	{
 		var x = document.getElementById('watchlist_select');
@@ -473,25 +494,31 @@
 			x.remove(i);
 
 		var watchlists = fetch_watchlists(user);
+		var watchlist_map = {};
 
 		if(watchlists.length > 1)
 		{
-			if(watchlists.length > 2)
+			if(localStorage.getItem(user + "-watchlist"))
 			{
-				var option = document.createElement("option");
-				option.text = "all";
-				x.add(option);
+				selected_watchlists	= localStorage.getItem(user + "-watchlist").split(',');
+				for(var i=0; i<selected_watchlists.length; i++)
+					watchlist_map[selected_watchlists[i]] = true;
 			}
+			else
+				selected_watchlists = [watchlists[1]];
 
 			for(var i=1; i<watchlists.length; i++)
 			{
 				var option = document.createElement("option");
 				option.text = watchlists[i];
+				if(watchlist_map[watchlists[i]] == true)
+					option.selected = true;
 				x.add(option);
 			}
 
-			if(localStorage.getItem(user + "-watchlist"))
-				document.getElementById('watchlist_select').value = localStorage.getItem(user + "-watchlist");
+			document.getElementById('watchlist_select').size = watchlists.length - 1;
+
+			document.getElementById('selected_watchlists').innerHTML = selected_watchlists.join(', ');
 		}
 		else
 		{
@@ -505,12 +532,14 @@
 
 	function watchlist_select_event()
 	{
+		selected_watchlists = Array.from(document.getElementById('watchlist_select').selectedOptions).map(({ value }) => value);
+		document.getElementById('selected_watchlists').innerHTML = selected_watchlists.join(', ');
+
 		document.getElementById('empty_watchlist_spotlight').style.display = "none";
 		document.getElementById('table_spotlight').style.display = "block";
 		document.getElementById('page_controls').style.display = "block";
-		if(document.getElementById('watchlist_select').value != "all")
-			localStorage.setItem(user + "-watchlist", document.getElementById('watchlist_select').value); 
-		fetch_table_coingecko(document.getElementById('watchlist_select').value);
+		localStorage.setItem(user + "-watchlist", selected_watchlists.join(','));
+		fetch_table_coingecko(selected_watchlists);
 	}
 
 	document.getElementById('table_spotlight').style.width = (document.getElementById('loading_gif').offsetWidth + 400) + "px";
