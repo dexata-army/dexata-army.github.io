@@ -484,7 +484,6 @@
 	{
 		document.getElementById('show_watchlist_select_link').style.display = "block";
 		document.getElementById('watchlist_select').style.display = "none";
-		watchlist_select_event();
 	}
 
 	function setup_watchlist_select()
