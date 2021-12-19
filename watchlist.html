@@ -356,7 +356,10 @@
 				no_pages = Math.ceil(watchlist_data.length/50);
 		
 				if(no_pages == 1)
+				{
+					alert("wtf");
 					document.getElementById('page_controls').style.display = "none";
+				}
 		
 				document.getElementById('loading_gif').src = "";
 				document.getElementById('loading_gif').style.visibility = "hidden";
