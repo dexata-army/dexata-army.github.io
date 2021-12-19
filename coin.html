@@ -596,46 +596,28 @@
 		
 			function toggle_watching(name)
 			{
+				var found = false;
+		
 				for(var i=0; i<watchlists[name].length; i++)
 				{
 					if(watchlists[name][i] == param_map.get('id'))
 					{
 						unwatch(user, name, param_map.get('id'));
-						watchlists[name] = fetch_watchlist(user, name);
-						if(!$("div#watchlists_table").is(":active"))
-						{
-							document.getElementById('show_watchlist_icon').style.display = "block";
-							document.getElementById('watchlists_spotlight').style.display = "none";
-						}
-						//hide_watchlists_table();
-						return;
+						found = true;
+						break;
 					}
 				}
 		
-				watch(user, name, param_map.get('id'));
+				if(!found)
+					watch(user, name, param_map.get('id'));
+		
 				watchlists[name] = fetch_watchlist(user, name);
+		
 				if(!$("div#watchlists_table").is(":active"))
 				{
 					document.getElementById('show_watchlist_icon').style.display = "block";
 					document.getElementById('watchlists_spotlight').style.display = "none";
 				}
-				//hide_watchlists_table();
-			}
-		
-			function toggle_watching_old(id)
-			{
-				if(watching[id] == true)
-				{
-					document.getElementById('watchlist_icon').innerHTML = "<i class='fas fa-eye fa-2x'></i>";
-					unwatch(user, watchlist_name, id);
-				}
-				else
-				{
-					document.getElementById('watchlist_icon').innerHTML = "<i class='fas fa-eye-slash fa-2x''></i>";
-					watch(user, watchlist_name, id);
-				}
-				watchlist = fetch_watchlist(user, watchlist_name);
-				watching = fetch_map(watchlist);
 			}
 		
 			function clear_table()
