@@ -22,11 +22,11 @@
 										<th><a onclick="toggle_sort('symbol')">symbol</a></th>
 										<th><a onclick="toggle_sort('name')">name</a></th>
 										<th><a onclick="toggle_sort('current_price')">price</a></th>
-										<th id="change_hour_row_head"><a onclick="toggle_sort('price_change_percentage_1h')">hour</a></th>
+										<th id="change_hour_row_head"><a onclick="toggle_sort('price_change_percentage_1h_in_currency')">hour</a></th>
 										<th id="change_day_row_head"><a onclick="toggle_sort('price_change_percentage_24h')">day</a></th>
-										<th id="change_week_row_head"><a onclick="toggle_sort('price_change_percentage_7d')">week</a></th>
-										<th id="change_month_row_head"><a onclick="toggle_sort('price_change_percentage_30d')">month</a></th>
-										<th id="change_year_row_head"><a onclick="toggle_sort('price_change_percentage_1y')">year</a></th>
+										<th id="change_week_row_head"><a onclick="toggle_sort('price_change_percentage_7d_in_currency')">week</a></th>
+										<th id="change_month_row_head"><a onclick="toggle_sort('price_change_percentage_30d_in_currency')">month</a></th>
+										<th id="change_year_row_head"><a onclick="toggle_sort('price_change_percentage_1y_in_currency')">year</a></th>
 										<th><a onclick="toggle_sort('market_cap')">market cap</a></th>
 										<th><a onclick="toggle_sort('total_volume')">volume</a></th>
 									</tr>
@@ -38,11 +38,11 @@
 										<th><a onclick="toggle_sort('symbol')">symbol</a></th>
 										<th><a onclick="toggle_sort('name')">name</a></th>
 										<th><a onclick="toggle_sort('current_price')">price</a></th>
-										<th id="change_hour_row_foot"><a onclick="toggle_sort('price_change_percentage_1h')">hour</a></th>
+										<th id="change_hour_row_foot"><a onclick="toggle_sort('price_change_percentage_1h_in_currency')">hour</a></th>
 										<th id="change_day_row_foot"><a onclick="toggle_sort('price_change_percentage_24h')">day</a></th>
-										<th id="change_week_row_foot"><a onclick="toggle_sort('price_change_percentage_7d')">week</a></th>
-										<th id="change_month_row_foot"><a onclick="toggle_sort('price_change_percentage_30d')">month</a></th>
-										<th id="change_year_row_foot"><a onclick="toggle_sort('price_change_percentage_1y')">year</a></th>
+										<th id="change_week_row_foot"><a onclick="toggle_sort('price_change_percentage_7d_in_currency')">week</a></th>
+										<th id="change_month_row_foot"><a onclick="toggle_sort('price_change_percentage_30d_in_currency')">month</a></th>
+										<th id="change_year_row_foot"><a onclick="toggle_sort('price_change_percentage_1y_in_currency')">year</a></th>
 										<th><a onclick="toggle_sort('market_cap')">market cap</a></th>
 										<th><a onclick="toggle_sort('total_volume')">volume</a></th>
 									</tr>

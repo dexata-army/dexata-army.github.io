@@ -46,18 +46,13 @@
 							<tr>
 								<td>Table percentage changes</td>
 								<td>
-									<input id="change_hour" type="checkbox"><label for="change_hour" checked>hour</label>
+									<input id="change_hour" type="checkbox"><label for="change_hour" checked>hour&nbsp;&nbsp;&nbsp;&nbsp;</label>
 									<input id="change_day" type="checkbox"><label for="change_day" checked>day</label>
 									<input id="change_week" type="checkbox"><label for="change_week" checked>week</label>
 									<div style="margin-top: -15px; margin-bottom: -15px">
 									<input id="change_month" type="checkbox"><label for="change_month" checked>month</label>
 									<input id="change_year" type="checkbox"><label for="change_year" checked>year</label>
-									</div>
 								</td>
-							</tr>
-							<tr id="bscscan_api_key_row">
-								<td>BSCScan API key</td>
-								<td><input id="bscscan_api_key" spellcheck="false"></td>
 							</tr>
 							<tr id="covalenthq_api_key_row">
 								<td>CovalentHQ API key</td>
@@ -216,10 +211,6 @@
 			document.getElementById('change_month').checked = true;
 		if(localStorage.getItem(user + '-change_year'))
 			document.getElementById('change_year').checked = true;
-
-		if(localStorage.getItem(user + '-bscscan_api_key'))
-			document.getElementById("bscscan_api_key").value = CryptoJS.AES.decrypt(localStorage.getItem(user + '-bscscan_api_key'), CryptoJS.AES.decrypt(localStorage.getItem('password'), "Go hang a salami, I’m a lasagna hog.").toString(CryptoJS.enc.Utf8)).toString(CryptoJS.enc.Utf8);
-
 
 		if(localStorage.getItem(user + '-covalenthq_api_key'))
 			document.getElementById("covalenthq_api_key").value = CryptoJS.AES.decrypt(localStorage.getItem(user + '-covalenthq_api_key'), CryptoJS.AES.decrypt(localStorage.getItem('password'), "Go hang a salami, I’m a lasagna hog.").toString(CryptoJS.enc.Utf8)).toString(CryptoJS.enc.Utf8);
@@ -527,11 +518,6 @@
 			else
 				localStorage.removeItem(user + '-change_year');
 
-			if(document.getElementById("bscscan_api_key").value != "")
-				localStorage.setItem(user + '-bscscan_api_key', CryptoJS.AES.encrypt(document.getElementById("bscscan_api_key").value, CryptoJS.AES.decrypt(localStorage.getItem("password"), "Go hang a salami, I’m a lasagna hog.").toString(CryptoJS.enc.Utf8)));
-			else
-				localStorage.removeItem(user + '-bscscan_api_key');
-
 			if(document.getElementById("covalenthq_api_key").value != "")
 				localStorage.setItem(user + '-covalenthq_api_key', CryptoJS.AES.encrypt(document.getElementById("covalenthq_api_key").value, CryptoJS.AES.decrypt(localStorage.getItem("password"), "Go hang a salami, I’m a lasagna hog.").toString(CryptoJS.enc.Utf8)));
 			else
@@ -569,7 +555,6 @@
 	{
 		document.getElementById('config_select').remove(2);
 		document.getElementById('session_timeout_row').style.display = "none";
-		document.getElementById('bscscan_api_key_row').style.display = "none";
 		document.getElementById('covalenthq_api_key_row').style.display = "none";
 	}
 
