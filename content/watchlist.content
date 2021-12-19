@@ -406,7 +406,7 @@
 
 	function next_page()
 	{
-		if(page_no+1 < no_pages)
+		if(page_no < no_pages)
 		{
 			if(page_no == 1)
 				document.getElementById('prev_page_link').style.visibility = "visible";
