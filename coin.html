@@ -602,24 +602,14 @@
 					{
 						unwatch(user, name, param_map.get('id'));
 						watchlists[name] = fetch_watchlist(user, name);
-						if(!$("div#watchlists_table").is(":active"))
-						{
-							document.getElementById('show_watchlist_icon').style.display = "block";
-							document.getElementById('watchlists_spotlight').style.display = "none";
-						}
-						//hide_watchlists_table();
+						hide_watchlists_table();
 						return;
 					}
 				}
 		
 				watch(user, name, param_map.get('id'));
 				watchlists[name] = fetch_watchlist(user, name);
-				if(!$("div#watchlists_table").is(":active"))
-				{
-					document.getElementById('show_watchlist_icon').style.display = "block";
-					document.getElementById('watchlists_spotlight').style.display = "none";
-				}
-				//hide_watchlists_table();
+				hide_watchlists_table();
 			}
 		
 			function toggle_watching_old(id)
