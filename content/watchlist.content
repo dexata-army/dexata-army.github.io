@@ -518,7 +518,7 @@
 
 			document.getElementById('watchlist_select').size = watchlists.length - 1;
 
-			document.getElementById('selected_watchlists').innerHTML = selected_watchlists.join(', ');
+			document.getElementById('selected_watchlists').innerHTML = selected_watchlists.join(' + ');
 		}
 		else
 		{
@@ -533,7 +533,7 @@
 	function watchlist_select_event()
 	{
 		selected_watchlists = Array.from(document.getElementById('watchlist_select').selectedOptions).map(({ value }) => value);
-		document.getElementById('selected_watchlists').innerHTML = selected_watchlists.join(', ');
+		document.getElementById('selected_watchlists').innerHTML = selected_watchlists.join(' + ');
 
 		document.getElementById('empty_watchlist_spotlight').style.display = "none";
 		document.getElementById('table_spotlight').style.display = "block";
