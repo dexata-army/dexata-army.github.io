@@ -353,7 +353,7 @@
 				clear_table();
 				var table = document.getElementById("watchlist_table");
 				document.getElementById("page_input").value = page_no;
-				no_pages = Math.ceil(watchlist_data.length/100);
+				no_pages = Math.ceil(watchlist_data.length/50);
 		
 				if(no_pages == 1)
 					document.getElementById('page_controls').style.display = "none";
@@ -547,7 +547,7 @@
 				{
 					$(document).ready(function(){
 						$.get(
-							'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=' + watchlist_str + '&order=market_cap_desc&per_page=100&page=' + page_no + '&sparkline=false&price_change_percentage=1h,24h,7d,30d,1y',             
+							'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=' + watchlist_str + '&order=market_cap_desc&per_page=50&page=' + page_no + '&sparkline=false&price_change_percentage=1h,24h,7d,30d,1y',             
 							function(data) {
 								watchlist_data = data;
 		
@@ -622,12 +622,20 @@
 		
 			function goto_page()
 			{
-				page_no = document.getElementById(document.activeElement.id).value;
+				page_no = Math.min(no_pages, document.getElementById(document.activeElement.id).value);
 		
-				if(page_no == 1)
-					document.getElementById('prev_page_link').style.visibility = "hidden";
-				else if(page_no == no_pages)
-					document.getElementById('next_page_link').style.visibility = "hidden";
+				if(no_pages > 1)
+				{
+					if(page_no == 1)
+						document.getElementById('prev_page_link').style.visibility = "hidden";
+					else
+						document.getElementById('prev_page_link').style.visibility = "visible";
+					
+					if(page_no == no_pages)
+						document.getElementById('next_page_link').style.visibility = "hidden";
+					else
+						document.getElementById('next_page_link').style.visibility = "visible";
+				}
 		
 				fetch_table_coingecko(document.getElementById('watchlist_select').value);
 			}
