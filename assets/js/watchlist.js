@@ -73,6 +73,17 @@ function fetch_watchlists(username)
 	return localStorage.getItem(username + "-watchlists").replace(/ /g,"").replace(/;/g, "\n").replace(/,/g, "\n").split("\n");
 }
 
+function fetch_combined_watchlists_str(username)
+{
+	var watchlists = fetch_watchlists(username);
+	var ids = [];
+
+	for(var i=0; i<watchlists.length; i++)
+		ids = ids.concat(fetch_watchlist(username, watchlists[i]));
+
+	return remove_duplicates(ids).join(",");
+}
+
 function save_watchlists(username, watchlists)
 {
 	var watchlists_str = "";
