@@ -96,7 +96,7 @@
 	if(localStorage.getItem(user + '-chart_range'))
 		chart_range = localStorage.getItem(user + '-chart_range');
 
-		if(!localStorage.getItem(user + "-change_hour") &&
+	if(!localStorage.getItem(user + "-change_hour") &&
 	   !localStorage.getItem(user + "-change_day") &&
 	   !localStorage.getItem(user + "-change_week") &&
 	   !localStorage.getItem(user + "-change_month") &&
@@ -340,7 +340,12 @@
 
 	function fetch_table_coingecko(name)
 	{
-		var watchlist_str = fetch_watchlist_str(user, name);
+		var watchlist_str;
+
+		if(name == "all")
+			watchlist_str = fetch_combined_watchlists_str(user);
+		else
+			watchlist_str = fetch_watchlist_str(user, name);
 
 		no_pages = Math.ceil(watchlist_str.split(',').length/50);
 
@@ -471,6 +476,13 @@
 
 		if(watchlists.length > 1)
 		{
+			if(watchlists.length > 2)
+			{
+				var option = document.createElement("option");
+				option.text = "all";
+				x.add(option);
+			}
+
 			for(var i=1; i<watchlists.length; i++)
 			{
 				var option = document.createElement("option");
@@ -496,7 +508,8 @@
 		document.getElementById('empty_watchlist_spotlight').style.display = "none";
 		document.getElementById('table_spotlight').style.display = "block";
 		document.getElementById('page_controls').style.display = "block";
-		localStorage.setItem(user + "-watchlist", document.getElementById('watchlist_select').value); 
+		if(document.getElementById('watchlist_select').value != "all")
+			localStorage.setItem(user + "-watchlist", document.getElementById('watchlist_select').value); 
 		fetch_table_coingecko(document.getElementById('watchlist_select').value);
 	}
 

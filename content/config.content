@@ -381,6 +381,7 @@
 		{
 			remove_from_watchlists(user, document.getElementById('remove_watchlist_select').value);
 			update_watchlist_select('remove_watchlist_select');
+			document.getElementById('remove_watchlist_password').value = "";
 		}
 	}
 
@@ -419,6 +420,7 @@
 		{
 			remove_from_wallets(user, document.getElementById('remove_wallet_select').value);
 			update_wallet_select('remove_wallet_select');
+			document.getElementById('remove_wallet_password').value = "";
 		}
 	}
 
