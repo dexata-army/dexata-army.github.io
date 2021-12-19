@@ -14,7 +14,7 @@
 					<div id="show_watchlist_select_link" class="spotlight" style="width: 300px; cursor: pointer" onclick="show_watchlist_select()">
 						<noselect style="margin: 0 auto"><div id="selected_watchlists"></div></noselect>
 					</div>
-					<select id="watchlist_select" onfocusout="hide_watchlist_select()" style="max-width: 100%; width: 300px; margin-bottom: 20px; display: none" multiple></select>
+					<select id="watchlist_select" onchange="watchlist_select_event()" onfocusout="hide_watchlist_select()" style="max-width: 100%; width: 300px; margin-bottom: 20px; display: none" multiple></select>
 
 					<div id="no_watchlists_spotlight" class="spotlight" style="max-width: 100%; width: 400px; display: none; padding-top: 20px; padding-bottom: 20px">
 					</div>
