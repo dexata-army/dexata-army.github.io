@@ -63,9 +63,9 @@
 						</div>
 					</div>
 					<noselect id="page_controls" style="margin-bottom: 15px">
-						<a id="prev_page_link" onclick="prev_page()" style="visibility: hidden"><i class="fas fa-arrow-circle-left fa-3x" style="vertical-align: middle"></i></a> &nbsp;&nbsp;
+						<a id="prev_page_link" onclick="prev_page()" style="visibility: hidden"><i class="fas fa-arrow-circle-left fa-2x" style="vertical-align: middle"></i></a> &nbsp;&nbsp;
 						<input id="page_input" style="width: 75px; vertical-align: middle"> &nbsp;&nbsp;
-						<a id="next_page_link" onclick="next_page()"><i class="fas fa-arrow-circle-right fa-3x" style="vertical-align: middle"></i></a>
+						<a id="next_page_link" onclick="next_page()"><i class="fas fa-arrow-circle-right fa-2x" style="vertical-align: middle"></i></a>
 					</noselect>
 
 					<div id="newsfeed_div" style="max-height: 350px; overflow-y: scroll; background-color: #2E2E35; border-radius: 5px; scrollbar-color: grey #2e2e35;">
