@@ -11,19 +11,16 @@
 						</div>
 					</div>
 
-					<div id="show_wallet_select_link" class="spotlight" style="width: 300px; cursor: pointer" onclick="show_wallet_select()">
-						<noselect style="margin: 0 auto"><div id="selected_wallets" class="xscroll" style="margin-top:10px"></div></noselect>
-					</div>
-					<select id="wallet_select" onchange="wallet_select_event()" onfocusout="hide_wallet_select()" style="max-width: 100%; width: 300px; margin-bottom: 20px; display: none" multiple></select>
+					<select id="wallet_select" onchange="wallet_select_event()" style="max-width: 100%; width: 300px; margin-bottom: 20px"></select>
 
 					<div id="no_wallets_spotlight" class="spotlight" style="max-width: 100%; width: 400px; display: none; padding-top: 20px; padding-bottom: 20px">
 					</div>
 
-					<div style="margin-bottom: 13px; margin-top: 10px; max-width: 40px">
+					<div style="margin-bottom: 10px; margin-top: -10px ;max-width: 40px">
 						<a id="charts_link" style="display: none" title="charts"><i class="fas fa-chart-area fa-2x" style="vertical-align: middle"></i></a>
 					</div>
 
-					<div id="balance_spotlight" class="spotlight" style="min-width: 300px; width: 300px; margin-bottom: 20px">
+					<div id="balance_spotlight" class="spotlight" style="max-width:300px;">
 						<div id="balance_div" class="xscroll" style="margin-top:10px">
 							<b>balance: </b>
 						</div>
@@ -38,7 +35,6 @@
 										<th></th>
 										<th><a onclick="toggle_sort('contract_ticker_symbol')">symbol</a></th>
 										<th><a onclick="toggle_sort('contract_name')">name</a></th>
-										<th><a onclick="toggle_sort('wallet')">wallet</a></th>
 										<th><a onclick="toggle_sort('quote_rate')">price</a></th>
 										<th><a onclick="toggle_sort('balance')">quantity</a></th>
 										<th><a onclick="toggle_sort('quote')">value</a></th>
@@ -50,7 +46,6 @@
 										<th></th>
 										<th><a onclick="toggle_sort('contract_ticker_symbol')">symbol</a></th>
 										<th><a onclick="toggle_sort('contract_name')">name</a></th>
-										<th><a onclick="toggle_sort('wallet')">wallet</a></th>
 										<th><a onclick="toggle_sort('quote_rate')">price</a></th>
 										<th><a onclick="toggle_sort('balance')">quantity</a></th>
 										<th><a onclick="toggle_sort('quote')">value</a></th>
@@ -65,7 +60,7 @@
 					<div id="balance_chart_div" style="display: none">
 						<h3>Balance Chart</h3>
 						<select id="chart_select" placeholder="" onchange="fetch_chart()" style="max-width: 100%; width: 300px; margin-bottom: 20px;">
-							<option value="coin" disabled selected hidden>coin</option>
+							<option disabled selected hidden>coin</option>
 						</select>
 						<div id="balance_chart_spotlight" class="spotlight" style="width: 100%; display: none; overflow: hidden">
 							<div id="balance_chart" style="width: 100%; height: 100%; padding-left: 10px; padding-right: 10px;padding-top: 10px; padding-bottom: 10px; margin: 0 auto">
@@ -105,11 +100,7 @@
 
 	var balance_data;
 	var balance_chart;
-	var chart_select_value;
 	var display_balance_div = false;
-
-	var selected_wallets;
-	var wallet_info = {};
 
 
 	if(localStorage.getItem(user + '-refresh_sec'))
@@ -119,6 +110,13 @@
 
 	if(localStorage.getItem(user + '-chart_range'))
 		chart_range = localStorage.getItem(user + '-chart_range');
+
+	if(localStorage.getItem(user + '-wallet'))
+	{
+		wallet_name = localStorage.getItem(user + '-wallet');
+		wallet_network = localStorage.getItem(user + '-wallets-' + wallet_name + '-network');
+		wallet_address = CryptoJS.AES.decrypt(localStorage.getItem(user + '-wallets-' + wallet_name + '-address'), CryptoJS.AES.decrypt(localStorage.getItem('password'), "Go hang a salami, I’m a lasagna hog.").toString(CryptoJS.enc.Utf8)).toString(CryptoJS.enc.Utf8);
+	}
 
 	if(localStorage.getItem(user + '-covalenthq_api_key'))
 		covalenthq_api_key = CryptoJS.AES.decrypt(localStorage.getItem(user + '-covalenthq_api_key'), CryptoJS.AES.decrypt(localStorage.getItem('password'), "Go hang a salami, I’m a lasagna hog.").toString(CryptoJS.enc.Utf8)).toString(CryptoJS.enc.Utf8);
@@ -147,115 +145,108 @@
 		var table = document.getElementById("wallet_table");
 		var wallet_balance = 0.0;
 
-		ignore_map = fetch_combined_ignorelist_map(user, selected_wallets);
+		ignore_map = fetch_ignorelist_map(user, wallet_name);
 
 		document.getElementById('loading_gif').src = "";
 		document.getElementById('loading_gif').style.visibility = "hidden";
 		document.getElementById('loading_gif').style.display = "none";
 		document.getElementById("wallet_table").style.display = "inline";
 
-		if(coins_data.length > 0)
+		if(coins_data['data']['items'].length > 0)
 		{
 			var coins_str = "";
 			var ids_str = "";
 
-			for(var i=0, r=0; i<coins_data.length; i++)
+			for(var i=0, r=0; i<coins_data['data']['items'].length; i++)
 			{
-				if(coins_data[i]['contract_ticker_symbol'] != undefined &&
-					coins_data[i]['contract_name'] != undefined &&
+				if(coins_data['data']['items'][i]['contract_ticker_symbol'] != undefined &&
+					coins_data['data']['items'][i]['contract_name'] != undefined &&
 					(show_ignored_coins ||
-						(coins_data[i]['quote'] > 0 &&
-						ignore_map[coins_data[i]['contract_ticker_symbol'].toLowerCase().replace(/ /g, "").replace(/-/g, "")] != true &&
-					    ignore_map[coins_data[i]['contract_name'].toLowerCase().replace(/ /g, "").replace(/-/g, "")] != true &&
-					    ignore_map[id_map[coins_data[i]['contract_name'].replace(/ /g, "").replace(/-/g, "").toLowerCase()]] != true)))
+						(coins_data['data']['items'][i]['quote'] > 0 &&
+						ignore_map[coins_data['data']['items'][i]['contract_ticker_symbol'].toLowerCase().replace(/ /g, "").replace(/-/g, "")] != true &&
+					    ignore_map[coins_data['data']['items'][i]['contract_name'].toLowerCase().replace(/ /g, "").replace(/-/g, "")] != true &&
+					    ignore_map[id_map[coins_data['data']['items'][i]['contract_name'].replace(/ /g, "").replace(/-/g, "").toLowerCase()]] != true)))
 				{
-					coins_data[i]['contract_ticker_symbol'] = coins_data[i]['contract_ticker_symbol'].toLowerCase();
+					coins_data['data']['items'][i]['contract_ticker_symbol'] = coins_data['data']['items'][i]['contract_ticker_symbol'].toLowerCase();
 
 					var row = table.insertRow(r+1);
 					r++;
-					if(coins_data[i]['logo_url'] != "")
-						row.insertCell(0).innerHTML = "<img style='min-width; 23px; max-height: 23px; vertical-align:middle' class='rounded' onerror='this.style.display=\"none\"' src='" + coins_data[i]['logo_url'] + "'>";
+					if(coins_data['data']['items'][i]['logo_url'] != "")
+						row.insertCell(0).innerHTML = "<img style='min-width; 23px; max-height: 23px; vertical-align:middle' class='rounded' onerror='this.style.display=\"none\"' src='" + coins_data['data']['items'][i]['logo_url'] + "'>";
 
-					row.insertCell(1).innerHTML = coins_data[i]['contract_ticker_symbol'];
+					row.insertCell(1).innerHTML = coins_data['data']['items'][i]['contract_ticker_symbol'];
 
-					if(id_map[coins_data[i]['contract_name'].replace(/ /g, "").replace(/-/g, "").toLowerCase()] != undefined)
+					if(id_map[coins_data['data']['items'][i]['contract_name'].replace(/ /g, "").replace(/-/g, "").toLowerCase()] != undefined)
 					{
-						row.insertCell(2).innerHTML = "<a href='@pathto(coin)?id=" + id_map[coins_data[i]['contract_name'].replace(/ /g, "").replace(/-/g, "").toLowerCase()] + "'>" + coins_data[i]['contract_name'] + "</a>";
+						row.insertCell(2).innerHTML = "<a href='@pathto(coin)?id=" + id_map[coins_data['data']['items'][i]['contract_name'].replace(/ /g, "").replace(/-/g, "").toLowerCase()] + "'>" + coins_data['data']['items'][i]['contract_name'] + "</a>";
 						if(coins_str.length > 0)
 						{
 							coins_str += ",";
 							ids_str += ",";
 						}
-						coins_str += id_map[coins_data[i]['contract_name'].replace(/ /g, "").replace(/-/g, "").toLowerCase()];
-						ids_str += coins_data[i]['contract_ticker_symbol'].toUpperCase();
+						coins_str += id_map[coins_data['data']['items'][i]['contract_name'].replace(/ /g, "").replace(/-/g, "").toLowerCase()];
+						ids_str += coins_data['data']['items'][i]['contract_ticker_symbol'].toUpperCase();
 
 						var option = document.createElement("option");
-						option.text = coins_data[i]['wallet'] + ' -- ' + coins_data[i]['contract_name'];
-						option.value = coins_data[i]['wallet'] + ' -- ' + coins_data[i]['contract_address'];
+						option.text = coins_data['data']['items'][i]['contract_name'];
+						option.value = coins_data['data']['items'][i]['contract_address'];
 						document.getElementById('chart_select').add(option);
 					}
-					else if(id_map[coins_data[i]['contract_ticker_symbol']] != undefined)
+					else if(id_map[coins_data['data']['items'][i]['contract_ticker_symbol']] != undefined)
 					{
-						row.insertCell(2).innerHTML = "<a href='@pathto(coin)?id=" + id_map[coins_data[i]['contract_ticker_symbol']] + "'>" + coins_data[i]['contract_name'] + "</a>";
+						row.insertCell(2).innerHTML = "<a href='@pathto(coin)?id=" + id_map[coins_data['data']['items'][i]['contract_ticker_symbol']] + "'>" + coins_data['data']['items'][i]['contract_name'] + "</a>";
 						if(coins_str.length > 0)
 						{
 							coins_str += ",";
 							ids_str += ",";
 						}
-						coins_str += id_map[coins_data[i]['contract_ticker_symbol'].replace(/ /g, "").replace(/-/g, "").toLowerCase()];
-						ids_str += coins_data[i]['contract_ticker_symbol'].toUpperCase();
+						coins_str += id_map[coins_data['data']['items'][i]['contract_ticker_symbol'].replace(/ /g, "").replace(/-/g, "").toLowerCase()];
+						ids_str += coins_data['data']['items'][i]['contract_ticker_symbol'].toUpperCase();
 
 						var option = document.createElement("option");
-						option.text = coins_data[i]['wallet'] + ' -- ' + coins_data[i]['contract_name'];
-						option.value = coins_data[i]['wallet'] + ' -- ' + coins_data[i]['contract_address'];
+						option.text = coins_data['data']['items'][i]['contract_name'];
+						option.value = coins_data['data']['items'][i]['contract_address'];
 						document.getElementById('chart_select').add(option);
 					}
 					else
-						row.insertCell(2).innerHTML = coins_data[i]['contract_name'];
+						row.insertCell(2).innerHTML = coins_data['data']['items'][i]['contract_name'];
 
-					row.insertCell(3).innerHTML = coins_data[i]['wallet'];
-
-					if(coins_data[i]['quote_rate'] != undefined)
+					if(coins_data['data']['items'][i]['quote_rate'] != undefined)
 					{
-						if(coins_data[i]['quote_rate'] == 0)
-							row.insertCell(4).innerHTML = "-";
-						else if(coins_data[i]['quote_rate'] > 1)
-							row.insertCell(4).innerHTML = "$" + parseFloat(coins_data[i]['quote_rate']).toLocaleString('en');
-						else if(coins_data[i]['quote_rate'] > 0 && coins_data[i]['quote_rate'] < 0.0001)
-							row.insertCell(4).innerHTML = "$" + parseFloat(coins_data[i]['quote_rate']).toExponential(3);
+						if(coins_data['data']['items'][i]['quote_rate'] == 0)
+							row.insertCell(3).innerHTML = "-";
+						else if(coins_data['data']['items'][i]['quote_rate'] > 1)
+							row.insertCell(3).innerHTML = "$" + parseFloat(coins_data['data']['items'][i]['quote_rate']).toLocaleString('en');
+						else if(coins_data['data']['items'][i]['quote_rate'] > 0 && coins_data['data']['items'][i]['quote_rate'] < 0.0001)
+							row.insertCell(3).innerHTML = "$" + parseFloat(coins_data['data']['items'][i]['quote_rate']).toExponential(3);
 						else
-							row.insertCell(4).innerHTML = "$" + coins_data[i]['quote_rate'].toFixed(6);
+							row.insertCell(3).innerHTML = "$" + coins_data['data']['items'][i]['quote_rate'].toFixed(6);
 					}
+					else
+						row.insertCell(3).innerHTML = "-";
+
+					if(coins_data['data']['items'][i]['quote'] > 0)
+						row.insertCell(4).innerHTML = coins_data['data']['items'][i]['balance'].toLocaleString('en');
 					else
 						row.insertCell(4).innerHTML = "-";
 
-					if(coins_data[i]['quote'] > 0)
-						row.insertCell(5).innerHTML = coins_data[i]['balance'].toLocaleString('en');
-					else
-						row.insertCell(5).innerHTML = "-";
-
-					row.insertCell(6).innerHTML = "$" + coins_data[i]['quote'].toLocaleString('en');
+					row.insertCell(5).innerHTML = "$" + coins_data['data']['items'][i]['quote'].toLocaleString('en');
 
 					if(add_hide_buttons)
 					{
-						if(ignore_map[coins_data[i]['contract_name'].toLowerCase().replace(/ /g, "").replace(/-/g, "")] != true &&
-				   			ignore_map[id_map[coins_data[i]['contract_name'].replace(/ /g, "").replace(/-/g, "").toLowerCase()]] != true)
+						if(ignore_map[coins_data['data']['items'][i]['contract_name'].toLowerCase().replace(/ /g, "").replace(/-/g, "")] != true &&
+				   			ignore_map[id_map[coins_data['data']['items'][i]['contract_name'].replace(/ /g, "").replace(/-/g, "").toLowerCase()]] != true)
 						{
-							if(coins_data[i]['quote'] > 0)
-								row.insertCell(7).innerHTML = "<a onclick='ignore_coin(\"" + row.cells[3].innerText + "\", \"" + row.cells[2].innerText.replace(/ /g, "").replace(/-/g, "").toLowerCase() + "\")'><i class='fas fa-trash fa-1x' style='vertical-align:middle'></i></a>";
+							if(coins_data['data']['items'][i]['quote'] > 0)
+								row.insertCell(6).innerHTML = "<a onclick='ignore_coin(\"" + row.cells[2].innerText.replace(/ /g, "").replace(/-/g, "").toLowerCase() + "\")'><i class='fas fa-trash fa-1x' style='vertical-align:middle'></i></a>";
 						}
 						else if(show_ignored_coins)
-							row.insertCell(7).innerHTML = "<a onclick='unignore_coin(\"" + row.cells[3].innerText + "\", \"" + row.cells[2].innerText.replace(/ /g, "").replace(/-/g, "").toLowerCase() + "\")'><i class='fas fa-trash-restore fa-1x' style='vertical-align:middle'></i></a>";
+							row.insertCell(6).innerHTML = "<a onclick='unignore_coin(\"" + row.cells[2].innerText.replace(/ /g, "").replace(/-/g, "").toLowerCase() + "\")'><i class='fas fa-trash-restore fa-1x' style='vertical-align:middle'></i></a>";
 					}
 
-					wallet_balance += coins_data[i]['quote'];
+					wallet_balance += coins_data['data']['items'][i]['quote'];
 				}
 			}
-
-			if(chart_select_value != undefined)
-				document.getElementById('chart_select').value = chart_select_value;
-			if(document.getElementById('chart_select').value == "")
-				document.getElementById('chart_select').value = "coin";
 
 			document.getElementById('table_spotlight').style.width = (document.getElementById('wallet_table').offsetWidth + 70) + "px";
 
@@ -282,9 +273,9 @@
 
 	function sort_data()
 	{
-		if(sort_attrib == "contract_ticker_symbol" || sort_attrib == "contract_name" || sort_attrib == "wallet")
+		if(sort_attrib == "contract_ticker_symbol" || sort_attrib == "contract_name")
 		{
-			coins_data.sort(function(obj1, obj2) {
+			coins_data['data']['items'].sort(function(obj1, obj2) {
 				if(obj1[sort_attrib] == undefined)
 				{
 					if(obj2[sort_attrib] == undefined)
@@ -304,7 +295,7 @@
 		}
 		else
 		{
-			coins_data.sort(function(obj1, obj2) {
+			coins_data['data']['items'].sort(function(obj1, obj2) {
 				return sort_dir*(obj1[sort_attrib] - obj2[sort_attrib]);
 			});
 		}
@@ -327,42 +318,32 @@
 
 	function fetch_table_covalenthq()
 	{
-		$(document).ready(async function(){
-			var no_fetched = 0;
-			coins_data = [];
+		$(document).ready(function(){
+			$.get(
+				'https://api.covalenthq.com/v1/' + wallet_network + '/address/' + wallet_address + '/balances_v2/?key=' + covalenthq_api_key,          
+				function(data) {
+					coins_data = data;
 
-			for(var w=0; w<selected_wallets.length; w++)
-			{
-				await $.get(
-					'https://api.covalenthq.com/v1/' + wallet_info[selected_wallets[w]][0] + '/address/' + wallet_info[selected_wallets[w]][1] + '/balances_v2/?key=' + covalenthq_api_key,          
-					function(data) {
-						for(var i=0; i<data['data']['items'].length; i++)
-						{
-							if(data['data']['items'][i]['quote_rate'] > 0)
-								data['data']['items'][i]['balance'] = data['data']['items'][i]['quote']/data['data']['items'][i]['quote_rate'];
+					for(var i=0; i<coins_data['data']['items'].length; i++)
+						if(coins_data['data']['items'][i]['quote_rate'] > 0)
+							coins_data['data']['items'][i]['balance'] = coins_data['data']['items'][i]['quote']/coins_data['data']['items'][i]['quote_rate'];
 
-							data['data']['items'][i]['wallet'] = selected_wallets[no_fetched];
-
-							coins_data.push(data['data']['items'][i]);
-						}
-
-						if(++no_fetched == selected_wallets.length)
-						{
-							sort_data();
-						}
-				}).fail(function() {
-					clear_table();
-					document.getElementById('loading_gif').src = "";
-					document.getElementById('loading_gif').style.visibility = "hidden";
-					document.getElementById('loading_gif').style.display = "none";
-					document.getElementById("balance_spotlight").style.display = "none";
-					document.getElementById('show_ignored_coins_button').style.display = "none";
-					document.getElementById("table_spotlight").style.width = "600px";
+					if(sort_attrib == "quote" && sort_dir == -1)
+						draw_table();
+					else
+						sort_data();
+			});
+		}).fail(function() {
+			clear_table();
+			document.getElementById('loading_gif').src = "";
+			document.getElementById('loading_gif').style.visibility = "hidden";
+			document.getElementById('loading_gif').style.display = "none";
+			document.getElementById("balance_spotlight").style.display = "none";
+			document.getElementById('show_ignored_coins_button').style.display = "none";
+			document.getElementById("table_spotlight").style.width = "600px";
 
 
-					alert("failed to fetch wallet information, please refresh to try again");
-				});
-			}
+			document.getElementById("table_div").innerHTML = "<p style='margin-top: 20px; margin-bottom: 10px'>failed to fetch wallet information, please refresh to try again.</p>";
 		});
 	}
 
@@ -409,18 +390,6 @@
 		});
 	}
 
-	function show_wallet_select()
-	{
-		document.getElementById('show_wallet_select_link').style.display = "none";
-		document.getElementById('wallet_select').style.display = "block";
-	}
-
-	function hide_wallet_select()
-	{
-		document.getElementById('show_wallet_select_link').style.display = "block";
-		document.getElementById('wallet_select').style.display = "none";
-	}
-
 	function setup_wallet_select()
 	{
 		var x = document.getElementById('wallet_select');
@@ -428,34 +397,22 @@
 			x.remove(i);
 
 		var wallets = fetch_wallets(user);
-		var wallet_map = {};
 
 		if(wallets.length > 1)
 		{
-			if(localStorage.getItem(user + "-wallet"))
-			{
-				selected_wallets = localStorage.getItem(user + "-wallet").split(',');
-				for(var i=0; i<selected_wallets.length; i++)
-					wallet_map[selected_wallets[i]] = true;
-			}
-			else
-				selected_wallets = [wallets[1]];
-
 			for(var i=1; i<wallets.length; i++)
 			{
 				var option = document.createElement("option");
 				option.text = wallets[i];
-				if(wallet_map[wallets[i]] == true)
-					option.selected = true;
 				x.add(option);
-
-				wallet_info[wallets[i]] = [localStorage.getItem(user + '-wallets-' + wallets[i] + "-network"),
-				                           CryptoJS.AES.decrypt(localStorage.getItem(user + '-wallets-' + wallets[i] + "-address"), CryptoJS.AES.decrypt(localStorage.getItem('password'), "Go hang a salami, I’m a lasagna hog.").toString(CryptoJS.enc.Utf8)).toString(CryptoJS.enc.Utf8)];
 			}
 
-			document.getElementById('wallet_select').size = wallets.length - 1;
-
-			document.getElementById('selected_wallets').innerHTML = selected_wallets.join(' + ');
+			if(localStorage.getItem(user + "-wallet"))
+				document.getElementById('wallet_select').value = localStorage.getItem(user + "-wallet");
+			
+			wallet_name = document.getElementById('wallet_select').value;
+			wallet_network = localStorage.getItem(user + '-wallets-' + wallet_name + "-network");
+			wallet_address = CryptoJS.AES.decrypt(localStorage.getItem(user + '-wallets-' + wallet_name + "-address"), CryptoJS.AES.decrypt(localStorage.getItem('password'), "Go hang a salami, I’m a lasagna hog.").toString(CryptoJS.enc.Utf8)).toString(CryptoJS.enc.Utf8);
 		}
 		else
 		{
@@ -470,33 +427,21 @@
 
 	function wallet_select_event()
 	{
-		selected_wallets = Array.from(document.getElementById('wallet_select').selectedOptions).map(({ value }) => value);
-		document.getElementById('selected_wallets').innerHTML = selected_wallets.join(' + ');
-
-
-		document.getElementById('balance_chart_div').style.display = "none";
-		document.getElementById('balance_chart_spotlight').style.display = "none";
-
-		if(balance_chart != undefined)
-		{
-			balance_chart.destroy();
-			document.getElementById('balance_chart').innerHTML = "";
-		}
-		
-		localStorage.setItem(user + "-wallet", selected_wallets.join(','));
+		wallet_name = document.getElementById('wallet_select').value;
+		wallet_network = localStorage.getItem(user + '-wallets-' + wallet_name + '-network');
+		wallet_address = CryptoJS.AES.decrypt(localStorage.getItem(user + '-wallets-' + wallet_name + '-address'), CryptoJS.AES.decrypt(localStorage.getItem('password'), "Go hang a salami, I’m a lasagna hog.").toString(CryptoJS.enc.Utf8)).toString(CryptoJS.enc.Utf8);
+		localStorage.setItem(user + "-wallet", wallet_name);
 		fetch_table_covalenthq();
-		fetch_balance_data();
 	}
 
-	function ignore_coin(wallet_name, id)
+	function ignore_coin(id)
 	{
-		alert(wallet_name + " " + id);
 		ignorelist = fetch_ignorelist(user, wallet_name);
 		ignore(user, ignorelist, wallet_name, id);
 		draw_table();
 	}
 
-	function unignore_coin(wallet_name, id)
+	function unignore_coin(id)
 	{
 		ignorelist = fetch_ignorelist(user, wallet_name);
 		unignore(user, ignorelist, wallet_name, id);
@@ -513,7 +458,7 @@
 			add_hide_buttons = false;
 
 			for(var r=1; r<no_rows; r++)
-				table.rows[r].deleteCell(7);
+				table.rows[r].deleteCell(6);
 		}
 		else
 		{
@@ -525,14 +470,14 @@
 				if(ignore_map[coin_name] != true &&
 				   	ignore_map[coin_name] != true)
 				{
-					if(table.rows[r].cells[5].innerText != '-')
+					if(table.rows[r].cells[4].innerText != '-')
 					{
-						table.rows[r].insertCell(7).innerHTML = "<a onclick='ignore_coin(\"" + table.rows[r].cells[3].innerText + "\", \"" + table.rows[r].cells[2].innerText.replace(/ /g, "").replace(/-/g, "").toLowerCase() + "\")'><i class='fas fa-trash fa-1x' style='vertical-align:middle'></i></a>";
+						table.rows[r].insertCell(6).innerHTML = "<a onclick='ignore_coin(\"" + table.rows[r].cells[2].innerText.replace(/ /g, "").replace(/-/g, "").toLowerCase() + "\")'><i class='fas fa-trash fa-1x' style='vertical-align:middle'></i></a>";
 					}
 				}
 				else if(show_ignored_coins)
 				{
-					table.rows[r].insertCell(7).innerHTML = "<a onclick='unignore_coin(\"" + table.rows[r].cells[3].innerText  + "\", \"" + table.rows[r].cells[2].innerText.replace(/ /g, "").replace(/-/g, "").toLowerCase() + "\")'><i class='fas fa-trash-restore fa-1x' style='vertical-align:middle'></i></a>";
+					table.rows[r].insertCell(6).innerHTML = "<a onclick='unignore_coin(\"" + table.rows[r].cells[2].innerText.replace(/ /g, "").replace(/-/g, "").toLowerCase() + "\")'><i class='fas fa-trash-restore fa-1x' style='vertical-align:middle'></i></a>";
 				}
 			}
 		}
@@ -655,36 +600,23 @@
 
 	function fetch_balance_data()
 	{
-		$(document).ready(async function(){
-			balance_data = [];
-			var no_fetched = 0;
-
-			for(var i=0; i<selected_wallets.length; i++)
-			{
-				//alert('https://api.covalenthq.com/v1/' + wallet_info[selected_wallets[i]][0] + '/address/' + wallet_info[selected_wallets[i]][1] + '/portfolio_v2/?key=' + covalenthq_api_key);
-				await $.get(
-					'https://api.covalenthq.com/v1/' + wallet_info[selected_wallets[i]][0] + '/address/' + wallet_info[selected_wallets[i]][1] + '/portfolio_v2/?key=' + covalenthq_api_key,
-					function(data) {
-						for(var j=0; j<data['items'].length; j++)
-						{
-							data['items'][j]['wallet'] = selected_wallets[no_fetched];
-							balance_data.push(data['items'][j]);
-						}
-						no_fetched++;
-				}).fail(function() {
-					document.getElementById('balance_chart_div').style.display = "none";
-					alert("could not find balance chart for " + document.getElementById('chart_select').text);
-				});
-			}
-
-			document.getElementById('balance_chart_div').style.display = "block";
+		$(document).ready(function(){
+			//alert('https://api.covalenthq.com/v1/' + wallet_network + '/address/' + wallet_address + '/portfolio_v2/?key=' + covalenthq_api_key);
+			$.get(
+				'https://api.covalenthq.com/v1/' + wallet_network + '/address/' + wallet_address + '/portfolio_v2/?key=' + covalenthq_api_key,
+				function(data) {
+					balance_data = data;
+					document.getElementById('balance_chart_div').style.display = "block";
+			}).fail(function() {
+				document.getElementById('balance_chart_div').style.display = "none";
+				alert("could not find balance chart for " + document.getElementById('chart_select').text);
+			});
 		});
 	}
 
 	function fetch_chart()
 	{
-		chart_select_value = document.getElementById('chart_select').value;
-		var coin_info = document.getElementById('chart_select').value.split(' -- ');
+		var coin_address = document.getElementById('chart_select').value;
 		var chart_data = [];
 
 		if(balance_chart != undefined)
@@ -693,24 +625,24 @@
 			document.getElementById('balance_chart').innerHTML = "";
 		}
 
-		for(var i=0; i<balance_data.length; i++)
+		for(var i=0; i<balance_data['items'].length; i++)
 		{
-			if(balance_data[i]['wallet'] == coin_info[0] && balance_data[i]['contract_address'] == coin_info[1])
+			if(balance_data['items'][i]['contract_address'] == coin_address)
 			{
-				var j=balance_data[i]['holdings'].length-1;
+				var j=balance_data['items'][i]['holdings'].length-1;
 
 				for(; j>=0; j--)
-					if(balance_data[i]['holdings'][j]['close']['quote'] != undefined && balance_data[i]['holdings'][j]['close']['quote'] > 0)
+					if(balance_data['items'][i]['holdings'][j]['close']['quote'] != undefined && balance_data['items'][i]['holdings'][j]['close']['quote'] > 0)
 						break;
 
-				if(j+1 < balance_data[i]['holdings'].length)
+				if(j+1 < balance_data['items'][i]['holdings'].length)
 					j++;
 
 				for(; j>=0; j--)
-					if(balance_data[i]['holdings'][j]['close']['quote'] != undefined)
-						chart_data[j] = [balance_data[i]['holdings'][j]['timestamp'], balance_data[i]['holdings'][j]['close']['quote']];
+					if(balance_data['items'][i]['holdings'][j]['close']['quote'] != undefined)
+						chart_data[j] = [balance_data['items'][i]['holdings'][j]['timestamp'], balance_data['items'][i]['holdings'][j]['close']['quote']];
 
-				draw_chart(balance_data[i]['contract_name'], chart_data);
+				draw_chart(balance_data['items'][i]['contract_name'], chart_data);
 				break;
 			}
 		}
