@@ -238,7 +238,7 @@
 												<th></th>
 												<th><a onclick="toggle_sort('contract_ticker_symbol')">symbol</a></th>
 												<th><a onclick="toggle_sort('contract_name')">name</a></th>
-												<th><a onclick="toggle_sort('wallet')">wallet</a></th>
+												<th id="wallet_row_head"><a onclick="toggle_sort('wallet')">wallet</a></th>
 												<th><a onclick="toggle_sort('quote_rate')">price</a></th>
 												<th><a onclick="toggle_sort('balance')">quantity</a></th>
 												<th><a onclick="toggle_sort('quote')">value</a></th>
@@ -250,7 +250,7 @@
 												<th></th>
 												<th><a onclick="toggle_sort('contract_ticker_symbol')">symbol</a></th>
 												<th><a onclick="toggle_sort('contract_name')">name</a></th>
-												<th><a onclick="toggle_sort('wallet')">wallet</a></th>
+												<th id="wallet_row_foot"><a onclick="toggle_sort('wallet')">wallet</a></th>
 												<th><a onclick="toggle_sort('quote_rate')">price</a></th>
 												<th><a onclick="toggle_sort('balance')">quantity</a></th>
 												<th><a onclick="toggle_sort('quote')">value</a></th>
@@ -354,6 +354,17 @@
 				document.getElementById('loading_gif').style.display = "none";
 				document.getElementById("wallet_table").style.display = "inline";
 		
+				if(selected_wallets.length == 1)
+				{
+					document.getElementById('wallet_row_head').style.display = "none";
+					document.getElementById('wallet_row_foot').style.display = "none";
+				}
+				else
+				{
+					document.getElementById('wallet_row_head').style.display = "inline";
+					document.getElementById('wallet_row_foot').style.display = "inline";
+				}
+		
 				if(coins_data.length > 0)
 				{
 					var coins_str = "";
@@ -452,6 +463,10 @@
 						}
 					}
 		
+					if(selected_wallets.length == 1)
+						for(var i=1; i<table.rows.length-1; i++)
+							table.rows[i].cells[3].style.display = "none";
+		
 					if(chart_select_value != undefined)
 						document.getElementById('chart_select').value = chart_select_value;
 					if(document.getElementById('chart_select').value == "")
@@ -533,6 +548,7 @@
 		
 					for(var w=0; w<selected_wallets.length; w++)
 					{
+						//alert('https://api.covalenthq.com/v1/' + wallet_info[selected_wallets[w]][0] + '/address/' + wallet_info[selected_wallets[w]][1] + '/balances_v2/?key=' + covalenthq_api_key);
 						await $.get(
 							'https://api.covalenthq.com/v1/' + wallet_info[selected_wallets[w]][0] + '/address/' + wallet_info[selected_wallets[w]][1] + '/balances_v2/?key=' + covalenthq_api_key,          
 							function(data) {
@@ -690,7 +706,6 @@
 		
 			function ignore_coin(wallet_name, id)
 			{
-				alert(wallet_name + " " + id);
 				ignorelist = fetch_ignorelist(user, wallet_name);
 				ignore(user, ignorelist, wallet_name, id);
 				draw_table();
