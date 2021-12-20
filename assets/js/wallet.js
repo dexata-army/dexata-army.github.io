@@ -1,3 +1,10 @@
+function remove_duplicates(x)
+{
+	return x.filter(function(item, pos) {
+	    return x.indexOf(item) == pos;
+	})
+}
+
 function fetch_ignorelist(username, name)
 {
 	if(!localStorage.getItem(username + "-ignorelist-" + name))
@@ -5,11 +12,36 @@ function fetch_ignorelist(username, name)
 	return localStorage.getItem(username + "-ignorelist-" + name).toLowerCase().replace(/ /g, "").replace(/-/g, "").replace(/;/g, "\n").replace(/,/g, "\n").split("\n");
 }
 
-
 function fetch_ignorelist_str(username, name)
 {
 	return localStorage.getItem(username + '-ignorelist-' + name).toLowerCase().replace(/ /g, "").replace(/-/g, "").replace(/;/g, ",").replace(/\n/g,",");
 }
+
+function fetch_combined_ignorelist(username, names)
+{
+	var ids = [];
+
+	for(var i=0; i<names.length; i++)
+		ids = ids.concat(fetch_ignorelist(username, names[i]));
+
+	return remove_duplicates(ids);
+}
+
+function fetch_combined_ignorelist_str(username, names)
+{
+	return fetch_combined_ignorelist(username, names).join(',');
+}
+
+function fetch_combined_ignorelist_map(username, names)
+{
+	var map = {};
+	var ignorelist = fetch_combined_ignorelist(username, names);
+	for(var i=0; i<ignorelist.length; i++)
+		map[ignorelist[i]] = true;
+	return map;
+}
+
+
 
 function fetch_ignorelist_map(username, name)
 {
