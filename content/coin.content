@@ -10,10 +10,10 @@
 							<h1 id="coin_title" style="margin-top: 5px"></h1>
 							<noselect>
 								<p style="margin-top:0px; margin-bottom: 0px" id="coin_links"></p>
-								<p style="margin-top:5px; margin-bottom: 0px" id="other_links"></p>
+								<p style="margin-top:5px; margin-bottom: 10px" id="other_links"></p>
 								<a id="show_watchlist_icon" onclick="show_watchlists_table()" style="max-width: 100%; margin-top: 0px"><i class='fas fa-eye fa-2x'></i></a>
-								<div id="watchlists_spotlight" class="spotlight" onfocusout="hide_watchlists_table()" style="display: none; overflow: hidden">
-									<table id="watchlists_table" style="text-align: left; margin-left: 40px"></table>
+								<div id="watchlists_spotlight" class="spotlight" style="display: none; overflow: hidden; margin-top: -10px;margin-bottom: 0px">
+									<table id="watchlists_table" style="text-align: left; width: auto"></table>
 								</div>
 							</noselect>
 						</div>
@@ -394,6 +394,18 @@
 		textArea.style.visibility = "hidden";
 	}
 
+	function show_watchlists_table()
+	{
+		document.getElementById('show_watchlist_icon').style.display = "none";
+		document.getElementById('watchlists_spotlight').style.display = "block";
+	}
+
+	function hide_watchlists_table()
+	{
+		document.getElementById('show_watchlist_icon').style.display = "block";
+		document.getElementById('watchlists_spotlight').style.display = "none";
+	}
+
 	function toggle_watching(name)
 	{
 		var found = false;
@@ -413,11 +425,7 @@
 
 		watchlists[name] = fetch_watchlist(user, name);
 
-		if(!$("div#watchlists_table").is(":active"))
-		{
-			document.getElementById('show_watchlist_icon').style.display = "block";
-			document.getElementById('watchlists_spotlight').style.display = "none";
-		}
+		hide_watchlists_table();
 	}
 
 	function clear_table()
@@ -893,21 +901,6 @@
 	{
 		if(refresh_ms > 0)
 			sleep(refresh_ms).then(() => { fetch_info(); refresh_data(); });
-	}
-
-	function show_watchlists_table()
-	{
-		document.getElementById('show_watchlist_icon').style.display = "none";
-		document.getElementById('watchlists_spotlight').style.display = "block";
-	}
-
-	function hide_watchlists_table()
-	{
-		if(!$("div#watchlists_spotlight").is(":active"))
-		{
-			document.getElementById('show_watchlist_icon').style.display = "block";
-			document.getElementById('watchlists_spotlight').style.display = "none";
-		}
 	}
 
 	watchlist_names = fetch_watchlists(user);
