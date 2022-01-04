@@ -552,7 +552,7 @@
 				else
 					watchlist_str = fetch_watchlist_str(user, names[0]);
 		
-				no_pages = Math.ceil(watchlist_str.split(',').length/50);
+				no_pages = Math.ceil((watchlist_str.split(',').length-1)/50);
 		
 				if(watchlist_str != "")
 				{
