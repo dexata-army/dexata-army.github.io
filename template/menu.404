@@ -1,0 +1,99 @@
+<!-- BEGIN #sidebar -->
+<div id="sidebar" class="app-sidebar">
+	<!-- BEGIN scrollbar -->
+	<div class="app-sidebar-content" data-scrollbar="true" data-height="100%">
+		<!-- BEGIN menu -->
+		<div class="menu">
+			<div class="menu-header">Navigation</div>
+			<div class="menu-item">
+				<a href="https://dexata.net/@pathto(index)" class="menu-link">
+					<span class="menu-icon"><i class="fas fa-home fa-1x"></i></span>
+					<span class="menu-text">home</span>
+				</a>
+			</div>
+			<div class="menu-item">
+				<a href="https://dexata.net/@pathto(coins)" class="menu-link">
+					<span class="menu-icon"><i class="fas fa-coins fa-1x"></i></span>
+					<span class="menu-text">coins</span>
+				</a>
+			</div>
+			<div class="menu-item">
+				<a href="https://dexata.net/@pathto(categories)" class="menu-link">
+					<span class="menu-icon"><i class="fas fa-cubes fa-1x"></i></span>
+					<span class="menu-text">categories</span>
+				</a>
+			</div>
+			<div class="menu-item">
+				<a href="https://dexata.net/@pathto(charts)" class="menu-link">
+					<span class="menu-icon"><i class="fas fa-chart-area fa-1x"></i></span>
+					<span class="menu-text">charts</span>
+				</a>
+			</div>
+			<div class="menu-item">
+				<a href="https://dexata.net/@pathto(news)" class="menu-link">
+					<span class="menu-icon"><i class="fas fa-newspaper fa-1x"></i></span>
+					<span class="menu-text">news</span>
+				</a>
+			</div>
+			<div class="menu-item">
+				<a href="https://dexata.net/@pathto(scams)" class="menu-link">
+					<span class="menu-icon"><i class="fas fa-bomb fa-1x"></i></span>
+					<span class="menu-text">scams</span>
+				</a>
+			</div>
+			<div class="menu-item">
+				<a href="https://dexata.net/@pathto(search)" class="menu-link">
+					<span class="menu-icon"><i class="fas fa-search fa-1x"></i></span>
+					<span class="menu-text">search</span>
+				</a>
+			</div>
+			<div class="menu-item">
+				<a href="https://dexata.net/@pathto(watchlist)" class="menu-link">
+					<span class="menu-icon"><i class="fas fa-binoculars fa-1x"></i></span>
+					<span class="menu-text">watchlist</span>
+				</a>
+			</div>
+			<div class="menu-item">
+				<a href="https://dexata.net/@pathto(wallet)" class="menu-link">
+					<span class="menu-icon"><i class="fas fa-wallet fa-1x"></i></span>
+					<span class="menu-text">wallet</span>
+				</a>
+			</div>
+
+			<div class="menu-header">Manage</div>
+			<div class="menu-item">
+				<a href="https://dexata.net/@pathto(config)" class="menu-link">
+					<span class="menu-icon"><i class="fas fa-cogs fa-1x"></i></span>
+					<span class="menu-text">config</span>
+				</a>
+			</div>
+			<div class="menu-item">
+				<a href="https://dexata.net/@pathto(manage_users)" class="menu-link">
+					<span class="menu-icon"><i class="fas fa-user-cog fa-1x"></i></span>
+					<span class="menu-text">users</span>
+				</a>
+			</div>
+			<div id="login_menu_item" class="menu-item">
+				<a href="https://dexata.net/@pathto(login)" class="menu-link">
+					<span class="menu-icon"><i class="fas fa-sign-in-alt fa-1x"></i></span>
+					<span class="menu-text">login</span>
+				</a>
+			</div>
+
+			<div class="menu-header">Community</div>
+			<div class="menu-item">
+				<a href="https://github.com/dexata-army" class="menu-link">
+					<span class="menu-icon"><i class="fab fa-github-alt fa-1x"></i></span>
+					<span class="menu-text">github</span>
+				</a>
+			</div>
+		</div>
+		<!-- END menu -->
+	</div>
+	<!-- END scrollbar -->
+</div>
+<!-- END #sidebar -->
+	
+<!-- BEGIN mobile-sidebar-backdrop -->
+<button class="app-sidebar-mobile-backdrop" data-toggle-target=".app" data-toggle-class="app-sidebar-mobile-toggled"></button>
+<!-- END mobile-sidebar-backdrop -->

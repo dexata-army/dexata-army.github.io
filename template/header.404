@@ -1,0 +1,119 @@
+<!-- BEGIN #header -->
+<div id="header" class="app-header">
+	<!-- BEGIN desktop-toggler -->
+	<div class="desktop-toggler">
+		<button type="button" class="menu-toggler" data-toggle-class="app-sidebar-collapsed" data-dismiss-class="app-sidebar-toggled" data-toggle-target=".app">
+			<span class="bar"></span>
+			<span class="bar"></span>
+			<span class="bar"></span>
+		</button>
+	</div>
+	<!-- BEGIN desktop-toggler -->
+	
+	<!-- BEGIN mobile-toggler -->
+	<div class="mobile-toggler">
+		<button type="button" class="menu-toggler" data-toggle-class="app-sidebar-mobile-toggled" data-toggle-target=".app">
+			<span class="bar"></span>
+			<span class="bar"></span>
+			<span class="bar"></span>
+		</button>
+	</div>
+	<!-- END mobile-toggler -->
+	
+	<!-- BEGIN brand -->
+	<div class="brand">
+		<a href="https://dexata.net/" class="brand-logo">
+			<img src="https://dexata.net/@pathtofile(output/images/logo.png)" style="max-height: 2rem"> Dexata
+		</a>
+	</div>
+	<!-- END brand -->
+	
+	<!-- BEGIN menu -->
+	<div class="menu">
+		<div class="menu-item dropdown">
+			<a href="#" data-toggle-class="app-header-menu-search-toggled" data-toggle-target=".app" class="menu-link">
+				<div class="menu-icon"><i class="bi bi-search nav-icon"></i></div>
+			</a>
+		</div>
+		<div class="menu-item dropdown dropdown-mobile-full">
+			<a href="javascript:;" data-toggle="theme-panel-expand" class="app-theme-toggle-btn"><i class="bi bi-sliders nav-icon"></i></a>
+			<a href="#" data-bs-toggle="dropdown" data-bs-display="static" class="menu-link">
+				<div class="menu-icon"><i class="bi bi-grid-3x3-gap nav-icon"></i></div>
+			</a>
+			<div class="dropdown-menu fade dropdown-menu-end w-300px text-center p-0 mt-1">
+				<div class="row row-grid gx-0">
+					<div class="col-4">
+						<a href="https://dexata.net/@pathto(coins)" class="dropdown-item text-decoration-none p-3 bg-none">
+							<div style="margin-top: 5px; margin-bottom: 5px"><i class="fas fa-coins fa-2x"></i></div>
+							<div class="fw-500 fs-10px text-white">coins</div>
+						</a>
+					</div>
+					<div class="col-4">
+						<a href="https://dexata.net/@pathto(categories)" class="dropdown-item text-decoration-none p-3 bg-none">
+							<div style="margin-top: 5px; margin-bottom: 5px"><i class="fas fa-cubes fa-2x"></i></div>
+							<div class="fw-500 fs-10px text-white">categories</div>
+						</a>
+					</div>
+					<div class="col-4">
+						<a href="https://dexata.net/@pathto(charts)" class="dropdown-item text-decoration-none p-3 bg-none">
+							<div style="margin-top: 5px; margin-bottom: 5px"><i class="fas fa-chart-area fa-2x"></i></div>
+							<div class="fw-500 fs-10px text-white">charts</div>
+						</a>
+					</div>
+				</div>
+				<div class="row row-grid gx-0">
+					<div class="col-4">
+						<a href="https://dexata.net/@pathto(news)" class="dropdown-item text-decoration-none p-3 bg-none">
+							<div style="margin-top: 5px; margin-bottom: 5px"><i class="fas fa-newspaper fa-2x"></i></div>
+							<div class="fw-500 fs-10px text-white">news</div>
+						</a>
+					</div>
+					<div class="col-4">
+						<a href="https://dexata.net/@pathto(search)" class="dropdown-item text-decoration-none p-3 bg-none">
+							<div style="margin-top: 5px; margin-bottom: 5px"><i class="fas fa-search fa-2x"></i></div>
+							<div class="fw-500 fs-10px text-white">search</div>
+						</a>
+					</div>
+					<div class="col-4">
+						<a href="https://dexata.net/@pathto(manage_users)" class="dropdown-item text-decoration-none p-3 bg-none">
+							<div style="margin-top: 5px; margin-bottom: 5px"><i class="fas fa-user-cog fa-2x"></i></div>
+							<div class="fw-500 fs-10px text-white">users</div>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="menu-item dropdown dropdown-mobile-full">
+			<a href="#" data-bs-toggle="dropdown" data-bs-display="static" class="menu-link">
+				<div id="header_username" class="menu-text d-sm-block">guest</div>
+			</a>
+			<div class="dropdown-menu dropdown-menu-end me-lg-3 fs-11px mt-1">
+				<a class="dropdown-item d-flex align-items-center" href="https://dexata.net/@pathto(watchlist)">watchlist <i class="fas fa-binoculars fa-1x ms-auto text-theme fs-16px my-n1"></i></a>
+				<a class="dropdown-item d-flex align-items-center" href="https://dexata.net/@pathto(wallet)">wallet <i class="fas fa-wallet fa-1x ms-auto text-theme fs-16px my-n1"></i></a>
+				<div class="dropdown-divider"></div>
+				<a class="dropdown-item d-flex align-items-center" href="https://dexata.net/@pathto(config)">config <i class="fas fa-cogs fa-1x ms-auto text-theme fs-16px my-n1"></i></a>
+				<a id="login_header_item" class="dropdown-item d-flex align-items-center" href="https://dexata.net/@pathto(login)">login <i class="fas fa-sign-in-alt fa-1x ms-auto text-theme fs-16px my-n1"></i></a>
+			</div>
+		</div>
+	</div>
+	<!-- END menu -->
+	
+	<!-- BEGIN menu-search -->
+	<div class="menu-search" name="header_search_form">
+		<div class="menu-search-container">
+			<div class="menu-search-icon"><i class="bi bi-search"></i></div>
+			<div class="menu-search-input">
+				<input id="search_box" type="text" class="form-control form-control-lg" placeholder="search" />
+			</div>
+			<div class="menu-search-icon">
+				<a href="#" data-toggle-class="app-header-menu-search-toggled" data-toggle-target=".app"><i class="bi bi-x-lg"></i></a>
+			</div>
+		</div>
+	</div>
+	<!-- END menu-search -->
+</div>
+<!-- END #header -->
+
+<script>
+	document.getElementById('header_username').innerHTML = user;
+</script>

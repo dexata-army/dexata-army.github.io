@@ -1,0 +1,21 @@
+<meta charset="utf-8" />
+<title>Dexata - $[title]</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="" />
+<link rel="icon" type="image/svg" href="@pathtofile(output/images/logo.png)">
+
+<link href="https://dexata.net/@pathtofile(output/assets/css/vendor.min.css)" rel="stylesheet" />
+<link href="https://dexata.net/@pathtofile(output/assets/css/app.min.css)" rel="stylesheet" />
+<link href="https://dexata.net/@pathtofile(output/assets/css/pagestyle.css)" rel="stylesheet" />
+<link href="@pathtofile(output/assets/css/404.css)" rel="stylesheet" />
+
+<script src="https://dexata.net/@pathtofile(output/assets/js/params.js)"></script>
+<script src="https://dexata.net/@pathtofile(output/assets/js/sleep.js)"></script>
+<script src="https://dexata.net/@pathtofile(output/assets/js/wallet.js)"></script>
+<script src="https://dexata.net/@pathtofile(output/assets/js/watchlist.js)"></script>
+<script src="https://dexata.net/@pathtofile(output/assets/js/apex-charts/apexcharts.min.js)"></script>
+<script src="https://dexata.net/@pathtofile(output/assets/js/crypto-js/crypto-js.js)"></script>
+
+<script src="https://dexata.net/@pathto(output/assets/js/jquery.min.js)"></script>
+
+<script src="https://kit.fontawesome.com/b51e6952ec.js"></script>
