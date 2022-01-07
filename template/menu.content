@@ -79,6 +79,14 @@
 					<span class="menu-text">login</span>
 				</a>
 			</div>
+
+			<div class="menu-header">Community</div>
+			<div class="menu-item">
+				<a href="https://github.com/dexata-army" class="menu-link">
+					<span class="menu-icon"><i class="fab fa-github-alt fa-1x"></i></span>
+					<span class="menu-text">github</span>
+				</a>
+			</div>
 		</div>
 		<!-- END menu -->
 	</div>
