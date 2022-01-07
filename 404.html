@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Dexata - 404</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content="" />
+		<link rel="icon" type="image/svg" href="images/logo.png">
+		
+		<link href="https://dexata.net/assets/css/vendor.min.css" rel="stylesheet" />
+		<link href="https://dexata.net/assets/css/app.min.css" rel="stylesheet" />
+		<link href="https://dexata.net/assets/css/pagestyle.css" rel="stylesheet" />
+		<link href="assets/css/404.css" rel="stylesheet" />
+		
+		<script src="https://dexata.net/assets/js/params.js"></script>
+		<script src="https://dexata.net/assets/js/sleep.js"></script>
+		<script src="https://dexata.net/assets/js/wallet.js"></script>
+		<script src="https://dexata.net/assets/js/watchlist.js"></script>
+		<script src="https://dexata.net/assets/js/apex-charts/apexcharts.min.js"></script>
+		<script src="https://dexata.net/assets/js/crypto-js/crypto-js.js"></script>
+		
+		<script src="https://dexata.net/assets/js/jquery.min.js"></script>
+		
+		<script src="https://kit.fontawesome.com/b51e6952ec.js"></script>
+
+		<script>
+			var user = "guest";
+		
+			if(localStorage.getItem('username'))
+				user = localStorage.getItem('username');
+			else if(sessionStorage.getItem('username'))
+				user = sessionStorage.getItem('username');
+		
+			function logout()
+			{
+				localStorage.removeItem('no_dexata_tabs');
+				localStorage.removeItem('last_load_time');
+				localStorage.removeItem('last_seen');
+				localStorage.removeItem('username');
+				sessionStorage.removeItem('username');
+				localStorage.removeItem('password');
+				sessionStorage.removeItem('password');
+				//location.reload();
+			}
+		
+			function check_for_logout(username)
+			{
+				sleep(2000).then(() => { 
+					if((!sessionStorage.getItem('username') && !localStorage.getItem('username')) || 
+						(sessionStorage.getItem('username') != username && localStorage.getItem('username') != username))
+						location.reload();
+					else
+						check_for_logout(username);
+				});
+			}
+		
+			var session_timeout_sec = localStorage.getItem(user + '-session_timeout')*60;
+		
+			if(session_timeout_sec != undefined && session_timeout_sec > 0)
+			{
+				if(sessionStorage.getItem('username') || localStorage.getItem('username'))
+				{
+					var curr_time = Math.round((new Date()).getTime() / 1000);
+		
+					//checks last page load time
+					if(localStorage.getItem("last_load_time"))
+					{
+						if(curr_time - localStorage.getItem("last_load_time") > session_timeout_sec)
+						{
+							logout();
+							location.reload();
+						}
+						else
+							localStorage.setItem("last_load_time", curr_time);
+					}
+					else
+					{
+						logout();
+						location.reload();
+					}
+				}
+			}
+		
+			if(sessionStorage.getItem("username") && !localStorage.getItem("username"))
+			{
+				var curr_time = Math.round((new Date()).getTime() / 1000);
+				if(!localStorage.getItem("last_seen") ||
+				     curr_time - localStorage.getItem("last_seen") > 2)
+				{
+					logout();
+					location.reload();
+				}
+				else
+				{
+					localStorage.setItem("no_dexata_tabs", 0);
+					localStorage.setItem("username", sessionStorage.getItem("username"));
+					localStorage.setItem("password", sessionStorage.getItem("password"));
+				}
+			}
+			else if(!sessionStorage.getItem("username") && localStorage.getItem("username"))
+			{
+				sessionStorage.setItem("username", localStorage.getItem("username"));
+				sessionStorage.setItem("password", localStorage.getItem("password"));
+			}
+		
+			var load_host = window.location.hostname;
+			if(localStorage.getItem("username"))
+			{
+				//updates number of dexata tabs open
+				if(localStorage.getItem('no_dexata_tabs') != undefined &&
+					localStorage.getItem('no_dexata_tabs') >= 0)
+					localStorage.setItem('no_dexata_tabs', parseFloat(localStorage.getItem('no_dexata_tabs'))+1);
+				else
+					localStorage.setItem('no_dexata_tabs', 1);
+		
+				window.addEventListener('beforeunload', function (e) {
+					if(localStorage.getItem('no_dexata_tabs'))
+					{
+					    localStorage.setItem('no_dexata_tabs', parseFloat(localStorage.getItem('no_dexata_tabs'))-1);
+		
+					    if(localStorage.getItem('no_dexata_tabs') == 0)
+					    {
+					    	localStorage.removeItem('no_dexata_tabs');
+					    	localStorage.removeItem('username');
+					    	localStorage.removeItem('password');
+					    }
+					}
+					else
+					{
+						sessionStorage.removeItem('username');
+						sessionStorage.removeItem('password');
+					}
+				});
+		
+				//reloads page if user has logged out
+				$(document).ready(function(){
+					check_for_logout(localStorage.getItem('username'));
+				});
+			}
+		
+			window.addEventListener("pageshow", function (event) {
+				var historyTraversal = event.persisted || 
+				                     ( typeof window.performance != "undefined" && 
+				                          window.performance.navigation.type === 2 );
+				if(historyTraversal &&
+					sessionStorage.getItem('username') &&
+					curr_time - localStorage.getItem('last_seen') > 2)
+				{
+					// Handle page restore.
+					window.location.reload();
+				}
+			});
+		
+			window.onbeforeunload = function(){
+				if(sessionStorage.getItem('username') || localStorage.getItem('username'))
+					localStorage.setItem('last_seen', Math.round((new Date()).getTime() / 1000));
+			};
+		</script>
+	</head>
+	<body class="theme-green">
+		<!-- BEGIN #app -->
+		<div id="app" class="app app-sidebar-collapsed">
+			<!-- BEGIN #header -->
+			<div id="header" class="app-header">
+				<!-- BEGIN desktop-toggler -->
+				<div class="desktop-toggler">
+					<button type="button" class="menu-toggler" data-toggle-class="app-sidebar-collapsed" data-dismiss-class="app-sidebar-toggled" data-toggle-target=".app">
+						<span class="bar"></span>
+						<span class="bar"></span>
+						<span class="bar"></span>
+					</button>
+				</div>
+				<!-- BEGIN desktop-toggler -->
+				
+				<!-- BEGIN mobile-toggler -->
+				<div class="mobile-toggler">
+					<button type="button" class="menu-toggler" data-toggle-class="app-sidebar-mobile-toggled" data-toggle-target=".app">
+						<span class="bar"></span>
+						<span class="bar"></span>
+						<span class="bar"></span>
+					</button>
+				</div>
+				<!-- END mobile-toggler -->
+				
+				<!-- BEGIN brand -->
+				<div class="brand">
+					<a href="https://dexata.net/" class="brand-logo">
+						<img src="https://dexata.net/images/logo.png" style="max-height: 2rem"> Dexata
+					</a>
+				</div>
+				<!-- END brand -->
+				
+				<!-- BEGIN menu -->
+				<div class="menu">
+					<div class="menu-item dropdown">
+						<a href="#" data-toggle-class="app-header-menu-search-toggled" data-toggle-target=".app" class="menu-link">
+							<div class="menu-icon"><i class="bi bi-search nav-icon"></i></div>
+						</a>
+					</div>
+					<div class="menu-item dropdown dropdown-mobile-full">
+						<a href="javascript:;" data-toggle="theme-panel-expand" class="app-theme-toggle-btn"><i class="bi bi-sliders nav-icon"></i></a>
+						<a href="#" data-bs-toggle="dropdown" data-bs-display="static" class="menu-link">
+							<div class="menu-icon"><i class="bi bi-grid-3x3-gap nav-icon"></i></div>
+						</a>
+						<div class="dropdown-menu fade dropdown-menu-end w-300px text-center p-0 mt-1">
+							<div class="row row-grid gx-0">
+								<div class="col-4">
+									<a href="https://dexata.net/coins.html" class="dropdown-item text-decoration-none p-3 bg-none">
+										<div style="margin-top: 5px; margin-bottom: 5px"><i class="fas fa-coins fa-2x"></i></div>
+										<div class="fw-500 fs-10px text-white">coins</div>
+									</a>
+								</div>
+								<div class="col-4">
+									<a href="https://dexata.net/categories.html" class="dropdown-item text-decoration-none p-3 bg-none">
+										<div style="margin-top: 5px; margin-bottom: 5px"><i class="fas fa-cubes fa-2x"></i></div>
+										<div class="fw-500 fs-10px text-white">categories</div>
+									</a>
+								</div>
+								<div class="col-4">
+									<a href="https://dexata.net/charts.html" class="dropdown-item text-decoration-none p-3 bg-none">
+										<div style="margin-top: 5px; margin-bottom: 5px"><i class="fas fa-chart-area fa-2x"></i></div>
+										<div class="fw-500 fs-10px text-white">charts</div>
+									</a>
+								</div>
+							</div>
+							<div class="row row-grid gx-0">
+								<div class="col-4">
+									<a href="https://dexata.net/news.html" class="dropdown-item text-decoration-none p-3 bg-none">
+										<div style="margin-top: 5px; margin-bottom: 5px"><i class="fas fa-newspaper fa-2x"></i></div>
+										<div class="fw-500 fs-10px text-white">news</div>
+									</a>
+								</div>
+								<div class="col-4">
+									<a href="https://dexata.net/search.html" class="dropdown-item text-decoration-none p-3 bg-none">
+										<div style="margin-top: 5px; margin-bottom: 5px"><i class="fas fa-search fa-2x"></i></div>
+										<div class="fw-500 fs-10px text-white">search</div>
+									</a>
+								</div>
+								<div class="col-4">
+									<a href="https://dexata.net/manage_users.html" class="dropdown-item text-decoration-none p-3 bg-none">
+										<div style="margin-top: 5px; margin-bottom: 5px"><i class="fas fa-user-cog fa-2x"></i></div>
+										<div class="fw-500 fs-10px text-white">users</div>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="menu-item dropdown dropdown-mobile-full">
+						<a href="#" data-bs-toggle="dropdown" data-bs-display="static" class="menu-link">
+							<div id="header_username" class="menu-text d-sm-block">guest</div>
+						</a>
+						<div class="dropdown-menu dropdown-menu-end me-lg-3 fs-11px mt-1">
+							<a class="dropdown-item d-flex align-items-center" href="https://dexata.net/watchlist.html">watchlist <i class="fas fa-binoculars fa-1x ms-auto text-theme fs-16px my-n1"></i></a>
+							<a class="dropdown-item d-flex align-items-center" href="https://dexata.net/wallet.html">wallet <i class="fas fa-wallet fa-1x ms-auto text-theme fs-16px my-n1"></i></a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item d-flex align-items-center" href="https://dexata.net/config.html">config <i class="fas fa-cogs fa-1x ms-auto text-theme fs-16px my-n1"></i></a>
+							<a id="login_header_item" class="dropdown-item d-flex align-items-center" href="https://dexata.net/login.html">login <i class="fas fa-sign-in-alt fa-1x ms-auto text-theme fs-16px my-n1"></i></a>
+						</div>
+					</div>
+				</div>
+				<!-- END menu -->
+				
+				<!-- BEGIN menu-search -->
+				<div class="menu-search" name="header_search_form">
+					<div class="menu-search-container">
+						<div class="menu-search-icon"><i class="bi bi-search"></i></div>
+						<div class="menu-search-input">
+							<input id="search_box" type="text" class="form-control form-control-lg" placeholder="search" />
+						</div>
+						<div class="menu-search-icon">
+							<a href="#" data-toggle-class="app-header-menu-search-toggled" data-toggle-target=".app"><i class="bi bi-x-lg"></i></a>
+						</div>
+					</div>
+				</div>
+				<!-- END menu-search -->
+			</div>
+			<!-- END #header -->
+			
+			<script>
+				document.getElementById('header_username').innerHTML = user;
+			</script>
+			
+			<!-- BEGIN #sidebar -->
+			<div id="sidebar" class="app-sidebar">
+				<!-- BEGIN scrollbar -->
+				<div class="app-sidebar-content" data-scrollbar="true" data-height="100%">
+					<!-- BEGIN menu -->
+					<div class="menu">
+						<div class="menu-header">Navigation</div>
+						<div class="menu-item">
+							<a href="https://dexata.net/index.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-home fa-1x"></i></span>
+								<span class="menu-text">home</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="https://dexata.net/coins.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-coins fa-1x"></i></span>
+								<span class="menu-text">coins</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="https://dexata.net/categories.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-cubes fa-1x"></i></span>
+								<span class="menu-text">categories</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="https://dexata.net/charts.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-chart-area fa-1x"></i></span>
+								<span class="menu-text">charts</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="https://dexata.net/news.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-newspaper fa-1x"></i></span>
+								<span class="menu-text">news</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="https://dexata.net/scams.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-bomb fa-1x"></i></span>
+								<span class="menu-text">scams</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="https://dexata.net/search.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-search fa-1x"></i></span>
+								<span class="menu-text">search</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="https://dexata.net/watchlist.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-binoculars fa-1x"></i></span>
+								<span class="menu-text">watchlist</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="https://dexata.net/wallet.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-wallet fa-1x"></i></span>
+								<span class="menu-text">wallet</span>
+							</a>
+						</div>
+			
+						<div class="menu-header">Manage</div>
+						<div class="menu-item">
+							<a href="https://dexata.net/config.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-cogs fa-1x"></i></span>
+								<span class="menu-text">config</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="https://dexata.net/manage_users.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-user-cog fa-1x"></i></span>
+								<span class="menu-text">users</span>
+							</a>
+						</div>
+						<div id="login_menu_item" class="menu-item">
+							<a href="https://dexata.net/login.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-sign-in-alt fa-1x"></i></span>
+								<span class="menu-text">login</span>
+							</a>
+						</div>
+			
+						<div class="menu-header">Community</div>
+						<div class="menu-item">
+							<a href="https://github.com/dexata-army" class="menu-link">
+								<span class="menu-icon"><i class="fab fa-github-alt fa-1x"></i></span>
+								<span class="menu-text">github</span>
+							</a>
+						</div>
+					</div>
+					<!-- END menu -->
+				</div>
+				<!-- END scrollbar -->
+			</div>
+			<!-- END #sidebar -->
+				
+			<!-- BEGIN mobile-sidebar-backdrop -->
+			<button class="app-sidebar-mobile-backdrop" data-toggle-target=".app" data-toggle-class="app-sidebar-mobile-toggled"></button>
+			<!-- END mobile-sidebar-backdrop -->
+			
+			<div class='row'>
+				<center>
+					<div class="error-banner">
+						<svg xmlns="http://www.w3.org/2000/svg" width="312" style="margin-top: -30px; margin-bottom: 50px">
+							<g id="group-1-cube-1"><path fill="#1D2125" d="M210.6 0l-20 11.2v22.4l20 11.2 20-11.2V11.2L210.6 0z"/><path fill="#DADEDE" d="M210.6 5.3l-15.3 8.5 15.3 8.6 15.3-8.6-15.3-8.5"/></g><g id="group-1-cube-2"><path fill="#1D2125" d="M170.6 22.4l-20 11.2V56l20 11.2 20-11.2V33.6l-20-11.2z"/><path fill="#DADEDE" d="M170.6 27.7l-15.3 8.5 15.3 8.6 15.3-8.6-15.3-8.5"/></g><g id="group-1-cube-3"><path fill="#1D2125" d="M230.6 11.2l-20 11.2v22.4l20 11.2 20-11.2V22.4l-20-11.2z"/><path fill="#DADEDE" d="M230.6 16.5L215.3 25l15.3 8.6 15.3-8.6-15.3-8.5"/></g><g id="group-1-cube-4"><path fill="#1D2125" d="M250.6 22.4l-20 11.2V56l20 11.2 20-11.2V33.6l-20-11.2z"/><path fill="#DADEDE" d="M250.6 27.7l-15.3 8.5 15.3 8.6 15.3-8.6-15.3-8.5"/></g><g id="group-1-cube-5"><path fill="#1D2125" d="M190.6 33.6l-20 11.2v22.4l20 11.2 20-11.2V44.8l-20-11.2z"/><path fill="#DADEDE" d="M190.6 38.9l-15.3 8.5 15.3 8.6 15.3-8.6-15.3-8.5"/></g><g id="group-1-cube-6"><path fill="#1D2125" d="M230.6 33.6l-20 11.2v22.4l20 11.2 20-11.2V44.8l-20-11.2z"/><path fill="#DADEDE" d="M230.6 38.9l-15.3 8.5 15.3 8.6 15.3-8.6-15.3-8.5"/></g><g id="group-1-cube-7"><path fill="#1D2125" d="M210.6 44.8l-20 11.2v22.4l20 11.2 20-11.2V56l-20-11.2z"/><path fill="#DADEDE" d="M210.6 50.1l-15.3 8.5 15.3 8.6 15.3-8.6-15.3-8.5"/></g><g id="group-1-cube-8"><path fill="#1D2125" d="M270.6 33.6l-20 11.2v22.4l20 11.2 20-11.2V44.8l-20-11.2z"/><path fill="#DADEDE" d="M270.6 38.9l-15.3 8.5 15.3 8.6 15.3-8.6-15.3-8.5"/></g><g id="group-1-cube-9"><path fill="#1D2125" d="M290.6 44.8l-20 11.2v22.4l20 11.2 20-11.2V56l-20-11.2z"/><path fill="#DADEDE" d="M290.6 50.1l-15.3 8.5 15.3 8.6 15.3-8.6-15.3-8.5"/></g><g id="group-2-cube-1"><path fill="#1D2125" d="M135.3 42.2l-20 11.2v22.4l20 11.2 20-11.2V53.4l-20-11.2z"/><path fill="#DADEDE" d="M135.3 47.5L120 56l15.3 8.6 15.3-8.6-15.3-8.5"/></g><g id="group-2-cube-2"><path fill="#1D2125" d="M115.3 53.4l-20 11.2V87l20 11.2 20-11.2V64.6l-20-11.2z"/><path fill="#DADEDE" d="M115.3 58.7L100 67.2l15.3 8.6 15.3-8.6-15.3-8.5"/></g><g id="group-2-cube-3"><path fill="#1D2125" d="M95.3 64.6l-20 11.2v22.4l20 11.2 20-11.2V75.8l-20-11.2z"/><path fill="#DADEDE" d="M95.3 69.9L80 78.4 95.3 87l15.3-8.6-15.3-8.5"/></g><g id="group-2-cube-4"><path fill="#1D2125" d="M155.3 53.4l-20 11.2V87l20 11.2 20-11.2V64.6l-20-11.2z"/><path fill="#DADEDE" d="M155.3 58.7L140 67.2l15.3 8.6 15.3-8.6-15.3-8.5"/></g><g id="group-2-cube-5"><path fill="#1D2125" d="M175.3 64.6l-20 11.2v22.4l20 11.2 20-11.2V75.8l-20-11.2z"/><path fill="#DADEDE" d="M175.3 69.9L160 78.4l15.3 8.6 15.3-8.6-15.3-8.5"/></g><g id="group-2-cube-6"><path fill="#1D2125" d="M115.3 75.8L95.3 87v22.4l20 11.2 20-11.2V87l-20-11.2z"/><path fill="#DADEDE" d="M115.3 81.1L100 89.6l15.3 8.6 15.3-8.6-15.3-8.5"/></g><g id="group-2-cube-7"><path fill="#1D2125" d="M135.3 87l-20 11.2v22.4l20 11.2 20-11.2V98.2l-20-11.2z"/><path fill="#DADEDE" d="M135.3 92.3l-15.3 8.5 15.3 8.6 15.3-8.6-15.3-8.5"/></g><g id="group-2-cube-8"><path fill="#1D2125" d="M155.3 98.2l-20 11.2v22.4l20 11.2 20-11.2v-22.4l-20-11.2z"/><path fill="#DADEDE" d="M155.3 103.5L140 112l15.3 8.6 15.3-8.6-15.3-8.5"/></g><g id="group-2-cube-9"><path fill="#1D2125" d="M195.3 75.8l-20 11.2v22.4l20 11.2 20-11.2V87l-20-11.2z"/><path fill="#DADEDE" d="M195.3 81.1L180 89.6l15.3 8.6 15.3-8.6-15.3-8.5"/></g><g id="group-2-cube-10"><path fill="#1D2125" d="M215.3 87l-20 11.2v22.4l20 11.2 20-11.2V98.2l-20-11.2z"/><path fill="#DADEDE" d="M215.3 92.3l-15.3 8.5 15.3 8.6 15.3-8.6-15.3-8.5"/></g><g id="group-2-cube-11"><path fill="#1D2125" d="M195.3 98.2l-20 11.2v22.4l20 11.2 20-11.2v-22.4l-20-11.2z"/><path fill="#DADEDE" d="M195.3 103.5L180 112l15.3 8.6 15.3-8.6-15.3-8.5"/></g><g id="group-2-cube-12"><path fill="#1D2125" d="M175.3 109.4l-20 11.2V143l20 11.2 20-11.2v-22.4l-20-11.2z"/><path fill="#DADEDE" d="M175.3 114.7l-15.3 8.5 15.3 8.6 15.3-8.6-15.3-8.5"/></g><g id="group-3-cube-1"><path fill="#1D2125" d="M60 84.4L40 95.6V118l20 11.2L80 118V95.6L60 84.4z"/><path fill="#DADEDE" d="M60 89.7l-15.3 8.5 15.3 8.6 15.3-8.6L60 89.7"/></g><g id="group-3-cube-2"><path fill="#1D2125" d="M20 106.8L0 118v22.4l20 11.2 20-11.2V118l-20-11.2z"/><path fill="#DADEDE" d="M20 112.1l-15.3 8.5 15.3 8.6 15.3-8.6-15.3-8.5"/></g><g id="group-3-cube-3"><path fill="#1D2125" d="M80 95.6l-20 11.2v22.4l20 11.2 20-11.2v-22.4L80 95.6z"/><path fill="#DADEDE" d="M80 100.9l-15.3 8.5L80 118l15.3-8.6-15.3-8.5"/></g><g id="group-3-cube-4"><path fill="#1D2125" d="M100 106.8L80 118v22.4l20 11.2 20-11.2V118l-20-11.2z"/><path fill="#DADEDE" d="M100 112.1l-15.3 8.5 15.3 8.6 15.3-8.6-15.3-8.5"/></g><g id="group-3-cube-5"><path fill="#1D2125" d="M40 118l-20 11.2v22.4l20 11.2 20-11.2v-22.4L40 118z"/><path fill="#DADEDE" d="M40 123.3l-15.3 8.5 15.3 8.6 15.3-8.6-15.3-8.5"/></g><g id="group-3-cube-6"><path fill="#1D2125" d="M80 118l-20 11.2v22.4l20 11.2 20-11.2v-22.4L80 118z"/><path fill="#DADEDE" d="M80 123.3l-15.3 8.5 15.3 8.6 15.3-8.6-15.3-8.5"/></g><g id="group-3-cube-7"><path fill="#1D2125" d="M60 129.2l-20 11.2v22.4L60 174l20-11.2v-22.4l-20-11.2z"/><path fill="#DADEDE" d="M60 134.5L44.7 143l15.3 8.6 15.3-8.6-15.3-8.5"/></g><g id="group-3-cube-8"><path fill="#1D2125" d="M120 118l-20 11.2v22.4l20 11.2 20-11.2v-22.4L120 118z"/><path fill="#DADEDE" d="M120 123.3l-15.3 8.5 15.3 8.6 15.3-8.6-15.3-8.5"/></g><g id="group-3-cube-9"><path fill="#1D2125" d="M140 129.2l-20 11.2v22.4l20 11.2 20-11.2v-22.4l-20-11.2z"/><path fill="#DADEDE" d="M140 134.5l-15.3 8.5 15.3 8.6 15.3-8.6-15.3-8.5"/></g>
+						</svg>
+			
+						<div class='error-message'>
+							<h2></h2>
+							<p></p>
+						</div>
+					</div>
+			
+					<!-- no watchlists spotlight -->
+					<div id="404_spotlight" style="width: 450px; max-width: 100%">
+						<!-- BEGIN card -->
+						<div class="card mb-3">
+							<!-- BEGIN card-body -->
+							<div class="card-body">
+								<div class='404_div'>
+									<h2>Not Found</h2>
+									<span>This page does not exist</span><br>
+									<a href="javascript:history.back()">Back</a>
+								</div>
+							</div>
+							<!-- END card-body -->
+							
+							<!-- BEGIN card-arrow -->
+							<div class="card-arrow">
+								<div class="card-arrow-top-left"></div>
+								<div class="card-arrow-top-right"></div>
+								<div class="card-arrow-bottom-left"></div>
+								<div class="card-arrow-bottom-right"></div>
+							</div>
+							<!-- END card-arrow -->
+						</div>
+						<!-- END card -->
+					</div>
+				</center>
+			</div>  
+
+			<!-- BEGIN #footer -->
+			<div id="footer" class="app-content" style="margin-top: -20px">
+				<div class="row">
+					<!-- footer -->
+					<noselect>
+						<center>
+							<div style="width: 400px; max-width: 100%">
+								<!-- BEGIN card -->
+								<div class="card mb-3">
+									<!-- BEGIN card-body -->
+									<div class="card-body">
+										<div style="margin-bottom: 15px">
+											<a href="https://dexata.net/search.html" title='search'><i class="fas fa-search fa-2x"></i></a> &nbsp;
+											<a href="https://dexata.net/coins.html" title='coins'><i class="fas fa-coins fa-2x"></i></a> &nbsp;
+											<a href="https://dexata.net/categories.html" title='categories'><i class="fas fa-cubes fa-2x"></i></a> &nbsp;
+											<a href="https://dexata.net/charts.html" title='charts'><i class="fas fa-chart-area fa-2x"></i></a> &nbsp;
+											<a href="https://dexata.net/news.html" title='news'><i class="fas fa-newspaper fa-2x"></i></a> &nbsp;
+											<a href="https://dexata.net/scams.html" title='scams'><i class="fas fa-bomb fa-2x"></i></a> &nbsp;
+											<a href="https://dexata.net/watchlist.html" title='watchlist'><i class="fas fa-binoculars fa-2x"></i></a> &nbsp;
+											<a href="https://dexata.net/wallet.html" title='wallet tracker'><i class="fas fa-wallet fa-2x"></i></a>
+										</div>
+											
+										<div>
+											<a href="https://github.com/dexata-army" title='github'><i class="fab fa-github-alt fa-2x"></i></a> &nbsp;
+											<a href="https://dexata.net/config.html" title='config'><i class="fas fa-cogs fa-2x"></i></a> &nbsp;
+											<a href="https://dexata.net/manage_users.html" title='manage users'><i class="fas fa-user-cog fa-2x"></i></a> &nbsp;
+											<text id="login_footer_item" style="display: inline-block"><a href="https://dexata.net/login.html" title='login'><i class="fas fa-sign-in-alt fa-2x"></i></a></text>
+										</div>
+									</div>
+									<!-- END card-body -->
+									
+									<!-- BEGIN card-arrow -->
+									<div class="card-arrow">
+										<div class="card-arrow-top-left"></div>
+										<div class="card-arrow-top-right"></div>
+										<div class="card-arrow-bottom-left"></div>
+										<div class="card-arrow-bottom-right"></div>
+									</div>
+									<!-- END card-arrow -->
+								</div>
+								<!-- END card -->
+							</div>
+							<p class="copyright">
+								&copy;<script>document.write(new Date().getFullYear())</script> Dexata
+							</p>
+			
+							<p>
+								<input id="footer_search_box" placeholder="search">
+							</p></center>
+					</noselect>
+				</div>
+			</div>
+			
+			<script>
+				window.addEventListener('keydown',this.keydown,false);
+			
+				function keydown(e)
+				{
+					var code = e.keyCode;
+					
+					if(document.activeElement.tagName == "INPUT")
+					{
+						if(code == 13)
+						{
+							if(document.activeElement.id == "footer_search_box" &&
+								document.getElementById('footer_search_box').value != "")
+								window.location.href = "search.html?term=" + document.getElementById('footer_search_box').value;
+							else if(document.activeElement.id == "search_box" &&
+								document.getElementById('search_box').value != "")
+								window.location.href = "search.html?term=" + document.getElementById('search_box').value;
+						}
+					}
+				}
+			</script>
+			
+			<!-- BEGIN btn-scroll-top -->
+			<a href="#" data-toggle="scroll-to-top" class="btn-scroll-top fade"><i class="fa fa-arrow-up"></i></a>
+			<!-- END btn-scroll-top -->
+
+			<!-- BEGIN theme-panel -->
+			<div class="app-theme-panel">
+				<div class="app-theme-panel-container">
+					<div class="app-theme-panel-content">
+						<div class="small fw-bold text-white mb-1">Theme Color</div>
+						<div class="card mb-3">
+							<!-- BEGIN card-body -->
+							<div class="card-body p-2">
+								<!-- BEGIN theme-list -->
+								<div class="app-theme-list">
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-pink" data-theme-class="theme-pink" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Pink">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-red" data-theme-class="theme-red" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Red">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-warning" data-theme-class="theme-warning" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Orange">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-yellow" data-theme-class="theme-yellow" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Yellow">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-lime" data-theme-class="theme-lime" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Lime">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-green" data-theme-class="theme-green" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Green">&nbsp;</a></div>
+									<div class="app-theme-list-item active"><a href="javascript:;" class="app-theme-list-link bg-teal" data-theme-class="" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Default">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-info" data-theme-class="theme-info"  data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Cyan">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-primary" data-theme-class="theme-primary"  data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Blue">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-purple" data-theme-class="theme-purple" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Purple">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-indigo" data-theme-class="theme-indigo" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Indigo">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-gray-100" data-theme-class="theme-gray-200" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Gray">&nbsp;</a></div>
+								</div>
+								<!-- END theme-list -->
+							</div>
+							<!-- END card-body -->
+							
+							<!-- BEGIN card-arrow -->
+							<div class="card-arrow">
+								<div class="card-arrow-top-left"></div>
+								<div class="card-arrow-top-right"></div>
+								<div class="card-arrow-bottom-left"></div>
+								<div class="card-arrow-bottom-right"></div>
+							</div>
+							<!-- END card-arrow -->
+						</div>
+						
+						<div class="small fw-bold text-white mb-1">Theme Cover</div>
+						<div class="card">
+							<!-- BEGIN card-body -->
+							<div class="card-body p-2">
+								<!-- BEGIN theme-cover -->
+								<div class="app-theme-cover">
+									<div class="app-theme-cover-item active">
+										<a href="javascript:;" class="app-theme-cover-link" style="background-image: url(assets/img/cover/cover-thumb-1.jpg);" data-theme-cover-class="" data-toggle="theme-cover-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Default">&nbsp;</a>
+									</div>
+									<div class="app-theme-cover-item">
+										<a href="javascript:;" class="app-theme-cover-link" style="background-image: url(assets/img/cover/cover-thumb-2.jpg);" data-theme-cover-class="bg-cover-2" data-toggle="theme-cover-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Cover 2">&nbsp;</a>
+									</div>
+									<div class="app-theme-cover-item">
+										<a href="javascript:;" class="app-theme-cover-link" style="background-image: url(assets/img/cover/cover-thumb-3.jpg);" data-theme-cover-class="bg-cover-3" data-toggle="theme-cover-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Cover 3">&nbsp;</a>
+									</div>
+									<div class="app-theme-cover-item">
+										<a href="javascript:;" class="app-theme-cover-link" style="background-image: url(assets/img/cover/cover-thumb-4.jpg);" data-theme-cover-class="bg-cover-4" data-toggle="theme-cover-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Cover 4">&nbsp;</a>
+									</div>
+									<div class="app-theme-cover-item">
+										<a href="javascript:;" class="app-theme-cover-link" style="background-image: url(assets/img/cover/cover-thumb-5.jpg);" data-theme-cover-class="bg-cover-5" data-toggle="theme-cover-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Cover 5">&nbsp;</a>
+									</div>
+								</div>
+								<!-- END theme-cover -->
+							</div>
+							<!-- END card-body -->
+							
+							<!-- BEGIN card-arrow -->
+							<div class="card-arrow">
+								<div class="card-arrow-top-left"></div>
+								<div class="card-arrow-top-right"></div>
+								<div class="card-arrow-bottom-left"></div>
+								<div class="card-arrow-bottom-right"></div>
+							</div>
+							<!-- END card-arrow -->
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- END theme-panel -->
+		</div>
+		<!-- END #app -->
+
+		<script>
+			//sets up login/logout menu link
+			if(localStorage.getItem("username"))
+			{
+				document.getElementById('login_menu_item').innerHTML = "<a href='logout.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1) + "' class='menu-link'><span class='menu-icon'><i class='fas fa-sign-out-alt fa-1x'></i></span><span class='menu-text'>logout</span></a>";
+				document.getElementById('login_header_item').innerHTML = "logout <i class='fas fa-sign-out-alt fa-1x ms-auto text-theme fs-16px my-n1'></i>";
+				document.getElementById('login_header_item').href = "logout.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
+				document.getElementById('login_footer_item').innerHTML = "<a href='logout.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1) + "' title='logout'><i class='fas fa-sign-out-alt fa-2x'></i></a>";
+			}
+			else
+			{
+				document.getElementById('login_menu_item').innerHTML = "<a href='login.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1) + "' class='menu-link'><span class='menu-icon'><i class='fas fa-sign-in-alt fa-1x'></i></span><span class='menu-text'>login</span></a>";
+				document.getElementById('login_header_item').innerHTML = "login <i class='fas fa-sign-in-alt fa-1x ms-auto text-theme fs-16px my-n1'></i>";
+				document.getElementById('login_header_item').href = "login.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
+				document.getElementById('login_footer_item').innerHTML = "<a href='login.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1) + "' title='login'><i class='fas fa-sign-in-alt fa-2x'></i></a>";
+			}
+		
+			//prevent autocomplete
+			$(':input').on('focus', function () {
+				$(this).attr('autocomplete', 'off')
+			});
+		</script>
+		
+		<script src="https://dexata.net/assets/js/vendor.min.js"></script>
+		<script src="https://dexata.net/assets/js/app.min.js"></script>
+	</body>
+</html>
