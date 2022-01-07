@@ -1,37 +1,118 @@
-<!-- Wrapper -->
-<div id="wrapper">	
-	<!-- One -->
-	<section id="one" class="wrapper style1">
-		<div class="inner">
-			<div class="spotlights">
-				<center>
-					<div class="spotlight" style="max-width:500px; margin-bottom: 50px">
-						<div class="content">
-							<h1><i class="fas fa-wallet fa-4x" style="vertical-align:middle"></i><br><noselect>Wallet</noselect></h1>
+<!-- BEGIN #content -->
+<div id="content" class="app-content">
+	<div class="row">
+		<!-- title spotlight -->
+		<center>
+			<div id="title_spotlight" style="max-width: 100%; width: 400px">
+				<!-- BEGIN card -->
+				<div class="card mb-3">
+					<!-- BEGIN card-body -->
+					<div class="card-body">
+						<h1><i class="fas fa-wallet fa-4x" style="vertical-align:middle"></i><br><noselect>wallet</noselect></h1>
+					</div>
+					<!-- END card-body -->
+					
+					<!-- BEGIN card-arrow -->
+					<div class="card-arrow">
+						<div class="card-arrow-top-left"></div>
+						<div class="card-arrow-top-right"></div>
+						<div class="card-arrow-bottom-left"></div>
+						<div class="card-arrow-bottom-right"></div>
+					</div>
+					<!-- END card-arrow -->
+				</div>
+				<!-- END card -->
+			</div>
+		</center>
+	</div>
+
+	<div class="row">
+		<center>
+			<!-- wallet select -->
+			<div id="show_wallet_select_link_spotlight" style="width: 300px; max-width: 100%; cursor: pointer" onclick="show_wallet_select()">
+				<!-- BEGIN card -->
+				<div class="card mb-3">
+					<!-- BEGIN card-body -->
+					<div class="card-body">
+						<div id="show_wallet_select_link" style="max-width: 300px">
+							<noselect style="margin: 0 auto"><div id="selected_wallets"></div></noselect>
 						</div>
 					</div>
-
-					<div id="show_wallet_select_link" class="spotlight" style="width: 300px; cursor: pointer" onclick="show_wallet_select()">
-						<noselect style="margin: 0 auto"><div id="selected_wallets" class="xscroll" style="margin-top:10px"></div></noselect>
+					<!-- END card-body -->
+					
+					<!-- BEGIN card-arrow -->
+					<div class="card-arrow">
+						<div class="card-arrow-top-left"></div>
+						<div class="card-arrow-top-right"></div>
+						<div class="card-arrow-bottom-left"></div>
+						<div class="card-arrow-bottom-right"></div>
 					</div>
-					<select id="wallet_select" onchange="wallet_select_event()" onfocusout="hide_wallet_select()" style="max-width: 100%; width: 300px; margin-bottom: 20px; display: none" multiple></select>
+					<!-- END card-arrow -->
+				</div>
+				<!-- END card -->
+			</div>
+			<select id="wallet_select" onchange="wallet_select_event()" onfocusout="hide_wallet_select()" style="max-width: 100%; width: 300px; margin-bottom: 20px; display: none" multiple></select>
 
-					<div id="no_wallets_spotlight" class="spotlight" style="max-width: 100%; width: 400px; display: none; padding-top: 20px; padding-bottom: 20px">
+			<!-- no wallets spotlight -->
+			<div id="no_wallets_spotlight" style="width: auto; max-width: 100%; display: none">
+				<!-- BEGIN card -->
+				<div class="card mb-3">
+					<!-- BEGIN card-body -->
+					<div class="card-body">
+						<div id="no_wallets_div" class="spotlight" style="max-width: 100%; width: 400px; padding-top: 20px; padding-bottom: 20px">
+						</div>
 					</div>
-
-					<div style="margin-bottom: 13px; margin-top: 10px; max-width: 40px">
-						<a id="charts_link" style="display: none" title="charts"><i class="fas fa-chart-area fa-2x" style="vertical-align: middle"></i></a>
+					<!-- END card-body -->
+					
+					<!-- BEGIN card-arrow -->
+					<div class="card-arrow">
+						<div class="card-arrow-top-left"></div>
+						<div class="card-arrow-top-right"></div>
+						<div class="card-arrow-bottom-left"></div>
+						<div class="card-arrow-bottom-right"></div>
 					</div>
+					<!-- END card-arrow -->
+				</div>
+				<!-- END card -->
+			</div>
 
-					<div id="balance_spotlight" class="spotlight" style="min-width: 300px; width: 300px; margin-bottom: 20px">
-						<div id="balance_div" class="xscroll" style="margin-top:10px">
+			<!-- charts link -->
+			<div style="margin-bottom: 13px; margin-top: 10px; max-width: 40px">
+				<a id="charts_link" style="display: none" title="charts"><i class="fas fa-chart-area fa-2x" style="vertical-align: middle"></i></a>
+			</div>
+
+			<!-- balance spotlight -->
+			<div id="balance_spotlight" style="width: 300px; max-width: 100%">
+				<!-- BEGIN card -->
+				<div class="card mb-3">
+					<!-- BEGIN card-body -->
+					<div class="card-body">
+						<div id="balance_div" class="xscroll">
 							<b>balance: </b>
 						</div>
 					</div>
+					<!-- END card-body -->
+					
+					<!-- BEGIN card-arrow -->
+					<div class="card-arrow">
+						<div class="card-arrow-top-left"></div>
+						<div class="card-arrow-top-right"></div>
+						<div class="card-arrow-bottom-left"></div>
+						<div class="card-arrow-bottom-right"></div>
+					</div>
+					<!-- END card-arrow -->
+				</div>
+				<!-- END card -->
+			</div>
 
-					<div class="spotlight" id="table_spotlight" style="max-width: 100%">
+			<!-- wallet spotlight -->
+			<div id="table_spotlight" style="width: auto; max-width: 100%">
+				<!-- BEGIN card -->
+				<div class="card mb-3">
+					<!-- BEGIN card-body -->
+					<div class="card-body">
 						<div id="table_div" class="xscroll">
-							<img id="loading_gif" src="@pathtofile(output/images/loading.gif)" style="margin-top: 20px; max-width: 150px">
+							<img id="loading_gif" src="@pathtofile(output/images/loading.gif)" style="max-width: 150px">
 							<table id="wallet_table" style="display: none;">
 								<thead>
 									<tr>
@@ -60,25 +141,75 @@
 							</table>
 						</div>
 					</div>
-					<a id="show_ignored_coins_button" onclick="toggle_show_ignored_coins()">show ignored coins</a><br>
+					<!-- END card-body -->
+					
+					<!-- BEGIN card-arrow -->
+					<div class="card-arrow">
+						<div class="card-arrow-top-left"></div>
+						<div class="card-arrow-top-right"></div>
+						<div class="card-arrow-bottom-left"></div>
+						<div class="card-arrow-bottom-right"></div>
+					</div>
+					<!-- END card-arrow -->
+				</div>
+				<!-- END card -->
+			</div>
+			<div style="margin-top:-10px; margin-bottom: 30px">
+				<a id="show_ignored_coins_button" onclick="toggle_show_ignored_coins()">show ignored coins</a>
+			</div>
 
-					<div id="balance_chart_div" style="margin-bottom: 30px; display: none">
-						<h3>Balance Chart</h3>
-						<select id="chart_select" placeholder="" onchange="fetch_chart()" style="max-width: 100%; width: 300px; margin-bottom: 20px;">
-							<option value="coin" disabled selected hidden>coin</option>
-						</select>
-						<div id="balance_chart_spotlight" class="spotlight" style="width: 100%; display: none; overflow: hidden">
-							<div id="balance_chart" style="width: 100%; height: 100%; padding-left: 10px; padding-right: 10px;padding-top: 10px; padding-bottom: 10px; margin: 0 auto">
-							</div><br>
+			<!-- balance chart spotlight -->
+			<div id="balance_chart_spotlight" style="width: auto; max-width: 100%; margin-bottom: 30px; display: none">
+				<h3>Balance Chart</h3>
+				<select id="chart_select" placeholder="" onchange="fetch_chart()" style="max-width: 100%; width: 300px; margin-bottom: 20px;">
+					<option value="coin" disabled selected="selected" hidden>coin</option>
+				</select>
+			
+				<!-- BEGIN card -->
+				<div id="balance_chart_card" class="card mb-3" style="display: none">
+					<!-- BEGIN card-body -->
+					<div class="card-body">
+						<div id="balance_chart" style="width: 100%; height: 100%; margin: 0 auto">
 						</div>
 					</div>
-
-					<div id="newsfeed_div" style="max-height: 350px; margin-top: 20px;overflow-y: scroll; background-color: #2E2E35; border-radius: 5px; scrollbar-color: grey #2e2e35;">
+					<!-- END card-body -->
+					
+					<!-- BEGIN card-arrow -->
+					<div class="card-arrow">
+						<div class="card-arrow-top-left"></div>
+						<div class="card-arrow-top-right"></div>
+						<div class="card-arrow-bottom-left"></div>
+						<div class="card-arrow-bottom-right"></div>
 					</div>
-				</center>
+					<!-- END card-arrow -->
+				</div>
+				<!-- END card -->
 			</div>
-		</div>
-	</section>
+
+			<!-- news div -->
+			<div id="newsfeed_spotlight" style="width: 600px; max-width: 100%; display: none">
+				<!-- BEGIN card -->
+				<div class="card mb-3">
+					<!-- BEGIN card-body -->
+					<div class="card-body">
+						<div id="newsfeed_div" style="max-height: 60vh; overflow-y: scroll; scrollbar-color: grey #2e2e35;">
+						</div>
+					</div>
+					<!-- END card-body -->
+					
+					<!-- BEGIN card-arrow -->
+					<div class="card-arrow">
+						<div class="card-arrow-top-left"></div>
+						<div class="card-arrow-top-right"></div>
+						<div class="card-arrow-bottom-left"></div>
+						<div class="card-arrow-bottom-right"></div>
+					</div>
+					<!-- END card-arrow -->
+				</div>
+				<!-- END card -->
+			</div>
+		</center>
+	</div>
 </div>
 
 <script>
@@ -275,13 +406,13 @@
 			document.getElementById('table_spotlight').style.width = (document.getElementById('wallet_table').offsetWidth + 70) + "px";
 
 			document.getElementById("balance_div").innerHTML = "<b>balance:</b> $" + wallet_balance.toLocaleString();
-			document.getElementById('balance_spotlight').style.width = (document.getElementById('balance_div').offsetWidth + 70) + "px";
 
 			document.getElementById('charts_link').href = "@pathto(charts)?width=250&height=350&range=" + chart_range + "&coins=" + coins_str;
 			document.getElementById('charts_link').style.display = "block";
 
 			document.getElementById('newsfeed_div').innerHTML = 
-				'<iframe id="newsfeed_iframe" scrolling="no" width="100%" height="650px" allowtransparency="true" frameborder="0" src="https://cryptopanic.com/widgets/news/?bg_color=2E2E35&amp;currencies=' + ids_str + '&amp;font_family=sans&amp;header_bg_color=30343B&amp;header_text_color=FFFFFF&amp;link_color=679267&amp;news_feed=recent&amp;posts_limit=10&amp;text_color=FFFFFF&amp;title=News"></iframe>';
+				'<iframe id="newsfeed_iframe" scrolling="no" width="100%" height="650px" allowtransparency="true" frameborder="0" src="https://cryptopanic.com/widgets/news/?bg_color=FFFFFF00&amp;currencies=' + ids_str + '&amp;font_family=mono&amp;font_size=13&amp;header_bg_color=FFFFFF00&amp;header_text_color=FFFFFF&amp;link_color=679267&amp;news_feed=recent&amp;posts_limit=10&amp;text_color=FFFFFF&amp;title=news"></iframe>';
+			document.getElementById('newsfeed_spotlight').style.display = "block";
 
 			var body_width = document.body.clientWidth;
 			if(body_width < 530)
@@ -427,13 +558,18 @@
 
 	function show_wallet_select()
 	{
-		document.getElementById('show_wallet_select_link').style.display = "none";
+		var options = document.getElementById("wallet_select").options;
+
+	    for(var i = 0; i < options.length; i++)
+	     	options[i].selected = false;
+
+		document.getElementById('show_wallet_select_link_spotlight').style.display = "none";
 		document.getElementById('wallet_select').style.display = "block";
 	}
 
 	function hide_wallet_select()
 	{
-		document.getElementById('show_wallet_select_link').style.display = "block";
+		document.getElementById('show_wallet_select_link_spotlight').style.display = "block";
 		document.getElementById('wallet_select').style.display = "none";
 	}
 
@@ -687,12 +823,12 @@
 						}
 						no_fetched++;
 				}).fail(function() {
-					document.getElementById('balance_chart_div').style.display = "none";
+					document.getElementById('balance_chart_spotlight').style.display = "none";
 					alert("could not find balance chart for " + document.getElementById('chart_select').text);
 				});
 			}
 
-			document.getElementById('balance_chart_div').style.display = "block";
+			document.getElementById('balance_chart_spotlight').style.display = "block";
 		});
 	}
 
@@ -707,6 +843,8 @@
 			balance_chart.destroy();
 			document.getElementById('balance_chart').innerHTML = "";
 		}
+		else
+			document.getElementById('balance_chart_card').style.display = "block";
 
 		for(var i=0; i<balance_data.length; i++)
 		{
@@ -731,7 +869,6 @@
 		}
 
 		document.getElementById('balance_chart_spotlight').style.display = "block";
-		document.getElementById('balance_chart_spotlight').style.height = (document.getElementById('balance_chart').offsetHeight) + "px";
 	}
 
 	document.getElementById('table_spotlight').style.width = (document.getElementById('loading_gif').offsetWidth + 400) + "px";

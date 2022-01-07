@@ -1,7 +1,3 @@
-'404'
-'404'
-'template/404.template'
-
 'categories'
 'categories'
 'template/page.template'
@@ -35,7 +31,7 @@
 'template/page.template'
 
 'manage_users'
-'manage users'
+'manage_users'
 'template/page.template'
 
 'news'
@@ -50,16 +46,8 @@
 'search'
 'template/page.template'
 
-'search-old'
-'search-old'
-'template/page.template'
-
 'wallet'
 'wallet'
-'template/page.template'
-
-'wallet-old'
-'wallet-old'
 'template/page.template'
 
 'watchlist'

@@ -1,27 +1,51 @@
-<!-- Wrapper -->
-<div id="wrapper">
-	<!-- One -->
-	<section id="one" class="wrapper style1">
-		<div class="inner">
-			<div class="spotlights">
-				<center>
-					<div class="spotlight" style="max-width:500px; margin-bottom: 35px">
-						<div class="content">
-							<h1><i class="fas fa-users-cog fa-4x" style="vertical-align:middle"></i><br><noselect>Manage Users</noselect></h1>
-						</div>
+<!-- BEGIN #content -->
+<div id="content" class="app-content">
+	<div class="row">
+		<!-- title spotlight -->
+		<center>
+			<div id="title_spotlight" style="max-width: 100%; width: 400px">
+				<!-- BEGIN card -->
+				<div class="card mb-3">
+					<!-- BEGIN card-body -->
+					<div class="card-body">
+						<h1><i class="fas fa-user-cog fa-4x" style="vertical-align:middle"></i><br><noselect>users</noselect></h1>
 					</div>
+					<!-- END card-body -->
+					
+					<!-- BEGIN card-arrow -->
+					<div class="card-arrow">
+						<div class="card-arrow-top-left"></div>
+						<div class="card-arrow-top-right"></div>
+						<div class="card-arrow-bottom-left"></div>
+						<div class="card-arrow-bottom-right"></div>
+					</div>
+					<!-- END card-arrow -->
+				</div>
+				<!-- END card -->
+			</div>
+		</center>
+	</div>
 
-					<select id="add_rem_select" style="max-width: 100%; margin-bottom: 20px;display: inline-block" onchange="add_rem_select_event()">
-						<option value="add" selected="selected">add user</option>
-						<option value="remove">remove user</option>
-						<option value="change_username">change username</option>
-						<option value="change_password">change password</option>
-						<option value="backup_user">backup user</option>
-						<option value="restore_user">restore user</option>
-					</select><br>
+	<center>
+		<select id="add_rem_select" style="max-width: 100%; margin-bottom: 20px; display: block" onchange="add_rem_select_event()">
+			<option value="add" selected="selected">add user</option>
+			<option value="remove">remove user</option>
+			<option value="change_username">change username</option>
+			<option value="change_password">change password</option>
+			<option value="backup_user">backup user</option>
+			<option value="restore_user">restore user</option>
+		</select>
+	</center>
 
-					<div id="add_user_spotlight" class="spotlight" style="max-width:100%; margin-bottom: 0px; display: inline-block">
-						<div id="add_user_div" class="xscroll">
+	<div class="row">
+		<center>
+			<!-- add user spotlight -->
+			<div id="add_user_spotlight" style="width: auto; max-width: 100%">
+				<!-- BEGIN card -->
+				<div class="card mb-3">
+					<!-- BEGIN card-body -->
+					<div class="card-body">
+						<div id="add_user_div" class="xscroll" style="max-width: 250px;">
 							<table id="add_user_table">
 								<tr>
 									<td><input id="add_user_username" spellcheck="false" placeholder="username"></td>
@@ -33,11 +57,30 @@
 									<td><input id="confirm_password" spellcheck="false" placeholder="confirm password" type="password"></td>
 								</tr>
 							</table>
-							<a onclick="add_user()"><i class="fas fa-user-plus fa-2x" style="margin-bottom: 10px"></i></a><br>
+							<a onclick="add_user()"><i class="fas fa-user-plus fa-2x" style="margin-top: 10px"></i></a><br>
 						</div>
 					</div>
-					<div id="remove_user_spotlight" class="spotlight" style="max-width:100%; margin-bottom: 0px;display: none">
-						<div id="remove_user_div" class="xscroll">
+					<!-- END card-body -->
+					
+					<!-- BEGIN card-arrow -->
+					<div class="card-arrow">
+						<div class="card-arrow-top-left"></div>
+						<div class="card-arrow-top-right"></div>
+						<div class="card-arrow-bottom-left"></div>
+						<div class="card-arrow-bottom-right"></div>
+					</div>
+					<!-- END card-arrow -->
+				</div>
+				<!-- END card -->
+			</div>
+
+			<!-- remove user spotlight -->
+			<div id="remove_user_spotlight" style="width: auto; max-width: 100%; display: none">
+				<!-- BEGIN card -->
+				<div class="card mb-3">
+					<!-- BEGIN card-body -->
+					<div class="card-body">
+						<div id="remove_user_div" class="xscroll" style="max-width: 250px">
 							<table id="remove_user_table">
 								<tr>
 									<td><input id="remove_user_username" spellcheck="false" placeholder="username"></td>
@@ -46,11 +89,30 @@
 									<td><input id="remove_user_password" spellcheck="false" placeholder="password" type="password"></td>
 								</tr>
 							</table>
-							<a onclick="remove_user()"><i class="fas fa-user-minus fa-2x" style="margin-bottom: 10px"></i></a><br>
+							<a onclick="remove_user()"><i class="fas fa-user-minus fa-2x" style="margin-top: 10px"></i></a><br>
 						</div>
 					</div>
-					<div id="change_password_spotlight" class="spotlight" style="max-width:100%; margin-bottom: 0px; display: none">
-						<div id="change_password_div" class="xscroll">
+					<!-- END card-body -->
+					
+					<!-- BEGIN card-arrow -->
+					<div class="card-arrow">
+						<div class="card-arrow-top-left"></div>
+						<div class="card-arrow-top-right"></div>
+						<div class="card-arrow-bottom-left"></div>
+						<div class="card-arrow-bottom-right"></div>
+					</div>
+					<!-- END card-arrow -->
+				</div>
+				<!-- END card -->
+			</div>
+
+			<!-- change password spotlight -->
+			<div id="change_password_spotlight" style="width: auto; max-width: 100%; display: none">
+				<!-- BEGIN card -->
+				<div class="card mb-3">
+					<!-- BEGIN card-body -->
+					<div class="card-body">
+						<div id="change_password_div" class="xscroll" style="max-width: 250px">
 							<table id="change_password_table">
 								<tr>
 									<td><input id="change_password_username" spellcheck="false" placeholder="username"></td>
@@ -65,11 +127,30 @@
 									<td><input id="confirm_new_password" spellcheck="false" placeholder="confirm password" type="password"></td>
 								</tr>
 							</table>
-							<a onclick="change_password()"><i class="fas fa-user-edit fa-2x" style="margin-bottom: 10px"></i></a><br>
+							<a onclick="change_password()"><i class="fas fa-user-edit fa-2x" style="margin-top: 10px"></i></a><br>
 						</div>
 					</div>
-					<div id="change_username_spotlight" class="spotlight" style="max-width:100%; margin-bottom: 0px; display: none">
-						<div id="change_username_div" class="xscroll">
+					<!-- END card-body -->
+					
+					<!-- BEGIN card-arrow -->
+					<div class="card-arrow">
+						<div class="card-arrow-top-left"></div>
+						<div class="card-arrow-top-right"></div>
+						<div class="card-arrow-bottom-left"></div>
+						<div class="card-arrow-bottom-right"></div>
+					</div>
+					<!-- END card-arrow -->
+				</div>
+				<!-- END card -->
+			</div>
+
+			<!-- change username spotlight -->
+			<div id="change_username_spotlight" style="width: auto; max-width: 100%; display: none">
+				<!-- BEGIN card -->
+				<div class="card mb-3">
+					<!-- BEGIN card-body -->
+					<div class="card-body">
+						<div id="change_username_div" class="xscroll" style="max-width: 250px">
 							<table id="change_username_table">
 								<tr>
 									<td><input id="old_username" spellcheck="false" placeholder="old username"></td>
@@ -81,11 +162,30 @@
 									<td><input id="change_username_password" spellcheck="false" placeholder="password" type="password"></td>
 								</tr>
 							</table>
-							<a onclick="change_username()"><i class="fas fa-user-edit fa-2x" style="margin-bottom: 10px"></i></a><br>
+							<a onclick="change_username()"><i class="fas fa-user-edit fa-2x" style="margin-top: 10px"></i></a><br>
 						</div>
 					</div>
-					<div id="backup_user_spotlight" class="spotlight" style="max-width:100%; margin-bottom: 0px; display: none">
-						<div id="backup_user_div" class="xscroll">
+					<!-- END card-body -->
+					
+					<!-- BEGIN card-arrow -->
+					<div class="card-arrow">
+						<div class="card-arrow-top-left"></div>
+						<div class="card-arrow-top-right"></div>
+						<div class="card-arrow-bottom-left"></div>
+						<div class="card-arrow-bottom-right"></div>
+					</div>
+					<!-- END card-arrow -->
+				</div>
+				<!-- END card -->
+			</div>
+
+			<!-- backup user spotlight -->
+			<div id="backup_user_spotlight" style="width: auto; max-width: 100%; display: none">
+				<!-- BEGIN card -->
+				<div class="card mb-3">
+					<!-- BEGIN card-body -->
+					<div class="card-body">
+						<div id="backup_user_div" class="xscroll" style="max-width: 250px">
 							<table id="backup_user_table">
 								<tr>
 									<td><input id="backup_username" spellcheck="false" placeholder="username"></td>
@@ -97,17 +197,53 @@
 									<td><input id="backup_passphrase" spellcheck="false" placeholder="passphrase" type="password"></td>
 								</tr>
 							</table>
-							<a onclick="backup_user()"><i class="fas fa-check-circle fa-2x" style="margin-bottom: 10px"></i></a><br>
+							<a onclick="backup_user()"><i class="fas fa-check-circle fa-2x" style="margin-top: 10px"></i></a><br>
 						</div>
 					</div>
-					<div id="backup_ta_div" style="display: none; margin-top: 30px">
-						<p>
-							Save to file
-							<textarea id="backup_ta" spellcheck="false" style="max-width:100%; width: 400px; height: 250px; margin-top: 10px; margin-bottom: 10px"></textarea>
-						</p>
+					<!-- END card-body -->
+					
+					<!-- BEGIN card-arrow -->
+					<div class="card-arrow">
+						<div class="card-arrow-top-left"></div>
+						<div class="card-arrow-top-right"></div>
+						<div class="card-arrow-bottom-left"></div>
+						<div class="card-arrow-bottom-right"></div>
 					</div>
-					<div id="restore_user_spotlight" class="spotlight" style="max-width:100%; margin-bottom: 0px; display: none">
-						<div id="restore_user_div" class="xscroll">
+					<!-- END card-arrow -->
+				</div>
+				<!-- END card -->
+			</div>
+
+			<!-- backup ta spotlight -->
+			<div id="backup_ta_spotlight" style="width: auto; max-width: 100%; display: none">
+				<!-- BEGIN card -->
+				<div class="card mb-3">
+					<!-- BEGIN card-body -->
+					<div class="card-body">
+						<div id="backup_ta_div" class="xscroll" style="max-width: 100%; width: 400px">
+						</div>
+					</div>
+					<!-- END card-body -->
+					
+					<!-- BEGIN card-arrow -->
+					<div class="card-arrow">
+						<div class="card-arrow-top-left"></div>
+						<div class="card-arrow-top-right"></div>
+						<div class="card-arrow-bottom-left"></div>
+						<div class="card-arrow-bottom-right"></div>
+					</div>
+					<!-- END card-arrow -->
+				</div>
+				<!-- END card -->
+			</div>
+
+			<!-- restore user spotlight -->
+			<div id="restore_user_spotlight" style="width: auto; max-width: 100%; display: none">
+				<!-- BEGIN card -->
+				<div class="card mb-3">
+					<!-- BEGIN card-body -->
+					<div class="card-body">
+						<div id="restore_user_div" class="xscroll" style="max-width: 250px">
 							<table id="restore_user_table">
 								<tr>
 									<td><input id="encrypted_data" spellcheck="false" placeholder="encrypted data"></td>
@@ -125,13 +261,24 @@
 									<td><input id="restore_confirm_password" spellcheck="false" placeholder="confirm password" type="password"></td>
 								</tr>
 							</table>
-							<a onclick="restore_user()"><i class="fas fa-check-circle fa-2x" style="margin-bottom: 10px"></i></a><br>
+							<a onclick="restore_user()"><i class="fas fa-check-circle fa-2x" style="margin-top: 10px"></i></a><br>
 						</div>
 					</div>
-				</center>
+					<!-- END card-body -->
+					
+					<!-- BEGIN card-arrow -->
+					<div class="card-arrow">
+						<div class="card-arrow-top-left"></div>
+						<div class="card-arrow-top-right"></div>
+						<div class="card-arrow-bottom-left"></div>
+						<div class="card-arrow-bottom-right"></div>
+					</div>
+					<!-- END card-arrow -->
+				</div>
+				<!-- END card -->
 			</div>
-		</div>
-	</section>
+		</center>
+	</div>
 </div>
 
 <script>
@@ -570,7 +717,7 @@
 
 			document.getElementById('backup_ta_div').style.display = "block";
 			var user_data_str = JSON.stringify(user_data);
-			document.getElementById('backup_ta').value = CryptoJS.AES.encrypt(user_data_str, document.getElementById('backup_passphrase').value);
+			document.getElementById('backup_ta_div').innerHTML = CryptoJS.AES.encrypt(user_data_str, document.getElementById('backup_passphrase').value);
 		}
 
 		document.getElementById('backup_password').value = "";

@@ -1,81 +1,146 @@
-<!-- Wrapper -->
-<div id="wrapper">
-	<!-- One -->
-	<section id="one" class="wrapper style1">
-		<div class="inner">
-			<div class="spotlights">
-				<center>
-					<div class="spotlight" style="max-width:500px; margin-bottom: 35px">
-						<div class="content">
-							<h1><i class="fas fa-cogs fa-4x" style="vertical-align:middle"></i><br><noselect>Config</noselect></h1>
+<!-- BEGIN #content -->
+<div id="content" class="app-content">
+	<div class="row">
+		<!-- title spotlight -->
+		<center>
+			<div id="title_spotlight" style="max-width: 100%; width: 400px">
+				<!-- BEGIN card -->
+				<div class="card mb-3">
+					<!-- BEGIN card-body -->
+					<div class="card-body">
+						<h1><i class="fas fa-cogs fa-4x" style="vertical-align:middle"></i><br><noselect>config</noselect></h1>
+					</div>
+					<!-- END card-body -->
+					
+					<!-- BEGIN card-arrow -->
+					<div class="card-arrow">
+						<div class="card-arrow-top-left"></div>
+						<div class="card-arrow-top-right"></div>
+						<div class="card-arrow-bottom-left"></div>
+						<div class="card-arrow-bottom-right"></div>
+					</div>
+					<!-- END card-arrow -->
+				</div>
+				<!-- END card -->
+			</div>
+		</center>
+	</div>
+
+	<center>
+		<div>
+			<select id="config_select" style="width: 300px; max-width: 100%; margin-bottom: 20px; display: inline-block" onchange="config_select_event()">
+				<option value="general" selected="selected">general</option>
+				<option value="watchlists">watchlists</option>
+				<option id="wallets_option" value="wallets">wallets</option>
+			</select>
+
+			<select id="watchlist_config_select" style="width: 300px; max-width: 100%; margin-bottom: 20px; display: none;" onchange="watchlist_config_select_event()">
+				<option value="add" selected="selected">add</option>
+				<option value="remove">remove</option>
+				<option value="edit">edit</option>
+			</select>
+
+			<select id="wallet_config_select" style="width: 300px; max-width: 100%; margin-bottom: 20px; display: none" onchange="wallet_config_select_event()">
+				<option value="add" selected="selected">add</option>
+				<option value="remove">remove</option>
+				<option value="ignore">ignore</option>
+			</select>
+		</div>
+	</center>
+
+	<div class="row">
+		<center>
+			<!-- config spotlight -->
+			<div id="config_spotlight" style="width: auto; max-width: 100%">
+				<!-- BEGIN card -->
+				<div class="card mb-3">
+					<!-- BEGIN card-body -->
+					<div class="card-body">
+						<div id="config_div" class="xscroll" style="max-width: 750px;">
+							<table id="config_table" style="text-align: left">
+								<tr>
+									<td>Refresh speed (sec)</td>
+									<td><input id="refresh_sec" spellcheck="false"></td>
+								</tr>
+								<tr id="session_timeout_row">
+									<td>Session timeout (min)</td>
+									<td><input id="session_timeout" spellcheck="false"></td>
+								</tr>
+								<tr>
+									<td>Table percentage changes</td>
+									<td>
+										<table style="margin-top: 10px; margin-left: -20px">
+											<tr>
+												<td><input id="change_hour" type="checkbox"><label for="change_hour" checked>hour&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+												<td><input id="change_day" type="checkbox"><label for="change_day" checked>day</label></td>
+												<td><input id="change_week" type="checkbox"><label for="change_week" checked>week</label></td>
+											</tr>
+											<tr>
+												<td><input id="change_month" type="checkbox"><label for="change_month" checked>month</label></td>
+												<td><input id="change_year" type="checkbox"><label for="change_year" checked>year</label></td>
+												<td></td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+								<tr id="covalenthq_api_key_row">
+									<td>CovalentHQ API key</td>
+									<td><input id="covalenthq_api_key" spellcheck="false"></td>
+								</tr>
+							</table>
+							<a onclick="save_general_config()"><i class="fas fa-save fa-3x" style="margin-top: 10px"></i></a>
 						</div>
 					</div>
-
-					<div>
-						<select id="config_select" style="width: 300px; max-width: 100%; margin-bottom: 20px; display: inline-block" onchange="config_select_event()">
-							<option value="general" selected="selected">general</option>
-							<option value="watchlists">watchlists</option>
-							<option id="wallets_option" value="wallets">wallets</option>
-						</select>
-
-						<select id="watchlist_config_select" style="width: 300px; max-width: 100%; margin-bottom: 20px; display: none;" onchange="watchlist_config_select_event()">
-							<option value="add" selected="selected">add</option>
-							<option value="remove">remove</option>
-							<option value="edit">edit</option>
-						</select>
-
-						<select id="wallet_config_select" style="width: 300px; max-width: 100%; margin-bottom: 20px; display: none" onchange="wallet_config_select_event()">
-							<option value="add" selected="selected">add</option>
-							<option value="remove">remove</option>
-							<option value="ignore">ignore</option>
-						</select>
-					</div>
-
+					<!-- END card-body -->
 					
-
-					<div id="config_spotlight" class="spotlight" style="max-width:100%; display: inline-block">
-						<table id="config_table">
-							<tr>
-								<td>Refresh speed (sec)</td>
-								<td><input id="refresh_sec" spellcheck="false"></td>
-							</tr>
-							<tr id="session_timeout_row">
-								<td>Session timeout (min)</td>
-								<td><input id="session_timeout" spellcheck="false"></td>
-							</tr>
-							<tr>
-								<td>Table percentage changes</td>
-								<td>
-									<input id="change_hour" type="checkbox"><label for="change_hour" checked>hour&nbsp;&nbsp;&nbsp;&nbsp;</label>
-									<input id="change_day" type="checkbox"><label for="change_day" checked>day</label>
-									<input id="change_week" type="checkbox"><label for="change_week" checked>week</label>
-									<div style="margin-top: -15px; margin-bottom: -15px">
-										<input id="change_month" type="checkbox"><label for="change_month" checked>month</label>
-										<input id="change_year" type="checkbox"><label for="change_year" checked>year</label>
-									</div>
-								</td>
-							</tr>
-							<tr id="covalenthq_api_key_row">
-								<td>CovalentHQ API key</td>
-								<td><input id="covalenthq_api_key" spellcheck="false"></td>
-							</tr>
-						</table>
-						<a onclick="save_general_config()"><i class="fas fa-save fa-3x" style="margin-bottom: 10px"></i></a>
+					<!-- BEGIN card-arrow -->
+					<div class="card-arrow">
+						<div class="card-arrow-top-left"></div>
+						<div class="card-arrow-top-right"></div>
+						<div class="card-arrow-bottom-left"></div>
+						<div class="card-arrow-bottom-right"></div>
 					</div>
+					<!-- END card-arrow -->
+				</div>
+				<!-- END card -->
+			</div>
 
-					<div id="add_watchlist_spotlight" class="spotlight" style="max-width:100%">
-						<div id="add_watchlist_div" class="xscroll">
+			<!-- add watchlist spotlight -->
+			<div id="add_watchlist_spotlight" style="width: auto; max-width: 100%">
+				<!-- BEGIN card -->
+				<div class="card mb-3">
+					<!-- BEGIN card-body -->
+					<div class="card-body">
+						<div id="add_watchlist_div" class="xscroll" style="width: 300px;">
 							<table id="add_watchlist_table">
 								<tr>
 									<td><input id="add_watchlist_input" spellcheck="false" placeholder="name"></td>
 								</tr>
 							</table>
-							<a onclick="add_watchlist()" title="add watchlist"><i class="fas fa-plus fa-2x" style="margin-bottom: 10px"></i></a>
+							<a onclick="add_watchlist()" title="add watchlist"><i class="fas fa-plus fa-2x" style="margin-top: 10px"></i></a>
 						</div>
 					</div>
+					<!-- END card-body -->
+					
+					<!-- BEGIN card-arrow -->
+					<div class="card-arrow">
+						<div class="card-arrow-top-left"></div>
+						<div class="card-arrow-top-right"></div>
+						<div class="card-arrow-bottom-left"></div>
+						<div class="card-arrow-bottom-right"></div>
+					</div>
+					<!-- END card-arrow -->
+				</div>
+				<!-- END card -->
+			</div>
 
-					<div id="remove_watchlist_spotlight" class="spotlight" style="max-width:100%; width: 900px">
-						<div id="remove_watchlist_div" class="xscroll">
+			<!-- remove watchlist spotlight -->
+			<div id="remove_watchlist_spotlight" style="width: auto; max-width: 100%">
+				<!-- BEGIN card -->
+				<div class="card mb-3">
+					<!-- BEGIN card-body -->
+					<div class="card-body">
+						<div id="remove_watchlist_div" class="xscroll" style="max-width: 300px;">
 							<table id="remove_watchlist_table">
 								<tr>
 									<td><select id="remove_watchlist_select" spellcheck="false" placeholder="name" style="width: 100%"></select></td>
@@ -84,24 +149,80 @@
 									<td><input id="remove_watchlist_password" spellcheck="false" placeholder="password" type="password"></td>
 								</tr>
 							</table>
-							<a onclick="remove_watchlist()" title="remove watchlist"><red><i class="fas fa-minus fa-2x"></i></red></a>
+							<a onclick="remove_watchlist()" title="remove watchlist"><red><i class="fas fa-minus fa-2x" style="margin-top: 10px"></i></red></a>
 						</div>
 					</div>
-
-					<div id="no_watchlists_spotlight" class="spotlight" style="max-width: 100%; width: 400px; display: none; padding-top: 20px; padding-bottom: 20px">
+					<!-- END card-body -->
+					
+					<!-- BEGIN card-arrow -->
+					<div class="card-arrow">
+						<div class="card-arrow-top-left"></div>
+						<div class="card-arrow-top-right"></div>
+						<div class="card-arrow-bottom-left"></div>
+						<div class="card-arrow-bottom-right"></div>
 					</div>
+					<!-- END card-arrow -->
+				</div>
+				<!-- END card -->
+			</div>
 
-					<div id="watchlist_div">
-						<p>
-							Watchlist
-							<select id="watchlist_select" onclick="watchlist_select_event()" style="max-width: 100%"></select>
-							<textarea id="watchlist" spellcheck="false" style="max-width:100%; width: 400px; height: 250px; margin-top: 10px; margin-bottom: 10px"></textarea>
+			<!-- no watchlists spotlight -->
+			<div id="no_watchlists_spotlight" style="width: auto; max-width: 100%; display: none">
+				<!-- BEGIN card -->
+				<div class="card mb-3">
+					<!-- BEGIN card-body -->
+					<div class="card-body">
+						<div id="no_watchlists_div" class="xscroll" style="max-width: 750px;">
+						</div>
+					</div>
+					<!-- END card-body -->
+					
+					<!-- BEGIN card-arrow -->
+					<div class="card-arrow">
+						<div class="card-arrow-top-left"></div>
+						<div class="card-arrow-top-right"></div>
+						<div class="card-arrow-bottom-left"></div>
+						<div class="card-arrow-bottom-right"></div>
+					</div>
+					<!-- END card-arrow -->
+				</div>
+				<!-- END card -->
+			</div>
+
+			<!-- watchlist spotlight -->
+			<div id="watchlist_spotlight" style="width: auto; max-width: 100%">
+				<!-- BEGIN card -->
+				<div class="card mb-3">
+					<!-- BEGIN card-body -->
+					<div class="card-body">
+						<div id="watchlist_div" class="xscroll" style="max-width: 420px;">
+							watchlist<br>
+							<select id="watchlist_select" onclick="watchlist_select_event()" style="max-width: 100%; margin-top: 5px"></select>
+							<textarea id="watchlist" spellcheck="false" style="max-width:100%; width: 400px; height: 250px; margin-top: 10px; margin-bottom: 10px"></textarea><br>
 							<a onclick="save_watchlist()"><i class="fas fa-save fa-3x"></i></a>
-						</p>
+						</div>
 					</div>
+					<!-- END card-body -->
+					
+					<!-- BEGIN card-arrow -->
+					<div class="card-arrow">
+						<div class="card-arrow-top-left"></div>
+						<div class="card-arrow-top-right"></div>
+						<div class="card-arrow-bottom-left"></div>
+						<div class="card-arrow-bottom-right"></div>
+					</div>
+					<!-- END card-arrow -->
+				</div>
+				<!-- END card -->
+			</div>
 
-					<div id="add_wallet_spotlight" class="spotlight" style="max-width:100%">
-						<div id="add_wallet_div" class="xscroll">
+			<!-- add wallet spotlight -->
+			<div id="add_wallet_spotlight" style="width: auto; max-width: 100%">
+				<!-- BEGIN card -->
+				<div class="card mb-3">
+					<!-- BEGIN card-body -->
+					<div class="card-body">
+						<div id="add_wallet_div" class="xscroll" style="max-width: 300px;">
 							<table id="add_wallet_table">
 								<tr>
 									<td>
@@ -139,12 +260,30 @@
 									<td><input id="add_wallet_address" spellcheck="false" placeholder="address"></td>
 								</tr>
 							</table>
-							<a onclick="add_wallet()" title="add wallet"><i class="fas fa-plus fa-2x" style="margin-bottom: 10px"></i></a>
+							<a onclick="add_wallet()" title="add wallet"><i class="fas fa-plus fa-2x" style="margin-top: 10px"></i></a>
 						</div>
 					</div>
+					<!-- END card-body -->
+					
+					<!-- BEGIN card-arrow -->
+					<div class="card-arrow">
+						<div class="card-arrow-top-left"></div>
+						<div class="card-arrow-top-right"></div>
+						<div class="card-arrow-bottom-left"></div>
+						<div class="card-arrow-bottom-right"></div>
+					</div>
+					<!-- END card-arrow -->
+				</div>
+				<!-- END card -->
+			</div>
 
-					<div id="remove_wallet_spotlight" class="spotlight" style="max-width:100%">
-						<div id="remove_wallet_div" class="xscroll">
+			<!-- remove wallet spotlight -->
+			<div id="remove_wallet_spotlight" style="width: auto; max-width: 100%">
+				<!-- BEGIN card -->
+				<div class="card mb-3">
+					<!-- BEGIN card-body -->
+					<div class="card-body">
+						<div id="remove_wallet_div" class="xscroll" style="max-width: 300px;">
 							<table id="remove_wallet_table">
 								<tr>
 									<td><select id="remove_wallet_select" spellcheck="false" placeholder="name"></select></td>
@@ -153,28 +292,76 @@
 									<td><input id="remove_wallet_password" spellcheck="false" placeholder="password" type="password"></td>
 								</tr>
 							</table>
-							<a onclick="remove_wallet()" title="remove wallet"><red><i class="fas fa-minus fa-2x" style="margin-bottom: 10px"></i></red></a>
+							<a onclick="remove_wallet()" title="remove wallet"><red><i class="fas fa-minus fa-2x" style="margin-top: 10px"></i></red></a>
 						</div>
 					</div>
-
-					<div id="no_wallets_spotlight" class="spotlight" style="max-width: 100%; width: 400px; display: none; padding-top: 20px; padding-bottom: 20px">
+					<!-- END card-body -->
+					
+					<!-- BEGIN card-arrow -->
+					<div class="card-arrow">
+						<div class="card-arrow-top-left"></div>
+						<div class="card-arrow-top-right"></div>
+						<div class="card-arrow-bottom-left"></div>
+						<div class="card-arrow-bottom-right"></div>
 					</div>
+					<!-- END card-arrow -->
+				</div>
+				<!-- END card -->
+			</div>
 
-					<div id="ignorelist_div">
-						<p>
-							Ignore list
+			<!-- no wallets spotlight -->
+			<div id="no_wallets_spotlight" style="width: auto; max-width: 100%; display: none">
+				<!-- BEGIN card -->
+				<div class="card mb-3">
+					<!-- BEGIN card-body -->
+					<div class="card-body">
+						<div id="no_wallets_div" class="xscroll" style="max-width: 750px;">
+							
+						</div>
+					</div>
+					<!-- END card-body -->
+					
+					<!-- BEGIN card-arrow -->
+					<div class="card-arrow">
+						<div class="card-arrow-top-left"></div>
+						<div class="card-arrow-top-right"></div>
+						<div class="card-arrow-bottom-left"></div>
+						<div class="card-arrow-bottom-right"></div>
+					</div>
+					<!-- END card-arrow -->
+				</div>
+				<!-- END card -->
+			</div>
+
+			<!-- ignorelist spotlight -->
+			<div id="ignorelist_spotlight" style="width: auto; max-width: 100%">
+				<!-- BEGIN card -->
+				<div class="card mb-3">
+					<!-- BEGIN card-body -->
+					<div class="card-body">
+						<div id="ignorelist_div" class="xscroll" style="max-width: 500px;">
+							ignore list
 							<select id="wallet_select" onclick="ignorelist_select_event()"></select>
 							<textarea id="ignorelist" spellcheck="false" style="max-width:100%; width: 400px; height: 250px; margin-top: 10px; margin-bottom: 10px"></textarea>
 							<a onclick="save_ignorelist()"><i class="fas fa-save fa-3x"></i></a>
-						</p>
+						</div>
 					</div>
-				</center>
+					<!-- END card-body -->
+					
+					<!-- BEGIN card-arrow -->
+					<div class="card-arrow">
+						<div class="card-arrow-top-left"></div>
+						<div class="card-arrow-top-right"></div>
+						<div class="card-arrow-bottom-left"></div>
+						<div class="card-arrow-bottom-right"></div>
+					</div>
+					<!-- END card-arrow -->
+				</div>
+				<!-- END card -->
 			</div>
-		</div>
-	</section>
+		</center>
+	</div>
 </div>
-
-
 
 <script>
 	//alert(JSON.stringify(localStorage));
@@ -239,7 +426,7 @@
 		else
 		{
 			document.getElementById('remove_watchlist_spotlight').style.display = "none";
-			document.getElementById('watchlist_div').style.display = "none";
+			document.getElementById('watchlist_spotlight').style.display = "none";
 			document.getElementById('no_watchlists_spotlight').style.display = "block";
 			document.getElementById('no_watchlists_spotlight').innerHTML = user + " does not have any watchlists";
 		}
@@ -267,7 +454,7 @@
 		else
 		{
 			document.getElementById('remove_wallet_spotlight').style.display = "none";
-			document.getElementById('wallet_div').style.display = "none";
+			document.getElementById('wallet_spotlight').style.display = "none";
 			document.getElementById('no_wallets_spotlight').style.display = "block";
 			document.getElementById('no_wallets_spotlight').innerHTML = user + " has not added any wallets";
 		}
@@ -288,7 +475,7 @@
 		document.getElementById('add_watchlist_spotlight').style.display = "none";
 		document.getElementById('remove_watchlist_spotlight').style.display = "none";
 		document.getElementById('no_watchlists_spotlight').style.display = "none";
-		document.getElementById('watchlist_div').style.display = "none";
+		document.getElementById('watchlist_spotlight').style.display = "none";
 
 
 		if(document.getElementById('watchlist_config_select').value == "add")
@@ -300,7 +487,7 @@
 		}
 		else
 		{
-			document.getElementById('watchlist_div').style.display = "block";
+			document.getElementById('watchlist_spotlight').style.display = "block";
 			update_watchlist_select('watchlist_select');
 		}
 	}
@@ -310,7 +497,7 @@
 		document.getElementById('add_wallet_spotlight').style.display = "none";
 		document.getElementById('remove_wallet_spotlight').style.display = "none";
 		document.getElementById('no_wallets_spotlight').style.display = "none";
-		document.getElementById('ignorelist_div').style.display = "none";
+		document.getElementById('ignorelist_spotlight').style.display = "none";
 
 		if(document.getElementById('wallet_config_select').value == "add")
 			document.getElementById('add_wallet_spotlight').style.display = "block";
@@ -321,7 +508,7 @@
 		}
 		else
 		{
-			document.getElementById('ignorelist_div').style.display = "block";
+			document.getElementById('ignorelist_spotlight').style.display = "block";
 			update_wallet_select('wallet_select');
 		}
 	}
@@ -335,10 +522,10 @@
 		document.getElementById('add_watchlist_spotlight').style.display = "none";
 		document.getElementById('remove_watchlist_spotlight').style.display = "none";
 		document.getElementById('remove_watchlist_spotlight').style.display = "none";
-		document.getElementById('watchlist_div').style.display = "none";
+		document.getElementById('watchlist_spotlight').style.display = "none";
 		document.getElementById('add_wallet_spotlight').style.display = "none";
 		document.getElementById('remove_wallet_spotlight').style.display = "none";
-		document.getElementById('ignorelist_div').style.display = "none";
+		document.getElementById('ignorelist_spotlight').style.display = "none";
 
 		if(document.getElementById('config_select').value == "general")
 		{
@@ -565,12 +752,14 @@
 
 	document.getElementById('config_spotlight').style.width = (document.getElementById('config_table').offsetWidth + 70) + "px";
 
-	document.getElementById('add_watchlist_spotlight').style.width = (document.getElementById('add_watchlist_div').offsetWidth + 70) + "px";
-	document.getElementById('remove_watchlist_spotlight').style.width = (document.getElementById('add_watchlist_div').offsetWidth + 70) + "px";
+	document.getElementById('add_watchlist_spotlight').style.width = (document.getElementById('add_watchlist_div').offsetWidth) + "px";
+	document.getElementById('remove_watchlist_spotlight').style.width = (document.getElementById('remove_watchlist_div').offsetWidth + 70) + "px";
+	document.getElementById('watchlist_spotlight').style.width = (document.getElementById('watchlist_div').offsetWidth + 70) + "px";
 	document.getElementById('watchlist_select').style.width = (document.getElementById('watchlist').offsetWidth) + "px";
 
 	document.getElementById('add_wallet_spotlight').style.width = (document.getElementById('add_wallet_div').offsetWidth + 70) + "px";
-	document.getElementById('remove_wallet_spotlight').style.width = (document.getElementById('add_wallet_div').offsetWidth + 70) + "px";
+	document.getElementById('remove_wallet_spotlight').style.width = (document.getElementById('remove_wallet_div').offsetWidth + 70) + "px";
+	document.getElementById('ignorelist_spotlight').style.width = (document.getElementById('ignorelist_div').offsetWidth + 70) + "px";
 	document.getElementById('wallet_select').style.width = (document.getElementById('ignorelist').offsetWidth) + "px";
 
 	load_config();

@@ -1,20 +1,40 @@
-<!-- Wrapper -->
-<div id="wrapper">
-	<!-- One -->
-	<section id="one" class="wrapper style1">
-		<div class="inner">
-			<div class="spotlights">
-				<center>
-					<div class="spotlight" style="max-width:500px;">
-						<div class="content">
-							<h1><img src="@pathtofile(output/images/logo.png)" height="225px" style="vertical-align: middle";><noselect> Dexata</noselect></h1>
-						</div>
+<!-- BEGIN #content -->
+<div id="content" class="app-content">
+	<div class="row">
+		<!-- title spotlight -->
+		<center>
+			<div id="title_spotlight" style="max-width: 100%; width: 400px">
+				<!-- BEGIN card -->
+				<div class="card mb-3">
+					<!-- BEGIN card-body -->
+					<div class="card-body">
+						<h1><i class="fas fa-newspaper fa-4x" style="vertical-align:middle"></i><br><noselect>news</noselect></h1>
 					</div>
+					<!-- END card-body -->
+					
+					<!-- BEGIN card-arrow -->
+					<div class="card-arrow">
+						<div class="card-arrow-top-left"></div>
+						<div class="card-arrow-top-right"></div>
+						<div class="card-arrow-bottom-left"></div>
+						<div class="card-arrow-bottom-right"></div>
+					</div>
+					<!-- END card-arrow -->
+				</div>
+				<!-- END card -->
+			</div>
+		</center>
+	</div>
 
-					<div id="news_spotlight" class="spotlight" style="max-width:100%; overflow-y: scroll; margin-bottom: 30px; margin-top: 20px">
-						<div style="max-height: 450px; margin: 0 auto">
-							<div id="news_div" class="xscroll" style="max-width: 700px;">
-								<h2 style="margin-top: 15px">News</h2>
+	<div class="row">
+		<!-- search div -->
+		<center>
+			<div id="news_spotlight" style="max-width: 100%">
+				<!-- BEGIN card -->
+				<div class="card mb-3">
+					<!-- BEGIN card-body -->
+					<div class="card-body">
+						<div id="news_div" class="xscroll" style="max-width: 700px;">
 								<select id="sort_select" style="width: 300px; max-width: 100%; margin-bottom: 20px; display: none" onchange="sort_select_event()">
 									<option value="hot" selected="selected">hot</option>
 									<option value="new">new</option>
@@ -27,16 +47,26 @@
 									<option value="year">year</option>
 									<option value="all">all</option>
 								</select>
-								<img id="loading_gif" src="@pathtofile(output/images/loading.gif)" style="margin-top: 20px; max-width: 150px">
+								<img id="loading_gif" src="@pathtofile(output/images/loading.gif)" style="max-width: 150px">
 								<table id="news_table" style="display: none; max-width: 100%; text-align: left; white-space: normal;">
 								</table>
 							</div>
-						</div>
 					</div>
-				</center>
+					<!-- END card-body -->
+					
+					<!-- BEGIN card-arrow -->
+					<div class="card-arrow">
+						<div class="card-arrow-top-left"></div>
+						<div class="card-arrow-top-right"></div>
+						<div class="card-arrow-bottom-left"></div>
+						<div class="card-arrow-bottom-right"></div>
+					</div>
+					<!-- END card-arrow -->
+				</div>
+				<!-- END card -->
 			</div>
-		</div>
-	</section>
+		</center>
+	</div>
 </div>
 
 <script>

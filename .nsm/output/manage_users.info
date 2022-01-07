@@ -1,6 +1,6 @@
-22:25:40 Tuesday January 04 2022
+16:01:19 Friday January 07 2022
 'manage_users'
-'manage users'
+'manage_users'
 'template/page.template'
 
 'content/manage_users.content'
@@ -10,4 +10,5 @@
 'template/header.content'
 'template/menu.content'
 'template/page.template'
+'template/theme_panel.content'
 'template/toggle_login.js'

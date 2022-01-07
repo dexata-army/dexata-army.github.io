@@ -1,34 +1,118 @@
-<!-- Wrapper -->
-<div id="wrapper">
-	<!-- One -->
-	<section id="one" class="wrapper style1">
-		<div class="inner">
-			<div class="spotlights">
-				<center>
-					<div class="spotlight" style="max-width:500px; margin-bottom: 30px">
-						<div class="content">
-							<h1><i class="fas fa-binoculars fa-4x" style="vertical-align:middle"></i><br><noselect>Watchlist</noselect></h1>
-						</div>
+<!-- BEGIN #content -->
+<div id="content" class="app-content">
+	<div class="row">
+		<!-- title spotlight -->
+		<center>
+			<div id="title_spotlight" style="max-width: 100%; width: 400px">
+				<!-- BEGIN card -->
+				<div class="card mb-3">
+					<!-- BEGIN card-body -->
+					<div class="card-body">
+						<h1><i class="fas fa-binoculars fa-4x" style="vertical-align:middle"></i><br><noselect>watchlist</noselect></h1>
 					</div>
+					<!-- END card-body -->
+					
+					<!-- BEGIN card-arrow -->
+					<div class="card-arrow">
+						<div class="card-arrow-top-left"></div>
+						<div class="card-arrow-top-right"></div>
+						<div class="card-arrow-bottom-left"></div>
+						<div class="card-arrow-bottom-right"></div>
+					</div>
+					<!-- END card-arrow -->
+				</div>
+				<!-- END card -->
+			</div>
+		</center>
+	</div>
 
-					<div id="show_watchlist_select_link" class="spotlight" style="width: 300px; cursor: pointer" onclick="show_watchlist_select()">
+	<center>
+		<!-- no watchlists spotlight -->
+		<div id="show_watchlist_select_link_spotlight" style="width: auto; max-width: 100%; cursor: pointer" onclick="show_watchlist_select()">
+			<!-- BEGIN card -->
+			<div class="card mb-3">
+				<!-- BEGIN card-body -->
+				<div class="card-body">
+					<div id="show_watchlist_select_link" style="max-width: 300px">
 						<noselect style="margin: 0 auto"><div id="selected_watchlists"></div></noselect>
 					</div>
-					<select id="watchlist_select" onchange="watchlist_select_event()" onfocusout="hide_watchlist_select()" style="max-width: 100%; width: 300px; margin-bottom: 20px; display: none" multiple></select>
+				</div>
+				<!-- END card-body -->
+				
+				<!-- BEGIN card-arrow -->
+				<div class="card-arrow">
+					<div class="card-arrow-top-left"></div>
+					<div class="card-arrow-top-right"></div>
+					<div class="card-arrow-bottom-left"></div>
+					<div class="card-arrow-bottom-right"></div>
+				</div>
+				<!-- END card-arrow -->
+			</div>
+			<!-- END card -->
+		</div>
+		<select id="watchlist_select" onchange="watchlist_select_event()" onfocusout="hide_watchlist_select()" style="max-width: 100%; width: 300px; display: none" multiple></select>
 
-					<div id="no_watchlists_spotlight" class="spotlight" style="max-width: 100%; width: 400px; display: none; padding-top: 20px; padding-bottom: 20px">
+		<div style="margin-bottom: 13px; max-width: 40px">
+			<a id="charts_link" style="display: none" title="charts"><i class="fas fa-chart-area fa-2x" style="vertical-align: middle"></i></a>
+		</div>
+	</center>
+
+	<div class="row">
+		<center>
+			<!-- no watchlists spotlight -->
+			<div id="no_watchlists_spotlight" style="width: auto; max-width: 100%; display: none">
+				<!-- BEGIN card -->
+				<div class="card mb-3">
+					<!-- BEGIN card-body -->
+					<div class="card-body">
+						<div id="no_watchlists_div" class="xscroll" style="max-width: 750px;">
+						</div>
 					</div>
-
-					<div id="empty_watchlist_spotlight" class="spotlight" style="max-width: 100%; width: 400px; display: none; margin-bottom: 20px; padding: 20px 20px 20px 20px">
+					<!-- END card-body -->
+					
+					<!-- BEGIN card-arrow -->
+					<div class="card-arrow">
+						<div class="card-arrow-top-left"></div>
+						<div class="card-arrow-top-right"></div>
+						<div class="card-arrow-bottom-left"></div>
+						<div class="card-arrow-bottom-right"></div>
 					</div>
+					<!-- END card-arrow -->
+				</div>
+				<!-- END card -->
+			</div>
 
-					<div style="margin-bottom: 13px; margin-top: 10px; max-width: 40px">
-						<a id="charts_link" style="display: none" title="charts"><i class="fas fa-chart-area fa-2x" style="vertical-align: middle"></i></a>
+			<!-- empty watchlist spotlight -->
+			<div id="empty_watchlist_spotlight" style="width: auto; max-width: 100%; display: none">
+				<!-- BEGIN card -->
+				<div class="card mb-3">
+					<!-- BEGIN card-body -->
+					<div class="card-body">
+						<div id="empty_watchlist_div" class="xscroll" style="max-width: 750px;">
+						</div>
 					</div>
+					<!-- END card-body -->
+					
+					<!-- BEGIN card-arrow -->
+					<div class="card-arrow">
+						<div class="card-arrow-top-left"></div>
+						<div class="card-arrow-top-right"></div>
+						<div class="card-arrow-bottom-left"></div>
+						<div class="card-arrow-bottom-right"></div>
+					</div>
+					<!-- END card-arrow -->
+				</div>
+				<!-- END card -->
+			</div>
 
-					<div id="table_spotlight" class="spotlight" style="max-width: 100%">
+			<!-- watchlist spotlight -->
+			<div id="table_spotlight" style="width: auto; max-width: 100%">
+				<!-- BEGIN card -->
+				<div class="card mb-3">
+					<!-- BEGIN card-body -->
+					<div class="card-body">
 						<div id="table_div" class="xscroll">
-							<img id="loading_gif" src="@pathtofile(output/images/loading.gif)" style="margin-top: 20px; max-width: 150px">
+							<img id="loading_gif" src="@pathtofile(output/images/loading.gif)" style="max-width: 150px">
 							<table id="watchlist_table" style="display: none">
 								<thead>
 									<tr>
@@ -65,18 +149,54 @@
 							</table>
 						</div>
 					</div>
-					<noselect id="page_controls" style="margin-bottom: 15px">
-						<a id="prev_page_link" onclick="prev_page()" style="visibility: hidden"><i class="fas fa-arrow-circle-left fa-2x" style="vertical-align: middle"></i></a> &nbsp;&nbsp;
-						<input id="page_input" style="width: 75px; vertical-align: middle"> &nbsp;&nbsp;
-						<a id="next_page_link" onclick="next_page()"><i class="fas fa-arrow-circle-right fa-2x" style="vertical-align: middle"></i></a>
-					</noselect>
-
-					<div id="newsfeed_div" style="max-height: 350px; overflow-y: scroll; background-color: #2E2E35; border-radius: 5px; scrollbar-color: grey #2e2e35;">
+					<!-- END card-body -->
+					
+					<!-- BEGIN card-arrow -->
+					<div class="card-arrow">
+						<div class="card-arrow-top-left"></div>
+						<div class="card-arrow-top-right"></div>
+						<div class="card-arrow-bottom-left"></div>
+						<div class="card-arrow-bottom-right"></div>
 					</div>
-				</center>
+					<!-- END card-arrow -->
+				</div>
+				<!-- END card -->
 			</div>
-		</div>
-	</section>
+
+			<noselect id="page_controls" style="margin-bottom: 15px">
+				<a id="prev_page_link" onclick="prev_page()" style="visibility: hidden"><i class="fas fa-arrow-circle-left fa-2x" style="vertical-align: middle"></i></a> &nbsp;&nbsp;
+				<input id="page_input" style="width: 75px; vertical-align: middle"> &nbsp;&nbsp;
+				<a id="next_page_link" onclick="next_page()"><i class="fas fa-arrow-circle-right fa-2x" style="vertical-align: middle"></i></a>
+			</noselect>
+		</center>
+	</div>
+
+	<div class="row">
+		<!-- news div -->
+		<center>
+			<div style="width: 600px; max-width: 100%">
+				<!-- BEGIN card -->
+				<div class="card mb-3">
+					<!-- BEGIN card-body -->
+					<div class="card-body">
+						<div id="newsfeed_div" style="max-height: 60vh; overflow-y: scroll; scrollbar-color: grey #2e2e35;">
+						</div>
+					</div>
+					<!-- END card-body -->
+					
+					<!-- BEGIN card-arrow -->
+					<div class="card-arrow">
+						<div class="card-arrow-top-left"></div>
+						<div class="card-arrow-top-right"></div>
+						<div class="card-arrow-bottom-left"></div>
+						<div class="card-arrow-bottom-right"></div>
+					</div>
+					<!-- END card-arrow -->
+				</div>
+				<!-- END card -->
+			</div>
+		</center>
+	</div>
 </div>
 
 <script>
@@ -286,7 +406,7 @@
 			document.getElementById('charts_link').style.display = "block";
 
 			document.getElementById('newsfeed_div').innerHTML = 
-				'<iframe id="newsfeed_iframe" scrolling="no" width="100%" height="650px" allowtransparency="true" frameborder="0" src="https://cryptopanic.com/widgets/news/?bg_color=2E2E35&amp;currencies=' + ids_str + '&amp;font_family=sans&amp;header_bg_color=30343B&amp;header_text_color=FFFFFF&amp;link_color=679267&amp;news_feed=recent&amp;posts_limit=10&amp;text_color=FFFFFF&amp;title=News"></iframe>';
+				'<iframe id="newsfeed_iframe" scrolling="no" width="100%" height="650px" allowtransparency="true" frameborder="0" src="https://cryptopanic.com/widgets/news/?bg_color=FFFFFF00&amp;currencies=' + ids_str + '&amp;font_family=mono&amp;font_size=13&amp;header_bg_color=FFFFFF00&amp;header_text_color=FFFFFF&amp;link_color=679267&amp;news_feed=recent&amp;posts_limit=10&amp;text_color=FFFFFF&amp;title=news"></iframe>';
 
 			var body_width = document.body.clientWidth;
 			if(body_width < 530)
@@ -304,7 +424,7 @@
 
 			document.getElementById('page_controls').style.display = "none";
 			document.getElementById('empty_watchlist_spotlight').style.display = "block";
-			document.getElementById("empty_watchlist_spotlight").innerHTML = "Watchlist appears to be empty, you can watch and unwatch coins from their respective pages.";
+			document.getElementById("empty_watchlist_div").innerHTML = "Watchlist appears to be empty, you can watch and unwatch coins from their respective pages.";
 		}
 	}
 
@@ -375,7 +495,7 @@
 					document.getElementById('page_controls').style.display = "none";
 
 					document.getElementById("empty_watchlist_spotlight").style.display = "block";
-					document.getElementById("empty_watchlist_spotlight").innerHTML = "failed to fetch watchlist information, please refresh to try again.";
+					document.getElementById("empty_watchlist_div").innerHTML = "failed to fetch watchlist information, please refresh to try again.";
 				});
 			});
 		}
@@ -388,7 +508,7 @@
 			document.getElementById('page_controls').style.display = "none";
 
 			document.getElementById("empty_watchlist_spotlight").style.display = "block";
-			document.getElementById("empty_watchlist_spotlight").innerHTML = "Watchlist appears to be empty, you can watch and unwatch coins from their respective pages.";
+			document.getElementById("empty_watchlist_div").innerHTML = "Watchlist appears to be empty, you can watch and unwatch coins from their respective pages.";
 		}
 	}
 
@@ -476,13 +596,18 @@
 
 	function show_watchlist_select()
 	{
-		document.getElementById('show_watchlist_select_link').style.display = "none";
+		var options = document.getElementById("watchlist_select").options;
+
+	    for(var i = 0; i < options.length; i++)
+	     	options[i].selected = false;
+
+		document.getElementById('show_watchlist_select_link_spotlight').style.display = "none";
 		document.getElementById('watchlist_select').style.display = "block";
 	}
 
 	function hide_watchlist_select()
 	{
-		document.getElementById('show_watchlist_select_link').style.display = "block";
+		document.getElementById('show_watchlist_select_link_spotlight').style.display = "block";
 		document.getElementById('watchlist_select').style.display = "none";
 	}
 
@@ -541,12 +666,11 @@
 		fetch_table_coingecko(selected_watchlists);
 	}
 
+	document.getElementById('show_watchlist_select_link_spotlight').style.width = (document.getElementById('show_watchlist_select_link').offsetWidth + 50) + "px";
 	document.getElementById('table_spotlight').style.width = (document.getElementById('loading_gif').offsetWidth + 400) + "px";
 	document.getElementById("table_div").scrollIntoView();
 
 	setup_watchlist_select();
 	watchlist_select_event();
-	refresh_table();
-
-			
+	refresh_table();	
 </script>

@@ -1,22 +1,32 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 	<head>
 		@input(template/head.content)
 
 		@input(template/accounts.js)
 	</head>
-	<body class="is-preload">
-		@input(template/header.content)
+	<body class="theme-green">
+		<!-- BEGIN #app -->
+		<div id="app" class="app app-sidebar-collapsed">
+			@input(template/header.content)
+			
+			@input(template/menu.content)
+			
+			@content
 
-		@content
+			@input(template/footer.content)
+			
+			<!-- BEGIN btn-scroll-top -->
+			<a href="#" data-toggle="scroll-to-top" class="btn-scroll-top fade"><i class="fa fa-arrow-up"></i></a>
+			<!-- END btn-scroll-top -->
 
-		@input(template/footer.content)
+			@input(template/theme_panel.content)
+		</div>
+		<!-- END #app -->
 
 		@input(template/toggle_login.js)
-
-		<script src="@pathto(output/assets/js/browser.min.js)"></script>
-		<script src="@pathto(output/assets/js/breakpoints.min.js)"></script>
-		<script src="@pathto(output/assets/js/util.js)"></script>
-		<script src="@pathto(output/assets/js/main.js)"></script>
+		
+		<script src="assets/js/vendor.min.js"></script>
+		<script src="assets/js/app.min.js"></script>
 	</body>
 </html>

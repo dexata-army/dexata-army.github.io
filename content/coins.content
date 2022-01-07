@@ -1,19 +1,41 @@
-<!-- Wrapper -->
-<div id="wrapper">
-	<!-- One -->
-	<section id="one" class="wrapper style1">
-		<div class="inner">
-			<div class="spotlights">
-				<center>
-					<div class="spotlight" style="max-width:500px; margin-bottom: 50px">
-						<div class="content">
-							<h1><i class="fas fa-coins fa-4x" style="vertical-align:middle"></i><br><noselect id="page_title">Coins</noselect></h1>
-						</div>
+<!-- BEGIN #content -->
+<div id="content" class="app-content">
+	<div class="row">
+		<!-- title spotlight -->
+		<center>
+			<div id="title_spotlight" style="max-width: 100%; width: 400px">
+				<!-- BEGIN card -->
+				<div class="card mb-3">
+					<!-- BEGIN card-body -->
+					<div class="card-body">
+						<h1><i class="fas fa-coins fa-4x" style="vertical-align:middle; margin-bottom: 10px"></i><br><noselect id="page_title">coins</noselect></h1>
 					</div>
+					<!-- END card-body -->
+					
+					<!-- BEGIN card-arrow -->
+					<div class="card-arrow">
+						<div class="card-arrow-top-left"></div>
+						<div class="card-arrow-top-right"></div>
+						<div class="card-arrow-bottom-left"></div>
+						<div class="card-arrow-bottom-right"></div>
+					</div>
+					<!-- END card-arrow -->
+				</div>
+				<!-- END card -->
+			</div>
+		</center>
+	</div>
 
-					<div id="table_spotlight" class="spotlight" style="max-width:100%">
+	<div class="row">
+		<!-- login spotlight -->
+		<center>
+			<div id="table_spotlight" style="width: auto; max-width: 100%">
+				<!-- BEGIN card -->
+				<div class="card mb-3">
+					<!-- BEGIN card-body -->
+					<div class="card-body">
 						<div id="table_div" class="xscroll">
-							<img id="loading_gif" src="@pathtofile(output/images/loading.gif)" style="margin-top: 20px; max-width: 150px">
+							<img id="loading_gif" src="@pathtofile(output/images/loading.gif)" style="max-width: 150px">
 							<table id="coins_table" style="display: none">
 								<thead>
 									<tr>
@@ -50,15 +72,27 @@
 							</table>
 						</div>
 					</div>
-					<noselect id="page_controls">
-						<a id="prev_page_link" onclick="prev_page(); document.getElementById('table_div').scrollIntoView();" style="visibility: hidden;"><i class="fas fa-arrow-circle-left fa-2x" style="vertical-align: middle"></i></a> &nbsp;&nbsp;
-						<input id="page_input" style="width: 75px; vertical-align: middle"> &nbsp;&nbsp;
-						<a id="next_page_link" onclick="next_page(); document.getElementById('table_div').scrollIntoView();"><i class="fas fa-arrow-circle-right fa-2x" style="vertical-align: middle"></i></a>
-					</noselect>
-				</center>
+					<!-- END card-body -->
+					
+					<!-- BEGIN card-arrow -->
+					<div class="card-arrow">
+						<div class="card-arrow-top-left"></div>
+						<div class="card-arrow-top-right"></div>
+						<div class="card-arrow-bottom-left"></div>
+						<div class="card-arrow-bottom-right"></div>
+					</div>
+					<!-- END card-arrow -->
+				</div>
+				<!-- END card -->
 			</div>
-		</div>
-	</section>
+
+			<noselect id="page_controls">
+				<a id="prev_page_link" onclick="prev_page(); document.getElementById('table_div').scrollIntoView();" style="visibility: hidden;"><i class="fas fa-arrow-circle-left fa-2x" style="vertical-align: middle"></i></a> &nbsp;&nbsp;
+				<input id="page_input" style="width: 75px; vertical-align: middle"> &nbsp;&nbsp;
+				<a id="next_page_link" onclick="next_page(); document.getElementById('table_div').scrollIntoView();"><i class="fas fa-arrow-circle-right fa-2x" style="vertical-align: middle"></i></a>
+			</noselect>
+		</center>
+	</div>
 </div>
 
 <script>

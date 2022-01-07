@@ -1,22 +1,46 @@
-<!-- Wrapper -->
-<div id="wrapper">
-	<!-- One -->
-	<section id="one" class="wrapper style1">
-		<div class="inner">
-			<div class="spotlights">
-				<center>
-					<div class="spotlight" style="max-width:500px; margin-bottom: 50px">
-						<div class="content">
-							<h1><i class="fas fa-bomb fa-4x" style="vertical-align:middle"></i><br><noselect>Scam Search</noselect></h1>
-						</div>
+<!-- BEGIN #content -->
+<div id="content" class="app-content">
+	<div class="row">
+		<!-- title spotlight -->
+		<center>
+			<div id="title_spotlight" style="max-width: 100%; width: 400px">
+				<!-- BEGIN card -->
+				<div class="card mb-3">
+					<!-- BEGIN card-body -->
+					<div class="card-body">
+						<h1><i class="fas fa-bomb fa-4x" style="vertical-align:middle"></i><br><noselect>scam search</noselect></h1>
 					</div>
+					<!-- END card-body -->
+					
+					<!-- BEGIN card-arrow -->
+					<div class="card-arrow">
+						<div class="card-arrow-top-left"></div>
+						<div class="card-arrow-top-right"></div>
+						<div class="card-arrow-bottom-left"></div>
+						<div class="card-arrow-bottom-right"></div>
+					</div>
+					<!-- END card-arrow -->
+				</div>
+				<!-- END card -->
+			</div>
+		</center>
+	</div>
 
-					<input id="search_input" placeholder="search" style="margin-bottom:15px">
+	<center>
+		<input id="search_input" placeholder="search" style="margin-bottom:15px"><br>
+	</center>
 
-					<div id="table_spotlight" class="spotlight" style="max-width: 100%; visibility: hidden">
+	<div class="row">
+		<!-- search div -->
+		<center>
+			<div id="table_spotlight" style="max-width: 100%; display: none">
+				<!-- BEGIN card -->
+				<div class="card mb-3">
+					<!-- BEGIN card-body -->
+					<div class="card-body">
 						<div id="table_div" class="xscroll">
 							<div id="no_results_msg" style=""></div>
-							<img id="loading_gif" src="" style="margin-top: 20px; max-width: 150px; display: none;">
+							<img id="loading_gif" src="" style="max-width: 150px">
 							<table id="search_table" class="scam" style="display: none; white-space: normal; word-wrap: break-word; line-height: 1.5">
 								<thead>
 									<tr>
@@ -39,10 +63,21 @@
 							</table>
 						</div>
 					</div>
-				</center>
+					<!-- END card-body -->
+					
+					<!-- BEGIN card-arrow -->
+					<div class="card-arrow">
+						<div class="card-arrow-top-left"></div>
+						<div class="card-arrow-top-right"></div>
+						<div class="card-arrow-bottom-left"></div>
+						<div class="card-arrow-bottom-right"></div>
+					</div>
+					<!-- END card-arrow -->
+				</div>
+				<!-- END card -->
 			</div>
-		</div>
-	</section>
+		</center>
+	</div>
 </div>
 
 <script>
@@ -104,7 +139,6 @@
 
 		document.getElementById("loading_gif").src = "";
 		document.getElementById("loading_gif").style.display = "none";
-		document.getElementById("loading_gif").style.visibility = "hidden";
 		document.getElementById("search_table").style.display = "inline";
 
 		if(no_coins_found > 0)
@@ -134,7 +168,6 @@
 			}).fail(function() {
 				clear_table();
 				document.getElementById('loading_gif').src = "";
-				document.getElementById('loading_gif').style.visibility = "hidden";
 				document.getElementById('loading_gif').style.display = "none";
 				document.getElementById("table_spotlight").style.width = "600px";
 
@@ -155,10 +188,9 @@
 				{
 					clear_table();
 					document.getElementById("search_table").style.display = "none";
-					document.getElementById("loading_gif").style.display = "inline";
 					document.getElementById("loading_gif").src = "@pathto(output/images/loading.gif)";
-					document.getElementById("loading_gif").style.visibility = "visible";
-					document.getElementById("table_spotlight").style.visibility = "visible";
+					document.getElementById("loading_gif").style.display = "block";
+					document.getElementById("table_spotlight").style.display = "block";
 					sleep(50).then(() => { search_coins() });
 				}
 			}
@@ -170,10 +202,9 @@
 		document.getElementById('search_input').value = param_map.get('term');
 
 		document.getElementById("search_table").style.display = "none";
-		document.getElementById("loading_gif").style.display = "inline";
 		document.getElementById("loading_gif").src = "@pathto(output/images/loading.gif)";
-		document.getElementById("loading_gif").style.visibility = "visible";
-		document.getElementById("table_spotlight").style.visibility = "visible";
+		document.getElementById("loading_gif").style.display = "block";
+		document.getElementById("table_spotlight").style.display = "block";
 	}
 
 	document.getElementById('table_spotlight').style.width = (document.getElementById('loading_gif').offsetWidth + 400) + "px";

@@ -1,17 +1,39 @@
-<!-- Wrapper -->
-<div id="wrapper">
-	<!-- One -->
-	<section id="one" class="wrapper style1">
-		<div class="inner">
-			<div class="spotlights">
-				<center>
-					<div class="spotlight" style="max-width:500px; margin-bottom: 30px">
-						<div class="content">
-							<h1><i class="fas fa-chart-area fa-4x" style="vertical-align:middle"></i><br><noselect>Charts</noselect></h1>
-						</div>
+<!-- BEGIN #content -->
+<div id="content" class="app-content">
+	<div class="row">
+		<!-- title spotlight -->
+		<center>
+			<div id="title_spotlight" style="max-width: 100%; width: 400px">
+				<!-- BEGIN card -->
+				<div class="card mb-3">
+					<!-- BEGIN card-body -->
+					<div class="card-body">
+						<h1><i class="fas fa-chart-area fa-4x" style="vertical-align:middle"></i><br><noselect>charts</noselect></h1>
 					</div>
+					<!-- END card-body -->
+					
+					<!-- BEGIN card-arrow -->
+					<div class="card-arrow">
+						<div class="card-arrow-top-left"></div>
+						<div class="card-arrow-top-right"></div>
+						<div class="card-arrow-bottom-left"></div>
+						<div class="card-arrow-bottom-right"></div>
+					</div>
+					<!-- END card-arrow -->
+				</div>
+				<!-- END card -->
+			</div>
+		</center>
+	</div>
 
-					<div id="add_chart_spotlight" class="spotlight" style="max-width:100%; width: 250px; margin-bottom: 20px; display: none">
+	<div class="row">
+		<center>
+			<!-- add chart spotlight -->
+			<div id="add_chart_spotlight" style="width: 300px; max-width: 100%">
+				<!-- BEGIN card -->
+				<div class="card mb-3">
+					<!-- BEGIN card-body -->
+					<div class="card-body">
 						<div id="add_chart_div" class="xscroll">
 							<table id="add_chart_table">
 								<thead>
@@ -50,13 +72,25 @@
 							<a onclick="add_chart()"><i class="fas fa-plus fa-2x" style="margin-bottom: 10px"></i></a><br>
 						</div>
 					</div>
-
-					<div id="charts_div">
+					<!-- END card-body -->
+					
+					<!-- BEGIN card-arrow -->
+					<div class="card-arrow">
+						<div class="card-arrow-top-left"></div>
+						<div class="card-arrow-top-right"></div>
+						<div class="card-arrow-bottom-left"></div>
+						<div class="card-arrow-bottom-right"></div>
 					</div>
-				</center>
+					<!-- END card-arrow -->
+				</div>
+				<!-- END card -->
 			</div>
-		</div>
-	</section>
+
+			<!-- charts div -->
+			<div id="charts_div">
+			</div>
+		</center>
+	</div>
 </div>
 
 <script>
@@ -75,7 +109,7 @@
 
 	function create_chart(chart_id, title, chart_type, chart_range, y_title, data)
 	{
-var options = {
+		var options = {
 	      series: [{
 		      name: y_title,
 		      data: data
@@ -84,7 +118,7 @@ var options = {
 		      type: 'area',
 		      stacked: false,
 		      background: 'none',
-		      height: '90%',
+		      height: '100%',
 		      zoom: {
 		        type: 'xy',
 		        enabled: true,
@@ -202,9 +236,13 @@ var options = {
 
 					if(param_map.get('width'))
 						document.getElementById('chart_' + chart_id + '_spotlight').style.width = param_map.get('width') + "px";
+					else
+						document.getElementById('chart_' + chart_id + '_spotlight').style.width = "100%";
 
 					if(param_map.get('height'))
-						document.getElementById('chart_' + chart_id + '_spotlight').style.height = param_map.get('height') + "px";
+						document.getElementById('chart_' + chart_id + '_card').style.height = param_map.get('height') + "px";
+					else
+						document.getElementById('chart_' + chart_id + '_card').style.height = "900px";
 
 					create_chart(chart_id, coin_name, chart_type, chart_range, y_title, data[chart_type]);
 			}).fail(function() {
@@ -285,15 +323,32 @@ var options = {
 		}
 
 		document.getElementById('charts_div').insertAdjacentHTML('beforeend',
-			'<div id="chart_' + chart_id + '_spotlight" class="spotlight" style="width: 100%; height: 400px; min-width: 250px; max-width: 100%; min-height: 250px; max-height: 600px; margin-left: 5px; margin-right: 5px; margin-bottom: 0px; resize: both; display: inline-block; overflow: hidden"> \
-				<div style="position: absolute; top: 5px; left: 10px"> \
-					<a href="@pathto(coin)?id=' + coin_id + '" target=”_blank”><i class="fas fa-link fa-1x" ></i></a> \
+			'<div id="chart_' + chart_id + '_spotlight" style="max-width: 100%; margin-left: 8px; margin-right: 8px; resize: both; display: inline-block;"> \
+				<!-- BEGIN card --> \
+				<div class="card mb-3"> \
+					<!-- BEGIN card-body --> \
+					<div id="chart_' + chart_id + '_card" class="card-body"> \
+						<div style="position: absolute; top: 5px; left: 10px"> \
+							<a href="@pathto(coin)?id=' + coin_id + '" target=”_blank”><i class="fas fa-link fa-1x" ></i></a> \
+						</div> \
+						<div style="position: absolute; top: 5px; right: 10px"> \
+							<a onclick="close_chart(\'' + chart_id + '\')"><i class="fas fa-window-close fa-1x" ></i></a> \
+						</div> \
+						<div id="chart_' + chart_id + '_div" style="width: 100%; height: 100%; min-width: 200px; margin: 0 auto;"> \
+						</div> \
+					</div> \
+					<!-- END card-body --> \
+					\
+					<!-- BEGIN card-arrow --> \
+					<div class="card-arrow"> \
+						<div class="card-arrow-top-left"></div> \
+						<div class="card-arrow-top-right"></div> \
+						<div class="card-arrow-bottom-left"></div> \
+						<div class="card-arrow-bottom-right"></div> \
+					</div> \
+					<!-- END card-arrow --> \
 				</div> \
-				<div style="position: absolute; top: 5px; right: 10px"> \
-					<a onclick="close_chart(\'' + chart_id + '\')"><i class="fas fa-window-close fa-1x" ></i></a> \
-				</div> \
-				<div id="chart_' + chart_id + '_div" style="width: 90%; height: 90%; padding-top: 20px; padding-left: 10px; padding-right: 10px; margin: 0 auto"> \
-				</div><br> \
+				<!-- END card --> \
 			</div>');
 
 		if(chart_range == "hour")

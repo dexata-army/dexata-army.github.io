@@ -1,174 +1,431 @@
-<!-- Wrapper -->
-<div id="wrapper">
-	<!-- One -->
-	<section id="one" class="wrapper style1">
-		<div class="inner">
-			<div class="spotlights">
-				<center>
-					<div id="title_spotlight" class="spotlight" style="max-width:100%; margin-bottom: 20px">
-						<div id="title_div" class="content">
-							<h1 id="coin_title" style="margin-top: 5px"></h1>
-							<noselect>
-								<p style="margin-top:0px; margin-bottom: 0px" id="coin_links"></p>
-								<p style="margin-top:5px; margin-bottom: 10px" id="other_links"></p>
-								<a id="show_watchlist_icon" onclick="show_watchlists_table()" style="max-width: 100%; margin-top: 0px"><i class='fas fa-eye fa-2x'></i></a>
-								<div id="watchlists_spotlight" class="spotlight" style="display: none; overflow: hidden; margin-top: -10px;margin-bottom: 0px">
-									<table id="watchlists_table" style="text-align: left; width: auto"></table>
+<!-- BEGIN #content -->
+<div id="content" class="app-content">
+	<div class="row">
+		<!-- coin title -->
+		<center>
+			<div style="width: 500px; max-width: 100%;">
+				<!-- BEGIN card -->
+				<div class="card mb-3">
+					<!-- BEGIN card-body -->
+					<div class="card-body">
+						<!-- BEGIN title -->
+						<div class="d-flex fw-bold small mb-3">
+							<h3 class="flex-grow-1" id="coin_title">Dexata</h3>
+						</div>
+						<!-- END title -->
+
+						<noselect>
+							<p style="margin-top:0px; margin-bottom: 10px" id="coin_links"></p>
+							<p style="margin-top:10px; margin-bottom: 10px" id="other_links"></p>
+							<a id="show_watchlist_icon" onclick="show_watchlists_table()" style="max-width: 100%; margin-top: 10px"><i class='fas fa-eye fa-2x'></i></a>
+							<div id="watchlists_spotlight" class="spotlight" style="display: none; overflow: hidden; margin-top: 0px; margin-bottom: 0px">
+								<table id="watchlists_table" style="text-align: left; width: auto"></table>
+							</div>
+						</noselect>
+					</div>
+					<!-- END card-body -->
+					
+					<!-- BEGIN card-arrow -->
+					<div class="card-arrow">
+						<div class="card-arrow-top-left"></div>
+						<div class="card-arrow-top-right"></div>
+						<div class="card-arrow-bottom-left"></div>
+						<div class="card-arrow-bottom-right"></div>
+					</div>
+					<!-- END card-arrow -->
+				</div>
+				<!-- END card -->
+			</div>
+		</center>
+	</div>
+
+	<div class="row">
+		<!-- contract table -->
+		<center>
+			<div id="contract_spotlight" style="width: auto; max-width: 100%; display: none">
+				<!-- BEGIN card -->
+				<div class="card mb-3">
+					<!-- BEGIN card-body -->
+					<div class="card-body">
+						<!-- BEGIN title -->
+						<div class="d-flex fw-bold small mb-3">
+							<span class="flex-grow-1">contracts</span>
+							<a href="#" data-toggle="card-expand" class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+						</div>
+						<!-- END title -->
+
+						<center>
+							<div id="contract_table_div" class="xscroll" style="max-width: 100%; max-height: 60vh">
+								<table id="contract_table" style="text-align:center">
+								</table>
+							</div>
+						</center>
+					</div>
+					<!-- END card-body -->
+					
+					<!-- BEGIN card-arrow -->
+					<div class="card-arrow">
+						<div class="card-arrow-top-left"></div>
+						<div class="card-arrow-top-right"></div>
+						<div class="card-arrow-bottom-left"></div>
+						<div class="card-arrow-bottom-right"></div>
+					</div>
+					<!-- END card-arrow -->
+				</div>
+				<!-- END card -->
+			</div>
+		</center>
+	</div>
+
+	<center>
+		<div class="row">
+			<div class="col">
+				<!-- info table -->
+				<div id="data_table_spotlight" style="width: auto; max-width: 100%;">
+					<!-- BEGIN card -->
+					<div class="card mb-3">
+						<!-- BEGIN card-body -->
+						<div class="card-body">
+							<center>
+								<div id="data_table_div" class="xscroll">
+									<table id="data_table" style="text-align:right">
+										<tr>
+											<td><b>price:</b></td>
+											<td></td>
+										</tr>
+										<tr>
+											<td><b>market cap rank:</b></td>
+											<td></td>
+										</tr>
+										<tr>
+											<td><b>market cap:</b></td>
+											<td></td>
+										</tr>
+										<tr>
+											<td><b>diluted<br>market cap:</b></td>
+											<td></td>
+										</tr>
+										<tr>
+											<td><b>volume:</b></td>
+											<td></td>
+										</tr>
+										<tr>
+											<td><b>total supply:</b></td>
+											<td></td>
+										</tr>
+										<tr>
+											<td><b>max supply:</b></td>
+											<td></td>
+										</tr>
+										<tr>
+											<td><b>circulating supply:</b></td>
+											<td></td>
+										</tr>
+									</table>
 								</div>
-							</noselect>
+							</center>
+						</div>
+						<!-- END card-body -->
+						
+						<!-- BEGIN card-arrow -->
+						<div class="card-arrow">
+							<div class="card-arrow-top-left"></div>
+							<div class="card-arrow-top-right"></div>
+							<div class="card-arrow-bottom-left"></div>
+							<div class="card-arrow-bottom-right"></div>
+						</div>
+						<!-- END card-arrow -->
+					</div>
+					<!-- END card -->
+				</div>
+			</div>
+
+			<div class="col">
+				<!-- percentage change table -->
+				<div id="change_table_spotlight" style="width: auto; max-width: 100%;">
+					<!-- BEGIN card -->
+					<div class="card mb-3">
+						<!-- BEGIN card-body -->
+						<div class="card-body">
+							<center>
+								<div id="change_table_div" class="xscroll">
+									<table id="change_table" style="text-align:center">
+										<thead>
+											<tr>
+												<td>hour</td>
+												<td>day</td>
+												<td>week</td>
+												<td>month</td>
+												<td>year</td>
+											</tr>
+										</thead>
+										<tr>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+										</tr>
+									</table>
+								</div>
+							</center>
+						</div>
+						<!-- END card-body -->
+						
+						<!-- BEGIN card-arrow -->
+						<div class="card-arrow">
+							<div class="card-arrow-top-left"></div>
+							<div class="card-arrow-top-right"></div>
+							<div class="card-arrow-bottom-left"></div>
+							<div class="card-arrow-bottom-right"></div>
+						</div>
+						<!-- END card-arrow -->
+					</div>
+					<!-- END card -->
+				</div>
+
+				<!-- all time low/high table -->
+				<div id="at_table_spotlight" style="width: auto; max-width: 100%;">
+					<!-- BEGIN card -->
+					<div class="card mb-3">
+						<!-- BEGIN card-body -->
+						<div class="card-body">
+							<center>
+								<div id="at_table_div" class="xscroll">
+									<table id="at_table" style="text-align:center">
+										<thead>
+											<tr>
+												<td></td>
+												<td>price</td>
+												<td>change</td>
+												<td>date</td>
+												<td>days</td>
+											</tr>
+										</thead>
+										<tr>
+											<td><b>low</b></td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+										</tr>
+										<tr>
+											<td><b>high</b></td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+										</tr>
+									</table>
+								</div>
+							</center>
+						</div>
+						<!-- END card-body -->
+						
+						<!-- BEGIN card-arrow -->
+						<div class="card-arrow">
+							<div class="card-arrow-top-left"></div>
+							<div class="card-arrow-top-right"></div>
+							<div class="card-arrow-bottom-left"></div>
+							<div class="card-arrow-bottom-right"></div>
+						</div>
+						<!-- END card-arrow -->
+					</div>
+					<!-- END card -->
+				</div>
+			</div>
+		</div>
+	</center>
+
+	<div class="row">
+		<!-- price chart -->
+		<center>
+			<div id="prices_chart_spotlight" style="max-width: 100%">
+				<!-- BEGIN card -->
+				<div class="card mb-3">
+					<!-- BEGIN card-body -->
+					<div class="card-body" style="height: 65vh">
+						<div id="prices_chart" style="min-width: 200px; margin: 0 auto; margin-bottom: -20px;">
 						</div>
 					</div>
-					<div id="contract_spotlight" class="spotlight" style="max-width: 100%; max-height: 250px; overflow-y: scroll; display: none; margin-bottom: 20px;">
-						<div id="contract_table_div" class="xscroll" style="max-width: 100%">
-							<table id="contract_table" style="text-align:center">
-								<tr>
-									<td></td>
-									<td><b>contract</b></td>
-									<td></td>
-								</tr>
-							</table>
+					<!-- END card-body -->
+					
+					<!-- BEGIN card-arrow -->
+					<div class="card-arrow">
+						<div class="card-arrow-top-left"></div>
+						<div class="card-arrow-top-right"></div>
+						<div class="card-arrow-bottom-left"></div>
+						<div class="card-arrow-bottom-right"></div>
+					</div>
+					<!-- END card-arrow -->
+				</div>
+				<!-- END card -->
+			</div>
+
+			<div id="total_volumes_chart_spotlight" style="max-width: 100%">
+				<!-- BEGIN card -->
+				<div class="card mb-3">
+					<!-- BEGIN card-body -->
+					<div class="card-body" style="height: 65vh">
+						<div id="total_volumes_chart" style="min-width: 200px; margin: 0 auto; margin-bottom: -20px;">
 						</div>
 					</div>
-					<div id="page_div">
-						<div id="data_table_spotlight" class="spotlight" style="width: 350px; max-width: 100%; display:inline-block; margin-bottom: 20px; vertical-align: top;">
-							<div id="data_table_div" class="xscroll">
-								<table id="data_table" style="text-align:right">
+					<!-- END card-body -->
+					
+					<!-- BEGIN card-arrow -->
+					<div class="card-arrow">
+						<div class="card-arrow-top-left"></div>
+						<div class="card-arrow-top-right"></div>
+						<div class="card-arrow-bottom-left"></div>
+						<div class="card-arrow-bottom-right"></div>
+					</div>
+					<!-- END card-arrow -->
+				</div>
+				<!-- END card -->
+			</div>
+		</center>
+	</div>
+
+	<div class="row">
+		<!-- exchange table -->
+		<center>
+			<div id="exchange_spotlight" style="max-width: 100%">
+				<!-- BEGIN card -->
+				<div class="card mb-3">
+					<!-- BEGIN card-body -->
+					<div class="card-body">
+						<!-- BEGIN title -->
+						<div class="d-flex fw-bold small mb-3">
+							<span class="flex-grow-1">exchanges</span>
+							<a href="#" data-toggle="card-expand" class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+						</div>
+						<!-- END title -->
+
+						<center>
+							<div id="exchange_table_div" class="xscroll" style="max-width: 100%; max-height: 60vh">
+								<table id="exchange_table" style="text-align:center">
 									<tr>
-										<td><b>price:</b></td>
 										<td></td>
-									</tr>
-									<tr>
-										<td><b>market cap rank:</b></td>
-										<td></td>
-									</tr>
-									<tr>
-										<td><b>market cap:</b></td>
-										<td></td>
-									</tr>
-									<tr>
-										<td><b>diluted<br>market cap:</b></td>
-										<td></td>
-									</tr>
-									<tr>
-										<td><b>volume:</b></td>
-										<td></td>
-									</tr>
-									<tr>
-										<td><b>total supply:</b></td>
-										<td></td>
-									</tr>
-									<tr>
-										<td><b>max supply:</b></td>
-										<td></td>
-									</tr>
-									<tr>
-										<td><b>circulating supply:</b></td>
-										<td></td>
+										<td><a onclick="toggle_sort('exchange')"><b>exchange</b></a></td>
+										<td><a onclick="toggle_sort('target_coin_id')"><b>pair</b></a></td>
+										<td><a onclick="toggle_sort('price')"><b>price</b></a></td>
+										<td><a onclick="toggle_sort('24h volume')"><b>24h volume</b></a></td>
+										<td><a onclick="toggle_sort('trust_score')"><b>trust</b></a></td>
 									</tr>
 								</table>
 							</div>
-						</div>
-						<div id="rhs_table_div" style="max-width: 100%; display:inline-block; vertical-align: top;">
-							<div id="change_table_spotlight" class="spotlight" style="width: 600px; max-width: 100%; margin-bottom: 20px">
-									<div id="change_table_div" class="xscroll">
-										<table id="change_table" style="text-align:center">
-											<thead>
-												<tr>
-													<td>hour</td>
-													<td>day</td>
-													<td>week</td>
-													<td>month</td>
-													<td>year</td>
-												</tr>
-											</thead>
-											<tr>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-											</tr>
-										</table>
-									</div>
-							</div>
-							<div id="at_table_spotlight" class="spotlight" style="width: 600px; max-width: 100%;">
-									<div id="at_table_div" class="xscroll">
-										<table id="at_table" style="text-align:center">
-											<thead>
-												<tr>
-													<td></td>
-													<td>price</td>
-													<td>change</td>
-													<td>date</td>
-													<td>days</td>
-												</tr>
-											</thead>
-											<tr>
-												<td><b>low</b></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-											</tr>
-											<tr>
-												<td><b>high</b></td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
-											</tr>
-										</table>
-									</div>
-							</div>
-						</div>
-
-						<select name="chart_range" id="chart_range" style="width:130px; margin-top: 0px; margin-bottom: 10px" onchange="change_chart_range()">
-							<option value="hour">hour</option>
-							<option value="day">day</option>
-							<option value="week">week</option>
-							<option value="month">month</option>
-							<option value="year">year</option>
-							<option value="max">max</option>
-						</select>
-						<div id="prices_chart_spotlight" class="spotlight" style="width: 100%; overflow: hidden">
-							<div id="prices_chart" style="min-width: 200px; width: 90%; padding-top: 30px; padding-bottom:30px; margin: 0 auto">
-							</div><br>
-						</div>
-						<div id="total_volumes_chart_spotlight" class="spotlight" style="width: 100%; overflow: hidden">
-							<div id="total_volumes_chart" style="min-width: 200px; width: 90%; padding-top: 30px; padding-bottom:30px; margin: 0 auto">
-							</div><br>
-						</div>
+						</center>
 					</div>
-					<div id="exchange_spotlight" class="spotlight" style="max-width: 100%; max-height: 330px; overflow-y: scroll; margin-bottom: 30px; margin-top: 20px">
-						<div id="exchange_table_div" class="xscroll" style="max-width: 100%">
-							<table id="exchange_table" style="text-align:center">
-								<tr>
-									<td></td>
-									<td><a onclick="toggle_sort('exchange')"><b>exchange</b></a></td>
-									<td><a onclick="toggle_sort('target_coin_id')"><b>pair</b></a></td>
-									<td><a onclick="toggle_sort('price')"><b>price</b></a></td>
-									<td><a onclick="toggle_sort('24h volume')"><b>24h volume</b></a></td>
-									<td><a onclick="toggle_sort('trust_score')"><b>trust</b></a></td>
-								</tr>
-							</table>
-						</div>
+					<!-- END card-body -->
+					
+					<!-- BEGIN card-arrow -->
+					<div class="card-arrow">
+						<div class="card-arrow-top-left"></div>
+						<div class="card-arrow-top-right"></div>
+						<div class="card-arrow-bottom-left"></div>
+						<div class="card-arrow-bottom-right"></div>
 					</div>
-					<div id="desc_spotlight" class="spotlight" style="max-width: 100%; max-height: 450px; overflow-y: scroll; display: inline-block; margin-bottom: 10px;">
-					</div><br>
-
-					<div id="newsfeed_div" style="max-height: 350px; overflow-y: scroll; background-color: #2E2E35; border-radius: 5px; scrollbar-color: grey #2e2e35;">
-					</div>
-
-					<div id="last_updated" style="max-width: 100%; display: inline-block; margin-bottom: -50px; margin-top: 15px">
-					</div>
-				</center>
+					<!-- END card-arrow -->
+				</div>
+				<!-- END card -->
 			</div>
+		</center>
+	</div>
 
-		</div>
-	</section>
+	<div class="row">
+		<!-- about div -->
+		<center>
+			<div style="width: auto; max-width: 100%">
+				<!-- BEGIN card -->
+				<div class="card mb-3">
+					<!-- BEGIN card-body -->
+					<div class="card-body">
+						<!-- BEGIN title -->
+						<div class="d-flex fw-bold small mb-3">
+							<span class="flex-grow-1">About</span>
+							<a href="#" data-toggle="card-expand" class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+						</div>
+						<!-- END title -->
+
+						<div id="desc_div" style="max-height: 60vh; overflow-y: auto;">
+						</div>
+					</div>
+					<!-- END card-body -->
+					
+					<!-- BEGIN card-arrow -->
+					<div class="card-arrow">
+						<div class="card-arrow-top-left"></div>
+						<div class="card-arrow-top-right"></div>
+						<div class="card-arrow-bottom-left"></div>
+						<div class="card-arrow-bottom-right"></div>
+					</div>
+					<!-- END card-arrow -->
+				</div>
+				<!-- END card -->
+			</div>
+		</center>
+	</div>
+
+	<div class="row">
+		<!-- news div -->
+		<center>
+			<div style="width: 600px; max-width: 100%">
+				<!-- BEGIN card -->
+				<div class="card mb-3">
+					<!-- BEGIN card-body -->
+					<div class="card-body">
+						<div id="newsfeed_div" style="max-height: 60vh; overflow-y: scroll; scrollbar-color: grey #2e2e35;">
+						</div>
+					</div>
+					<!-- END card-body -->
+					
+					<!-- BEGIN card-arrow -->
+					<div class="card-arrow">
+						<div class="card-arrow-top-left"></div>
+						<div class="card-arrow-top-right"></div>
+						<div class="card-arrow-bottom-left"></div>
+						<div class="card-arrow-bottom-right"></div>
+					</div>
+					<!-- END card-arrow -->
+				</div>
+				<!-- END card -->
+			</div>
+		</center>
+	</div>
+
+	<div class="row">
+		<!-- last updated div -->
+		<center>
+			<div id="last_updated_spotlight" style="max-width: 100%">
+				<!-- BEGIN card -->
+				<div class="card mb-3">
+					<!-- BEGIN card-body -->
+					<div class="card-body">
+						<!-- BEGIN title -->
+						<div class="d-flex fw-bold small mb-3">
+							<span class="flex-grow-1">last updated</span>
+						</div>
+						<!-- END title -->
+
+						<div id="last_updated" style="max-width: 300px">
+						</div>
+					</div>
+					<!-- END card-body -->
+					
+					<!-- BEGIN card-arrow -->
+					<div class="card-arrow">
+						<div class="card-arrow-top-left"></div>
+						<div class="card-arrow-top-right"></div>
+						<div class="card-arrow-bottom-left"></div>
+						<div class="card-arrow-bottom-right"></div>
+					</div>
+					<!-- END card-arrow -->
+				</div>
+				<!-- END card -->
+			</div>
+		</center>
+	</div>
 </div>
-
-
 
 <script>
 	var details_filled = 0;
@@ -203,7 +460,7 @@
 	else
 		localStorage.setItem(user + '-chart_range', 'hour');
 
-	document.getElementById('chart_range').value = chart_range;
+	//document.getElementById('chart_range').value = chart_range;
 
 	function treatAsUTC(date)
 	{
@@ -229,7 +486,7 @@
 		      type: 'area',
 		      stacked: false,
 		      background: 'none',
-		      height: 350,
+		      height: '100%',
 		      zoom: {
 		        type: 'xy',
 		        enabled: true,
@@ -349,7 +606,7 @@
 						}
 						price_chart = draw_chart(coin_data['name'], chart_type, y_title, data[chart_type]);
 
-						document.getElementById('prices_chart_spotlight').style.height = (document.getElementById('prices_chart').offsetHeight + 10) + "px";
+						//document.getElementById('prices_chart_spotlight').style.height = (document.getElementById('prices_chart').offsetHeight + 10) + "px";
 					}
 					else
 					{
@@ -361,7 +618,7 @@
 						vol_chart = draw_chart(coin_data['name'], chart_type, y_title, data[chart_type]);
 
 
-						document.getElementById('total_volumes_chart_spotlight').style.height = (document.getElementById('total_volumes_chart').offsetHeight + 10) + "px";
+						//document.getElementById('total_volumes_chart_spotlight').style.height = (document.getElementById('total_volumes_chart').offsetHeight + 10) + "px";
 					}
 			}).fail(function() {
 				alert("failed to fetch chart data");
@@ -443,8 +700,6 @@
 
 		if(coin_data['tickers'] != undefined)
 		{
-			document.getElementById('exchange_spotlight').style.display = "block";
-
 			for(var r=0; r<coin_data['tickers'].length; r++)
 			{
 				if(coin_data['tickers'][r]['market']['name'] != undefined)
@@ -537,7 +792,7 @@
 		document.title = "Dexata - " + data['symbol'];
 
 		if(data['image']['large'] != "")
-			document.getElementById("coin_title").innerHTML = '<img onerror="this.src=\'@pathtofile(output/images/missing.png)\'" class="rounded" src="' + data['image']['large'] + '" height="150px" style="vertical-align: middle";><br>' + data['name'] + ' (' + data['symbol'] + ')';
+			document.getElementById("coin_title").innerHTML = '<img onerror="this.src=\'@pathtofile(output/images/missing.png)\'" class="rounded" src="' + data['image']['large'] + '" height="150px" style="vertical-align: middle; margin-bottom: 10px";><br>' + data['name'] + ' (' + data['symbol'] + ')';
 
 		document.getElementById("coin_links").innerHTML = "";
 
@@ -547,33 +802,33 @@
 		if(data['links']['facebook_username'] != null)
 		{
 			if(data['community_data']['facebook_likes'] != null)
-				document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="https://facebook.com/' + data['links']['facebook_username'] + '" title="Facebook - ' + data['community_data']['facebook_likes'] + ' likes"><i class="icon brands fa-facebook-f fa-2x"></a>';
+				document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="https://facebook.com/' + data['links']['facebook_username'] + '" title="Facebook - ' + data['community_data']['facebook_likes'] + ' likes"><i class="fab fa-facebook-f fa-2x"></a>';
 			else
-				document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="https://facebook.com/' + data['links']['facebook_username'] + '" title="Facebook"><i class="icon brands fa-facebook-f fa-2x"></a>';
+				document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="https://facebook.com/' + data['links']['facebook_username'] + '" title="Facebook"><i class="fab fa-facebook-f fa-2x"></a>';
 		}
 
 		if(data['links']['subreddit_url'] != null)
 		{
 			if(data['community_data']['reddit_subscribers'] != null)
-				document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="' + data['links']['subreddit_url'].replace("www", "old") + '" title="Reddit - ' + data['community_data']['reddit_subscribers'] + ' subscribers"><i class="icon brands fa-reddit-alien fa-2x"></i></a>';
+				document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="' + data['links']['subreddit_url'].replace("www", "old") + '" title="Reddit - ' + data['community_data']['reddit_subscribers'] + ' subscribers"><i class="fab fa-reddit-alien fa-2x"></i></a>';
 			else
-				document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="' + data['links']['subreddit_url'].replace("www", "old") + '" title="Reddit"><i class="icon brands fa-reddit-alien fa-2x"></i></a>';
+				document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="' + data['links']['subreddit_url'].replace("www", "old") + '" title="Reddit"><i class="fab fa-reddit-alien fa-2x"></i></a>';
 		}
 
 		if(data['links']['telegram_channel_identifier'] != null)
 		{
 			if(data['community_data']['telegram_channel_user_count'] != null)
-				document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="https://t.me/' + data['links']['telegram_channel_identifier'] + '" title="Telegram - ' + data['community_data']['telegram_channel_user_count'] + ' users"><i class="icon brands fa-telegram-plane fa-2x"></i></a>';
+				document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="https://t.me/' + data['links']['telegram_channel_identifier'] + '" title="Telegram - ' + data['community_data']['telegram_channel_user_count'] + ' users"><i class="fab fa-telegram-plane fa-2x"></i></a>';
 			else
-				document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="https://t.me/' + data['links']['telegram_channel_identifier'] + '" title="Telegram"><i class="icon brands fa-telegram-plane fa-2x"></i></a>';
+				document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="https://t.me/' + data['links']['telegram_channel_identifier'] + '" title="Telegram"><i class="fab fa-telegram-plane fa-2x"></i></a>';
 		}
 
 		if(data['links']['twitter_screen_name'] != null)
 		{
 			if(data['community_data']['twitter_followers'] != null)
-				document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="https://twitter.com/' + data['links']['twitter_screen_name'] + '" title="Twitter - ' + data['community_data']['twitter_followers'] + ' followers"><i class="icon brands fa-twitter fa-2x"></a>';
+				document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="https://twitter.com/' + data['links']['twitter_screen_name'] + '" title="Twitter - ' + data['community_data']['twitter_followers'] + ' followers"><i class="fab fa-twitter fa-2x"></a>';
 			else
-				document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="https://twitter.com/' + data['links']['twitter_screen_name'] + '" title="Twitter"><i class="icon brands fa-twitter fa-2x"></a>';
+				document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="https://twitter.com/' + data['links']['twitter_screen_name'] + '" title="Twitter"><i class="fab fa-twitter fa-2x"></a>';
 		}
 
 		if(data['links']['chat_url'][0] != null)
@@ -603,7 +858,7 @@
 		if(data['platforms']['solana'] != undefined)
 			document.getElementById("other_links").innerHTML += '&nbsp;&nbsp;<a href="https://solscan.io/token/' + data['platforms']['solana'] + '" title="SolScan"><img src="@pathtofile(output/images/icons/solscan.png)" height="30px"></a>';
 
-		document.getElementById('title_spotlight').style.width = (document.getElementById('title_div').offsetWidth + 70) + "px";
+		//document.getElementById('title_spotlight').style.width = (document.getElementById('title_div').offsetWidth + 70) + "px";
 
 		if(data['contract_address'] != undefined && data['contract_address'].length > 10)
 		{
@@ -613,7 +868,7 @@
 
 				var table = document.getElementById('contract_table');
 
-				var r = 1;
+				var r = 0;
 				for(let p in data['platforms'])
 				{
 					var row = table.insertRow(r++);
@@ -636,17 +891,17 @@
 				row.insertCell(2).innerHTML = "<a onclick=\"ctrl_c(\'" + data['contract_address'] + "\')\"><i class='fas fa-copy fa-1x' style='vertical-align:middle'></i></a>";
 			}
 
-			document.getElementById('contract_spotlight').style.width = document.getElementById('title_spotlight').style.width = (document.getElementById('contract_table').offsetWidth + 70) + "px";
+			document.getElementById('contract_spotlight').style.width = (document.getElementById('contract_table').offsetWidth + 50) + "px";
 		}
 
 		draw_exchange_table();
-		document.getElementById('exchange_spotlight').style.width = (document.getElementById('exchange_table').offsetWidth + 250) + "px";
+		document.getElementById('exchange_spotlight').style.width = (document.getElementById('exchange_table').offsetWidth + 50) + "px";
 
 		var table = document.getElementById('watchlists_table');
 		for(var i=1; i<watchlist_names.length; i++)
 		{
 			var row = table.insertRow(i-1);
-			row.insertCell(0).innerHTML = "<div style='margin-bottom:-20px'><input id='" + watchlist_names[i] + "' type='checkbox'><label for='" + watchlist_names[i] + "'>" + watchlist_names[i] + "</label></div>";
+			row.insertCell(0).innerHTML = "<div style='margin-bottom:0px'><input id='" + watchlist_names[i] + "' type='checkbox'><label for='" + watchlist_names[i] + "'>" + watchlist_names[i] + "</label></div>";
 
 			document.getElementById(watchlist_names[i]).addEventListener('change', (event) => {
 				toggle_watching(event.currentTarget.id);
@@ -664,12 +919,12 @@
 
 		if(data['description']['en'] != undefined && 
 			data['description']['en'] != "")
-			document.getElementById('desc_spotlight').innerHTML = "<h3 style='margin-top: 15px; margin-bottom: 10px'>About</h3><center><p style='max-width: 90%; margin-top: 10px; margin-bottom: 20px'>" + data['description']['en'] + "</p></center>";
+			document.getElementById('desc_div').innerHTML = "<center><p style='max-width: 90%; margin-top: 10px; margin-bottom: 20px'>" + data['description']['en'] + "</p></center>";
 		else
-			document.getElementById('desc_spotlight').style.display = "none";
+			document.getElementById('desc_div').style.display = "none";
 
 		document.getElementById('newsfeed_div').innerHTML = 
-		'<iframe id="newsfeed_iframe" scrolling="no" width="100%" height="650px" allowtransparency="true" frameborder="0" src="https://cryptopanic.com/widgets/news/?bg_color=2E2E35&amp;currencies=' + data['symbol'] + '&amp;font_family=sans&amp;header_bg_color=30343B&amp;header_text_color=FFFFFF&amp;link_color=679267&amp;news_feed=recent&amp;posts_limit=10&amp;text_color=FFFFFF&amp;title=News"></iframe>';
+		'<iframe id="newsfeed_iframe" scrolling="no" width="100%" height="650px" allowtransparency="true" frameborder="0" src="https://cryptopanic.com/widgets/news/?bg_color=FFFFFF00&amp;currencies=' + data['symbol'] + '&amp;font_family=mono&amp;font_size=13&amp;header_bg_color=FFFFFF00&amp;header_text_color=FFFFFF&amp;link_color=679267&amp;news_feed=recent&amp;posts_limit=10&amp;text_color=FFFFFF&amp;title=news"></iframe>';
 
 		var body_width = document.body.clientWidth;
 		if(body_width < 530)
@@ -815,7 +1070,7 @@
 		}
 
 		if(data['last_updated'] != undefined)
-			document.getElementById('last_updated').innerHTML = "<p><b>data last updated</b><br>" + new Date(data['last_updated']).toLocaleTimeString() + " " + new Date(data['last_updated']).toLocaleDateString() + "</p>";
+			document.getElementById('last_updated').innerHTML = new Date(data['last_updated']).toLocaleTimeString() + " " + new Date(data['last_updated']).toLocaleDateString();
 	}
 
 	function fetch_info_from_contract_address()
@@ -908,12 +1163,11 @@
 		watchlists[watchlist_names[i]] = fetch_watchlist(user, watchlist_names[i]);
 
 	fetch_info();
-	document.getElementById('data_table_spotlight').style.width = (document.getElementById('data_table').offsetWidth + 60) + "px";
-	document.getElementById('exchange_spotlight').style.width = (document.getElementById('exchange_table_div').offsetWidth + 200) + "px";
-	var max_width = Math.max(document.getElementById('change_table').offsetWidth, document.getElementById('at_table').offsetWidth);
-	document.getElementById('change_table_spotlight').style.width = (max_width + 170) + "px";
-	document.getElementById('at_table_spotlight').style.width = (max_width + 170) + "px";
-	document.getElementById('rhs_table_div').style.width = (max_width + 190) + "px";
+	/*document.getElementById('data_table_spotlight').style.width = (document.getElementById('data_table_div').offsetWidth) + "px";
+	var max_width = Math.max(document.getElementById('change_table_div').offsetWidth, document.getElementById('at_table_div').offsetWidth) + 120;
+	document.getElementById('change_table_spotlight').style.width = max_width + "px";
+	document.getElementById('at_table_spotlight').style.width = max_width + "px";*/
+	document.getElementById('last_updated_spotlight').style.width = (document.getElementById('last_updated').offsetWidth) + "px";
 	refresh_data();
 	
 </script>

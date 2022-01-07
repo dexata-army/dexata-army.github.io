@@ -1,14 +1,13 @@
-<title>Dexata - $[title]</title>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<title>Dexata - $[title]</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="description" content="" />
-<meta name="keywords" content="" />
-<link rel="stylesheet" href="@pathtofile(output/assets/css/main.css)" />
-<link rel="stylesheet" href="@pathtofile(output/assets/css/pagestyle.css)" />
-<link rel="stylesheet" href="@pathtofile(output/assets/css/print.css)" />
 <link rel="icon" type="image/svg" href="@pathtofile(output/images/logo.png)">
 
-<!-- Scripts -->
+<link href="@pathtofile(output/assets/css/vendor.min.css)" rel="stylesheet" />
+<link href="@pathtofile(output/assets/css/app.min.css)" rel="stylesheet" />
+<link href="@pathtofile(output/assets/css/pagestyle.css)" rel="stylesheet" />
+
 <script src="@pathtofile(output/assets/js/params.js)"></script>
 <script src="@pathtofile(output/assets/js/sleep.js)"></script>
 <script src="@pathtofile(output/assets/js/wallet.js)"></script>
@@ -17,19 +16,5 @@
 <script src="@pathtofile(output/assets/js/crypto-js/crypto-js.js)"></script>
 
 <script src="@pathto(output/assets/js/jquery.min.js)"></script>
-<script src="@pathto(output/assets/js/jquery.dropotron.min.js)"></script>
-<script src="@pathto(output/assets/js/jquery.scrollex.min.js)"></script>
-<script src="@pathto(output/assets/js/jquery.scrolly.min.js)"></script>
 
-<!-- https://printjs.crabbly.com/ -->
-<script src="@pathto(output/assets/js/print.js)"></script>
-
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-D70JLR4EJM"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-D70JLR4EJM');
-</script>
+<script src="https://kit.fontawesome.com/b51e6952ec.js"></script>
