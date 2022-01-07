@@ -645,6 +645,9 @@
 			document.getElementById('watchlist_select').size = watchlists.length - 1;
 
 			document.getElementById('selected_watchlists').innerHTML = selected_watchlists.join(' + ');
+
+			watchlist_select_event();
+			refresh_table();
 		}
 		else
 		{
@@ -673,7 +676,5 @@
 	document.getElementById('table_spotlight').style.width = (document.getElementById('loading_gif').offsetWidth + 400) + "px";
 	document.getElementById("table_div").scrollIntoView();
 
-	setup_watchlist_select();
-	watchlist_select_event();
-	refresh_table();	
+	setup_watchlist_select();	
 </script>
