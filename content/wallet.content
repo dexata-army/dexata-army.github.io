@@ -626,8 +626,7 @@
 		selected_wallets = Array.from(document.getElementById('wallet_select').selectedOptions).map(({ value }) => value);
 		document.getElementById('selected_wallets').innerHTML = selected_wallets.join(' + ');
 
-
-		document.getElementById('balance_chart_div').style.display = "none";
+		document.getElementById('balance_chart').style.display = "none";
 		document.getElementById('balance_chart_spotlight').style.display = "none";
 
 		if(balance_chart != undefined)
