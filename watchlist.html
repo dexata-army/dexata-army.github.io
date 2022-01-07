@@ -400,7 +400,7 @@
 				</div>
 			
 				<center>
-					<!-- no watchlists spotlight -->
+					<!-- show watchlist select link spotlight -->
 					<div id="show_watchlist_select_link_spotlight" style="width: auto; max-width: 100%; cursor: pointer" onclick="show_watchlist_select()">
 						<!-- BEGIN card -->
 						<div class="card mb-3">
@@ -547,7 +547,7 @@
 				<div class="row">
 					<!-- news div -->
 					<center>
-						<div style="width: 600px; max-width: 100%">
+						<div id="newsfeed_spotlight" style="width: 600px; max-width: 100%; display: none">
 							<!-- BEGIN card -->
 							<div class="card mb-3">
 								<!-- BEGIN card-body -->
@@ -780,6 +780,8 @@
 			
 						document.getElementById('newsfeed_div').innerHTML = 
 							'<iframe id="newsfeed_iframe" scrolling="no" width="100%" height="650px" allowtransparency="true" frameborder="0" src="https://cryptopanic.com/widgets/news/?bg_color=FFFFFF00&amp;currencies=' + ids_str + '&amp;font_family=mono&amp;font_size=13&amp;header_bg_color=FFFFFF00&amp;header_text_color=FFFFFF&amp;link_color=679267&amp;news_feed=recent&amp;posts_limit=10&amp;text_color=FFFFFF&amp;title=news"></iframe>';
+			
+						document.getElementById('newsfeed_spotlight').style.display = "block";
 			
 						var body_width = document.body.clientWidth;
 						if(body_width < 530)
@@ -1019,11 +1021,12 @@
 					}
 					else
 					{
+						document.getElementById('show_watchlist_select_link_spotlight').style.display = "none";
 						document.getElementById('watchlist_select').style.display = "none";
 						document.getElementById('table_spotlight').style.display = "none";
 						document.getElementById('page_controls').style.display = "none";
 						document.getElementById('no_watchlists_spotlight').style.display = "block";
-						document.getElementById('no_watchlists_spotlight').innerHTML = user + " does not have any watchlists";
+						document.getElementById('no_watchlists_div').innerHTML = user + " does not have any watchlists";
 					}
 				}
 			
