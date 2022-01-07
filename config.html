@@ -1,17 +1,16 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 	<head>
-		<title>Dexata - config</title>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<title>Dexata - config</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="description" content="" />
-		<meta name="keywords" content="" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<link rel="stylesheet" href="assets/css/pagestyle.css" />
-		<link rel="stylesheet" href="assets/css/print.css" />
 		<link rel="icon" type="image/svg" href="images/logo.png">
 		
-		<!-- Scripts -->
+		<link href="assets/css/vendor.min.css" rel="stylesheet" />
+		<link href="assets/css/app.min.css" rel="stylesheet" />
+		<link href="assets/css/pagestyle.css" rel="stylesheet" />
+		
 		<script src="assets/js/params.js"></script>
 		<script src="assets/js/sleep.js"></script>
 		<script src="assets/js/wallet.js"></script>
@@ -20,22 +19,8 @@
 		<script src="assets/js/crypto-js/crypto-js.js"></script>
 		
 		<script src="assets/js/jquery.min.js"></script>
-		<script src="assets/js/jquery.dropotron.min.js"></script>
-		<script src="assets/js/jquery.scrollex.min.js"></script>
-		<script src="assets/js/jquery.scrolly.min.js"></script>
 		
-		<!-- https://printjs.crabbly.com/ -->
-		<script src="assets/js/print.js"></script>
-		
-		<!-- Global site tag (gtag.js) - Google Analytics -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-D70JLR4EJM"></script>
-		<script>
-		  window.dataLayer = window.dataLayer || [];
-		  function gtag(){dataLayer.push(arguments);}
-		  gtag('js', new Date());
-		
-		  gtag('config', 'G-D70JLR4EJM');
-		</script>
+		<script src="https://kit.fontawesome.com/b51e6952ec.js"></script>
 
 		<script>
 			var user = "guest";
@@ -171,679 +156,1141 @@
 			};
 		</script>
 	</head>
-	<body class="is-preload">
-		<!-- Header -->
-		<header id="header" class="alt">
-			<div class="logo" style="margin-top: -25px">
-				<noselect>
-					<a href="index.html"><img src="images/logo.png" height="45px" style="vertical-align: middle"> Dexata</a> &nbsp; 
-					<a href="search.html" title='search'><i class="fas fa-search fa-1x" style="vertical-align:middle"></i></a> 
-					<a href="config.html" title='config'><i class="fas fa-cogs fa-1x" style="vertical-align:middle"></i></a> 
-					<a href="manage_users.html" title='manage users'><i class="fas fa-user-cog fa-1x" style="vertical-align:middle"></i></a> 
-				</noselect>
-			</div>
-		
-			<nav id="nav">
-				<ul>
-					<li><a href="index.html">home</a></li>
-					<li><a href="coins.html">coins</a></li>
-					<li><a href="categories.html">categories</a></li>
-					<li><a href="charts.html">charts</a></li>
-					<li><a href="news.html">news</a></li>
-					<li><a href="scams.html">scams</a></li>
-					<li><a href="watchlist.html">watchlist</a></li>
-					<li><a href="wallet.html">wallet</a></li>
-					<li id="login_menu_item"></li>
-				</ul>
-			</nav>
-		</header>
-
-		<!-- Wrapper -->
-		<div id="wrapper">
-			<!-- One -->
-			<section id="one" class="wrapper style1">
-				<div class="inner">
-					<div class="spotlights">
-						<center>
-							<div class="spotlight" style="max-width:500px; margin-bottom: 35px">
-								<div class="content">
-									<h1><i class="fas fa-cogs fa-4x" style="vertical-align:middle"></i><br><noselect>Config</noselect></h1>
+	<body class="theme-green">
+		<!-- BEGIN #app -->
+		<div id="app" class="app app-sidebar-collapsed">
+			<!-- BEGIN #header -->
+			<div id="header" class="app-header">
+				<!-- BEGIN desktop-toggler -->
+				<div class="desktop-toggler">
+					<button type="button" class="menu-toggler" data-toggle-class="app-sidebar-collapsed" data-dismiss-class="app-sidebar-toggled" data-toggle-target=".app">
+						<span class="bar"></span>
+						<span class="bar"></span>
+						<span class="bar"></span>
+					</button>
+				</div>
+				<!-- BEGIN desktop-toggler -->
+				
+				<!-- BEGIN mobile-toggler -->
+				<div class="mobile-toggler">
+					<button type="button" class="menu-toggler" data-toggle-class="app-sidebar-mobile-toggled" data-toggle-target=".app">
+						<span class="bar"></span>
+						<span class="bar"></span>
+						<span class="bar"></span>
+					</button>
+				</div>
+				<!-- END mobile-toggler -->
+				
+				<!-- BEGIN brand -->
+				<div class="brand">
+					<a href="index.html" class="brand-logo">
+						<img src="images/logo.png" style="max-height: 2rem"> Dexata
+					</a>
+				</div>
+				<!-- END brand -->
+				
+				<!-- BEGIN menu -->
+				<div class="menu">
+					<div class="menu-item dropdown">
+						<a href="#" data-toggle-class="app-header-menu-search-toggled" data-toggle-target=".app" class="menu-link">
+							<div class="menu-icon"><i class="bi bi-search nav-icon"></i></div>
+						</a>
+					</div>
+					<div class="menu-item dropdown dropdown-mobile-full">
+						<a href="javascript:;" data-toggle="theme-panel-expand" class="app-theme-toggle-btn"><i class="bi bi-sliders nav-icon"></i></a>
+						<a href="#" data-bs-toggle="dropdown" data-bs-display="static" class="menu-link">
+							<div class="menu-icon"><i class="bi bi-grid-3x3-gap nav-icon"></i></div>
+						</a>
+						<div class="dropdown-menu fade dropdown-menu-end w-300px text-center p-0 mt-1">
+							<div class="row row-grid gx-0">
+								<div class="col-4">
+									<a href="coins.html" class="dropdown-item text-decoration-none p-3 bg-none">
+										<div style="margin-top: 5px; margin-bottom: 5px"><i class="fas fa-coins fa-2x"></i></div>
+										<div class="fw-500 fs-10px text-white">coins</div>
+									</a>
+								</div>
+								<div class="col-4">
+									<a href="categories.html" class="dropdown-item text-decoration-none p-3 bg-none">
+										<div style="margin-top: 5px; margin-bottom: 5px"><i class="fas fa-cubes fa-2x"></i></div>
+										<div class="fw-500 fs-10px text-white">categories</div>
+									</a>
+								</div>
+								<div class="col-4">
+									<a href="charts.html" class="dropdown-item text-decoration-none p-3 bg-none">
+										<div style="margin-top: 5px; margin-bottom: 5px"><i class="fas fa-chart-area fa-2x"></i></div>
+										<div class="fw-500 fs-10px text-white">charts</div>
+									</a>
 								</div>
 							</div>
-		
-							<div>
-								<select id="config_select" style="width: 300px; max-width: 100%; margin-bottom: 20px; display: inline-block" onchange="config_select_event()">
-									<option value="general" selected="selected">general</option>
-									<option value="watchlists">watchlists</option>
-									<option id="wallets_option" value="wallets">wallets</option>
-								</select>
-		
-								<select id="watchlist_config_select" style="width: 300px; max-width: 100%; margin-bottom: 20px; display: none;" onchange="watchlist_config_select_event()">
-									<option value="add" selected="selected">add</option>
-									<option value="remove">remove</option>
-									<option value="edit">edit</option>
-								</select>
-		
-								<select id="wallet_config_select" style="width: 300px; max-width: 100%; margin-bottom: 20px; display: none" onchange="wallet_config_select_event()">
-									<option value="add" selected="selected">add</option>
-									<option value="remove">remove</option>
-									<option value="ignore">ignore</option>
-								</select>
-							</div>
-		
-							
-		
-							<div id="config_spotlight" class="spotlight" style="max-width:100%; display: inline-block">
-								<table id="config_table">
-									<tr>
-										<td>Refresh speed (sec)</td>
-										<td><input id="refresh_sec" spellcheck="false"></td>
-									</tr>
-									<tr id="session_timeout_row">
-										<td>Session timeout (min)</td>
-										<td><input id="session_timeout" spellcheck="false"></td>
-									</tr>
-									<tr>
-										<td>Table percentage changes</td>
-										<td>
-											<input id="change_hour" type="checkbox"><label for="change_hour" checked>hour&nbsp;&nbsp;&nbsp;&nbsp;</label>
-											<input id="change_day" type="checkbox"><label for="change_day" checked>day</label>
-											<input id="change_week" type="checkbox"><label for="change_week" checked>week</label>
-											<div style="margin-top: -15px; margin-bottom: -15px">
-												<input id="change_month" type="checkbox"><label for="change_month" checked>month</label>
-												<input id="change_year" type="checkbox"><label for="change_year" checked>year</label>
-											</div>
-										</td>
-									</tr>
-									<tr id="covalenthq_api_key_row">
-										<td>CovalentHQ API key</td>
-										<td><input id="covalenthq_api_key" spellcheck="false"></td>
-									</tr>
-								</table>
-								<a onclick="save_general_config()"><i class="fas fa-save fa-3x" style="margin-bottom: 10px"></i></a>
-							</div>
-		
-							<div id="add_watchlist_spotlight" class="spotlight" style="max-width:100%">
-								<div id="add_watchlist_div" class="xscroll">
-									<table id="add_watchlist_table">
-										<tr>
-											<td><input id="add_watchlist_input" spellcheck="false" placeholder="name"></td>
-										</tr>
-									</table>
-									<a onclick="add_watchlist()" title="add watchlist"><i class="fas fa-plus fa-2x" style="margin-bottom: 10px"></i></a>
+							<div class="row row-grid gx-0">
+								<div class="col-4">
+									<a href="news.html" class="dropdown-item text-decoration-none p-3 bg-none">
+										<div style="margin-top: 5px; margin-bottom: 5px"><i class="fas fa-newspaper fa-2x"></i></div>
+										<div class="fw-500 fs-10px text-white">news</div>
+									</a>
+								</div>
+								<div class="col-4">
+									<a href="search.html" class="dropdown-item text-decoration-none p-3 bg-none">
+										<div style="margin-top: 5px; margin-bottom: 5px"><i class="fas fa-search fa-2x"></i></div>
+										<div class="fw-500 fs-10px text-white">search</div>
+									</a>
+								</div>
+								<div class="col-4">
+									<a href="manage_users.html" class="dropdown-item text-decoration-none p-3 bg-none">
+										<div style="margin-top: 5px; margin-bottom: 5px"><i class="fas fa-user-cog fa-2x"></i></div>
+										<div class="fw-500 fs-10px text-white">users</div>
+									</a>
 								</div>
 							</div>
-		
-							<div id="remove_watchlist_spotlight" class="spotlight" style="max-width:100%; width: 900px">
-								<div id="remove_watchlist_div" class="xscroll">
-									<table id="remove_watchlist_table">
-										<tr>
-											<td><select id="remove_watchlist_select" spellcheck="false" placeholder="name" style="width: 100%"></select></td>
-										</tr>
-										<tr>
-											<td><input id="remove_watchlist_password" spellcheck="false" placeholder="password" type="password"></td>
-										</tr>
-									</table>
-									<a onclick="remove_watchlist()" title="remove watchlist"><red><i class="fas fa-minus fa-2x"></i></red></a>
-								</div>
-							</div>
-		
-							<div id="no_watchlists_spotlight" class="spotlight" style="max-width: 100%; width: 400px; display: none; padding-top: 20px; padding-bottom: 20px">
-							</div>
-		
-							<div id="watchlist_div">
-								<p>
-									Watchlist
-									<select id="watchlist_select" onclick="watchlist_select_event()" style="max-width: 100%"></select>
-									<textarea id="watchlist" spellcheck="false" style="max-width:100%; width: 400px; height: 250px; margin-top: 10px; margin-bottom: 10px"></textarea>
-									<a onclick="save_watchlist()"><i class="fas fa-save fa-3x"></i></a>
-								</p>
-							</div>
-		
-							<div id="add_wallet_spotlight" class="spotlight" style="max-width:100%">
-								<div id="add_wallet_div" class="xscroll">
-									<table id="add_wallet_table">
-										<tr>
-											<td>
-												<select id="network_select" title="network">
-													<option disabled selected hidden>network</option>
-													<option value="42161">arbitrum mainnet</option>
-													<option value="421611">arbitrum testnet</option>
-													<option value="43114">avalanche c-chain mainnet</option>
-													<option value="43113">avalanche fuji testnet</option>
-													<option value="56">bsc</option>
-													<option value="97">bsc testnet</option>
-													<option value="1">ethereum</option>
-													<option value="42">ethereum testnet kovan</option>
-													<option value="250">fantom opera</option>
-													<option value="4002">fantom testnet</option>
-													<option value="128">heco mainnet</option>
-													<option value="256">heco testnet</option>
-													<option value="8217">klaytn mainnet</option>
-													<option value="137">matic</option>
-													<option value="80001">matic testnet mumbai</option>
-													<option value="1287">moonbeam moonbase alpha</option>
-													<option value="1285">moonbeam moonriver</option>
-													<option value="71393">nervos polyjuice testnet</option>
-													<option value="11297108109">palm mainnet</option>
-													<option value="11297108099">palm testnet</option>
-													<option value="30">rsk mainnet</option>
-													<option value="31">rsk testnet</option>
-												</select>
-											</td>
-										</tr>
-										<tr>
-											<td><input id="add_wallet_name" spellcheck="false" placeholder="name"></td>
-										</tr>
-										<tr>
-											<td><input id="add_wallet_address" spellcheck="false" placeholder="address"></td>
-										</tr>
-									</table>
-									<a onclick="add_wallet()" title="add wallet"><i class="fas fa-plus fa-2x" style="margin-bottom: 10px"></i></a>
-								</div>
-							</div>
-		
-							<div id="remove_wallet_spotlight" class="spotlight" style="max-width:100%">
-								<div id="remove_wallet_div" class="xscroll">
-									<table id="remove_wallet_table">
-										<tr>
-											<td><select id="remove_wallet_select" spellcheck="false" placeholder="name"></select></td>
-										</tr>
-										<tr>
-											<td><input id="remove_wallet_password" spellcheck="false" placeholder="password" type="password"></td>
-										</tr>
-									</table>
-									<a onclick="remove_wallet()" title="remove wallet"><red><i class="fas fa-minus fa-2x" style="margin-bottom: 10px"></i></red></a>
-								</div>
-							</div>
-		
-							<div id="no_wallets_spotlight" class="spotlight" style="max-width: 100%; width: 400px; display: none; padding-top: 20px; padding-bottom: 20px">
-							</div>
-		
-							<div id="ignorelist_div">
-								<p>
-									Ignore list
-									<select id="wallet_select" onclick="ignorelist_select_event()"></select>
-									<textarea id="ignorelist" spellcheck="false" style="max-width:100%; width: 400px; height: 250px; margin-top: 10px; margin-bottom: 10px"></textarea>
-									<a onclick="save_ignorelist()"><i class="fas fa-save fa-3x"></i></a>
-								</p>
-							</div>
-						</center>
+						</div>
+					</div>
+					<div class="menu-item dropdown dropdown-mobile-full">
+						<a href="#" data-bs-toggle="dropdown" data-bs-display="static" class="menu-link">
+							<div id="header_username" class="menu-text d-sm-block">guest</div>
+						</a>
+						<div class="dropdown-menu dropdown-menu-end me-lg-3 fs-11px mt-1">
+							<a class="dropdown-item d-flex align-items-center" href="watchlist.html">watchlist <i class="fas fa-binoculars fa-1x ms-auto text-theme fs-16px my-n1"></i></a>
+							<a class="dropdown-item d-flex align-items-center" href="wallet.html">wallet <i class="fas fa-wallet fa-1x ms-auto text-theme fs-16px my-n1"></i></a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item d-flex align-items-center" href="config.html">config <i class="fas fa-cogs fa-1x ms-auto text-theme fs-16px my-n1"></i></a>
+							<a id="login_header_item" class="dropdown-item d-flex align-items-center" href="login.html">login <i class="fas fa-sign-in-alt fa-1x ms-auto text-theme fs-16px my-n1"></i></a>
+						</div>
 					</div>
 				</div>
-			</section>
-		</div>
-		
-		
-		
-		<script>
-			//alert(JSON.stringify(localStorage));
-		
-			var user = "guest";
-		
-			if(localStorage.getItem('username'))
-				user = localStorage.getItem('username');
-		
-			function load_config()
-			{
-				if(localStorage.getItem(user + '-refresh_sec'))
-					document.getElementById("refresh_sec").value = localStorage.getItem(user + '-refresh_sec');
-				else
+				<!-- END menu -->
+				
+				<!-- BEGIN menu-search -->
+				<div class="menu-search" name="header_search_form">
+					<div class="menu-search-container">
+						<div class="menu-search-icon"><i class="bi bi-search"></i></div>
+						<div class="menu-search-input">
+							<input id="search_box" type="text" class="form-control form-control-lg" placeholder="search" />
+						</div>
+						<div class="menu-search-icon">
+							<a href="#" data-toggle-class="app-header-menu-search-toggled" data-toggle-target=".app"><i class="bi bi-x-lg"></i></a>
+						</div>
+					</div>
+				</div>
+				<!-- END menu-search -->
+			</div>
+			<!-- END #header -->
+			
+			<script>
+				document.getElementById('header_username').innerHTML = user;
+			</script>
+			
+			<!-- BEGIN #sidebar -->
+			<div id="sidebar" class="app-sidebar">
+				<!-- BEGIN scrollbar -->
+				<div class="app-sidebar-content" data-scrollbar="true" data-height="100%">
+					<!-- BEGIN menu -->
+					<div class="menu">
+						<div class="menu-header">Navigation</div>
+						<div class="menu-item">
+							<a href="index.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-home fa-1x"></i></span>
+								<span class="menu-text">home</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="coins.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-coins fa-1x"></i></span>
+								<span class="menu-text">coins</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="categories.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-cubes fa-1x"></i></span>
+								<span class="menu-text">categories</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="charts.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-chart-area fa-1x"></i></span>
+								<span class="menu-text">charts</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="news.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-newspaper fa-1x"></i></span>
+								<span class="menu-text">news</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="scams.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-bomb fa-1x"></i></span>
+								<span class="menu-text">scams</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="search.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-search fa-1x"></i></span>
+								<span class="menu-text">search</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="watchlist.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-binoculars fa-1x"></i></span>
+								<span class="menu-text">watchlist</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="wallet.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-wallet fa-1x"></i></span>
+								<span class="menu-text">wallet</span>
+							</a>
+						</div>
+			
+						<div class="menu-header">Manage</div>
+						<div class="menu-item">
+							<a href="config.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-cogs fa-1x"></i></span>
+								<span class="menu-text">config</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="manage_users.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-user-cog fa-1x"></i></span>
+								<span class="menu-text">users</span>
+							</a>
+						</div>
+						<div id="login_menu_item" class="menu-item">
+							<a href="login.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-sign-in-alt fa-1x"></i></span>
+								<span class="menu-text">login</span>
+							</a>
+						</div>
+					</div>
+					<!-- END menu -->
+				</div>
+				<!-- END scrollbar -->
+			</div>
+			<!-- END #sidebar -->
+				
+			<!-- BEGIN mobile-sidebar-backdrop -->
+			<button class="app-sidebar-mobile-backdrop" data-toggle-target=".app" data-toggle-class="app-sidebar-mobile-toggled"></button>
+			<!-- END mobile-sidebar-backdrop -->
+			
+			<!-- BEGIN #content -->
+			<div id="content" class="app-content">
+				<div class="row">
+					<!-- title spotlight -->
+					<center>
+						<div id="title_spotlight" style="max-width: 100%; width: 400px">
+							<!-- BEGIN card -->
+							<div class="card mb-3">
+								<!-- BEGIN card-body -->
+								<div class="card-body">
+									<h1><i class="fas fa-cogs fa-4x" style="vertical-align:middle"></i><br><noselect>config</noselect></h1>
+								</div>
+								<!-- END card-body -->
+								
+								<!-- BEGIN card-arrow -->
+								<div class="card-arrow">
+									<div class="card-arrow-top-left"></div>
+									<div class="card-arrow-top-right"></div>
+									<div class="card-arrow-bottom-left"></div>
+									<div class="card-arrow-bottom-right"></div>
+								</div>
+								<!-- END card-arrow -->
+							</div>
+							<!-- END card -->
+						</div>
+					</center>
+				</div>
+			
+				<center>
+					<div>
+						<select id="config_select" style="width: 300px; max-width: 100%; margin-bottom: 20px; display: inline-block" onchange="config_select_event()">
+							<option value="general" selected="selected">general</option>
+							<option value="watchlists">watchlists</option>
+							<option id="wallets_option" value="wallets">wallets</option>
+						</select>
+			
+						<select id="watchlist_config_select" style="width: 300px; max-width: 100%; margin-bottom: 20px; display: none;" onchange="watchlist_config_select_event()">
+							<option value="add" selected="selected">add</option>
+							<option value="remove">remove</option>
+							<option value="edit">edit</option>
+						</select>
+			
+						<select id="wallet_config_select" style="width: 300px; max-width: 100%; margin-bottom: 20px; display: none" onchange="wallet_config_select_event()">
+							<option value="add" selected="selected">add</option>
+							<option value="remove">remove</option>
+							<option value="ignore">ignore</option>
+						</select>
+					</div>
+				</center>
+			
+				<div class="row">
+					<center>
+						<!-- config spotlight -->
+						<div id="config_spotlight" style="width: auto; max-width: 100%">
+							<!-- BEGIN card -->
+							<div class="card mb-3">
+								<!-- BEGIN card-body -->
+								<div class="card-body">
+									<div id="config_div" class="xscroll" style="max-width: 750px;">
+										<table id="config_table" style="text-align: left">
+											<tr>
+												<td>Refresh speed (sec)</td>
+												<td><input id="refresh_sec" spellcheck="false"></td>
+											</tr>
+											<tr id="session_timeout_row">
+												<td>Session timeout (min)</td>
+												<td><input id="session_timeout" spellcheck="false"></td>
+											</tr>
+											<tr>
+												<td>Table percentage changes</td>
+												<td>
+													<table style="margin-top: 10px; margin-left: -20px">
+														<tr>
+															<td><input id="change_hour" type="checkbox"><label for="change_hour" checked>hour&nbsp;&nbsp;&nbsp;&nbsp;</label></td>
+															<td><input id="change_day" type="checkbox"><label for="change_day" checked>day</label></td>
+															<td><input id="change_week" type="checkbox"><label for="change_week" checked>week</label></td>
+														</tr>
+														<tr>
+															<td><input id="change_month" type="checkbox"><label for="change_month" checked>month</label></td>
+															<td><input id="change_year" type="checkbox"><label for="change_year" checked>year</label></td>
+															<td></td>
+														</tr>
+													</table>
+												</td>
+											</tr>
+											<tr id="covalenthq_api_key_row">
+												<td>CovalentHQ API key</td>
+												<td><input id="covalenthq_api_key" spellcheck="false"></td>
+											</tr>
+										</table>
+										<a onclick="save_general_config()"><i class="fas fa-save fa-3x" style="margin-top: 10px"></i></a>
+									</div>
+								</div>
+								<!-- END card-body -->
+								
+								<!-- BEGIN card-arrow -->
+								<div class="card-arrow">
+									<div class="card-arrow-top-left"></div>
+									<div class="card-arrow-top-right"></div>
+									<div class="card-arrow-bottom-left"></div>
+									<div class="card-arrow-bottom-right"></div>
+								</div>
+								<!-- END card-arrow -->
+							</div>
+							<!-- END card -->
+						</div>
+			
+						<!-- add watchlist spotlight -->
+						<div id="add_watchlist_spotlight" style="width: auto; max-width: 100%">
+							<!-- BEGIN card -->
+							<div class="card mb-3">
+								<!-- BEGIN card-body -->
+								<div class="card-body">
+									<div id="add_watchlist_div" class="xscroll" style="width: 300px;">
+										<table id="add_watchlist_table">
+											<tr>
+												<td><input id="add_watchlist_input" spellcheck="false" placeholder="name"></td>
+											</tr>
+										</table>
+										<a onclick="add_watchlist()" title="add watchlist"><i class="fas fa-plus fa-2x" style="margin-top: 10px"></i></a>
+									</div>
+								</div>
+								<!-- END card-body -->
+								
+								<!-- BEGIN card-arrow -->
+								<div class="card-arrow">
+									<div class="card-arrow-top-left"></div>
+									<div class="card-arrow-top-right"></div>
+									<div class="card-arrow-bottom-left"></div>
+									<div class="card-arrow-bottom-right"></div>
+								</div>
+								<!-- END card-arrow -->
+							</div>
+							<!-- END card -->
+						</div>
+			
+						<!-- remove watchlist spotlight -->
+						<div id="remove_watchlist_spotlight" style="width: auto; max-width: 100%">
+							<!-- BEGIN card -->
+							<div class="card mb-3">
+								<!-- BEGIN card-body -->
+								<div class="card-body">
+									<div id="remove_watchlist_div" class="xscroll" style="max-width: 300px;">
+										<table id="remove_watchlist_table">
+											<tr>
+												<td><select id="remove_watchlist_select" spellcheck="false" placeholder="name" style="width: 100%"></select></td>
+											</tr>
+											<tr>
+												<td><input id="remove_watchlist_password" spellcheck="false" placeholder="password" type="password"></td>
+											</tr>
+										</table>
+										<a onclick="remove_watchlist()" title="remove watchlist"><red><i class="fas fa-minus fa-2x" style="margin-top: 10px"></i></red></a>
+									</div>
+								</div>
+								<!-- END card-body -->
+								
+								<!-- BEGIN card-arrow -->
+								<div class="card-arrow">
+									<div class="card-arrow-top-left"></div>
+									<div class="card-arrow-top-right"></div>
+									<div class="card-arrow-bottom-left"></div>
+									<div class="card-arrow-bottom-right"></div>
+								</div>
+								<!-- END card-arrow -->
+							</div>
+							<!-- END card -->
+						</div>
+			
+						<!-- no watchlists spotlight -->
+						<div id="no_watchlists_spotlight" style="width: auto; max-width: 100%; display: none">
+							<!-- BEGIN card -->
+							<div class="card mb-3">
+								<!-- BEGIN card-body -->
+								<div class="card-body">
+									<div id="no_watchlists_div" class="xscroll" style="max-width: 750px;">
+									</div>
+								</div>
+								<!-- END card-body -->
+								
+								<!-- BEGIN card-arrow -->
+								<div class="card-arrow">
+									<div class="card-arrow-top-left"></div>
+									<div class="card-arrow-top-right"></div>
+									<div class="card-arrow-bottom-left"></div>
+									<div class="card-arrow-bottom-right"></div>
+								</div>
+								<!-- END card-arrow -->
+							</div>
+							<!-- END card -->
+						</div>
+			
+						<!-- watchlist spotlight -->
+						<div id="watchlist_spotlight" style="width: auto; max-width: 100%">
+							<!-- BEGIN card -->
+							<div class="card mb-3">
+								<!-- BEGIN card-body -->
+								<div class="card-body">
+									<div id="watchlist_div" class="xscroll" style="max-width: 420px;">
+										watchlist<br>
+										<select id="watchlist_select" onclick="watchlist_select_event()" style="max-width: 100%; margin-top: 5px"></select>
+										<textarea id="watchlist" spellcheck="false" style="max-width:100%; width: 400px; height: 250px; margin-top: 10px; margin-bottom: 10px"></textarea><br>
+										<a onclick="save_watchlist()"><i class="fas fa-save fa-3x"></i></a>
+									</div>
+								</div>
+								<!-- END card-body -->
+								
+								<!-- BEGIN card-arrow -->
+								<div class="card-arrow">
+									<div class="card-arrow-top-left"></div>
+									<div class="card-arrow-top-right"></div>
+									<div class="card-arrow-bottom-left"></div>
+									<div class="card-arrow-bottom-right"></div>
+								</div>
+								<!-- END card-arrow -->
+							</div>
+							<!-- END card -->
+						</div>
+			
+						<!-- add wallet spotlight -->
+						<div id="add_wallet_spotlight" style="width: auto; max-width: 100%">
+							<!-- BEGIN card -->
+							<div class="card mb-3">
+								<!-- BEGIN card-body -->
+								<div class="card-body">
+									<div id="add_wallet_div" class="xscroll" style="max-width: 300px;">
+										<table id="add_wallet_table">
+											<tr>
+												<td>
+													<select id="network_select" title="network">
+														<option disabled selected hidden>network</option>
+														<option value="42161">arbitrum mainnet</option>
+														<option value="421611">arbitrum testnet</option>
+														<option value="43114">avalanche c-chain mainnet</option>
+														<option value="43113">avalanche fuji testnet</option>
+														<option value="56">bsc</option>
+														<option value="97">bsc testnet</option>
+														<option value="1">ethereum</option>
+														<option value="42">ethereum testnet kovan</option>
+														<option value="250">fantom opera</option>
+														<option value="4002">fantom testnet</option>
+														<option value="128">heco mainnet</option>
+														<option value="256">heco testnet</option>
+														<option value="8217">klaytn mainnet</option>
+														<option value="137">matic</option>
+														<option value="80001">matic testnet mumbai</option>
+														<option value="1287">moonbeam moonbase alpha</option>
+														<option value="1285">moonbeam moonriver</option>
+														<option value="71393">nervos polyjuice testnet</option>
+														<option value="11297108109">palm mainnet</option>
+														<option value="11297108099">palm testnet</option>
+														<option value="30">rsk mainnet</option>
+														<option value="31">rsk testnet</option>
+													</select>
+												</td>
+											</tr>
+											<tr>
+												<td><input id="add_wallet_name" spellcheck="false" placeholder="name"></td>
+											</tr>
+											<tr>
+												<td><input id="add_wallet_address" spellcheck="false" placeholder="address"></td>
+											</tr>
+										</table>
+										<a onclick="add_wallet()" title="add wallet"><i class="fas fa-plus fa-2x" style="margin-top: 10px"></i></a>
+									</div>
+								</div>
+								<!-- END card-body -->
+								
+								<!-- BEGIN card-arrow -->
+								<div class="card-arrow">
+									<div class="card-arrow-top-left"></div>
+									<div class="card-arrow-top-right"></div>
+									<div class="card-arrow-bottom-left"></div>
+									<div class="card-arrow-bottom-right"></div>
+								</div>
+								<!-- END card-arrow -->
+							</div>
+							<!-- END card -->
+						</div>
+			
+						<!-- remove wallet spotlight -->
+						<div id="remove_wallet_spotlight" style="width: auto; max-width: 100%">
+							<!-- BEGIN card -->
+							<div class="card mb-3">
+								<!-- BEGIN card-body -->
+								<div class="card-body">
+									<div id="remove_wallet_div" class="xscroll" style="max-width: 300px;">
+										<table id="remove_wallet_table">
+											<tr>
+												<td><select id="remove_wallet_select" spellcheck="false" placeholder="name"></select></td>
+											</tr>
+											<tr>
+												<td><input id="remove_wallet_password" spellcheck="false" placeholder="password" type="password"></td>
+											</tr>
+										</table>
+										<a onclick="remove_wallet()" title="remove wallet"><red><i class="fas fa-minus fa-2x" style="margin-top: 10px"></i></red></a>
+									</div>
+								</div>
+								<!-- END card-body -->
+								
+								<!-- BEGIN card-arrow -->
+								<div class="card-arrow">
+									<div class="card-arrow-top-left"></div>
+									<div class="card-arrow-top-right"></div>
+									<div class="card-arrow-bottom-left"></div>
+									<div class="card-arrow-bottom-right"></div>
+								</div>
+								<!-- END card-arrow -->
+							</div>
+							<!-- END card -->
+						</div>
+			
+						<!-- no wallets spotlight -->
+						<div id="no_wallets_spotlight" style="width: auto; max-width: 100%; display: none">
+							<!-- BEGIN card -->
+							<div class="card mb-3">
+								<!-- BEGIN card-body -->
+								<div class="card-body">
+									<div id="no_wallets_div" class="xscroll" style="max-width: 750px;">
+										
+									</div>
+								</div>
+								<!-- END card-body -->
+								
+								<!-- BEGIN card-arrow -->
+								<div class="card-arrow">
+									<div class="card-arrow-top-left"></div>
+									<div class="card-arrow-top-right"></div>
+									<div class="card-arrow-bottom-left"></div>
+									<div class="card-arrow-bottom-right"></div>
+								</div>
+								<!-- END card-arrow -->
+							</div>
+							<!-- END card -->
+						</div>
+			
+						<!-- ignorelist spotlight -->
+						<div id="ignorelist_spotlight" style="width: auto; max-width: 100%">
+							<!-- BEGIN card -->
+							<div class="card mb-3">
+								<!-- BEGIN card-body -->
+								<div class="card-body">
+									<div id="ignorelist_div" class="xscroll" style="max-width: 500px;">
+										ignore list
+										<select id="wallet_select" onclick="ignorelist_select_event()"></select>
+										<textarea id="ignorelist" spellcheck="false" style="max-width:100%; width: 400px; height: 250px; margin-top: 10px; margin-bottom: 10px"></textarea>
+										<a onclick="save_ignorelist()"><i class="fas fa-save fa-3x"></i></a>
+									</div>
+								</div>
+								<!-- END card-body -->
+								
+								<!-- BEGIN card-arrow -->
+								<div class="card-arrow">
+									<div class="card-arrow-top-left"></div>
+									<div class="card-arrow-top-right"></div>
+									<div class="card-arrow-bottom-left"></div>
+									<div class="card-arrow-bottom-right"></div>
+								</div>
+								<!-- END card-arrow -->
+							</div>
+							<!-- END card -->
+						</div>
+					</center>
+				</div>
+			</div>
+			
+			<script>
+				//alert(JSON.stringify(localStorage));
+			
+				var user = "guest";
+			
+				if(localStorage.getItem('username'))
+					user = localStorage.getItem('username');
+			
+				function load_config()
 				{
-					localStorage.setItem(user + '-refresh_sec', 60);
-					document.getElementById("refresh_sec").value = 60;
-				}
-		
-				if(localStorage.getItem(user + '-session_timeout'))
-					document.getElementById("session_timeout").value = localStorage.getItem(user + '-session_timeout');
-				else
-				{
-					localStorage.setItem(user + '-session_timeout', 30);
-					document.getElementById("session_timeout").value = 30;
-				}
-		
-				if(localStorage.getItem(user + '-change_hour'))
-					document.getElementById('change_hour').checked = true;
-				if(localStorage.getItem(user + '-change_day'))
-					document.getElementById('change_day').checked = true;
-				if(localStorage.getItem(user + '-change_week'))
-					document.getElementById('change_week').checked = true;
-				if(localStorage.getItem(user + '-change_month'))
-					document.getElementById('change_month').checked = true;
-				if(localStorage.getItem(user + '-change_year'))
-					document.getElementById('change_year').checked = true;
-		
-				if(localStorage.getItem(user + '-covalenthq_api_key'))
-					document.getElementById("covalenthq_api_key").value = CryptoJS.AES.decrypt(localStorage.getItem(user + '-covalenthq_api_key'), CryptoJS.AES.decrypt(localStorage.getItem('password'), "Go hang a salami, I’m a lasagna hog.").toString(CryptoJS.enc.Utf8)).toString(CryptoJS.enc.Utf8);
-			}
-		
-			function update_watchlist_select(id)
-			{
-				var x = document.getElementById(id);
-				for(var i=x.options.length-1; i>=0; i--)
-					x.remove(i);
-		
-				var watchlists = fetch_watchlists(user);
-		
-				if(watchlists.length > 1)
-				{
-					for(var i=1; i<watchlists.length; i++)
+					if(localStorage.getItem(user + '-refresh_sec'))
+						document.getElementById("refresh_sec").value = localStorage.getItem(user + '-refresh_sec');
+					else
 					{
-						var option = document.createElement("option");
-						option.text = watchlists[i];
-						x.add(option);
+						localStorage.setItem(user + '-refresh_sec', 60);
+						document.getElementById("refresh_sec").value = 60;
 					}
-		
+			
+					if(localStorage.getItem(user + '-session_timeout'))
+						document.getElementById("session_timeout").value = localStorage.getItem(user + '-session_timeout');
+					else
+					{
+						localStorage.setItem(user + '-session_timeout', 30);
+						document.getElementById("session_timeout").value = 30;
+					}
+			
+					if(localStorage.getItem(user + '-change_hour'))
+						document.getElementById('change_hour').checked = true;
+					if(localStorage.getItem(user + '-change_day'))
+						document.getElementById('change_day').checked = true;
+					if(localStorage.getItem(user + '-change_week'))
+						document.getElementById('change_week').checked = true;
+					if(localStorage.getItem(user + '-change_month'))
+						document.getElementById('change_month').checked = true;
+					if(localStorage.getItem(user + '-change_year'))
+						document.getElementById('change_year').checked = true;
+			
+					if(localStorage.getItem(user + '-covalenthq_api_key'))
+						document.getElementById("covalenthq_api_key").value = CryptoJS.AES.decrypt(localStorage.getItem(user + '-covalenthq_api_key'), CryptoJS.AES.decrypt(localStorage.getItem('password'), "Go hang a salami, I’m a lasagna hog.").toString(CryptoJS.enc.Utf8)).toString(CryptoJS.enc.Utf8);
+				}
+			
+				function update_watchlist_select(id)
+				{
+					var x = document.getElementById(id);
+					for(var i=x.options.length-1; i>=0; i--)
+						x.remove(i);
+			
+					var watchlists = fetch_watchlists(user);
+			
+					if(watchlists.length > 1)
+					{
+						for(var i=1; i<watchlists.length; i++)
+						{
+							var option = document.createElement("option");
+							option.text = watchlists[i];
+							x.add(option);
+						}
+			
+						document.getElementById('watchlist').value = localStorage.getItem(user + "-watchlist-" + document.getElementById('watchlist_select').value);
+					}
+					else
+					{
+						document.getElementById('remove_watchlist_spotlight').style.display = "none";
+						document.getElementById('watchlist_spotlight').style.display = "none";
+						document.getElementById('no_watchlists_spotlight').style.display = "block";
+						document.getElementById('no_watchlists_spotlight').innerHTML = user + " does not have any watchlists";
+					}
+				}
+			
+				function update_wallet_select(id)
+				{
+					var x = document.getElementById(id);
+					for(var i=x.options.length-1; i>=0; i--)
+						x.remove(i);
+			
+					var wallets = fetch_wallets(user);
+			
+					if(wallets.length > 1)
+					{
+						for(var i=1; i<wallets.length; i++)
+						{
+							var option = document.createElement("option");
+							option.text = wallets[i];
+							x.add(option);
+						}
+			
+						document.getElementById('ignorelist').value = localStorage.getItem(user + "-ignorelist-" + document.getElementById('wallet_select').value);
+					}
+					else
+					{
+						document.getElementById('remove_wallet_spotlight').style.display = "none";
+						document.getElementById('wallet_spotlight').style.display = "none";
+						document.getElementById('no_wallets_spotlight').style.display = "block";
+						document.getElementById('no_wallets_spotlight').innerHTML = user + " has not added any wallets";
+					}
+				}
+			
+				function watchlist_select_event()
+				{
 					document.getElementById('watchlist').value = localStorage.getItem(user + "-watchlist-" + document.getElementById('watchlist_select').value);
 				}
-				else
+			
+				function ignorelist_select_event()
 				{
-					document.getElementById('remove_watchlist_spotlight').style.display = "none";
-					document.getElementById('watchlist_div').style.display = "none";
-					document.getElementById('no_watchlists_spotlight').style.display = "block";
-					document.getElementById('no_watchlists_spotlight').innerHTML = user + " does not have any watchlists";
-				}
-			}
-		
-			function update_wallet_select(id)
-			{
-				var x = document.getElementById(id);
-				for(var i=x.options.length-1; i>=0; i--)
-					x.remove(i);
-		
-				var wallets = fetch_wallets(user);
-		
-				if(wallets.length > 1)
-				{
-					for(var i=1; i<wallets.length; i++)
-					{
-						var option = document.createElement("option");
-						option.text = wallets[i];
-						x.add(option);
-					}
-		
 					document.getElementById('ignorelist').value = localStorage.getItem(user + "-ignorelist-" + document.getElementById('wallet_select').value);
 				}
-				else
+			
+				function watchlist_config_select_event()
 				{
+					document.getElementById('add_watchlist_spotlight').style.display = "none";
+					document.getElementById('remove_watchlist_spotlight').style.display = "none";
+					document.getElementById('no_watchlists_spotlight').style.display = "none";
+					document.getElementById('watchlist_spotlight').style.display = "none";
+			
+			
+					if(document.getElementById('watchlist_config_select').value == "add")
+						document.getElementById('add_watchlist_spotlight').style.display = "block";
+					else if(document.getElementById('watchlist_config_select').value == "remove")
+					{
+						document.getElementById('remove_watchlist_spotlight').style.display = "block";
+						update_watchlist_select('remove_watchlist_select');
+					}
+					else
+					{
+						document.getElementById('watchlist_spotlight').style.display = "block";
+						update_watchlist_select('watchlist_select');
+					}
+				}
+			
+				function wallet_config_select_event()
+				{
+					document.getElementById('add_wallet_spotlight').style.display = "none";
 					document.getElementById('remove_wallet_spotlight').style.display = "none";
-					document.getElementById('wallet_div').style.display = "none";
-					document.getElementById('no_wallets_spotlight').style.display = "block";
-					document.getElementById('no_wallets_spotlight').innerHTML = user + " has not added any wallets";
+					document.getElementById('no_wallets_spotlight').style.display = "none";
+					document.getElementById('ignorelist_spotlight').style.display = "none";
+			
+					if(document.getElementById('wallet_config_select').value == "add")
+						document.getElementById('add_wallet_spotlight').style.display = "block";
+					else if(document.getElementById('wallet_config_select').value == "remove")
+					{
+						document.getElementById('remove_wallet_spotlight').style.display = "block";
+						update_wallet_select('remove_wallet_select');
+					}
+					else
+					{
+						document.getElementById('ignorelist_spotlight').style.display = "block";
+						update_wallet_select('wallet_select');
+					}
 				}
-			}
-		
-			function watchlist_select_event()
-			{
-				document.getElementById('watchlist').value = localStorage.getItem(user + "-watchlist-" + document.getElementById('watchlist_select').value);
-			}
-		
-			function ignorelist_select_event()
-			{
-				document.getElementById('ignorelist').value = localStorage.getItem(user + "-ignorelist-" + document.getElementById('wallet_select').value);
-			}
-		
-			function watchlist_config_select_event()
-			{
-				document.getElementById('add_watchlist_spotlight').style.display = "none";
-				document.getElementById('remove_watchlist_spotlight').style.display = "none";
-				document.getElementById('no_watchlists_spotlight').style.display = "none";
-				document.getElementById('watchlist_div').style.display = "none";
-		
-		
-				if(document.getElementById('watchlist_config_select').value == "add")
-					document.getElementById('add_watchlist_spotlight').style.display = "block";
-				else if(document.getElementById('watchlist_config_select').value == "remove")
+			
+				function config_select_event()
 				{
-					document.getElementById('remove_watchlist_spotlight').style.display = "block";
-					update_watchlist_select('remove_watchlist_select');
+					document.getElementById('watchlist_config_select').style.display = "none";
+					document.getElementById('wallet_config_select').style.display = "none";
+			
+					document.getElementById('config_spotlight').style.display = "none";
+					document.getElementById('add_watchlist_spotlight').style.display = "none";
+					document.getElementById('remove_watchlist_spotlight').style.display = "none";
+					document.getElementById('remove_watchlist_spotlight').style.display = "none";
+					document.getElementById('watchlist_spotlight').style.display = "none";
+					document.getElementById('add_wallet_spotlight').style.display = "none";
+					document.getElementById('remove_wallet_spotlight').style.display = "none";
+					document.getElementById('ignorelist_spotlight').style.display = "none";
+			
+					if(document.getElementById('config_select').value == "general")
+					{
+						document.getElementById('config_spotlight').style.display = "block";
+					}
+					else if(document.getElementById('config_select').value == "watchlists")
+					{
+						document.getElementById('watchlist_config_select').style.display = "block";
+						watchlist_config_select_event();
+					}
+					else if(document.getElementById('config_select').value == "wallets")
+					{
+						document.getElementById('wallet_config_select').style.display = "block";
+						wallet_config_select_event();
+					}
 				}
-				else
+			
+				function remove_duplicates(x)
 				{
-					document.getElementById('watchlist_div').style.display = "block";
-					update_watchlist_select('watchlist_select');
+					return x.filter(function(item, pos) {
+					    return x.indexOf(item) == pos;
+					})
 				}
-			}
-		
-			function wallet_config_select_event()
-			{
-				document.getElementById('add_wallet_spotlight').style.display = "none";
-				document.getElementById('remove_wallet_spotlight').style.display = "none";
-				document.getElementById('no_wallets_spotlight').style.display = "none";
-				document.getElementById('ignorelist_div').style.display = "none";
-		
-				if(document.getElementById('wallet_config_select').value == "add")
-					document.getElementById('add_wallet_spotlight').style.display = "block";
-				else if(document.getElementById('wallet_config_select').value == "remove")
+			
+				function add_watchlist()
 				{
-					document.getElementById('remove_wallet_spotlight').style.display = "block";
-					update_wallet_select('remove_wallet_select');
+					add_to_watchlists(user, document.getElementById('add_watchlist_input').value);
+					document.getElementById('add_watchlist_input').value = "";
 				}
-				else
+			
+				function remove_watchlist()
 				{
-					document.getElementById('ignorelist_div').style.display = "block";
-					update_wallet_select('wallet_select');
-				}
-			}
-		
-			function config_select_event()
-			{
-				document.getElementById('watchlist_config_select').style.display = "none";
-				document.getElementById('wallet_config_select').style.display = "none";
-		
-				document.getElementById('config_spotlight').style.display = "none";
-				document.getElementById('add_watchlist_spotlight').style.display = "none";
-				document.getElementById('remove_watchlist_spotlight').style.display = "none";
-				document.getElementById('remove_watchlist_spotlight').style.display = "none";
-				document.getElementById('watchlist_div').style.display = "none";
-				document.getElementById('add_wallet_spotlight').style.display = "none";
-				document.getElementById('remove_wallet_spotlight').style.display = "none";
-				document.getElementById('ignorelist_div').style.display = "none";
-		
-				if(document.getElementById('config_select').value == "general")
-				{
-					document.getElementById('config_spotlight').style.display = "block";
-				}
-				else if(document.getElementById('config_select').value == "watchlists")
-				{
-					document.getElementById('watchlist_config_select').style.display = "block";
-					watchlist_config_select_event();
-				}
-				else if(document.getElementById('config_select').value == "wallets")
-				{
-					document.getElementById('wallet_config_select').style.display = "block";
-					wallet_config_select_event();
-				}
-			}
-		
-			function remove_duplicates(x)
-			{
-				return x.filter(function(item, pos) {
-				    return x.indexOf(item) == pos;
-				})
-			}
-		
-			function add_watchlist()
-			{
-				add_to_watchlists(user, document.getElementById('add_watchlist_input').value);
-				document.getElementById('add_watchlist_input').value = "";
-			}
-		
-			function remove_watchlist()
-			{
-				if(document.getElementById('remove_watchlist_password').value != CryptoJS.AES.decrypt(localStorage.getItem('password'), "Go hang a salami, I’m a lasagna hog.").toString(CryptoJS.enc.Utf8))
-				{
-					sleep(1000).then(() => {
+					if(document.getElementById('remove_watchlist_password').value != CryptoJS.AES.decrypt(localStorage.getItem('password'), "Go hang a salami, I’m a lasagna hog.").toString(CryptoJS.enc.Utf8))
+					{
+						sleep(1000).then(() => {
+							document.getElementById('remove_watchlist_password').value = "";
+							alert("password is incorrect");
+						});
+					}
+					else
+					{
+						remove_from_watchlists(user, document.getElementById('remove_watchlist_select').value);
+						update_watchlist_select('remove_watchlist_select');
 						document.getElementById('remove_watchlist_password').value = "";
-						alert("password is incorrect");
-					});
+					}
 				}
-				else
+			
+				function save_watchlist()
 				{
-					remove_from_watchlists(user, document.getElementById('remove_watchlist_select').value);
-					update_watchlist_select('remove_watchlist_select');
-					document.getElementById('remove_watchlist_password').value = "";
+					var watchlist_name = "-" + document.getElementById("watchlist_select").value;
+			
+					if(document.getElementById("watchlist").value != "")
+					{
+						document.getElementById("watchlist").value = remove_duplicates(document.getElementById("watchlist").value.replace(/ /g,"").replace(/;/g, "\n").replace(/,/g, "\n").split("\n").sort()).join("\n");
+						localStorage.setItem(user + '-watchlist' + watchlist_name, document.getElementById("watchlist").value);
+					}
+					else
+						localStorage.removeItem(user + '-watchlist' + watchlist_name);
+			
+					alert("watchlist has been saved");
 				}
-			}
-		
-			function save_watchlist()
-			{
-				var watchlist_name = "-" + document.getElementById("watchlist_select").value;
-		
-				if(document.getElementById("watchlist").value != "")
+			
+				function add_wallet()
 				{
-					document.getElementById("watchlist").value = remove_duplicates(document.getElementById("watchlist").value.replace(/ /g,"").replace(/;/g, "\n").replace(/,/g, "\n").split("\n").sort()).join("\n");
-					localStorage.setItem(user + '-watchlist' + watchlist_name, document.getElementById("watchlist").value);
+					add_to_wallets(user, document.getElementById('network_select').value, document.getElementById('add_wallet_name').value, document.getElementById('add_wallet_address').value);
+					document.getElementById('add_wallet_name').value = "";
+					document.getElementById('add_wallet_address').value = "";
 				}
-				else
-					localStorage.removeItem(user + '-watchlist' + watchlist_name);
-		
-				alert("watchlist has been saved");
-			}
-		
-			function add_wallet()
-			{
-				add_to_wallets(user, document.getElementById('network_select').value, document.getElementById('add_wallet_name').value, document.getElementById('add_wallet_address').value);
-				document.getElementById('add_wallet_name').value = "";
-				document.getElementById('add_wallet_address').value = "";
-			}
-		
-			function remove_wallet()
-			{
-				if(document.getElementById('remove_wallet_password').value != CryptoJS.AES.decrypt(localStorage.getItem('password'), "Go hang a salami, I’m a lasagna hog.").toString(CryptoJS.enc.Utf8))
+			
+				function remove_wallet()
 				{
-					sleep(1000).then(() => {
+					if(document.getElementById('remove_wallet_password').value != CryptoJS.AES.decrypt(localStorage.getItem('password'), "Go hang a salami, I’m a lasagna hog.").toString(CryptoJS.enc.Utf8))
+					{
+						sleep(1000).then(() => {
+							document.getElementById('remove_wallet_password').value = "";
+							alert("password is incorrect");
+						});
+					}
+					else
+					{
+						remove_from_wallets(user, document.getElementById('remove_wallet_select').value);
+						update_wallet_select('remove_wallet_select');
 						document.getElementById('remove_wallet_password').value = "";
-						alert("password is incorrect");
-					});
-				}
-				else
-				{
-					remove_from_wallets(user, document.getElementById('remove_wallet_select').value);
-					update_wallet_select('remove_wallet_select');
-					document.getElementById('remove_wallet_password').value = "";
-				}
-			}
-		
-			function save_ignorelist()
-			{
-				var wallet_name = document.getElementById("wallet_select").value;
-		
-				if(document.getElementById("ignorelist").value != "")
-				{
-					document.getElementById("ignorelist").value = remove_duplicates(document.getElementById("ignorelist").value.replace(/;/g, "\n").replace(/,/g, "\n").split("\n").sort()).join("\n");
-					localStorage.setItem(user + '-ignorelist-' + wallet_name, document.getElementById("ignorelist").value);
-				}
-				else
-					localStorage.removeItem(user + '-ignorelist-' + wallet_name);
-		
-				alert("ignorelist has been saved");
-			}
-		
-			function save_general_config()
-			{
-				var valid_config = 1;
-		
-				if(document.getElementById("refresh_sec").value == "")
-				{
-					valid_config = 0;
-					alert("refresh speed must be specified (use 0 to not refresh)");
-				}
-				else if(document.getElementById("refresh_sec").value < 0)
-				{
-					valid_config = 0;
-					alert("refresh speed must be a non-negative number (use 0 to not refresh)");
-				}
-				else if(document.getElementById("refresh_sec").value > 0 && 
-				        document.getElementById("refresh_sec").value < 30)
-				{
-					valid_config = 0;
-					alert("refresh speed too frequent (use 0 to not refresh)");
-				}
-		
-				if(document.getElementById('session_timeout').value == "")
-				{
-					valid_config = 0;
-					alert("session timout must be specified (use 0 to not timeout)");
-				}
-				else if(document.getElementById('session_timeout').value < 0)
-				{
-					valid_config = 0;
-					alert("session timeout must be a non-negative number (use 0 to not timeout)");
-				}
-				else if(document.getElementById('session_timeout').value > 0 && 
-				        document.getElementById('session_timeout').value < 10)
-				{
-					valid_config = 0;
-					alert("specified session timout would get quite annoying, try a little longer!");
-				}
-		
-				if(!document.getElementById('change_hour').checked && 
-				   !document.getElementById('change_day').checked && 
-				   !document.getElementById('change_week').checked && 
-				   !document.getElementById('change_month').checked &&
-				   !document.getElementById('change_year').checked)
-				{
-					valid_config = 0;
-					alert("must show at least one type of percentage change for tables");
-				}
-		
-				if(valid_config)
-				{
-					localStorage.setItem(user + '-refresh_sec', document.getElementById("refresh_sec").value);
-		
-					localStorage.setItem(user + '-session_timeout', document.getElementById("session_timeout").value);
-		
-					if(document.getElementById('change_hour').checked == true)
-						localStorage.setItem(user + '-change_hour', true);
-					else
-						localStorage.removeItem(user + '-change_hour');
-		
-					if(document.getElementById('change_day').checked == true)
-					{
-						localStorage.setItem(user + '-change_day', true);
-					}
-					else
-						localStorage.removeItem(user + '-change_day');
-		
-					if(document.getElementById('change_week').checked == true)
-						localStorage.setItem(user + '-change_week', true);
-					else
-						localStorage.removeItem(user + '-change_week');
-		
-					if(document.getElementById('change_month').checked == true)
-						localStorage.setItem(user + '-change_month', true);
-					else
-						localStorage.removeItem(user + '-change_month');
-		
-					if(document.getElementById('change_year').checked == true)
-						localStorage.setItem(user + '-change_year', true);
-					else
-						localStorage.removeItem(user + '-change_year');
-		
-					if(document.getElementById("covalenthq_api_key").value != "")
-						localStorage.setItem(user + '-covalenthq_api_key', CryptoJS.AES.encrypt(document.getElementById("covalenthq_api_key").value, CryptoJS.AES.decrypt(localStorage.getItem("password"), "Go hang a salami, I’m a lasagna hog.").toString(CryptoJS.enc.Utf8)));
-					else
-					{
-						localStorage.removeItem(user + '-covalenthq_api_key');
-					}
-		
-					alert("config saved successfully");
-				}
-			}
-		
-			window.addEventListener('keydown',this.keydown,false);
-				
-			function keydown(e)
-			{
-				var code = e.keyCode;
-				
-				if(document.activeElement.tagName == "INPUT")
-				{
-					if(code == 13)
-					{
-						if(document.activeElement.id == "add_watchlist_input")
-							add_watchlist();
-						else if(document.activeElement.id == "remove_watchlist_password")
-							remove_watchlist();
-						else if(document.activeElement.id == "add_wallet_address")
-							add_wallet();
-						else if(document.activeElement.id == "remove_wallet_password")
-							remove_wallet();
 					}
 				}
-			}
-		
-			if(user == "guest")
-			{
-				document.getElementById('config_select').remove(2);
-				document.getElementById('session_timeout_row').style.display = "none";
-				document.getElementById('covalenthq_api_key_row').style.display = "none";
-			}
-		
-			document.getElementById('config_select').value = "general";
-		
-			document.getElementById('config_spotlight').style.width = (document.getElementById('config_table').offsetWidth + 70) + "px";
-		
-			document.getElementById('add_watchlist_spotlight').style.width = (document.getElementById('add_watchlist_div').offsetWidth + 70) + "px";
-			document.getElementById('remove_watchlist_spotlight').style.width = (document.getElementById('add_watchlist_div').offsetWidth + 70) + "px";
-			document.getElementById('watchlist_select').style.width = (document.getElementById('watchlist').offsetWidth) + "px";
-		
-			document.getElementById('add_wallet_spotlight').style.width = (document.getElementById('add_wallet_div').offsetWidth + 70) + "px";
-			document.getElementById('remove_wallet_spotlight').style.width = (document.getElementById('add_wallet_div').offsetWidth + 70) + "px";
-			document.getElementById('wallet_select').style.width = (document.getElementById('ignorelist').offsetWidth) + "px";
-		
-			load_config();
-			config_select_event();
-		</script>
-
-		<!-- Footer -->
-		<div class="footer wrapper">
-			<div class="inner" style="text-align:center">
-				<noselect>
-					<p>
-						<a href="search.html" title='search'><i class="fas fa-search fa-2x"></i></a> &nbsp;
-						<a href="coins.html" title='coins'><i class="fas fa-coins fa-2x"></i></a> &nbsp;
-						<a href="categories.html" title='categories'><i class="fas fa-cubes fa-2x"></i></a> &nbsp;
-						<a href="charts.html" title='charts'><i class="fas fa-chart-area fa-2x"></i></a> &nbsp;
-						<a href="news.html" title='news'><i class="fas fa-newspaper fa-2x"></i></a> &nbsp;
-						<a href="scams.html" title='scams'><i class="fas fa-bomb fa-2x"></i></a> &nbsp;
-						<a href="watchlist.html" title='watchlist'><i class="fas fa-binoculars fa-2x"></i></a> &nbsp;
-						<a href="wallet.html" title='wallet tracker'><i class="fas fa-wallet fa-2x"></i></a><br>
-						
-						<a href="https://t.me/dexata_army" title='telegram'><i class="icon brands fa-telegram-plane fa-2x"></i></a> &nbsp;
-						<a href="https://twitter.com/dexata_army" title='twitter'><i class="icon brands fa-twitter fa-2x"></i></a> &nbsp;
-						<a href="https://github.com/dexata-army" title='github'><i class="icon brands fa-github-alt fa-2x"></i></a> &nbsp;
-						<a href="config.html" title='config'><i class="fas fa-cogs fa-2x"></i></a> &nbsp;
-						<a href="manage_users.html" title='manage users'><i class="fas fa-user-cog fa-2x"></i></a> &nbsp;
-						<text id="login_footer_item" style="display: inline-block"><a href="login.html" title='login'><i class="fas fa-sign-in-alt fa-2x"></i></a></text>
-					</p>
-		
-					<p>
-						<input id="footer_search_box" placeholder="search">
-					</p>
-		
-					<p class="copyright">
-						&copy;<script>document.write(new Date().getFullYear())</script> Dexata
-					</p>
-				</noselect>
-			</div>
-		</div>
-		
-		<script>
-			window.addEventListener('keydown',this.keydown,false);
-		
-			function keydown(e)
-			{
-				var code = e.keyCode;
-				
-				if(document.activeElement.tagName == "INPUT")
+			
+				function save_ignorelist()
 				{
-					if(code == 13)
+					var wallet_name = document.getElementById("wallet_select").value;
+			
+					if(document.getElementById("ignorelist").value != "")
 					{
-						if(document.activeElement.id == "footer_search_box" &&
-							document.getElementById('footer_search_box').value != "")
+						document.getElementById("ignorelist").value = remove_duplicates(document.getElementById("ignorelist").value.replace(/;/g, "\n").replace(/,/g, "\n").split("\n").sort()).join("\n");
+						localStorage.setItem(user + '-ignorelist-' + wallet_name, document.getElementById("ignorelist").value);
+					}
+					else
+						localStorage.removeItem(user + '-ignorelist-' + wallet_name);
+			
+					alert("ignorelist has been saved");
+				}
+			
+				function save_general_config()
+				{
+					var valid_config = 1;
+			
+					if(document.getElementById("refresh_sec").value == "")
+					{
+						valid_config = 0;
+						alert("refresh speed must be specified (use 0 to not refresh)");
+					}
+					else if(document.getElementById("refresh_sec").value < 0)
+					{
+						valid_config = 0;
+						alert("refresh speed must be a non-negative number (use 0 to not refresh)");
+					}
+					else if(document.getElementById("refresh_sec").value > 0 && 
+					        document.getElementById("refresh_sec").value < 30)
+					{
+						valid_config = 0;
+						alert("refresh speed too frequent (use 0 to not refresh)");
+					}
+			
+					if(document.getElementById('session_timeout').value == "")
+					{
+						valid_config = 0;
+						alert("session timout must be specified (use 0 to not timeout)");
+					}
+					else if(document.getElementById('session_timeout').value < 0)
+					{
+						valid_config = 0;
+						alert("session timeout must be a non-negative number (use 0 to not timeout)");
+					}
+					else if(document.getElementById('session_timeout').value > 0 && 
+					        document.getElementById('session_timeout').value < 10)
+					{
+						valid_config = 0;
+						alert("specified session timout would get quite annoying, try a little longer!");
+					}
+			
+					if(!document.getElementById('change_hour').checked && 
+					   !document.getElementById('change_day').checked && 
+					   !document.getElementById('change_week').checked && 
+					   !document.getElementById('change_month').checked &&
+					   !document.getElementById('change_year').checked)
+					{
+						valid_config = 0;
+						alert("must show at least one type of percentage change for tables");
+					}
+			
+					if(valid_config)
+					{
+						localStorage.setItem(user + '-refresh_sec', document.getElementById("refresh_sec").value);
+			
+						localStorage.setItem(user + '-session_timeout', document.getElementById("session_timeout").value);
+			
+						if(document.getElementById('change_hour').checked == true)
+							localStorage.setItem(user + '-change_hour', true);
+						else
+							localStorage.removeItem(user + '-change_hour');
+			
+						if(document.getElementById('change_day').checked == true)
 						{
-							window.location.href = "search.html?term=" + document.getElementById('footer_search_box').value;
+							localStorage.setItem(user + '-change_day', true);
+						}
+						else
+							localStorage.removeItem(user + '-change_day');
+			
+						if(document.getElementById('change_week').checked == true)
+							localStorage.setItem(user + '-change_week', true);
+						else
+							localStorage.removeItem(user + '-change_week');
+			
+						if(document.getElementById('change_month').checked == true)
+							localStorage.setItem(user + '-change_month', true);
+						else
+							localStorage.removeItem(user + '-change_month');
+			
+						if(document.getElementById('change_year').checked == true)
+							localStorage.setItem(user + '-change_year', true);
+						else
+							localStorage.removeItem(user + '-change_year');
+			
+						if(document.getElementById("covalenthq_api_key").value != "")
+							localStorage.setItem(user + '-covalenthq_api_key', CryptoJS.AES.encrypt(document.getElementById("covalenthq_api_key").value, CryptoJS.AES.decrypt(localStorage.getItem("password"), "Go hang a salami, I’m a lasagna hog.").toString(CryptoJS.enc.Utf8)));
+						else
+						{
+							localStorage.removeItem(user + '-covalenthq_api_key');
+						}
+			
+						alert("config saved successfully");
+					}
+				}
+			
+				window.addEventListener('keydown',this.keydown,false);
+					
+				function keydown(e)
+				{
+					var code = e.keyCode;
+					
+					if(document.activeElement.tagName == "INPUT")
+					{
+						if(code == 13)
+						{
+							if(document.activeElement.id == "add_watchlist_input")
+								add_watchlist();
+							else if(document.activeElement.id == "remove_watchlist_password")
+								remove_watchlist();
+							else if(document.activeElement.id == "add_wallet_address")
+								add_wallet();
+							else if(document.activeElement.id == "remove_wallet_password")
+								remove_wallet();
 						}
 					}
 				}
-			}
-		</script>
+			
+				if(user == "guest")
+				{
+					document.getElementById('config_select').remove(2);
+					document.getElementById('session_timeout_row').style.display = "none";
+					document.getElementById('covalenthq_api_key_row').style.display = "none";
+				}
+			
+				document.getElementById('config_select').value = "general";
+			
+				document.getElementById('config_spotlight').style.width = (document.getElementById('config_table').offsetWidth + 70) + "px";
+			
+				document.getElementById('add_watchlist_spotlight').style.width = (document.getElementById('add_watchlist_div').offsetWidth) + "px";
+				document.getElementById('remove_watchlist_spotlight').style.width = (document.getElementById('remove_watchlist_div').offsetWidth + 70) + "px";
+				document.getElementById('watchlist_spotlight').style.width = (document.getElementById('watchlist_div').offsetWidth + 70) + "px";
+				document.getElementById('watchlist_select').style.width = (document.getElementById('watchlist').offsetWidth) + "px";
+			
+				document.getElementById('add_wallet_spotlight').style.width = (document.getElementById('add_wallet_div').offsetWidth + 70) + "px";
+				document.getElementById('remove_wallet_spotlight').style.width = (document.getElementById('remove_wallet_div').offsetWidth + 70) + "px";
+				document.getElementById('ignorelist_spotlight').style.width = (document.getElementById('ignorelist_div').offsetWidth + 70) + "px";
+				document.getElementById('wallet_select').style.width = (document.getElementById('ignorelist').offsetWidth) + "px";
+			
+				load_config();
+				config_select_event();
+			</script>
+
+			<!-- BEGIN #footer -->
+			<div id="footer" class="app-content">
+				<div class="row">
+					<!-- footer -->
+					<noselect>
+						<center>
+							<div style="width: 300px; max-width: 100%">
+								<!-- BEGIN card -->
+								<div class="card mb-3">
+									<!-- BEGIN card-body -->
+									<div class="card-body copyright">
+										&copy;<script>document.write(new Date().getFullYear())</script> Dexata
+									</div>
+									<!-- END card-body -->
+									
+									<!-- BEGIN card-arrow -->
+									<div class="card-arrow">
+										<div class="card-arrow-top-left"></div>
+										<div class="card-arrow-top-right"></div>
+										<div class="card-arrow-bottom-left"></div>
+										<div class="card-arrow-bottom-right"></div>
+									</div>
+									<!-- END card-arrow -->
+								</div>
+								<!-- END card -->
+							</div>
+			
+							<p>
+								<input id="footer_search_box" placeholder="search">
+							</p></center>
+					</noselect>
+				</div>
+			</div>
+			
+			<script>
+				window.addEventListener('keydown',this.keydown,false);
+			
+				function keydown(e)
+				{
+					var code = e.keyCode;
+					
+					if(document.activeElement.tagName == "INPUT")
+					{
+						if(code == 13)
+						{
+							if(document.activeElement.id == "footer_search_box" &&
+								document.getElementById('footer_search_box').value != "")
+								window.location.href = "search.html?term=" + document.getElementById('footer_search_box').value;
+							else if(document.activeElement.id == "search_box" &&
+								document.getElementById('search_box').value != "")
+								window.location.href = "search.html?term=" + document.getElementById('search_box').value;
+						}
+					}
+				}
+			</script>
+			
+			<!-- BEGIN btn-scroll-top -->
+			<a href="#" data-toggle="scroll-to-top" class="btn-scroll-top fade"><i class="fa fa-arrow-up"></i></a>
+			<!-- END btn-scroll-top -->
+
+			<!-- BEGIN theme-panel -->
+			<div class="app-theme-panel">
+				<div class="app-theme-panel-container">
+					<div class="app-theme-panel-content">
+						<div class="small fw-bold text-white mb-1">Theme Color</div>
+						<div class="card mb-3">
+							<!-- BEGIN card-body -->
+							<div class="card-body p-2">
+								<!-- BEGIN theme-list -->
+								<div class="app-theme-list">
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-pink" data-theme-class="theme-pink" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Pink">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-red" data-theme-class="theme-red" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Red">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-warning" data-theme-class="theme-warning" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Orange">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-yellow" data-theme-class="theme-yellow" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Yellow">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-lime" data-theme-class="theme-lime" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Lime">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-green" data-theme-class="theme-green" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Green">&nbsp;</a></div>
+									<div class="app-theme-list-item active"><a href="javascript:;" class="app-theme-list-link bg-teal" data-theme-class="" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Default">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-info" data-theme-class="theme-info"  data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Cyan">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-primary" data-theme-class="theme-primary"  data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Blue">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-purple" data-theme-class="theme-purple" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Purple">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-indigo" data-theme-class="theme-indigo" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Indigo">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-gray-100" data-theme-class="theme-gray-200" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Gray">&nbsp;</a></div>
+								</div>
+								<!-- END theme-list -->
+							</div>
+							<!-- END card-body -->
+							
+							<!-- BEGIN card-arrow -->
+							<div class="card-arrow">
+								<div class="card-arrow-top-left"></div>
+								<div class="card-arrow-top-right"></div>
+								<div class="card-arrow-bottom-left"></div>
+								<div class="card-arrow-bottom-right"></div>
+							</div>
+							<!-- END card-arrow -->
+						</div>
+						
+						<div class="small fw-bold text-white mb-1">Theme Cover</div>
+						<div class="card">
+							<!-- BEGIN card-body -->
+							<div class="card-body p-2">
+								<!-- BEGIN theme-cover -->
+								<div class="app-theme-cover">
+									<div class="app-theme-cover-item active">
+										<a href="javascript:;" class="app-theme-cover-link" style="background-image: url(assets/img/cover/cover-thumb-1.jpg);" data-theme-cover-class="" data-toggle="theme-cover-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Default">&nbsp;</a>
+									</div>
+									<div class="app-theme-cover-item">
+										<a href="javascript:;" class="app-theme-cover-link" style="background-image: url(assets/img/cover/cover-thumb-2.jpg);" data-theme-cover-class="bg-cover-2" data-toggle="theme-cover-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Cover 2">&nbsp;</a>
+									</div>
+									<div class="app-theme-cover-item">
+										<a href="javascript:;" class="app-theme-cover-link" style="background-image: url(assets/img/cover/cover-thumb-3.jpg);" data-theme-cover-class="bg-cover-3" data-toggle="theme-cover-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Cover 3">&nbsp;</a>
+									</div>
+									<div class="app-theme-cover-item">
+										<a href="javascript:;" class="app-theme-cover-link" style="background-image: url(assets/img/cover/cover-thumb-4.jpg);" data-theme-cover-class="bg-cover-4" data-toggle="theme-cover-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Cover 4">&nbsp;</a>
+									</div>
+									<div class="app-theme-cover-item">
+										<a href="javascript:;" class="app-theme-cover-link" style="background-image: url(assets/img/cover/cover-thumb-5.jpg);" data-theme-cover-class="bg-cover-5" data-toggle="theme-cover-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Cover 5">&nbsp;</a>
+									</div>
+								</div>
+								<!-- END theme-cover -->
+							</div>
+							<!-- END card-body -->
+							
+							<!-- BEGIN card-arrow -->
+							<div class="card-arrow">
+								<div class="card-arrow-top-left"></div>
+								<div class="card-arrow-top-right"></div>
+								<div class="card-arrow-bottom-left"></div>
+								<div class="card-arrow-bottom-right"></div>
+							</div>
+							<!-- END card-arrow -->
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- END theme-panel -->
+		</div>
+		<!-- END #app -->
 
 		<script>
-			//changes login to logout on page if logged in
+			//sets up login/logout menu link
 			if(localStorage.getItem("username"))
 			{
-				//document.getElementById('login_menu_item').innerHTML = "<a onclick='logout()'>logout</a>";
-				//document.getElementById('login_footer_item').innerHTML = "<a onclick='logout()' title='logout'><i class='fas fa-sign-out-alt fa-2x'></i></a>";
-				document.getElementById('login_menu_item').innerHTML = "<a href='logout.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1) + "'>logout</a>"
-				document.getElementById('login_footer_item').innerHTML = "<a href='logout.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1) + "'><i class='fas fa-sign-out-alt fa-2x'></i></a>"
+				document.getElementById('login_menu_item').innerHTML = "<a href='logout.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1) + "' class='menu-link'><span class='menu-icon'><i class='fas fa-sign-out-alt fa-1x'></i></span><span class='menu-text'>logout</span></a>";
+				document.getElementById('login_header_item').innerHTML = "logout <i class='fas fa-sign-out-alt fa-1x ms-auto text-theme fs-16px my-n1'></i>";
+				document.getElementById('login_header_item').href = "logout.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
 			}
 			else
 			{
-				document.getElementById('login_menu_item').innerHTML = "<a href='login.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1) + "'>login</a>"
-				document.getElementById('login_footer_item').innerHTML = "<a href='login.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1) + "'><i class='fas fa-sign-in-alt fa-2x'></i></a>"
+				document.getElementById('login_menu_item').innerHTML = "<a href='login.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1) + "' class='menu-link'><span class='menu-icon'><i class='fas fa-sign-in-alt fa-1x'></i></span><span class='menu-text'>login</span></a>";
+				document.getElementById('login_header_item').innerHTML = "login <i class='fas fa-sign-in-alt fa-1x ms-auto text-theme fs-16px my-n1'></i>";
+				document.getElementById('login_header_item').href = "login.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
 			}
 		
 			//prevent autocomplete
@@ -851,10 +1298,8 @@
 				$(this).attr('autocomplete', 'off')
 			});
 		</script>
-
-		<script src="assets/js/browser.min.js"></script>
-		<script src="assets/js/breakpoints.min.js"></script>
-		<script src="assets/js/util.js"></script>
-		<script src="assets/js/main.js"></script>
+		
+		<script src="assets/js/vendor.min.js"></script>
+		<script src="assets/js/app.min.js"></script>
 	</body>
 </html>

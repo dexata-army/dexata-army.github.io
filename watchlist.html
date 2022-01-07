@@ -1,17 +1,16 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 	<head>
-		<title>Dexata - watchlist</title>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<title>Dexata - watchlist</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="description" content="" />
-		<meta name="keywords" content="" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<link rel="stylesheet" href="assets/css/pagestyle.css" />
-		<link rel="stylesheet" href="assets/css/print.css" />
 		<link rel="icon" type="image/svg" href="images/logo.png">
 		
-		<!-- Scripts -->
+		<link href="assets/css/vendor.min.css" rel="stylesheet" />
+		<link href="assets/css/app.min.css" rel="stylesheet" />
+		<link href="assets/css/pagestyle.css" rel="stylesheet" />
+		
 		<script src="assets/js/params.js"></script>
 		<script src="assets/js/sleep.js"></script>
 		<script src="assets/js/wallet.js"></script>
@@ -20,22 +19,8 @@
 		<script src="assets/js/crypto-js/crypto-js.js"></script>
 		
 		<script src="assets/js/jquery.min.js"></script>
-		<script src="assets/js/jquery.dropotron.min.js"></script>
-		<script src="assets/js/jquery.scrollex.min.js"></script>
-		<script src="assets/js/jquery.scrolly.min.js"></script>
 		
-		<!-- https://printjs.crabbly.com/ -->
-		<script src="assets/js/print.js"></script>
-		
-		<!-- Global site tag (gtag.js) - Google Analytics -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-D70JLR4EJM"></script>
-		<script>
-		  window.dataLayer = window.dataLayer || [];
-		  function gtag(){dataLayer.push(arguments);}
-		  gtag('js', new Date());
-		
-		  gtag('config', 'G-D70JLR4EJM');
-		</script>
+		<script src="https://kit.fontawesome.com/b51e6952ec.js"></script>
 
 		<script>
 			var user = "guest";
@@ -171,653 +156,1050 @@
 			};
 		</script>
 	</head>
-	<body class="is-preload">
-		<!-- Header -->
-		<header id="header" class="alt">
-			<div class="logo" style="margin-top: -25px">
-				<noselect>
-					<a href="index.html"><img src="images/logo.png" height="45px" style="vertical-align: middle"> Dexata</a> &nbsp; 
-					<a href="search.html" title='search'><i class="fas fa-search fa-1x" style="vertical-align:middle"></i></a> 
-					<a href="config.html" title='config'><i class="fas fa-cogs fa-1x" style="vertical-align:middle"></i></a> 
-					<a href="manage_users.html" title='manage users'><i class="fas fa-user-cog fa-1x" style="vertical-align:middle"></i></a> 
-				</noselect>
-			</div>
-		
-			<nav id="nav">
-				<ul>
-					<li><a href="index.html">home</a></li>
-					<li><a href="coins.html">coins</a></li>
-					<li><a href="categories.html">categories</a></li>
-					<li><a href="charts.html">charts</a></li>
-					<li><a href="news.html">news</a></li>
-					<li><a href="scams.html">scams</a></li>
-					<li><a href="watchlist.html">watchlist</a></li>
-					<li><a href="wallet.html">wallet</a></li>
-					<li id="login_menu_item"></li>
-				</ul>
-			</nav>
-		</header>
-
-		<!-- Wrapper -->
-		<div id="wrapper">
-			<!-- One -->
-			<section id="one" class="wrapper style1">
-				<div class="inner">
-					<div class="spotlights">
-						<center>
-							<div class="spotlight" style="max-width:500px; margin-bottom: 30px">
-								<div class="content">
-									<h1><i class="fas fa-binoculars fa-4x" style="vertical-align:middle"></i><br><noselect>Watchlist</noselect></h1>
+	<body class="theme-green">
+		<!-- BEGIN #app -->
+		<div id="app" class="app app-sidebar-collapsed">
+			<!-- BEGIN #header -->
+			<div id="header" class="app-header">
+				<!-- BEGIN desktop-toggler -->
+				<div class="desktop-toggler">
+					<button type="button" class="menu-toggler" data-toggle-class="app-sidebar-collapsed" data-dismiss-class="app-sidebar-toggled" data-toggle-target=".app">
+						<span class="bar"></span>
+						<span class="bar"></span>
+						<span class="bar"></span>
+					</button>
+				</div>
+				<!-- BEGIN desktop-toggler -->
+				
+				<!-- BEGIN mobile-toggler -->
+				<div class="mobile-toggler">
+					<button type="button" class="menu-toggler" data-toggle-class="app-sidebar-mobile-toggled" data-toggle-target=".app">
+						<span class="bar"></span>
+						<span class="bar"></span>
+						<span class="bar"></span>
+					</button>
+				</div>
+				<!-- END mobile-toggler -->
+				
+				<!-- BEGIN brand -->
+				<div class="brand">
+					<a href="index.html" class="brand-logo">
+						<img src="images/logo.png" style="max-height: 2rem"> Dexata
+					</a>
+				</div>
+				<!-- END brand -->
+				
+				<!-- BEGIN menu -->
+				<div class="menu">
+					<div class="menu-item dropdown">
+						<a href="#" data-toggle-class="app-header-menu-search-toggled" data-toggle-target=".app" class="menu-link">
+							<div class="menu-icon"><i class="bi bi-search nav-icon"></i></div>
+						</a>
+					</div>
+					<div class="menu-item dropdown dropdown-mobile-full">
+						<a href="javascript:;" data-toggle="theme-panel-expand" class="app-theme-toggle-btn"><i class="bi bi-sliders nav-icon"></i></a>
+						<a href="#" data-bs-toggle="dropdown" data-bs-display="static" class="menu-link">
+							<div class="menu-icon"><i class="bi bi-grid-3x3-gap nav-icon"></i></div>
+						</a>
+						<div class="dropdown-menu fade dropdown-menu-end w-300px text-center p-0 mt-1">
+							<div class="row row-grid gx-0">
+								<div class="col-4">
+									<a href="coins.html" class="dropdown-item text-decoration-none p-3 bg-none">
+										<div style="margin-top: 5px; margin-bottom: 5px"><i class="fas fa-coins fa-2x"></i></div>
+										<div class="fw-500 fs-10px text-white">coins</div>
+									</a>
+								</div>
+								<div class="col-4">
+									<a href="categories.html" class="dropdown-item text-decoration-none p-3 bg-none">
+										<div style="margin-top: 5px; margin-bottom: 5px"><i class="fas fa-cubes fa-2x"></i></div>
+										<div class="fw-500 fs-10px text-white">categories</div>
+									</a>
+								</div>
+								<div class="col-4">
+									<a href="charts.html" class="dropdown-item text-decoration-none p-3 bg-none">
+										<div style="margin-top: 5px; margin-bottom: 5px"><i class="fas fa-chart-area fa-2x"></i></div>
+										<div class="fw-500 fs-10px text-white">charts</div>
+									</a>
 								</div>
 							</div>
-		
-							<div id="show_watchlist_select_link" class="spotlight" style="width: 300px; cursor: pointer" onclick="show_watchlist_select()">
-								<noselect style="margin: 0 auto"><div id="selected_watchlists"></div></noselect>
-							</div>
-							<select id="watchlist_select" onchange="watchlist_select_event()" onfocusout="hide_watchlist_select()" style="max-width: 100%; width: 300px; margin-bottom: 20px; display: none" multiple></select>
-		
-							<div id="no_watchlists_spotlight" class="spotlight" style="max-width: 100%; width: 400px; display: none; padding-top: 20px; padding-bottom: 20px">
-							</div>
-		
-							<div id="empty_watchlist_spotlight" class="spotlight" style="max-width: 100%; width: 400px; display: none; margin-bottom: 20px; padding: 20px 20px 20px 20px">
-							</div>
-		
-							<div style="margin-bottom: 13px; margin-top: 10px; max-width: 40px">
-								<a id="charts_link" style="display: none" title="charts"><i class="fas fa-chart-area fa-2x" style="vertical-align: middle"></i></a>
-							</div>
-		
-							<div id="table_spotlight" class="spotlight" style="max-width: 100%">
-								<div id="table_div" class="xscroll">
-									<img id="loading_gif" src="images/loading.gif" style="margin-top: 20px; max-width: 150px">
-									<table id="watchlist_table" style="display: none">
-										<thead>
-											<tr>
-												<th>rank</th>
-												<th></th>
-												<th><a onclick="toggle_sort('symbol')">symbol</a></th>
-												<th><a onclick="toggle_sort('name')">name</a></th>
-												<th><a onclick="toggle_sort('current_price')">price</a></th>
-												<th id="change_hour_row_head"><a onclick="toggle_sort('price_change_percentage_1h_in_currency')">hour</a></th>
-												<th id="change_day_row_head"><a onclick="toggle_sort('price_change_percentage_24h')">day</a></th>
-												<th id="change_week_row_head"><a onclick="toggle_sort('price_change_percentage_7d_in_currency')">week</a></th>
-												<th id="change_month_row_head"><a onclick="toggle_sort('price_change_percentage_30d_in_currency')">month</a></th>
-												<th id="change_year_row_head"><a onclick="toggle_sort('price_change_percentage_1y_in_currency')">year</a></th>
-												<th><a onclick="toggle_sort('market_cap')">market cap</a></th>
-												<th><a onclick="toggle_sort('total_volume')">volume</a></th>
-											</tr>
-										</thead>
-										<tfoot>
-											<tr>
-												<th>rank</th>
-												<th></th>
-												<th><a onclick="toggle_sort('symbol')">symbol</a></th>
-												<th><a onclick="toggle_sort('name')">name</a></th>
-												<th><a onclick="toggle_sort('current_price')">price</a></th>
-												<th id="change_hour_row_foot"><a onclick="toggle_sort('price_change_percentage_1h')">hour</a></th>
-												<th id="change_day_row_foot"><a onclick="toggle_sort('price_change_percentage_24h')">day</a></th>
-												<th id="change_week_row_foot"><a onclick="toggle_sort('price_change_percentage_7d')">week</a></th>
-												<th id="change_month_row_foot"><a onclick="toggle_sort('price_change_percentage_30d')">month</a></th>
-												<th id="change_year_row_foot"><a onclick="toggle_sort('price_change_percentage_1y')">year</a></th>
-												<th><a onclick="toggle_sort('market_cap')">market cap</a></th>
-												<th><a onclick="toggle_sort('total_volume')">volume</a></th>
-											</tr>
-										</tfoot>
-									</table>
+							<div class="row row-grid gx-0">
+								<div class="col-4">
+									<a href="news.html" class="dropdown-item text-decoration-none p-3 bg-none">
+										<div style="margin-top: 5px; margin-bottom: 5px"><i class="fas fa-newspaper fa-2x"></i></div>
+										<div class="fw-500 fs-10px text-white">news</div>
+									</a>
+								</div>
+								<div class="col-4">
+									<a href="search.html" class="dropdown-item text-decoration-none p-3 bg-none">
+										<div style="margin-top: 5px; margin-bottom: 5px"><i class="fas fa-search fa-2x"></i></div>
+										<div class="fw-500 fs-10px text-white">search</div>
+									</a>
+								</div>
+								<div class="col-4">
+									<a href="manage_users.html" class="dropdown-item text-decoration-none p-3 bg-none">
+										<div style="margin-top: 5px; margin-bottom: 5px"><i class="fas fa-user-cog fa-2x"></i></div>
+										<div class="fw-500 fs-10px text-white">users</div>
+									</a>
 								</div>
 							</div>
-							<noselect id="page_controls" style="margin-bottom: 15px">
-								<a id="prev_page_link" onclick="prev_page()" style="visibility: hidden"><i class="fas fa-arrow-circle-left fa-2x" style="vertical-align: middle"></i></a> &nbsp;&nbsp;
-								<input id="page_input" style="width: 75px; vertical-align: middle"> &nbsp;&nbsp;
-								<a id="next_page_link" onclick="next_page()"><i class="fas fa-arrow-circle-right fa-2x" style="vertical-align: middle"></i></a>
-							</noselect>
-		
-							<div id="newsfeed_div" style="max-height: 350px; overflow-y: scroll; background-color: #2E2E35; border-radius: 5px; scrollbar-color: grey #2e2e35;">
-							</div>
-						</center>
+						</div>
+					</div>
+					<div class="menu-item dropdown dropdown-mobile-full">
+						<a href="#" data-bs-toggle="dropdown" data-bs-display="static" class="menu-link">
+							<div id="header_username" class="menu-text d-sm-block">guest</div>
+						</a>
+						<div class="dropdown-menu dropdown-menu-end me-lg-3 fs-11px mt-1">
+							<a class="dropdown-item d-flex align-items-center" href="watchlist.html">watchlist <i class="fas fa-binoculars fa-1x ms-auto text-theme fs-16px my-n1"></i></a>
+							<a class="dropdown-item d-flex align-items-center" href="wallet.html">wallet <i class="fas fa-wallet fa-1x ms-auto text-theme fs-16px my-n1"></i></a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item d-flex align-items-center" href="config.html">config <i class="fas fa-cogs fa-1x ms-auto text-theme fs-16px my-n1"></i></a>
+							<a id="login_header_item" class="dropdown-item d-flex align-items-center" href="login.html">login <i class="fas fa-sign-in-alt fa-1x ms-auto text-theme fs-16px my-n1"></i></a>
+						</div>
 					</div>
 				</div>
-			</section>
-		</div>
-		
-		<script>
-			var page_no = 1;
-			var no_pages = 0;
-			var refresh_ms = 60000;
-			var chart_range = "week";
-		
-			var sort_attrib = 'market_cap';
-			var sort_dir = -1;
-			var watchlist_data;
-		
-			var selected_watchlists;
-		
-			window.addEventListener('keydown',this.keydown,false);
-		
-			if(localStorage.getItem(user + 'refresh_sec'))
-				refresh_ms = 1000*localStorage.getItem(user + 'refresh_sec');
-			else
-				localStorage.setItem(user + 'refresh_sec', 60);
-		
-			if(localStorage.getItem(user + '-chart_range'))
-				chart_range = localStorage.getItem(user + '-chart_range');
-		
-			if(!localStorage.getItem(user + "-change_hour") &&
-			   !localStorage.getItem(user + "-change_day") &&
-			   !localStorage.getItem(user + "-change_week") &&
-			   !localStorage.getItem(user + "-change_month") &&
-			   !localStorage.getItem(user + "-change_year"))
-			{
-				localStorage.setItem(user + "-change_hour", true);
-				localStorage.setItem(user + "-change_day", true);
-				localStorage.setItem(user + "-change_week", true);
-				localStorage.setItem(user + "-change_month", true);
-				localStorage.setItem(user + "-change_year", true);
-			}
-		
-			if(!localStorage.getItem(user + "-change_hour"))
-			{
-				document.getElementById('change_hour_row_head').style.display = "none";
-				document.getElementById('change_hour_row_foot').style.display = "none";
-			}
-		
-			if(!localStorage.getItem(user + "-change_day"))
-			{
-				document.getElementById('change_day_row_head').style.display = "none";
-				document.getElementById('change_day_row_foot').style.display = "none";
-			}
-		
-			if(!localStorage.getItem(user + "-change_week"))
-			{
-				document.getElementById('change_week_row_head').style.display = "none";
-				document.getElementById('change_week_row_foot').style.display = "none";
-			}
-		
-			if(!localStorage.getItem(user + "-change_month"))
-			{
-				document.getElementById('change_month_row_head').style.display = "none";
-				document.getElementById('change_month_row_foot').style.display = "none";
-			}
-		
-			if(!localStorage.getItem(user + "-change_year"))
-			{
-				document.getElementById('change_year_row_head').style.display = "none";
-				document.getElementById('change_year_row_foot').style.display = "none";
-			}
-		
-			function clear_table()
-			{
-				var table = document.getElementById("watchlist_table");
-		
-				var no_rows = table.rows.length-2;
-				for(var i=0; i < no_rows; i++)
-					table.deleteRow(1);		
-			}
-		
-			function draw_table()
-			{
-				clear_table();
-				var table = document.getElementById("watchlist_table");
-				document.getElementById("page_input").value = page_no;
-		
-				if(no_pages == 1)
-					document.getElementById('page_controls').style.display = "none";
-		
-				document.getElementById('loading_gif').src = "";
-				document.getElementById('loading_gif').style.visibility = "hidden";
-				document.getElementById('loading_gif').style.display = "none";
-				document.getElementById("watchlist_table").style.display = "inline";
-		
-				if(watchlist_data.length > 0)
-				{
-					var coins_str = "";
-					var ids_str = "";
-		
-					for(var i=0; i<watchlist_data.length; i++)
-					{
-						if(i > 0)
-						{
-							coins_str += ",";
-							ids_str += ",";
-						}
-						coins_str += watchlist_data[i]['id'];
-						ids_str += watchlist_data[i]['symbol'];
-		
-						var row = table.insertRow(i+1);
-						row.insertCell(0).innerHTML = watchlist_data[i]['market_cap_rank'];
-						if(watchlist_data[i]['image'] != "")
-							row.insertCell(1).innerHTML = "<img style='min-width: 23px; max-height: 23px; vertical-align:middle' class='rounded' onerror='this.style.display=\"none\"' src='" + watchlist_data[i]['image'] + "'>";
-						row.insertCell(2).innerHTML = watchlist_data[i]['symbol'];
-						row.insertCell(3).innerHTML = "<a href='coin.html?id=" + watchlist_data[i]['id'] + "'>" + watchlist_data[i]['name'] + "</a>";
-		
-						if(watchlist_data[i]['current_price'] == 0)
-							row.insertCell(4).innerHTML = "-";
-						else if(watchlist_data[i]['current_price'] > 999)
-							row.insertCell(4).innerHTML = "$" + parseFloat(watchlist_data[i]['current_price']).toLocaleString('en');
-						else if(watchlist_data[i]['current_price'] < 0.001)
-							row.insertCell(4).innerHTML = "$" + parseFloat(watchlist_data[i]['current_price']).toExponential(3);
-						else
-							row.insertCell(4).innerHTML = "$" + watchlist_data[i]['current_price'].toFixed(5);
-		
-						if(localStorage.getItem(user + '-change_hour'))
-						{
-							if(watchlist_data[i]['price_change_percentage_1h_in_currency'] == null)
-								row.insertCell(5).innerHTML = "-";
-							else if(parseFloat(watchlist_data[i]['price_change_percentage_1h_in_currency']) < 0)
-								row.insertCell(5).innerHTML = "<red>" + parseFloat(watchlist_data[i]['price_change_percentage_1h_in_currency']).toLocaleString('en') + "%</red>";
-							else
-								row.insertCell(5).innerHTML = "<green>" + parseFloat(watchlist_data[i]['price_change_percentage_1h_in_currency']).toLocaleString('en') + "%</green>";
-						}
-						else
-							row.insertCell(5);
-		
-						if(localStorage.getItem(user + '-change_day'))
-						{
-							if(watchlist_data[i]['price_change_percentage_24h'] == null)
-								row.insertCell(6).innerHTML = "-";
-							else if(parseFloat(watchlist_data[i]['price_change_percentage_24h']) < 0)
-								row.insertCell(6).innerHTML = "<red>" + parseFloat(watchlist_data[i]['price_change_percentage_24h']).toLocaleString('en') + "%</red>";
-							else
-								row.insertCell(6).innerHTML = "<green>" + parseFloat(watchlist_data[i]['price_change_percentage_24h']).toLocaleString('en') + "%</green>";
-						}
-						else
-							row.insertCell(6);
-		
-						if(localStorage.getItem(user + '-change_week'))
-						{
-							if(watchlist_data[i]['price_change_percentage_7d_in_currency'] == null)
-								row.insertCell(7).innerHTML = "-";
-							else if(parseFloat(watchlist_data[i]['price_change_percentage_7d_in_currency']) < 0)
-								row.insertCell(7).innerHTML = "<red>" + parseFloat(watchlist_data[i]['price_change_percentage_7d_in_currency']).toLocaleString('en') + "%</red>";
-							else
-								row.insertCell(7).innerHTML = "<green>" + parseFloat(watchlist_data[i]['price_change_percentage_7d_in_currency']).toLocaleString('en') + "%</green>";
-						}
-						else
-							row.insertCell(7);
-		
-						if(localStorage.getItem(user + '-change_month'))
-						{
-							if(watchlist_data[i]['price_change_percentage_30d_in_currency'] == null)
-								row.insertCell(8).innerHTML = "-";
-							else if(parseFloat(watchlist_data[i]['price_change_percentage_30d_in_currency']) < 0)
-								row.insertCell(8).innerHTML = "<red>" + parseFloat(watchlist_data[i]['price_change_percentage_30d_in_currency']).toLocaleString('en') + "%</red>";
-							else
-								row.insertCell(8).innerHTML = "<green>" + parseFloat(watchlist_data[i]['price_change_percentage_30d_in_currency']).toLocaleString('en') + "%</green>";
-						}
-						else
-							row.insertCell(8);
-		
-						if(localStorage.getItem(user + '-change_year'))
-						{
-							if(watchlist_data[i]['price_change_percentage_1y_in_currency'] == null)
-								row.insertCell(9).innerHTML = "-";
-							else if(parseFloat(watchlist_data[i]['price_change_percentage_1y_in_currency']) < 0)
-								row.insertCell(9).innerHTML = "<red>" + parseFloat(watchlist_data[i]['price_change_percentage_1y_in_currency']).toLocaleString('en') + "%</red>";
-							else
-								row.insertCell(9).innerHTML = "<green>" + parseFloat(watchlist_data[i]['price_change_percentage_1y_in_currency']).toLocaleString('en') + "%</green>";
-						}
-						else
-							row.insertCell(9);
-		
-						if(watchlist_data[i]['market_cap'] > 0)
-							row.insertCell(10).innerHTML = "$" + parseFloat(watchlist_data[i]['market_cap']).toLocaleString('en') ;
-						else
-							row.insertCell(10).innerHTML = "-";
-		
-						if(watchlist_data[i]['total_volume'] > 0)
-							row.insertCell(11).innerHTML = "$" + watchlist_data[i]['total_volume'].toLocaleString('en') ;
-						else
-							row.insertCell(11).innerHTML = "-";
-		
-						if(!localStorage.getItem(user + '-change_year'))
-							row.deleteCell(9);
-						if(!localStorage.getItem(user + '-change_month'))
-							row.deleteCell(8);
-						if(!localStorage.getItem(user + '-change_week'))
-							row.deleteCell(7);
-						if(!localStorage.getItem(user + '-change_day'))
-							row.deleteCell(6);
-						if(!localStorage.getItem(user + '-change_hour'))
-							row.deleteCell(5);
-					}
-		
-					document.getElementById('table_spotlight').style.width = (document.getElementById('watchlist_table').offsetWidth + 70) + "px";
-		
-					document.getElementById('charts_link').href = "charts.html?width=250&height=350&range=" + chart_range + "&coins=" + coins_str;
-					document.getElementById('charts_link').style.display = "block";
-		
-					document.getElementById('newsfeed_div').innerHTML = 
-						'<iframe id="newsfeed_iframe" scrolling="no" width="100%" height="650px" allowtransparency="true" frameborder="0" src="https://cryptopanic.com/widgets/news/?bg_color=2E2E35&amp;currencies=' + ids_str + '&amp;font_family=sans&amp;header_bg_color=30343B&amp;header_text_color=FFFFFF&amp;link_color=679267&amp;news_feed=recent&amp;posts_limit=10&amp;text_color=FFFFFF&amp;title=News"></iframe>';
-		
-					var body_width = document.body.clientWidth;
-					if(body_width < 530)
-						document.getElementById('newsfeed_iframe').style.height = "1000px";
-					else if(body_width < 700)
-						document.getElementById('newsfeed_iframe').style.height = "900px";
-					else if(body_width < 950)
-						document.getElementById('newsfeed_iframe').style.height = "800px";
-					else if(body_width < 1100)
-						document.getElementById('newsfeed_iframe').style.height = "700px";
-				}
+				<!-- END menu -->
+				
+				<!-- BEGIN menu-search -->
+				<div class="menu-search" name="header_search_form">
+					<div class="menu-search-container">
+						<div class="menu-search-icon"><i class="bi bi-search"></i></div>
+						<div class="menu-search-input">
+							<input id="search_box" type="text" class="form-control form-control-lg" placeholder="search" />
+						</div>
+						<div class="menu-search-icon">
+							<a href="#" data-toggle-class="app-header-menu-search-toggled" data-toggle-target=".app"><i class="bi bi-x-lg"></i></a>
+						</div>
+					</div>
+				</div>
+				<!-- END menu-search -->
+			</div>
+			<!-- END #header -->
+			
+			<script>
+				document.getElementById('header_username').innerHTML = user;
+			</script>
+			
+			<!-- BEGIN #sidebar -->
+			<div id="sidebar" class="app-sidebar">
+				<!-- BEGIN scrollbar -->
+				<div class="app-sidebar-content" data-scrollbar="true" data-height="100%">
+					<!-- BEGIN menu -->
+					<div class="menu">
+						<div class="menu-header">Navigation</div>
+						<div class="menu-item">
+							<a href="index.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-home fa-1x"></i></span>
+								<span class="menu-text">home</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="coins.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-coins fa-1x"></i></span>
+								<span class="menu-text">coins</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="categories.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-cubes fa-1x"></i></span>
+								<span class="menu-text">categories</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="charts.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-chart-area fa-1x"></i></span>
+								<span class="menu-text">charts</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="news.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-newspaper fa-1x"></i></span>
+								<span class="menu-text">news</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="scams.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-bomb fa-1x"></i></span>
+								<span class="menu-text">scams</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="search.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-search fa-1x"></i></span>
+								<span class="menu-text">search</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="watchlist.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-binoculars fa-1x"></i></span>
+								<span class="menu-text">watchlist</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="wallet.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-wallet fa-1x"></i></span>
+								<span class="menu-text">wallet</span>
+							</a>
+						</div>
+			
+						<div class="menu-header">Manage</div>
+						<div class="menu-item">
+							<a href="config.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-cogs fa-1x"></i></span>
+								<span class="menu-text">config</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="manage_users.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-user-cog fa-1x"></i></span>
+								<span class="menu-text">users</span>
+							</a>
+						</div>
+						<div id="login_menu_item" class="menu-item">
+							<a href="login.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-sign-in-alt fa-1x"></i></span>
+								<span class="menu-text">login</span>
+							</a>
+						</div>
+					</div>
+					<!-- END menu -->
+				</div>
+				<!-- END scrollbar -->
+			</div>
+			<!-- END #sidebar -->
+				
+			<!-- BEGIN mobile-sidebar-backdrop -->
+			<button class="app-sidebar-mobile-backdrop" data-toggle-target=".app" data-toggle-class="app-sidebar-mobile-toggled"></button>
+			<!-- END mobile-sidebar-backdrop -->
+			
+			<!-- BEGIN #content -->
+			<div id="content" class="app-content">
+				<div class="row">
+					<!-- title spotlight -->
+					<center>
+						<div id="title_spotlight" style="max-width: 100%; width: 400px">
+							<!-- BEGIN card -->
+							<div class="card mb-3">
+								<!-- BEGIN card-body -->
+								<div class="card-body">
+									<h1><i class="fas fa-binoculars fa-4x" style="vertical-align:middle"></i><br><noselect>watchlist</noselect></h1>
+								</div>
+								<!-- END card-body -->
+								
+								<!-- BEGIN card-arrow -->
+								<div class="card-arrow">
+									<div class="card-arrow-top-left"></div>
+									<div class="card-arrow-top-right"></div>
+									<div class="card-arrow-bottom-left"></div>
+									<div class="card-arrow-bottom-right"></div>
+								</div>
+								<!-- END card-arrow -->
+							</div>
+							<!-- END card -->
+						</div>
+					</center>
+				</div>
+			
+				<center>
+					<!-- no watchlists spotlight -->
+					<div id="show_watchlist_select_link_spotlight" style="width: auto; max-width: 100%; cursor: pointer" onclick="show_watchlist_select()">
+						<!-- BEGIN card -->
+						<div class="card mb-3">
+							<!-- BEGIN card-body -->
+							<div class="card-body">
+								<div id="show_watchlist_select_link" style="max-width: 300px">
+									<noselect style="margin: 0 auto"><div id="selected_watchlists"></div></noselect>
+								</div>
+							</div>
+							<!-- END card-body -->
+							
+							<!-- BEGIN card-arrow -->
+							<div class="card-arrow">
+								<div class="card-arrow-top-left"></div>
+								<div class="card-arrow-top-right"></div>
+								<div class="card-arrow-bottom-left"></div>
+								<div class="card-arrow-bottom-right"></div>
+							</div>
+							<!-- END card-arrow -->
+						</div>
+						<!-- END card -->
+					</div>
+					<select id="watchlist_select" onchange="watchlist_select_event()" onfocusout="hide_watchlist_select()" style="max-width: 100%; width: 300px; display: none" multiple></select>
+			
+					<div style="margin-bottom: 13px; max-width: 40px">
+						<a id="charts_link" style="display: none" title="charts"><i class="fas fa-chart-area fa-2x" style="vertical-align: middle"></i></a>
+					</div>
+				</center>
+			
+				<div class="row">
+					<center>
+						<!-- no watchlists spotlight -->
+						<div id="no_watchlists_spotlight" style="width: auto; max-width: 100%; display: none">
+							<!-- BEGIN card -->
+							<div class="card mb-3">
+								<!-- BEGIN card-body -->
+								<div class="card-body">
+									<div id="no_watchlists_div" class="xscroll" style="max-width: 750px;">
+									</div>
+								</div>
+								<!-- END card-body -->
+								
+								<!-- BEGIN card-arrow -->
+								<div class="card-arrow">
+									<div class="card-arrow-top-left"></div>
+									<div class="card-arrow-top-right"></div>
+									<div class="card-arrow-bottom-left"></div>
+									<div class="card-arrow-bottom-right"></div>
+								</div>
+								<!-- END card-arrow -->
+							</div>
+							<!-- END card -->
+						</div>
+			
+						<!-- empty watchlist spotlight -->
+						<div id="empty_watchlist_spotlight" style="width: auto; max-width: 100%; display: none">
+							<!-- BEGIN card -->
+							<div class="card mb-3">
+								<!-- BEGIN card-body -->
+								<div class="card-body">
+									<div id="empty_watchlist_div" class="xscroll" style="max-width: 750px;">
+									</div>
+								</div>
+								<!-- END card-body -->
+								
+								<!-- BEGIN card-arrow -->
+								<div class="card-arrow">
+									<div class="card-arrow-top-left"></div>
+									<div class="card-arrow-top-right"></div>
+									<div class="card-arrow-bottom-left"></div>
+									<div class="card-arrow-bottom-right"></div>
+								</div>
+								<!-- END card-arrow -->
+							</div>
+							<!-- END card -->
+						</div>
+			
+						<!-- watchlist spotlight -->
+						<div id="table_spotlight" style="width: auto; max-width: 100%">
+							<!-- BEGIN card -->
+							<div class="card mb-3">
+								<!-- BEGIN card-body -->
+								<div class="card-body">
+									<div id="table_div" class="xscroll">
+										<img id="loading_gif" src="images/loading.gif" style="max-width: 150px">
+										<table id="watchlist_table" style="display: none">
+											<thead>
+												<tr>
+													<th>rank</th>
+													<th></th>
+													<th><a onclick="toggle_sort('symbol')">symbol</a></th>
+													<th><a onclick="toggle_sort('name')">name</a></th>
+													<th><a onclick="toggle_sort('current_price')">price</a></th>
+													<th id="change_hour_row_head"><a onclick="toggle_sort('price_change_percentage_1h_in_currency')">hour</a></th>
+													<th id="change_day_row_head"><a onclick="toggle_sort('price_change_percentage_24h')">day</a></th>
+													<th id="change_week_row_head"><a onclick="toggle_sort('price_change_percentage_7d_in_currency')">week</a></th>
+													<th id="change_month_row_head"><a onclick="toggle_sort('price_change_percentage_30d_in_currency')">month</a></th>
+													<th id="change_year_row_head"><a onclick="toggle_sort('price_change_percentage_1y_in_currency')">year</a></th>
+													<th><a onclick="toggle_sort('market_cap')">market cap</a></th>
+													<th><a onclick="toggle_sort('total_volume')">volume</a></th>
+												</tr>
+											</thead>
+											<tfoot>
+												<tr>
+													<th>rank</th>
+													<th></th>
+													<th><a onclick="toggle_sort('symbol')">symbol</a></th>
+													<th><a onclick="toggle_sort('name')">name</a></th>
+													<th><a onclick="toggle_sort('current_price')">price</a></th>
+													<th id="change_hour_row_foot"><a onclick="toggle_sort('price_change_percentage_1h')">hour</a></th>
+													<th id="change_day_row_foot"><a onclick="toggle_sort('price_change_percentage_24h')">day</a></th>
+													<th id="change_week_row_foot"><a onclick="toggle_sort('price_change_percentage_7d')">week</a></th>
+													<th id="change_month_row_foot"><a onclick="toggle_sort('price_change_percentage_30d')">month</a></th>
+													<th id="change_year_row_foot"><a onclick="toggle_sort('price_change_percentage_1y')">year</a></th>
+													<th><a onclick="toggle_sort('market_cap')">market cap</a></th>
+													<th><a onclick="toggle_sort('total_volume')">volume</a></th>
+												</tr>
+											</tfoot>
+										</table>
+									</div>
+								</div>
+								<!-- END card-body -->
+								
+								<!-- BEGIN card-arrow -->
+								<div class="card-arrow">
+									<div class="card-arrow-top-left"></div>
+									<div class="card-arrow-top-right"></div>
+									<div class="card-arrow-bottom-left"></div>
+									<div class="card-arrow-bottom-right"></div>
+								</div>
+								<!-- END card-arrow -->
+							</div>
+							<!-- END card -->
+						</div>
+			
+						<noselect id="page_controls" style="margin-bottom: 15px">
+							<a id="prev_page_link" onclick="prev_page()" style="visibility: hidden"><i class="fas fa-arrow-circle-left fa-2x" style="vertical-align: middle"></i></a> &nbsp;&nbsp;
+							<input id="page_input" style="width: 75px; vertical-align: middle"> &nbsp;&nbsp;
+							<a id="next_page_link" onclick="next_page()"><i class="fas fa-arrow-circle-right fa-2x" style="vertical-align: middle"></i></a>
+						</noselect>
+					</center>
+				</div>
+			
+				<div class="row">
+					<!-- news div -->
+					<center>
+						<div style="width: 600px; max-width: 100%">
+							<!-- BEGIN card -->
+							<div class="card mb-3">
+								<!-- BEGIN card-body -->
+								<div class="card-body">
+									<div id="newsfeed_div" style="max-height: 60vh; overflow-y: scroll; scrollbar-color: grey #2e2e35;">
+									</div>
+								</div>
+								<!-- END card-body -->
+								
+								<!-- BEGIN card-arrow -->
+								<div class="card-arrow">
+									<div class="card-arrow-top-left"></div>
+									<div class="card-arrow-top-right"></div>
+									<div class="card-arrow-bottom-left"></div>
+									<div class="card-arrow-bottom-right"></div>
+								</div>
+								<!-- END card-arrow -->
+							</div>
+							<!-- END card -->
+						</div>
+					</center>
+				</div>
+			</div>
+			
+			<script>
+				var page_no = 1;
+				var no_pages = 0;
+				var refresh_ms = 60000;
+				var chart_range = "week";
+			
+				var sort_attrib = 'market_cap';
+				var sort_dir = -1;
+				var watchlist_data;
+			
+				var selected_watchlists;
+			
+				window.addEventListener('keydown',this.keydown,false);
+			
+				if(localStorage.getItem(user + 'refresh_sec'))
+					refresh_ms = 1000*localStorage.getItem(user + 'refresh_sec');
 				else
+					localStorage.setItem(user + 'refresh_sec', 60);
+			
+				if(localStorage.getItem(user + '-chart_range'))
+					chart_range = localStorage.getItem(user + '-chart_range');
+			
+				if(!localStorage.getItem(user + "-change_hour") &&
+				   !localStorage.getItem(user + "-change_day") &&
+				   !localStorage.getItem(user + "-change_week") &&
+				   !localStorage.getItem(user + "-change_month") &&
+				   !localStorage.getItem(user + "-change_year"))
 				{
-					document.getElementById('table_spotlight').style.display = "none";
-		
-					document.getElementById('page_controls').style.display = "none";
-					document.getElementById('empty_watchlist_spotlight').style.display = "block";
-					document.getElementById("empty_watchlist_spotlight").innerHTML = "Watchlist appears to be empty, you can watch and unwatch coins from their respective pages.";
+					localStorage.setItem(user + "-change_hour", true);
+					localStorage.setItem(user + "-change_day", true);
+					localStorage.setItem(user + "-change_week", true);
+					localStorage.setItem(user + "-change_month", true);
+					localStorage.setItem(user + "-change_year", true);
 				}
-			}
-		
-			function sort_data()
-			{
-				if(sort_attrib == "symbol" || sort_attrib == "name")
+			
+				if(!localStorage.getItem(user + "-change_hour"))
 				{
-					watchlist_data.sort(function(obj1, obj2) {
-						if(obj1[sort_attrib].toLowerCase() > obj2[sort_attrib].toLowerCase())
-							return sort_dir*1;
-						else if(obj1[sort_attrib] == obj2[sort_attrib])
-							return 0;
-						else return sort_dir*-1;
-					});
+					document.getElementById('change_hour_row_head').style.display = "none";
+					document.getElementById('change_hour_row_foot').style.display = "none";
 				}
-				else
+			
+				if(!localStorage.getItem(user + "-change_day"))
 				{
-					watchlist_data.sort(function(obj1, obj2) {
-						return sort_dir*(obj1[sort_attrib] - obj2[sort_attrib]);
-					});
+					document.getElementById('change_day_row_head').style.display = "none";
+					document.getElementById('change_day_row_foot').style.display = "none";
 				}
-		
-				draw_table();
-			}
-		
-			function toggle_sort(attrib)
-			{
-				if(sort_attrib == attrib)
-					sort_dir *= -1;
-				else
+			
+				if(!localStorage.getItem(user + "-change_week"))
 				{
-					sort_attrib = attrib;
-					sort_dir = -1;
+					document.getElementById('change_week_row_head').style.display = "none";
+					document.getElementById('change_week_row_foot').style.display = "none";
 				}
-		
-				sort_data();
-			}
-		
-			function fetch_table_coingecko(names)
-			{
-				var watchlist_str;
-		
-				if(names.length > 1)
-					watchlist_str = fetch_combined_watchlists_str(user, names);
-				else
-					watchlist_str = fetch_watchlist_str(user, names[0]);
-		
-				no_pages = Math.ceil((watchlist_str.split(',').length-1)/50);
-		
-				if(watchlist_str != "")
+			
+				if(!localStorage.getItem(user + "-change_month"))
 				{
-					$(document).ready(function(){
-						$.get(
-							'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=' + watchlist_str + '&order=market_cap_desc&per_page=50&page=' + page_no + '&sparkline=false&price_change_percentage=1h,24h,7d,30d,1y',             
-							function(data) {
-								watchlist_data = data;
-		
-								if(sort_attrib == "market_cap" && sort_dir == -1)
-									draw_table();
-								else
-									sort_data();
-						}).fail(function() {
-							clear_table();
-							document.getElementById('loading_gif').src = "";
-							document.getElementById('loading_gif').style.visibility = "hidden";
-							document.getElementById('loading_gif').style.display = "none";
-							document.getElementById("table_spotlight").style.display = "none";
-							document.getElementById('page_controls').style.display = "none";
-		
-							document.getElementById("empty_watchlist_spotlight").style.display = "block";
-							document.getElementById("empty_watchlist_spotlight").innerHTML = "failed to fetch watchlist information, please refresh to try again.";
-						});
-					});
+					document.getElementById('change_month_row_head').style.display = "none";
+					document.getElementById('change_month_row_foot').style.display = "none";
 				}
-				else
+			
+				if(!localStorage.getItem(user + "-change_year"))
 				{
+					document.getElementById('change_year_row_head').style.display = "none";
+					document.getElementById('change_year_row_foot').style.display = "none";
+				}
+			
+				function clear_table()
+				{
+					var table = document.getElementById("watchlist_table");
+			
+					var no_rows = table.rows.length-2;
+					for(var i=0; i < no_rows; i++)
+						table.deleteRow(1);		
+				}
+			
+				function draw_table()
+				{
+					clear_table();
+					var table = document.getElementById("watchlist_table");
+					document.getElementById("page_input").value = page_no;
+			
+					if(no_pages == 1)
+						document.getElementById('page_controls').style.display = "none";
+			
 					document.getElementById('loading_gif').src = "";
 					document.getElementById('loading_gif').style.visibility = "hidden";
 					document.getElementById('loading_gif').style.display = "none";
-					document.getElementById('table_spotlight').style.display = "none";
-					document.getElementById('page_controls').style.display = "none";
-		
-					document.getElementById("empty_watchlist_spotlight").style.display = "block";
-					document.getElementById("empty_watchlist_spotlight").innerHTML = "Watchlist appears to be empty, you can watch and unwatch coins from their respective pages.";
-				}
-			}
-		
-			function refresh_table()
-			{
-				if(refresh_ms > 0)
-					sleep(refresh_ms).then(() => { 
-						fetch_table_coingecko(selected_watchlists);
-						refresh_table(); 
-					});
-			}
-		
-			function prev_page()
-			{
-				if(page_no > 1)
-				{
-					if(page_no == no_pages)
-						document.getElementById('next_page_link').style.visibility = "visible";
-		
-					page_no--;
-		
-					if(page_no == 1)
-						document.getElementById('prev_page_link').style.visibility = "hidden";
-		
-					fetch_table_coingecko(selected_watchlists);
-				}
-			}
-		
-			function next_page()
-			{
-				if(page_no < no_pages)
-				{
-					if(page_no == 1)
-						document.getElementById('prev_page_link').style.visibility = "visible";
-		
-					page_no++;
-		
-					if(page_no == no_pages)
-						document.getElementById('next_page_link').style.visibility = "hidden";
-		
-		
-					fetch_table_coingecko(selected_watchlists);
-				}
-			}
-		
-			function goto_page()
-			{
-				page_no = Math.min(no_pages, document.getElementById(document.activeElement.id).value);
-		
-				if(no_pages > 1)
-				{
-					if(page_no == 1)
-						document.getElementById('prev_page_link').style.visibility = "hidden";
-					else
-						document.getElementById('prev_page_link').style.visibility = "visible";
-					
-					if(page_no == no_pages)
-						document.getElementById('next_page_link').style.visibility = "hidden";
-					else
-						document.getElementById('next_page_link').style.visibility = "visible";
-				}
-		
-				fetch_table_coingecko(selected_watchlists);
-			}
-		
-			function keydown(e)
-			{
-				var code = e.keyCode;
-				
-				if(document.activeElement.tagName == "INPUT")
-				{
-					if(code == 13)
-						goto_page();	
-				}
-				else
-				{
-					switch (code) 
+					document.getElementById("watchlist_table").style.display = "inline";
+			
+					if(watchlist_data.length > 0)
 					{
-						
-						case 37: prev_page(); break; //Left key
-						case 39: next_page(); break; //Right key
-					}
-				}
-			}
-		
-			function show_watchlist_select()
-			{
-				document.getElementById('show_watchlist_select_link').style.display = "none";
-				document.getElementById('watchlist_select').style.display = "block";
-			}
-		
-			function hide_watchlist_select()
-			{
-				document.getElementById('show_watchlist_select_link').style.display = "block";
-				document.getElementById('watchlist_select').style.display = "none";
-			}
-		
-			function setup_watchlist_select()
-			{
-				var x = document.getElementById('watchlist_select');
-				for(var i=x.options.length-1; i>=0; i--)
-					x.remove(i);
-		
-				var watchlists = fetch_watchlists(user);
-				var watchlist_map = {};
-		
-				if(watchlists.length > 1)
-				{
-					if(localStorage.getItem(user + "-watchlist"))
-					{
-						selected_watchlists	= localStorage.getItem(user + "-watchlist").split(',');
-						for(var i=0; i<selected_watchlists.length; i++)
-							watchlist_map[selected_watchlists[i]] = true;
-					}
-					else
-						selected_watchlists = [watchlists[1]];
-		
-					for(var i=1; i<watchlists.length; i++)
-					{
-						var option = document.createElement("option");
-						option.text = watchlists[i];
-						if(watchlist_map[watchlists[i]] == true)
-							option.selected = true;
-						x.add(option);
-					}
-		
-					document.getElementById('watchlist_select').size = watchlists.length - 1;
-		
-					document.getElementById('selected_watchlists').innerHTML = selected_watchlists.join(' + ');
-				}
-				else
-				{
-					document.getElementById('watchlist_select').style.display = "none";
-					document.getElementById('table_spotlight').style.display = "none";
-					document.getElementById('page_controls').style.display = "none";
-					document.getElementById('no_watchlists_spotlight').style.display = "block";
-					document.getElementById('no_watchlists_spotlight').innerHTML = user + " does not have any watchlists";
-				}
-			}
-		
-			function watchlist_select_event()
-			{
-				selected_watchlists = Array.from(document.getElementById('watchlist_select').selectedOptions).map(({ value }) => value);
-				document.getElementById('selected_watchlists').innerHTML = selected_watchlists.join(' + ');
-		
-				document.getElementById('empty_watchlist_spotlight').style.display = "none";
-				document.getElementById('table_spotlight').style.display = "block";
-				document.getElementById('page_controls').style.display = "block";
-				localStorage.setItem(user + "-watchlist", selected_watchlists.join(','));
-				fetch_table_coingecko(selected_watchlists);
-			}
-		
-			document.getElementById('table_spotlight').style.width = (document.getElementById('loading_gif').offsetWidth + 400) + "px";
-			document.getElementById("table_div").scrollIntoView();
-		
-			setup_watchlist_select();
-			watchlist_select_event();
-			refresh_table();
-		
-					
-		</script>
-
-		<!-- Footer -->
-		<div class="footer wrapper">
-			<div class="inner" style="text-align:center">
-				<noselect>
-					<p>
-						<a href="search.html" title='search'><i class="fas fa-search fa-2x"></i></a> &nbsp;
-						<a href="coins.html" title='coins'><i class="fas fa-coins fa-2x"></i></a> &nbsp;
-						<a href="categories.html" title='categories'><i class="fas fa-cubes fa-2x"></i></a> &nbsp;
-						<a href="charts.html" title='charts'><i class="fas fa-chart-area fa-2x"></i></a> &nbsp;
-						<a href="news.html" title='news'><i class="fas fa-newspaper fa-2x"></i></a> &nbsp;
-						<a href="scams.html" title='scams'><i class="fas fa-bomb fa-2x"></i></a> &nbsp;
-						<a href="watchlist.html" title='watchlist'><i class="fas fa-binoculars fa-2x"></i></a> &nbsp;
-						<a href="wallet.html" title='wallet tracker'><i class="fas fa-wallet fa-2x"></i></a><br>
-						
-						<a href="https://t.me/dexata_army" title='telegram'><i class="icon brands fa-telegram-plane fa-2x"></i></a> &nbsp;
-						<a href="https://twitter.com/dexata_army" title='twitter'><i class="icon brands fa-twitter fa-2x"></i></a> &nbsp;
-						<a href="https://github.com/dexata-army" title='github'><i class="icon brands fa-github-alt fa-2x"></i></a> &nbsp;
-						<a href="config.html" title='config'><i class="fas fa-cogs fa-2x"></i></a> &nbsp;
-						<a href="manage_users.html" title='manage users'><i class="fas fa-user-cog fa-2x"></i></a> &nbsp;
-						<text id="login_footer_item" style="display: inline-block"><a href="login.html" title='login'><i class="fas fa-sign-in-alt fa-2x"></i></a></text>
-					</p>
-		
-					<p>
-						<input id="footer_search_box" placeholder="search">
-					</p>
-		
-					<p class="copyright">
-						&copy;<script>document.write(new Date().getFullYear())</script> Dexata
-					</p>
-				</noselect>
-			</div>
-		</div>
-		
-		<script>
-			window.addEventListener('keydown',this.keydown,false);
-		
-			function keydown(e)
-			{
-				var code = e.keyCode;
-				
-				if(document.activeElement.tagName == "INPUT")
-				{
-					if(code == 13)
-					{
-						if(document.activeElement.id == "footer_search_box" &&
-							document.getElementById('footer_search_box').value != "")
+						var coins_str = "";
+						var ids_str = "";
+			
+						for(var i=0; i<watchlist_data.length; i++)
 						{
-							window.location.href = "search.html?term=" + document.getElementById('footer_search_box').value;
+							if(i > 0)
+							{
+								coins_str += ",";
+								ids_str += ",";
+							}
+							coins_str += watchlist_data[i]['id'];
+							ids_str += watchlist_data[i]['symbol'];
+			
+							var row = table.insertRow(i+1);
+							row.insertCell(0).innerHTML = watchlist_data[i]['market_cap_rank'];
+							if(watchlist_data[i]['image'] != "")
+								row.insertCell(1).innerHTML = "<img style='min-width: 23px; max-height: 23px; vertical-align:middle' class='rounded' onerror='this.style.display=\"none\"' src='" + watchlist_data[i]['image'] + "'>";
+							row.insertCell(2).innerHTML = watchlist_data[i]['symbol'];
+							row.insertCell(3).innerHTML = "<a href='coin.html?id=" + watchlist_data[i]['id'] + "'>" + watchlist_data[i]['name'] + "</a>";
+			
+							if(watchlist_data[i]['current_price'] == 0)
+								row.insertCell(4).innerHTML = "-";
+							else if(watchlist_data[i]['current_price'] > 999)
+								row.insertCell(4).innerHTML = "$" + parseFloat(watchlist_data[i]['current_price']).toLocaleString('en');
+							else if(watchlist_data[i]['current_price'] < 0.001)
+								row.insertCell(4).innerHTML = "$" + parseFloat(watchlist_data[i]['current_price']).toExponential(3);
+							else
+								row.insertCell(4).innerHTML = "$" + watchlist_data[i]['current_price'].toFixed(5);
+			
+							if(localStorage.getItem(user + '-change_hour'))
+							{
+								if(watchlist_data[i]['price_change_percentage_1h_in_currency'] == null)
+									row.insertCell(5).innerHTML = "-";
+								else if(parseFloat(watchlist_data[i]['price_change_percentage_1h_in_currency']) < 0)
+									row.insertCell(5).innerHTML = "<red>" + parseFloat(watchlist_data[i]['price_change_percentage_1h_in_currency']).toLocaleString('en') + "%</red>";
+								else
+									row.insertCell(5).innerHTML = "<green>" + parseFloat(watchlist_data[i]['price_change_percentage_1h_in_currency']).toLocaleString('en') + "%</green>";
+							}
+							else
+								row.insertCell(5);
+			
+							if(localStorage.getItem(user + '-change_day'))
+							{
+								if(watchlist_data[i]['price_change_percentage_24h'] == null)
+									row.insertCell(6).innerHTML = "-";
+								else if(parseFloat(watchlist_data[i]['price_change_percentage_24h']) < 0)
+									row.insertCell(6).innerHTML = "<red>" + parseFloat(watchlist_data[i]['price_change_percentage_24h']).toLocaleString('en') + "%</red>";
+								else
+									row.insertCell(6).innerHTML = "<green>" + parseFloat(watchlist_data[i]['price_change_percentage_24h']).toLocaleString('en') + "%</green>";
+							}
+							else
+								row.insertCell(6);
+			
+							if(localStorage.getItem(user + '-change_week'))
+							{
+								if(watchlist_data[i]['price_change_percentage_7d_in_currency'] == null)
+									row.insertCell(7).innerHTML = "-";
+								else if(parseFloat(watchlist_data[i]['price_change_percentage_7d_in_currency']) < 0)
+									row.insertCell(7).innerHTML = "<red>" + parseFloat(watchlist_data[i]['price_change_percentage_7d_in_currency']).toLocaleString('en') + "%</red>";
+								else
+									row.insertCell(7).innerHTML = "<green>" + parseFloat(watchlist_data[i]['price_change_percentage_7d_in_currency']).toLocaleString('en') + "%</green>";
+							}
+							else
+								row.insertCell(7);
+			
+							if(localStorage.getItem(user + '-change_month'))
+							{
+								if(watchlist_data[i]['price_change_percentage_30d_in_currency'] == null)
+									row.insertCell(8).innerHTML = "-";
+								else if(parseFloat(watchlist_data[i]['price_change_percentage_30d_in_currency']) < 0)
+									row.insertCell(8).innerHTML = "<red>" + parseFloat(watchlist_data[i]['price_change_percentage_30d_in_currency']).toLocaleString('en') + "%</red>";
+								else
+									row.insertCell(8).innerHTML = "<green>" + parseFloat(watchlist_data[i]['price_change_percentage_30d_in_currency']).toLocaleString('en') + "%</green>";
+							}
+							else
+								row.insertCell(8);
+			
+							if(localStorage.getItem(user + '-change_year'))
+							{
+								if(watchlist_data[i]['price_change_percentage_1y_in_currency'] == null)
+									row.insertCell(9).innerHTML = "-";
+								else if(parseFloat(watchlist_data[i]['price_change_percentage_1y_in_currency']) < 0)
+									row.insertCell(9).innerHTML = "<red>" + parseFloat(watchlist_data[i]['price_change_percentage_1y_in_currency']).toLocaleString('en') + "%</red>";
+								else
+									row.insertCell(9).innerHTML = "<green>" + parseFloat(watchlist_data[i]['price_change_percentage_1y_in_currency']).toLocaleString('en') + "%</green>";
+							}
+							else
+								row.insertCell(9);
+			
+							if(watchlist_data[i]['market_cap'] > 0)
+								row.insertCell(10).innerHTML = "$" + parseFloat(watchlist_data[i]['market_cap']).toLocaleString('en') ;
+							else
+								row.insertCell(10).innerHTML = "-";
+			
+							if(watchlist_data[i]['total_volume'] > 0)
+								row.insertCell(11).innerHTML = "$" + watchlist_data[i]['total_volume'].toLocaleString('en') ;
+							else
+								row.insertCell(11).innerHTML = "-";
+			
+							if(!localStorage.getItem(user + '-change_year'))
+								row.deleteCell(9);
+							if(!localStorage.getItem(user + '-change_month'))
+								row.deleteCell(8);
+							if(!localStorage.getItem(user + '-change_week'))
+								row.deleteCell(7);
+							if(!localStorage.getItem(user + '-change_day'))
+								row.deleteCell(6);
+							if(!localStorage.getItem(user + '-change_hour'))
+								row.deleteCell(5);
+						}
+			
+						document.getElementById('table_spotlight').style.width = (document.getElementById('watchlist_table').offsetWidth + 70) + "px";
+			
+						document.getElementById('charts_link').href = "charts.html?width=250&height=350&range=" + chart_range + "&coins=" + coins_str;
+						document.getElementById('charts_link').style.display = "block";
+			
+						document.getElementById('newsfeed_div').innerHTML = 
+							'<iframe id="newsfeed_iframe" scrolling="no" width="100%" height="650px" allowtransparency="true" frameborder="0" src="https://cryptopanic.com/widgets/news/?bg_color=FFFFFF00&amp;currencies=' + ids_str + '&amp;font_family=mono&amp;font_size=13&amp;header_bg_color=FFFFFF00&amp;header_text_color=FFFFFF&amp;link_color=679267&amp;news_feed=recent&amp;posts_limit=10&amp;text_color=FFFFFF&amp;title=news"></iframe>';
+			
+						var body_width = document.body.clientWidth;
+						if(body_width < 530)
+							document.getElementById('newsfeed_iframe').style.height = "1000px";
+						else if(body_width < 700)
+							document.getElementById('newsfeed_iframe').style.height = "900px";
+						else if(body_width < 950)
+							document.getElementById('newsfeed_iframe').style.height = "800px";
+						else if(body_width < 1100)
+							document.getElementById('newsfeed_iframe').style.height = "700px";
+					}
+					else
+					{
+						document.getElementById('table_spotlight').style.display = "none";
+			
+						document.getElementById('page_controls').style.display = "none";
+						document.getElementById('empty_watchlist_spotlight').style.display = "block";
+						document.getElementById("empty_watchlist_div").innerHTML = "Watchlist appears to be empty, you can watch and unwatch coins from their respective pages.";
+					}
+				}
+			
+				function sort_data()
+				{
+					if(sort_attrib == "symbol" || sort_attrib == "name")
+					{
+						watchlist_data.sort(function(obj1, obj2) {
+							if(obj1[sort_attrib].toLowerCase() > obj2[sort_attrib].toLowerCase())
+								return sort_dir*1;
+							else if(obj1[sort_attrib] == obj2[sort_attrib])
+								return 0;
+							else return sort_dir*-1;
+						});
+					}
+					else
+					{
+						watchlist_data.sort(function(obj1, obj2) {
+							return sort_dir*(obj1[sort_attrib] - obj2[sort_attrib]);
+						});
+					}
+			
+					draw_table();
+				}
+			
+				function toggle_sort(attrib)
+				{
+					if(sort_attrib == attrib)
+						sort_dir *= -1;
+					else
+					{
+						sort_attrib = attrib;
+						sort_dir = -1;
+					}
+			
+					sort_data();
+				}
+			
+				function fetch_table_coingecko(names)
+				{
+					var watchlist_str;
+			
+					if(names.length > 1)
+						watchlist_str = fetch_combined_watchlists_str(user, names);
+					else
+						watchlist_str = fetch_watchlist_str(user, names[0]);
+			
+					no_pages = Math.ceil((watchlist_str.split(',').length-1)/50);
+			
+					if(watchlist_str != "")
+					{
+						$(document).ready(function(){
+							$.get(
+								'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=' + watchlist_str + '&order=market_cap_desc&per_page=50&page=' + page_no + '&sparkline=false&price_change_percentage=1h,24h,7d,30d,1y',             
+								function(data) {
+									watchlist_data = data;
+			
+									if(sort_attrib == "market_cap" && sort_dir == -1)
+										draw_table();
+									else
+										sort_data();
+							}).fail(function() {
+								clear_table();
+								document.getElementById('loading_gif').src = "";
+								document.getElementById('loading_gif').style.visibility = "hidden";
+								document.getElementById('loading_gif').style.display = "none";
+								document.getElementById("table_spotlight").style.display = "none";
+								document.getElementById('page_controls').style.display = "none";
+			
+								document.getElementById("empty_watchlist_spotlight").style.display = "block";
+								document.getElementById("empty_watchlist_div").innerHTML = "failed to fetch watchlist information, please refresh to try again.";
+							});
+						});
+					}
+					else
+					{
+						document.getElementById('loading_gif').src = "";
+						document.getElementById('loading_gif').style.visibility = "hidden";
+						document.getElementById('loading_gif').style.display = "none";
+						document.getElementById('table_spotlight').style.display = "none";
+						document.getElementById('page_controls').style.display = "none";
+			
+						document.getElementById("empty_watchlist_spotlight").style.display = "block";
+						document.getElementById("empty_watchlist_div").innerHTML = "Watchlist appears to be empty, you can watch and unwatch coins from their respective pages.";
+					}
+				}
+			
+				function refresh_table()
+				{
+					if(refresh_ms > 0)
+						sleep(refresh_ms).then(() => { 
+							fetch_table_coingecko(selected_watchlists);
+							refresh_table(); 
+						});
+				}
+			
+				function prev_page()
+				{
+					if(page_no > 1)
+					{
+						if(page_no == no_pages)
+							document.getElementById('next_page_link').style.visibility = "visible";
+			
+						page_no--;
+			
+						if(page_no == 1)
+							document.getElementById('prev_page_link').style.visibility = "hidden";
+			
+						fetch_table_coingecko(selected_watchlists);
+					}
+				}
+			
+				function next_page()
+				{
+					if(page_no < no_pages)
+					{
+						if(page_no == 1)
+							document.getElementById('prev_page_link').style.visibility = "visible";
+			
+						page_no++;
+			
+						if(page_no == no_pages)
+							document.getElementById('next_page_link').style.visibility = "hidden";
+			
+			
+						fetch_table_coingecko(selected_watchlists);
+					}
+				}
+			
+				function goto_page()
+				{
+					page_no = Math.min(no_pages, document.getElementById(document.activeElement.id).value);
+			
+					if(no_pages > 1)
+					{
+						if(page_no == 1)
+							document.getElementById('prev_page_link').style.visibility = "hidden";
+						else
+							document.getElementById('prev_page_link').style.visibility = "visible";
+						
+						if(page_no == no_pages)
+							document.getElementById('next_page_link').style.visibility = "hidden";
+						else
+							document.getElementById('next_page_link').style.visibility = "visible";
+					}
+			
+					fetch_table_coingecko(selected_watchlists);
+				}
+			
+				function keydown(e)
+				{
+					var code = e.keyCode;
+					
+					if(document.activeElement.tagName == "INPUT")
+					{
+						if(code == 13)
+							goto_page();	
+					}
+					else
+					{
+						switch (code) 
+						{
+							
+							case 37: prev_page(); break; //Left key
+							case 39: next_page(); break; //Right key
 						}
 					}
 				}
-			}
-		</script>
+			
+				function show_watchlist_select()
+				{
+					var options = document.getElementById("watchlist_select").options;
+			
+				    for(var i = 0; i < options.length; i++)
+				     	options[i].selected = false;
+			
+					document.getElementById('show_watchlist_select_link_spotlight').style.display = "none";
+					document.getElementById('watchlist_select').style.display = "block";
+				}
+			
+				function hide_watchlist_select()
+				{
+					document.getElementById('show_watchlist_select_link_spotlight').style.display = "block";
+					document.getElementById('watchlist_select').style.display = "none";
+				}
+			
+				function setup_watchlist_select()
+				{
+					var x = document.getElementById('watchlist_select');
+					for(var i=x.options.length-1; i>=0; i--)
+						x.remove(i);
+			
+					var watchlists = fetch_watchlists(user);
+					var watchlist_map = {};
+			
+					if(watchlists.length > 1)
+					{
+						if(localStorage.getItem(user + "-watchlist"))
+						{
+							selected_watchlists	= localStorage.getItem(user + "-watchlist").split(',');
+							for(var i=0; i<selected_watchlists.length; i++)
+								watchlist_map[selected_watchlists[i]] = true;
+						}
+						else
+							selected_watchlists = [watchlists[1]];
+			
+						for(var i=1; i<watchlists.length; i++)
+						{
+							var option = document.createElement("option");
+							option.text = watchlists[i];
+							if(watchlist_map[watchlists[i]] == true)
+								option.selected = true;
+							x.add(option);
+						}
+			
+						document.getElementById('watchlist_select').size = watchlists.length - 1;
+			
+						document.getElementById('selected_watchlists').innerHTML = selected_watchlists.join(' + ');
+					}
+					else
+					{
+						document.getElementById('watchlist_select').style.display = "none";
+						document.getElementById('table_spotlight').style.display = "none";
+						document.getElementById('page_controls').style.display = "none";
+						document.getElementById('no_watchlists_spotlight').style.display = "block";
+						document.getElementById('no_watchlists_spotlight').innerHTML = user + " does not have any watchlists";
+					}
+				}
+			
+				function watchlist_select_event()
+				{
+					selected_watchlists = Array.from(document.getElementById('watchlist_select').selectedOptions).map(({ value }) => value);
+					document.getElementById('selected_watchlists').innerHTML = selected_watchlists.join(' + ');
+			
+					document.getElementById('empty_watchlist_spotlight').style.display = "none";
+					document.getElementById('table_spotlight').style.display = "block";
+					document.getElementById('page_controls').style.display = "block";
+					localStorage.setItem(user + "-watchlist", selected_watchlists.join(','));
+					fetch_table_coingecko(selected_watchlists);
+				}
+			
+				document.getElementById('show_watchlist_select_link_spotlight').style.width = (document.getElementById('show_watchlist_select_link').offsetWidth + 50) + "px";
+				document.getElementById('table_spotlight').style.width = (document.getElementById('loading_gif').offsetWidth + 400) + "px";
+				document.getElementById("table_div").scrollIntoView();
+			
+				setup_watchlist_select();
+				watchlist_select_event();
+				refresh_table();	
+			</script>
+
+			<!-- BEGIN #footer -->
+			<div id="footer" class="app-content">
+				<div class="row">
+					<!-- footer -->
+					<noselect>
+						<center>
+							<div style="width: 300px; max-width: 100%">
+								<!-- BEGIN card -->
+								<div class="card mb-3">
+									<!-- BEGIN card-body -->
+									<div class="card-body copyright">
+										&copy;<script>document.write(new Date().getFullYear())</script> Dexata
+									</div>
+									<!-- END card-body -->
+									
+									<!-- BEGIN card-arrow -->
+									<div class="card-arrow">
+										<div class="card-arrow-top-left"></div>
+										<div class="card-arrow-top-right"></div>
+										<div class="card-arrow-bottom-left"></div>
+										<div class="card-arrow-bottom-right"></div>
+									</div>
+									<!-- END card-arrow -->
+								</div>
+								<!-- END card -->
+							</div>
+			
+							<p>
+								<input id="footer_search_box" placeholder="search">
+							</p></center>
+					</noselect>
+				</div>
+			</div>
+			
+			<script>
+				window.addEventListener('keydown',this.keydown,false);
+			
+				function keydown(e)
+				{
+					var code = e.keyCode;
+					
+					if(document.activeElement.tagName == "INPUT")
+					{
+						if(code == 13)
+						{
+							if(document.activeElement.id == "footer_search_box" &&
+								document.getElementById('footer_search_box').value != "")
+								window.location.href = "search.html?term=" + document.getElementById('footer_search_box').value;
+							else if(document.activeElement.id == "search_box" &&
+								document.getElementById('search_box').value != "")
+								window.location.href = "search.html?term=" + document.getElementById('search_box').value;
+						}
+					}
+				}
+			</script>
+			
+			<!-- BEGIN btn-scroll-top -->
+			<a href="#" data-toggle="scroll-to-top" class="btn-scroll-top fade"><i class="fa fa-arrow-up"></i></a>
+			<!-- END btn-scroll-top -->
+
+			<!-- BEGIN theme-panel -->
+			<div class="app-theme-panel">
+				<div class="app-theme-panel-container">
+					<div class="app-theme-panel-content">
+						<div class="small fw-bold text-white mb-1">Theme Color</div>
+						<div class="card mb-3">
+							<!-- BEGIN card-body -->
+							<div class="card-body p-2">
+								<!-- BEGIN theme-list -->
+								<div class="app-theme-list">
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-pink" data-theme-class="theme-pink" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Pink">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-red" data-theme-class="theme-red" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Red">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-warning" data-theme-class="theme-warning" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Orange">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-yellow" data-theme-class="theme-yellow" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Yellow">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-lime" data-theme-class="theme-lime" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Lime">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-green" data-theme-class="theme-green" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Green">&nbsp;</a></div>
+									<div class="app-theme-list-item active"><a href="javascript:;" class="app-theme-list-link bg-teal" data-theme-class="" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Default">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-info" data-theme-class="theme-info"  data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Cyan">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-primary" data-theme-class="theme-primary"  data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Blue">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-purple" data-theme-class="theme-purple" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Purple">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-indigo" data-theme-class="theme-indigo" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Indigo">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-gray-100" data-theme-class="theme-gray-200" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Gray">&nbsp;</a></div>
+								</div>
+								<!-- END theme-list -->
+							</div>
+							<!-- END card-body -->
+							
+							<!-- BEGIN card-arrow -->
+							<div class="card-arrow">
+								<div class="card-arrow-top-left"></div>
+								<div class="card-arrow-top-right"></div>
+								<div class="card-arrow-bottom-left"></div>
+								<div class="card-arrow-bottom-right"></div>
+							</div>
+							<!-- END card-arrow -->
+						</div>
+						
+						<div class="small fw-bold text-white mb-1">Theme Cover</div>
+						<div class="card">
+							<!-- BEGIN card-body -->
+							<div class="card-body p-2">
+								<!-- BEGIN theme-cover -->
+								<div class="app-theme-cover">
+									<div class="app-theme-cover-item active">
+										<a href="javascript:;" class="app-theme-cover-link" style="background-image: url(assets/img/cover/cover-thumb-1.jpg);" data-theme-cover-class="" data-toggle="theme-cover-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Default">&nbsp;</a>
+									</div>
+									<div class="app-theme-cover-item">
+										<a href="javascript:;" class="app-theme-cover-link" style="background-image: url(assets/img/cover/cover-thumb-2.jpg);" data-theme-cover-class="bg-cover-2" data-toggle="theme-cover-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Cover 2">&nbsp;</a>
+									</div>
+									<div class="app-theme-cover-item">
+										<a href="javascript:;" class="app-theme-cover-link" style="background-image: url(assets/img/cover/cover-thumb-3.jpg);" data-theme-cover-class="bg-cover-3" data-toggle="theme-cover-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Cover 3">&nbsp;</a>
+									</div>
+									<div class="app-theme-cover-item">
+										<a href="javascript:;" class="app-theme-cover-link" style="background-image: url(assets/img/cover/cover-thumb-4.jpg);" data-theme-cover-class="bg-cover-4" data-toggle="theme-cover-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Cover 4">&nbsp;</a>
+									</div>
+									<div class="app-theme-cover-item">
+										<a href="javascript:;" class="app-theme-cover-link" style="background-image: url(assets/img/cover/cover-thumb-5.jpg);" data-theme-cover-class="bg-cover-5" data-toggle="theme-cover-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Cover 5">&nbsp;</a>
+									</div>
+								</div>
+								<!-- END theme-cover -->
+							</div>
+							<!-- END card-body -->
+							
+							<!-- BEGIN card-arrow -->
+							<div class="card-arrow">
+								<div class="card-arrow-top-left"></div>
+								<div class="card-arrow-top-right"></div>
+								<div class="card-arrow-bottom-left"></div>
+								<div class="card-arrow-bottom-right"></div>
+							</div>
+							<!-- END card-arrow -->
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- END theme-panel -->
+		</div>
+		<!-- END #app -->
 
 		<script>
-			//changes login to logout on page if logged in
+			//sets up login/logout menu link
 			if(localStorage.getItem("username"))
 			{
-				//document.getElementById('login_menu_item').innerHTML = "<a onclick='logout()'>logout</a>";
-				//document.getElementById('login_footer_item').innerHTML = "<a onclick='logout()' title='logout'><i class='fas fa-sign-out-alt fa-2x'></i></a>";
-				document.getElementById('login_menu_item').innerHTML = "<a href='logout.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1) + "'>logout</a>"
-				document.getElementById('login_footer_item').innerHTML = "<a href='logout.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1) + "'><i class='fas fa-sign-out-alt fa-2x'></i></a>"
+				document.getElementById('login_menu_item').innerHTML = "<a href='logout.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1) + "' class='menu-link'><span class='menu-icon'><i class='fas fa-sign-out-alt fa-1x'></i></span><span class='menu-text'>logout</span></a>";
+				document.getElementById('login_header_item').innerHTML = "logout <i class='fas fa-sign-out-alt fa-1x ms-auto text-theme fs-16px my-n1'></i>";
+				document.getElementById('login_header_item').href = "logout.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
 			}
 			else
 			{
-				document.getElementById('login_menu_item').innerHTML = "<a href='login.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1) + "'>login</a>"
-				document.getElementById('login_footer_item').innerHTML = "<a href='login.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1) + "'><i class='fas fa-sign-in-alt fa-2x'></i></a>"
+				document.getElementById('login_menu_item').innerHTML = "<a href='login.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1) + "' class='menu-link'><span class='menu-icon'><i class='fas fa-sign-in-alt fa-1x'></i></span><span class='menu-text'>login</span></a>";
+				document.getElementById('login_header_item').innerHTML = "login <i class='fas fa-sign-in-alt fa-1x ms-auto text-theme fs-16px my-n1'></i>";
+				document.getElementById('login_header_item').href = "login.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
 			}
 		
 			//prevent autocomplete
@@ -825,10 +1207,8 @@
 				$(this).attr('autocomplete', 'off')
 			});
 		</script>
-
-		<script src="assets/js/browser.min.js"></script>
-		<script src="assets/js/breakpoints.min.js"></script>
-		<script src="assets/js/util.js"></script>
-		<script src="assets/js/main.js"></script>
+		
+		<script src="assets/js/vendor.min.js"></script>
+		<script src="assets/js/app.min.js"></script>
 	</body>
 </html>

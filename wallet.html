@@ -1,17 +1,16 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 	<head>
-		<title>Dexata - wallet</title>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<title>Dexata - wallet</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="description" content="" />
-		<meta name="keywords" content="" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<link rel="stylesheet" href="assets/css/pagestyle.css" />
-		<link rel="stylesheet" href="assets/css/print.css" />
 		<link rel="icon" type="image/svg" href="images/logo.png">
 		
-		<!-- Scripts -->
+		<link href="assets/css/vendor.min.css" rel="stylesheet" />
+		<link href="assets/css/app.min.css" rel="stylesheet" />
+		<link href="assets/css/pagestyle.css" rel="stylesheet" />
+		
 		<script src="assets/js/params.js"></script>
 		<script src="assets/js/sleep.js"></script>
 		<script src="assets/js/wallet.js"></script>
@@ -20,22 +19,8 @@
 		<script src="assets/js/crypto-js/crypto-js.js"></script>
 		
 		<script src="assets/js/jquery.min.js"></script>
-		<script src="assets/js/jquery.dropotron.min.js"></script>
-		<script src="assets/js/jquery.scrollex.min.js"></script>
-		<script src="assets/js/jquery.scrolly.min.js"></script>
 		
-		<!-- https://printjs.crabbly.com/ -->
-		<script src="assets/js/print.js"></script>
-		
-		<!-- Global site tag (gtag.js) - Google Analytics -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-D70JLR4EJM"></script>
-		<script>
-		  window.dataLayer = window.dataLayer || [];
-		  function gtag(){dataLayer.push(arguments);}
-		  gtag('js', new Date());
-		
-		  gtag('config', 'G-D70JLR4EJM');
-		</script>
+		<script src="https://kit.fontawesome.com/b51e6952ec.js"></script>
 
 		<script>
 			var user = "guest";
@@ -171,401 +156,764 @@
 			};
 		</script>
 	</head>
-	<body class="is-preload">
-		<!-- Header -->
-		<header id="header" class="alt">
-			<div class="logo" style="margin-top: -25px">
-				<noselect>
-					<a href="index.html"><img src="images/logo.png" height="45px" style="vertical-align: middle"> Dexata</a> &nbsp; 
-					<a href="search.html" title='search'><i class="fas fa-search fa-1x" style="vertical-align:middle"></i></a> 
-					<a href="config.html" title='config'><i class="fas fa-cogs fa-1x" style="vertical-align:middle"></i></a> 
-					<a href="manage_users.html" title='manage users'><i class="fas fa-user-cog fa-1x" style="vertical-align:middle"></i></a> 
-				</noselect>
-			</div>
-		
-			<nav id="nav">
-				<ul>
-					<li><a href="index.html">home</a></li>
-					<li><a href="coins.html">coins</a></li>
-					<li><a href="categories.html">categories</a></li>
-					<li><a href="charts.html">charts</a></li>
-					<li><a href="news.html">news</a></li>
-					<li><a href="scams.html">scams</a></li>
-					<li><a href="watchlist.html">watchlist</a></li>
-					<li><a href="wallet.html">wallet</a></li>
-					<li id="login_menu_item"></li>
-				</ul>
-			</nav>
-		</header>
-
-		<!-- Wrapper -->
-		<div id="wrapper">	
-			<!-- One -->
-			<section id="one" class="wrapper style1">
-				<div class="inner">
-					<div class="spotlights">
-						<center>
-							<div class="spotlight" style="max-width:500px; margin-bottom: 50px">
-								<div class="content">
-									<h1><i class="fas fa-wallet fa-4x" style="vertical-align:middle"></i><br><noselect>Wallet</noselect></h1>
+	<body class="theme-green">
+		<!-- BEGIN #app -->
+		<div id="app" class="app app-sidebar-collapsed">
+			<!-- BEGIN #header -->
+			<div id="header" class="app-header">
+				<!-- BEGIN desktop-toggler -->
+				<div class="desktop-toggler">
+					<button type="button" class="menu-toggler" data-toggle-class="app-sidebar-collapsed" data-dismiss-class="app-sidebar-toggled" data-toggle-target=".app">
+						<span class="bar"></span>
+						<span class="bar"></span>
+						<span class="bar"></span>
+					</button>
+				</div>
+				<!-- BEGIN desktop-toggler -->
+				
+				<!-- BEGIN mobile-toggler -->
+				<div class="mobile-toggler">
+					<button type="button" class="menu-toggler" data-toggle-class="app-sidebar-mobile-toggled" data-toggle-target=".app">
+						<span class="bar"></span>
+						<span class="bar"></span>
+						<span class="bar"></span>
+					</button>
+				</div>
+				<!-- END mobile-toggler -->
+				
+				<!-- BEGIN brand -->
+				<div class="brand">
+					<a href="index.html" class="brand-logo">
+						<img src="images/logo.png" style="max-height: 2rem"> Dexata
+					</a>
+				</div>
+				<!-- END brand -->
+				
+				<!-- BEGIN menu -->
+				<div class="menu">
+					<div class="menu-item dropdown">
+						<a href="#" data-toggle-class="app-header-menu-search-toggled" data-toggle-target=".app" class="menu-link">
+							<div class="menu-icon"><i class="bi bi-search nav-icon"></i></div>
+						</a>
+					</div>
+					<div class="menu-item dropdown dropdown-mobile-full">
+						<a href="javascript:;" data-toggle="theme-panel-expand" class="app-theme-toggle-btn"><i class="bi bi-sliders nav-icon"></i></a>
+						<a href="#" data-bs-toggle="dropdown" data-bs-display="static" class="menu-link">
+							<div class="menu-icon"><i class="bi bi-grid-3x3-gap nav-icon"></i></div>
+						</a>
+						<div class="dropdown-menu fade dropdown-menu-end w-300px text-center p-0 mt-1">
+							<div class="row row-grid gx-0">
+								<div class="col-4">
+									<a href="coins.html" class="dropdown-item text-decoration-none p-3 bg-none">
+										<div style="margin-top: 5px; margin-bottom: 5px"><i class="fas fa-coins fa-2x"></i></div>
+										<div class="fw-500 fs-10px text-white">coins</div>
+									</a>
+								</div>
+								<div class="col-4">
+									<a href="categories.html" class="dropdown-item text-decoration-none p-3 bg-none">
+										<div style="margin-top: 5px; margin-bottom: 5px"><i class="fas fa-cubes fa-2x"></i></div>
+										<div class="fw-500 fs-10px text-white">categories</div>
+									</a>
+								</div>
+								<div class="col-4">
+									<a href="charts.html" class="dropdown-item text-decoration-none p-3 bg-none">
+										<div style="margin-top: 5px; margin-bottom: 5px"><i class="fas fa-chart-area fa-2x"></i></div>
+										<div class="fw-500 fs-10px text-white">charts</div>
+									</a>
 								</div>
 							</div>
-		
-							<div id="show_wallet_select_link" class="spotlight" style="width: 300px; cursor: pointer" onclick="show_wallet_select()">
-								<noselect style="margin: 0 auto"><div id="selected_wallets" class="xscroll" style="margin-top:10px"></div></noselect>
-							</div>
-							<select id="wallet_select" onchange="wallet_select_event()" onfocusout="hide_wallet_select()" style="max-width: 100%; width: 300px; margin-bottom: 20px; display: none" multiple></select>
-		
-							<div id="no_wallets_spotlight" class="spotlight" style="max-width: 100%; width: 400px; display: none; padding-top: 20px; padding-bottom: 20px">
-							</div>
-		
-							<div style="margin-bottom: 13px; margin-top: 10px; max-width: 40px">
-								<a id="charts_link" style="display: none" title="charts"><i class="fas fa-chart-area fa-2x" style="vertical-align: middle"></i></a>
-							</div>
-		
-							<div id="balance_spotlight" class="spotlight" style="min-width: 300px; width: 300px; margin-bottom: 20px">
-								<div id="balance_div" class="xscroll" style="margin-top:10px">
-									<b>balance: </b>
+							<div class="row row-grid gx-0">
+								<div class="col-4">
+									<a href="news.html" class="dropdown-item text-decoration-none p-3 bg-none">
+										<div style="margin-top: 5px; margin-bottom: 5px"><i class="fas fa-newspaper fa-2x"></i></div>
+										<div class="fw-500 fs-10px text-white">news</div>
+									</a>
+								</div>
+								<div class="col-4">
+									<a href="search.html" class="dropdown-item text-decoration-none p-3 bg-none">
+										<div style="margin-top: 5px; margin-bottom: 5px"><i class="fas fa-search fa-2x"></i></div>
+										<div class="fw-500 fs-10px text-white">search</div>
+									</a>
+								</div>
+								<div class="col-4">
+									<a href="manage_users.html" class="dropdown-item text-decoration-none p-3 bg-none">
+										<div style="margin-top: 5px; margin-bottom: 5px"><i class="fas fa-user-cog fa-2x"></i></div>
+										<div class="fw-500 fs-10px text-white">users</div>
+									</a>
 								</div>
 							</div>
-		
-							<div class="spotlight" id="table_spotlight" style="max-width: 100%">
-								<div id="table_div" class="xscroll">
-									<img id="loading_gif" src="images/loading.gif" style="margin-top: 20px; max-width: 150px">
-									<table id="wallet_table" style="display: none;">
-										<thead>
-											<tr>
-												<th><noselect>&emsp;&emsp;</noselect></th>
-												<th><a onclick="toggle_sort('contract_ticker_symbol')">symbol</a></th>
-												<th><a onclick="toggle_sort('contract_name')">name</a></th>
-												<th id="wallet_row_head"><a onclick="toggle_sort('wallet')">wallet</a></th>
-												<th><a onclick="toggle_sort('quote_rate')">price</a></th>
-												<th><a onclick="toggle_sort('balance')">quantity</a></th>
-												<th><a onclick="toggle_sort('quote')">value</a></th>
-												<th><a onclick="toggle_hide_coins()"><i class='fas fa-minus-circle fa-1x' style='vertical-align:middle'></i></a></th>
-											</tr>
-										</thead>
-										<tfoot>
-											<tr>
-												<th></th>
-												<th><a onclick="toggle_sort('contract_ticker_symbol')">symbol</a></th>
-												<th><a onclick="toggle_sort('contract_name')">name</a></th>
-												<th id="wallet_row_foot"><a onclick="toggle_sort('wallet')">wallet</a></th>
-												<th><a onclick="toggle_sort('quote_rate')">price</a></th>
-												<th><a onclick="toggle_sort('balance')">quantity</a></th>
-												<th><a onclick="toggle_sort('quote')">value</a></th>
-												<th><a onclick="toggle_hide_coins()"><i class='fas fa-minus-circle fa-1x' style='vertical-align:middle'></i></a></th>
-											</tr>
-										</tfoot>
-									</table>
-								</div>
-							</div>
-							<a id="show_ignored_coins_button" onclick="toggle_show_ignored_coins()">show ignored coins</a><br>
-		
-							<div id="balance_chart_div" style="margin-bottom: 30px; display: none">
-								<h3>Balance Chart</h3>
-								<select id="chart_select" placeholder="" onchange="fetch_chart()" style="max-width: 100%; width: 300px; margin-bottom: 20px;">
-									<option value="coin" disabled selected hidden>coin</option>
-								</select>
-								<div id="balance_chart_spotlight" class="spotlight" style="width: 100%; display: none; overflow: hidden">
-									<div id="balance_chart" style="width: 100%; height: 100%; padding-left: 10px; padding-right: 10px;padding-top: 10px; padding-bottom: 10px; margin: 0 auto">
-									</div><br>
-								</div>
-							</div>
-		
-							<div id="newsfeed_div" style="max-height: 350px; margin-top: 20px;overflow-y: scroll; background-color: #2E2E35; border-radius: 5px; scrollbar-color: grey #2e2e35;">
-							</div>
-						</center>
+						</div>
+					</div>
+					<div class="menu-item dropdown dropdown-mobile-full">
+						<a href="#" data-bs-toggle="dropdown" data-bs-display="static" class="menu-link">
+							<div id="header_username" class="menu-text d-sm-block">guest</div>
+						</a>
+						<div class="dropdown-menu dropdown-menu-end me-lg-3 fs-11px mt-1">
+							<a class="dropdown-item d-flex align-items-center" href="watchlist.html">watchlist <i class="fas fa-binoculars fa-1x ms-auto text-theme fs-16px my-n1"></i></a>
+							<a class="dropdown-item d-flex align-items-center" href="wallet.html">wallet <i class="fas fa-wallet fa-1x ms-auto text-theme fs-16px my-n1"></i></a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item d-flex align-items-center" href="config.html">config <i class="fas fa-cogs fa-1x ms-auto text-theme fs-16px my-n1"></i></a>
+							<a id="login_header_item" class="dropdown-item d-flex align-items-center" href="login.html">login <i class="fas fa-sign-in-alt fa-1x ms-auto text-theme fs-16px my-n1"></i></a>
+						</div>
 					</div>
 				</div>
-			</section>
-		</div>
-		
-		<script>
-			var refresh_ms = 60000;
-			var chart_range = "week";
-		
-			var wallet_network;
-			var wallet_name;
-			var wallet_address;
-			var covalenthq_api_key;
-		
-			var cg_coins_data;
-			var id_map = {};
-		
-			var sort_attrib = 'quote';
-			var sort_dir = -1;
-			var coins_data;
-		
-			var ignorelist_name;
-			var ignorelist;
-			var ignore_map;
-			var add_hide_buttons = false;
-			var show_ignored_coins = false;
-		
-			var balance_data;
-			var balance_chart;
-			var chart_select_value;
-			var display_balance_div = false;
-		
-			var selected_wallets;
-			var wallet_info = {};
-		
-		
-			if(localStorage.getItem(user + '-refresh_sec'))
-				refresh_ms = 1000*localStorage.getItem(user + '-refresh_sec');
-			else
-				localStorage.setItem(user + '-refresh_sec', 60);
-		
-			if(localStorage.getItem(user + '-chart_range'))
-				chart_range = localStorage.getItem(user + '-chart_range');
-		
-			if(localStorage.getItem(user + '-covalenthq_api_key'))
-				covalenthq_api_key = CryptoJS.AES.decrypt(localStorage.getItem(user + '-covalenthq_api_key'), CryptoJS.AES.decrypt(localStorage.getItem('password'), "Go hang a salami, I’m a lasagna hog.").toString(CryptoJS.enc.Utf8)).toString(CryptoJS.enc.Utf8);
-		
-			function clear_chart_select()
-			{
-				var x = document.getElementById('chart_select');
-				for(var i=x.options.length-1; i>0; i--)
-					x.remove(i);
-			}
-		
-			function clear_table()
-			{
-				var table = document.getElementById("wallet_table");
-		
-				var no_rows = table.rows.length-2;
-				for(var i=0; i < no_rows; i++)
-					table.deleteRow(1);	
-		
-				clear_chart_select();
-			}
-		
-			function draw_table()
-			{
-				clear_table();
-				var table = document.getElementById("wallet_table");
-				var wallet_balance = 0.0;
-		
-				ignore_map = fetch_combined_ignorelist_map(user, selected_wallets);
-		
-				document.getElementById('loading_gif').src = "";
-				document.getElementById('loading_gif').style.visibility = "hidden";
-				document.getElementById('loading_gif').style.display = "none";
-				document.getElementById("wallet_table").style.display = "inline";
-		
-				if(selected_wallets.length == 1)
-				{
-					document.getElementById('wallet_row_head').style.display = "none";
-					document.getElementById('wallet_row_foot').style.display = "none";
-				}
+				<!-- END menu -->
+				
+				<!-- BEGIN menu-search -->
+				<div class="menu-search" name="header_search_form">
+					<div class="menu-search-container">
+						<div class="menu-search-icon"><i class="bi bi-search"></i></div>
+						<div class="menu-search-input">
+							<input id="search_box" type="text" class="form-control form-control-lg" placeholder="search" />
+						</div>
+						<div class="menu-search-icon">
+							<a href="#" data-toggle-class="app-header-menu-search-toggled" data-toggle-target=".app"><i class="bi bi-x-lg"></i></a>
+						</div>
+					</div>
+				</div>
+				<!-- END menu-search -->
+			</div>
+			<!-- END #header -->
+			
+			<script>
+				document.getElementById('header_username').innerHTML = user;
+			</script>
+			
+			<!-- BEGIN #sidebar -->
+			<div id="sidebar" class="app-sidebar">
+				<!-- BEGIN scrollbar -->
+				<div class="app-sidebar-content" data-scrollbar="true" data-height="100%">
+					<!-- BEGIN menu -->
+					<div class="menu">
+						<div class="menu-header">Navigation</div>
+						<div class="menu-item">
+							<a href="index.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-home fa-1x"></i></span>
+								<span class="menu-text">home</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="coins.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-coins fa-1x"></i></span>
+								<span class="menu-text">coins</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="categories.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-cubes fa-1x"></i></span>
+								<span class="menu-text">categories</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="charts.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-chart-area fa-1x"></i></span>
+								<span class="menu-text">charts</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="news.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-newspaper fa-1x"></i></span>
+								<span class="menu-text">news</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="scams.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-bomb fa-1x"></i></span>
+								<span class="menu-text">scams</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="search.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-search fa-1x"></i></span>
+								<span class="menu-text">search</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="watchlist.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-binoculars fa-1x"></i></span>
+								<span class="menu-text">watchlist</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="wallet.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-wallet fa-1x"></i></span>
+								<span class="menu-text">wallet</span>
+							</a>
+						</div>
+			
+						<div class="menu-header">Manage</div>
+						<div class="menu-item">
+							<a href="config.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-cogs fa-1x"></i></span>
+								<span class="menu-text">config</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="manage_users.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-user-cog fa-1x"></i></span>
+								<span class="menu-text">users</span>
+							</a>
+						</div>
+						<div id="login_menu_item" class="menu-item">
+							<a href="login.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-sign-in-alt fa-1x"></i></span>
+								<span class="menu-text">login</span>
+							</a>
+						</div>
+					</div>
+					<!-- END menu -->
+				</div>
+				<!-- END scrollbar -->
+			</div>
+			<!-- END #sidebar -->
+				
+			<!-- BEGIN mobile-sidebar-backdrop -->
+			<button class="app-sidebar-mobile-backdrop" data-toggle-target=".app" data-toggle-class="app-sidebar-mobile-toggled"></button>
+			<!-- END mobile-sidebar-backdrop -->
+			
+			<!-- BEGIN #content -->
+			<div id="content" class="app-content">
+				<div class="row">
+					<!-- title spotlight -->
+					<center>
+						<div id="title_spotlight" style="max-width: 100%; width: 400px">
+							<!-- BEGIN card -->
+							<div class="card mb-3">
+								<!-- BEGIN card-body -->
+								<div class="card-body">
+									<h1><i class="fas fa-wallet fa-4x" style="vertical-align:middle"></i><br><noselect>wallet</noselect></h1>
+								</div>
+								<!-- END card-body -->
+								
+								<!-- BEGIN card-arrow -->
+								<div class="card-arrow">
+									<div class="card-arrow-top-left"></div>
+									<div class="card-arrow-top-right"></div>
+									<div class="card-arrow-bottom-left"></div>
+									<div class="card-arrow-bottom-right"></div>
+								</div>
+								<!-- END card-arrow -->
+							</div>
+							<!-- END card -->
+						</div>
+					</center>
+				</div>
+			
+				<div class="row">
+					<center>
+						<!-- wallet select -->
+						<div id="show_wallet_select_link_spotlight" style="width: 300px; max-width: 100%; cursor: pointer" onclick="show_wallet_select()">
+							<!-- BEGIN card -->
+							<div class="card mb-3">
+								<!-- BEGIN card-body -->
+								<div class="card-body">
+									<div id="show_wallet_select_link" style="max-width: 300px">
+										<noselect style="margin: 0 auto"><div id="selected_wallets"></div></noselect>
+									</div>
+								</div>
+								<!-- END card-body -->
+								
+								<!-- BEGIN card-arrow -->
+								<div class="card-arrow">
+									<div class="card-arrow-top-left"></div>
+									<div class="card-arrow-top-right"></div>
+									<div class="card-arrow-bottom-left"></div>
+									<div class="card-arrow-bottom-right"></div>
+								</div>
+								<!-- END card-arrow -->
+							</div>
+							<!-- END card -->
+						</div>
+						<select id="wallet_select" onchange="wallet_select_event()" onfocusout="hide_wallet_select()" style="max-width: 100%; width: 300px; margin-bottom: 20px; display: none" multiple></select>
+			
+						<!-- no wallets spotlight -->
+						<div id="no_wallets_spotlight" style="width: auto; max-width: 100%; display: none">
+							<!-- BEGIN card -->
+							<div class="card mb-3">
+								<!-- BEGIN card-body -->
+								<div class="card-body">
+									<div id="no_wallets_div" class="spotlight" style="max-width: 100%; width: 400px; padding-top: 20px; padding-bottom: 20px">
+									</div>
+								</div>
+								<!-- END card-body -->
+								
+								<!-- BEGIN card-arrow -->
+								<div class="card-arrow">
+									<div class="card-arrow-top-left"></div>
+									<div class="card-arrow-top-right"></div>
+									<div class="card-arrow-bottom-left"></div>
+									<div class="card-arrow-bottom-right"></div>
+								</div>
+								<!-- END card-arrow -->
+							</div>
+							<!-- END card -->
+						</div>
+			
+						<!-- charts link -->
+						<div style="margin-bottom: 13px; margin-top: 10px; max-width: 40px">
+							<a id="charts_link" style="display: none" title="charts"><i class="fas fa-chart-area fa-2x" style="vertical-align: middle"></i></a>
+						</div>
+			
+						<!-- balance spotlight -->
+						<div id="balance_spotlight" style="width: 300px; max-width: 100%">
+							<!-- BEGIN card -->
+							<div class="card mb-3">
+								<!-- BEGIN card-body -->
+								<div class="card-body">
+									<div id="balance_div" class="xscroll">
+										<b>balance: </b>
+									</div>
+								</div>
+								<!-- END card-body -->
+								
+								<!-- BEGIN card-arrow -->
+								<div class="card-arrow">
+									<div class="card-arrow-top-left"></div>
+									<div class="card-arrow-top-right"></div>
+									<div class="card-arrow-bottom-left"></div>
+									<div class="card-arrow-bottom-right"></div>
+								</div>
+								<!-- END card-arrow -->
+							</div>
+							<!-- END card -->
+						</div>
+			
+						<!-- wallet spotlight -->
+						<div id="table_spotlight" style="width: auto; max-width: 100%">
+							<!-- BEGIN card -->
+							<div class="card mb-3">
+								<!-- BEGIN card-body -->
+								<div class="card-body">
+									<div id="table_div" class="xscroll">
+										<img id="loading_gif" src="images/loading.gif" style="max-width: 150px">
+										<table id="wallet_table" style="display: none;">
+											<thead>
+												<tr>
+													<th><noselect>&emsp;&emsp;</noselect></th>
+													<th><a onclick="toggle_sort('contract_ticker_symbol')">symbol</a></th>
+													<th><a onclick="toggle_sort('contract_name')">name</a></th>
+													<th id="wallet_row_head"><a onclick="toggle_sort('wallet')">wallet</a></th>
+													<th><a onclick="toggle_sort('quote_rate')">price</a></th>
+													<th><a onclick="toggle_sort('balance')">quantity</a></th>
+													<th><a onclick="toggle_sort('quote')">value</a></th>
+													<th><a onclick="toggle_hide_coins()"><i class='fas fa-minus-circle fa-1x' style='vertical-align:middle'></i></a></th>
+												</tr>
+											</thead>
+											<tfoot>
+												<tr>
+													<th></th>
+													<th><a onclick="toggle_sort('contract_ticker_symbol')">symbol</a></th>
+													<th><a onclick="toggle_sort('contract_name')">name</a></th>
+													<th id="wallet_row_foot"><a onclick="toggle_sort('wallet')">wallet</a></th>
+													<th><a onclick="toggle_sort('quote_rate')">price</a></th>
+													<th><a onclick="toggle_sort('balance')">quantity</a></th>
+													<th><a onclick="toggle_sort('quote')">value</a></th>
+													<th><a onclick="toggle_hide_coins()"><i class='fas fa-minus-circle fa-1x' style='vertical-align:middle'></i></a></th>
+												</tr>
+											</tfoot>
+										</table>
+									</div>
+								</div>
+								<!-- END card-body -->
+								
+								<!-- BEGIN card-arrow -->
+								<div class="card-arrow">
+									<div class="card-arrow-top-left"></div>
+									<div class="card-arrow-top-right"></div>
+									<div class="card-arrow-bottom-left"></div>
+									<div class="card-arrow-bottom-right"></div>
+								</div>
+								<!-- END card-arrow -->
+							</div>
+							<!-- END card -->
+						</div>
+						<div style="margin-top:-10px; margin-bottom: 30px">
+							<a id="show_ignored_coins_button" onclick="toggle_show_ignored_coins()">show ignored coins</a>
+						</div>
+			
+						<!-- balance chart spotlight -->
+						<div id="balance_chart_spotlight" style="width: auto; max-width: 100%; margin-bottom: 30px; display: none">
+							<h3>Balance Chart</h3>
+							<select id="chart_select" placeholder="" onchange="fetch_chart()" style="max-width: 100%; width: 300px; margin-bottom: 20px;">
+								<option value="coin" disabled selected="selected" hidden>coin</option>
+							</select>
+						
+							<!-- BEGIN card -->
+							<div id="balance_chart_card" class="card mb-3" style="display: none">
+								<!-- BEGIN card-body -->
+								<div class="card-body">
+									<div id="balance_chart" style="width: 100%; height: 100%; margin: 0 auto">
+									</div>
+								</div>
+								<!-- END card-body -->
+								
+								<!-- BEGIN card-arrow -->
+								<div class="card-arrow">
+									<div class="card-arrow-top-left"></div>
+									<div class="card-arrow-top-right"></div>
+									<div class="card-arrow-bottom-left"></div>
+									<div class="card-arrow-bottom-right"></div>
+								</div>
+								<!-- END card-arrow -->
+							</div>
+							<!-- END card -->
+						</div>
+			
+						<!-- news div -->
+						<div id="newsfeed_spotlight" style="width: 600px; max-width: 100%; display: none">
+							<!-- BEGIN card -->
+							<div class="card mb-3">
+								<!-- BEGIN card-body -->
+								<div class="card-body">
+									<div id="newsfeed_div" style="max-height: 60vh; overflow-y: scroll; scrollbar-color: grey #2e2e35;">
+									</div>
+								</div>
+								<!-- END card-body -->
+								
+								<!-- BEGIN card-arrow -->
+								<div class="card-arrow">
+									<div class="card-arrow-top-left"></div>
+									<div class="card-arrow-top-right"></div>
+									<div class="card-arrow-bottom-left"></div>
+									<div class="card-arrow-bottom-right"></div>
+								</div>
+								<!-- END card-arrow -->
+							</div>
+							<!-- END card -->
+						</div>
+					</center>
+				</div>
+			</div>
+			
+			<script>
+				var refresh_ms = 60000;
+				var chart_range = "week";
+			
+				var wallet_network;
+				var wallet_name;
+				var wallet_address;
+				var covalenthq_api_key;
+			
+				var cg_coins_data;
+				var id_map = {};
+			
+				var sort_attrib = 'quote';
+				var sort_dir = -1;
+				var coins_data;
+			
+				var ignorelist_name;
+				var ignorelist;
+				var ignore_map;
+				var add_hide_buttons = false;
+				var show_ignored_coins = false;
+			
+				var balance_data;
+				var balance_chart;
+				var chart_select_value;
+				var display_balance_div = false;
+			
+				var selected_wallets;
+				var wallet_info = {};
+			
+			
+				if(localStorage.getItem(user + '-refresh_sec'))
+					refresh_ms = 1000*localStorage.getItem(user + '-refresh_sec');
 				else
+					localStorage.setItem(user + '-refresh_sec', 60);
+			
+				if(localStorage.getItem(user + '-chart_range'))
+					chart_range = localStorage.getItem(user + '-chart_range');
+			
+				if(localStorage.getItem(user + '-covalenthq_api_key'))
+					covalenthq_api_key = CryptoJS.AES.decrypt(localStorage.getItem(user + '-covalenthq_api_key'), CryptoJS.AES.decrypt(localStorage.getItem('password'), "Go hang a salami, I’m a lasagna hog.").toString(CryptoJS.enc.Utf8)).toString(CryptoJS.enc.Utf8);
+			
+				function clear_chart_select()
 				{
-					document.getElementById('wallet_row_head').style.display = "inline";
-					document.getElementById('wallet_row_foot').style.display = "inline";
+					var x = document.getElementById('chart_select');
+					for(var i=x.options.length-1; i>0; i--)
+						x.remove(i);
 				}
-		
-				if(coins_data.length > 0)
+			
+				function clear_table()
 				{
-					var coins_str = "";
-					var ids_str = "";
-		
-					for(var i=0, r=0; i<coins_data.length; i++)
-					{
-						if(coins_data[i]['contract_ticker_symbol'] != undefined &&
-							coins_data[i]['contract_name'] != undefined &&
-							(show_ignored_coins ||
-								(coins_data[i]['quote'] > 0 &&
-								ignore_map[coins_data[i]['contract_ticker_symbol'].toLowerCase().replace(/ /g, "").replace(/-/g, "")] != true &&
-							    ignore_map[coins_data[i]['contract_name'].toLowerCase().replace(/ /g, "").replace(/-/g, "")] != true &&
-							    ignore_map[id_map[coins_data[i]['contract_name'].replace(/ /g, "").replace(/-/g, "").toLowerCase()]] != true)))
-						{
-							coins_data[i]['contract_ticker_symbol'] = coins_data[i]['contract_ticker_symbol'].toLowerCase();
-		
-							var row = table.insertRow(r+1);
-							r++;
-							if(coins_data[i]['logo_url'] != "")
-								row.insertCell(0).innerHTML = "<img style='min-width; 23px; max-height: 23px; vertical-align:middle' class='rounded' onerror='this.style.display=\"none\"' src='" + coins_data[i]['logo_url'] + "'>";
-		
-							row.insertCell(1).innerHTML = coins_data[i]['contract_ticker_symbol'];
-		
-							if(id_map[coins_data[i]['contract_name'].replace(/ /g, "").replace(/-/g, "").toLowerCase()] != undefined)
-							{
-								row.insertCell(2).innerHTML = "<a href='coin.html?id=" + id_map[coins_data[i]['contract_name'].replace(/ /g, "").replace(/-/g, "").toLowerCase()] + "'>" + coins_data[i]['contract_name'] + "</a>";
-								if(coins_str.length > 0)
-								{
-									coins_str += ",";
-									ids_str += ",";
-								}
-								coins_str += id_map[coins_data[i]['contract_name'].replace(/ /g, "").replace(/-/g, "").toLowerCase()];
-								ids_str += coins_data[i]['contract_ticker_symbol'].toUpperCase();
-		
-								var option = document.createElement("option");
-								option.text = coins_data[i]['wallet'] + ' -- ' + coins_data[i]['contract_name'];
-								option.value = coins_data[i]['wallet'] + ' -- ' + coins_data[i]['contract_address'];
-								document.getElementById('chart_select').add(option);
-							}
-							else if(id_map[coins_data[i]['contract_ticker_symbol']] != undefined)
-							{
-								row.insertCell(2).innerHTML = "<a href='coin.html?id=" + id_map[coins_data[i]['contract_ticker_symbol']] + "'>" + coins_data[i]['contract_name'] + "</a>";
-								if(coins_str.length > 0)
-								{
-									coins_str += ",";
-									ids_str += ",";
-								}
-								coins_str += id_map[coins_data[i]['contract_ticker_symbol'].replace(/ /g, "").replace(/-/g, "").toLowerCase()];
-								ids_str += coins_data[i]['contract_ticker_symbol'].toUpperCase();
-		
-								var option = document.createElement("option");
-								option.text = coins_data[i]['wallet'] + ' -- ' + coins_data[i]['contract_name'];
-								option.value = coins_data[i]['wallet'] + ' -- ' + coins_data[i]['contract_address'];
-								document.getElementById('chart_select').add(option);
-							}
-							else
-								row.insertCell(2).innerHTML = coins_data[i]['contract_name'];
-		
-							row.insertCell(3).innerHTML = coins_data[i]['wallet'];
-		
-							if(coins_data[i]['quote_rate'] != undefined)
-							{
-								if(coins_data[i]['quote_rate'] == 0)
-									row.insertCell(4).innerHTML = "-";
-								else if(coins_data[i]['quote_rate'] > 1)
-									row.insertCell(4).innerHTML = "$" + parseFloat(coins_data[i]['quote_rate']).toLocaleString('en');
-								else if(coins_data[i]['quote_rate'] > 0 && coins_data[i]['quote_rate'] < 0.0001)
-									row.insertCell(4).innerHTML = "$" + parseFloat(coins_data[i]['quote_rate']).toExponential(3);
-								else
-									row.insertCell(4).innerHTML = "$" + coins_data[i]['quote_rate'].toFixed(6);
-							}
-							else
-								row.insertCell(4).innerHTML = "-";
-		
-							if(coins_data[i]['quote'] > 0)
-								row.insertCell(5).innerHTML = coins_data[i]['balance'].toLocaleString('en');
-							else
-								row.insertCell(5).innerHTML = "-";
-		
-							row.insertCell(6).innerHTML = "$" + coins_data[i]['quote'].toLocaleString('en');
-		
-							if(add_hide_buttons)
-							{
-								if(ignore_map[coins_data[i]['contract_name'].toLowerCase().replace(/ /g, "").replace(/-/g, "")] != true &&
-						   			ignore_map[id_map[coins_data[i]['contract_name'].replace(/ /g, "").replace(/-/g, "").toLowerCase()]] != true)
-								{
-									if(coins_data[i]['quote'] > 0)
-										row.insertCell(7).innerHTML = "<a onclick='ignore_coin(\"" + row.cells[3].innerText + "\", \"" + row.cells[2].innerText.replace(/ /g, "").replace(/-/g, "").toLowerCase() + "\")'><i class='fas fa-trash fa-1x' style='vertical-align:middle'></i></a>";
-								}
-								else if(show_ignored_coins)
-									row.insertCell(7).innerHTML = "<a onclick='unignore_coin(\"" + row.cells[3].innerText + "\", \"" + row.cells[2].innerText.replace(/ /g, "").replace(/-/g, "").toLowerCase() + "\")'><i class='fas fa-trash-restore fa-1x' style='vertical-align:middle'></i></a>";
-							}
-		
-							wallet_balance += coins_data[i]['quote'];
-						}
-					}
-		
+					var table = document.getElementById("wallet_table");
+			
+					var no_rows = table.rows.length-2;
+					for(var i=0; i < no_rows; i++)
+						table.deleteRow(1);	
+			
+					clear_chart_select();
+				}
+			
+				function draw_table()
+				{
+					clear_table();
+					var table = document.getElementById("wallet_table");
+					var wallet_balance = 0.0;
+			
+					ignore_map = fetch_combined_ignorelist_map(user, selected_wallets);
+			
+					document.getElementById('loading_gif').src = "";
+					document.getElementById('loading_gif').style.visibility = "hidden";
+					document.getElementById('loading_gif').style.display = "none";
+					document.getElementById("wallet_table").style.display = "inline";
+			
 					if(selected_wallets.length == 1)
-						for(var i=1; i<table.rows.length-1; i++)
-							table.rows[i].cells[3].style.display = "none";
-		
-					if(chart_select_value != undefined)
-						document.getElementById('chart_select').value = chart_select_value;
-					if(document.getElementById('chart_select').value == "")
-						document.getElementById('chart_select').value = "coin";
-		
-					document.getElementById('table_spotlight').style.width = (document.getElementById('wallet_table').offsetWidth + 70) + "px";
-		
-					document.getElementById("balance_div").innerHTML = "<b>balance:</b> $" + wallet_balance.toLocaleString();
-					document.getElementById('balance_spotlight').style.width = (document.getElementById('balance_div').offsetWidth + 70) + "px";
-		
-					document.getElementById('charts_link').href = "charts.html?width=250&height=350&range=" + chart_range + "&coins=" + coins_str;
-					document.getElementById('charts_link').style.display = "block";
-		
-					document.getElementById('newsfeed_div').innerHTML = 
-						'<iframe id="newsfeed_iframe" scrolling="no" width="100%" height="650px" allowtransparency="true" frameborder="0" src="https://cryptopanic.com/widgets/news/?bg_color=2E2E35&amp;currencies=' + ids_str + '&amp;font_family=sans&amp;header_bg_color=30343B&amp;header_text_color=FFFFFF&amp;link_color=679267&amp;news_feed=recent&amp;posts_limit=10&amp;text_color=FFFFFF&amp;title=News"></iframe>';
-		
-					var body_width = document.body.clientWidth;
-					if(body_width < 530)
-						document.getElementById('newsfeed_iframe').style.height = "1000px";
-					else if(body_width < 700)
-						document.getElementById('newsfeed_iframe').style.height = "900px";
-					else if(body_width < 950)
-						document.getElementById('newsfeed_iframe').style.height = "800px";
-					else if(body_width < 1100)
-						document.getElementById('newsfeed_iframe').style.height = "700px";
-				}
-			}
-		
-			function sort_data()
-			{
-				if(sort_attrib == "contract_ticker_symbol" || sort_attrib == "contract_name" || sort_attrib == "wallet")
-				{
-					coins_data.sort(function(obj1, obj2) {
-						if(obj1[sort_attrib] == undefined)
-						{
-							if(obj2[sort_attrib] == undefined)
-								return 0;
-							else
-								return sort_dir*1;
-						}
-						else if(obj2[sort_attrib] == undefined)
-							return sort_dir*1;
-		
-						if(obj1[sort_attrib].toLowerCase() > obj2[sort_attrib].toLowerCase())
-							return sort_dir*1;
-						else if(obj1[sort_attrib] == obj2[sort_attrib])
-							return 0;
-						else return sort_dir*-1;
-					});
-				}
-				else
-				{
-					coins_data.sort(function(obj1, obj2) {
-						return sort_dir*(obj1[sort_attrib] - obj2[sort_attrib]);
-					});
-				}
-		
-				draw_table();
-			}
-		
-			function toggle_sort(attrib)
-			{
-				if(sort_attrib == attrib)
-					sort_dir *= -1;
-				else
-				{
-					sort_attrib = attrib;
-					sort_dir = -1;
-				}
-		
-				sort_data();
-			}
-		
-			function fetch_table_covalenthq()
-			{
-				$(document).ready(async function(){
-					var no_fetched = 0;
-					coins_data = [];
-		
-					for(var w=0; w<selected_wallets.length; w++)
 					{
-						//alert('https://api.covalenthq.com/v1/' + wallet_info[selected_wallets[w]][0] + '/address/' + wallet_info[selected_wallets[w]][1] + '/balances_v2/?key=' + covalenthq_api_key);
-						await $.get(
-							'https://api.covalenthq.com/v1/' + wallet_info[selected_wallets[w]][0] + '/address/' + wallet_info[selected_wallets[w]][1] + '/balances_v2/?key=' + covalenthq_api_key,          
+						document.getElementById('wallet_row_head').style.display = "none";
+						document.getElementById('wallet_row_foot').style.display = "none";
+					}
+					else
+					{
+						document.getElementById('wallet_row_head').style.display = "inline";
+						document.getElementById('wallet_row_foot').style.display = "inline";
+					}
+			
+					if(coins_data.length > 0)
+					{
+						var coins_str = "";
+						var ids_str = "";
+			
+						for(var i=0, r=0; i<coins_data.length; i++)
+						{
+							if(coins_data[i]['contract_ticker_symbol'] != undefined &&
+								coins_data[i]['contract_name'] != undefined &&
+								(show_ignored_coins ||
+									(coins_data[i]['quote'] > 0 &&
+									ignore_map[coins_data[i]['contract_ticker_symbol'].toLowerCase().replace(/ /g, "").replace(/-/g, "")] != true &&
+								    ignore_map[coins_data[i]['contract_name'].toLowerCase().replace(/ /g, "").replace(/-/g, "")] != true &&
+								    ignore_map[id_map[coins_data[i]['contract_name'].replace(/ /g, "").replace(/-/g, "").toLowerCase()]] != true)))
+							{
+								coins_data[i]['contract_ticker_symbol'] = coins_data[i]['contract_ticker_symbol'].toLowerCase();
+			
+								var row = table.insertRow(r+1);
+								r++;
+								if(coins_data[i]['logo_url'] != "")
+									row.insertCell(0).innerHTML = "<img style='min-width; 23px; max-height: 23px; vertical-align:middle' class='rounded' onerror='this.style.display=\"none\"' src='" + coins_data[i]['logo_url'] + "'>";
+			
+								row.insertCell(1).innerHTML = coins_data[i]['contract_ticker_symbol'];
+			
+								if(id_map[coins_data[i]['contract_name'].replace(/ /g, "").replace(/-/g, "").toLowerCase()] != undefined)
+								{
+									row.insertCell(2).innerHTML = "<a href='coin.html?id=" + id_map[coins_data[i]['contract_name'].replace(/ /g, "").replace(/-/g, "").toLowerCase()] + "'>" + coins_data[i]['contract_name'] + "</a>";
+									if(coins_str.length > 0)
+									{
+										coins_str += ",";
+										ids_str += ",";
+									}
+									coins_str += id_map[coins_data[i]['contract_name'].replace(/ /g, "").replace(/-/g, "").toLowerCase()];
+									ids_str += coins_data[i]['contract_ticker_symbol'].toUpperCase();
+			
+									var option = document.createElement("option");
+									option.text = coins_data[i]['wallet'] + ' -- ' + coins_data[i]['contract_name'];
+									option.value = coins_data[i]['wallet'] + ' -- ' + coins_data[i]['contract_address'];
+									document.getElementById('chart_select').add(option);
+								}
+								else if(id_map[coins_data[i]['contract_ticker_symbol']] != undefined)
+								{
+									row.insertCell(2).innerHTML = "<a href='coin.html?id=" + id_map[coins_data[i]['contract_ticker_symbol']] + "'>" + coins_data[i]['contract_name'] + "</a>";
+									if(coins_str.length > 0)
+									{
+										coins_str += ",";
+										ids_str += ",";
+									}
+									coins_str += id_map[coins_data[i]['contract_ticker_symbol'].replace(/ /g, "").replace(/-/g, "").toLowerCase()];
+									ids_str += coins_data[i]['contract_ticker_symbol'].toUpperCase();
+			
+									var option = document.createElement("option");
+									option.text = coins_data[i]['wallet'] + ' -- ' + coins_data[i]['contract_name'];
+									option.value = coins_data[i]['wallet'] + ' -- ' + coins_data[i]['contract_address'];
+									document.getElementById('chart_select').add(option);
+								}
+								else
+									row.insertCell(2).innerHTML = coins_data[i]['contract_name'];
+			
+								row.insertCell(3).innerHTML = coins_data[i]['wallet'];
+			
+								if(coins_data[i]['quote_rate'] != undefined)
+								{
+									if(coins_data[i]['quote_rate'] == 0)
+										row.insertCell(4).innerHTML = "-";
+									else if(coins_data[i]['quote_rate'] > 1)
+										row.insertCell(4).innerHTML = "$" + parseFloat(coins_data[i]['quote_rate']).toLocaleString('en');
+									else if(coins_data[i]['quote_rate'] > 0 && coins_data[i]['quote_rate'] < 0.0001)
+										row.insertCell(4).innerHTML = "$" + parseFloat(coins_data[i]['quote_rate']).toExponential(3);
+									else
+										row.insertCell(4).innerHTML = "$" + coins_data[i]['quote_rate'].toFixed(6);
+								}
+								else
+									row.insertCell(4).innerHTML = "-";
+			
+								if(coins_data[i]['quote'] > 0)
+									row.insertCell(5).innerHTML = coins_data[i]['balance'].toLocaleString('en');
+								else
+									row.insertCell(5).innerHTML = "-";
+			
+								row.insertCell(6).innerHTML = "$" + coins_data[i]['quote'].toLocaleString('en');
+			
+								if(add_hide_buttons)
+								{
+									if(ignore_map[coins_data[i]['contract_name'].toLowerCase().replace(/ /g, "").replace(/-/g, "")] != true &&
+							   			ignore_map[id_map[coins_data[i]['contract_name'].replace(/ /g, "").replace(/-/g, "").toLowerCase()]] != true)
+									{
+										if(coins_data[i]['quote'] > 0)
+											row.insertCell(7).innerHTML = "<a onclick='ignore_coin(\"" + row.cells[3].innerText + "\", \"" + row.cells[2].innerText.replace(/ /g, "").replace(/-/g, "").toLowerCase() + "\")'><i class='fas fa-trash fa-1x' style='vertical-align:middle'></i></a>";
+									}
+									else if(show_ignored_coins)
+										row.insertCell(7).innerHTML = "<a onclick='unignore_coin(\"" + row.cells[3].innerText + "\", \"" + row.cells[2].innerText.replace(/ /g, "").replace(/-/g, "").toLowerCase() + "\")'><i class='fas fa-trash-restore fa-1x' style='vertical-align:middle'></i></a>";
+								}
+			
+								wallet_balance += coins_data[i]['quote'];
+							}
+						}
+			
+						if(selected_wallets.length == 1)
+							for(var i=1; i<table.rows.length-1; i++)
+								table.rows[i].cells[3].style.display = "none";
+			
+						if(chart_select_value != undefined)
+							document.getElementById('chart_select').value = chart_select_value;
+						if(document.getElementById('chart_select').value == "")
+							document.getElementById('chart_select').value = "coin";
+			
+						document.getElementById('table_spotlight').style.width = (document.getElementById('wallet_table').offsetWidth + 70) + "px";
+			
+						document.getElementById("balance_div").innerHTML = "<b>balance:</b> $" + wallet_balance.toLocaleString();
+			
+						document.getElementById('charts_link').href = "charts.html?width=250&height=350&range=" + chart_range + "&coins=" + coins_str;
+						document.getElementById('charts_link').style.display = "block";
+			
+						document.getElementById('newsfeed_div').innerHTML = 
+							'<iframe id="newsfeed_iframe" scrolling="no" width="100%" height="650px" allowtransparency="true" frameborder="0" src="https://cryptopanic.com/widgets/news/?bg_color=FFFFFF00&amp;currencies=' + ids_str + '&amp;font_family=mono&amp;font_size=13&amp;header_bg_color=FFFFFF00&amp;header_text_color=FFFFFF&amp;link_color=679267&amp;news_feed=recent&amp;posts_limit=10&amp;text_color=FFFFFF&amp;title=news"></iframe>';
+						document.getElementById('newsfeed_spotlight').style.display = "block";
+			
+						var body_width = document.body.clientWidth;
+						if(body_width < 530)
+							document.getElementById('newsfeed_iframe').style.height = "1000px";
+						else if(body_width < 700)
+							document.getElementById('newsfeed_iframe').style.height = "900px";
+						else if(body_width < 950)
+							document.getElementById('newsfeed_iframe').style.height = "800px";
+						else if(body_width < 1100)
+							document.getElementById('newsfeed_iframe').style.height = "700px";
+					}
+				}
+			
+				function sort_data()
+				{
+					if(sort_attrib == "contract_ticker_symbol" || sort_attrib == "contract_name" || sort_attrib == "wallet")
+					{
+						coins_data.sort(function(obj1, obj2) {
+							if(obj1[sort_attrib] == undefined)
+							{
+								if(obj2[sort_attrib] == undefined)
+									return 0;
+								else
+									return sort_dir*1;
+							}
+							else if(obj2[sort_attrib] == undefined)
+								return sort_dir*1;
+			
+							if(obj1[sort_attrib].toLowerCase() > obj2[sort_attrib].toLowerCase())
+								return sort_dir*1;
+							else if(obj1[sort_attrib] == obj2[sort_attrib])
+								return 0;
+							else return sort_dir*-1;
+						});
+					}
+					else
+					{
+						coins_data.sort(function(obj1, obj2) {
+							return sort_dir*(obj1[sort_attrib] - obj2[sort_attrib]);
+						});
+					}
+			
+					draw_table();
+				}
+			
+				function toggle_sort(attrib)
+				{
+					if(sort_attrib == attrib)
+						sort_dir *= -1;
+					else
+					{
+						sort_attrib = attrib;
+						sort_dir = -1;
+					}
+			
+					sort_data();
+				}
+			
+				function fetch_table_covalenthq()
+				{
+					$(document).ready(async function(){
+						var no_fetched = 0;
+						coins_data = [];
+			
+						for(var w=0; w<selected_wallets.length; w++)
+						{
+							//alert('https://api.covalenthq.com/v1/' + wallet_info[selected_wallets[w]][0] + '/address/' + wallet_info[selected_wallets[w]][1] + '/balances_v2/?key=' + covalenthq_api_key);
+							await $.get(
+								'https://api.covalenthq.com/v1/' + wallet_info[selected_wallets[w]][0] + '/address/' + wallet_info[selected_wallets[w]][1] + '/balances_v2/?key=' + covalenthq_api_key,          
+								function(data) {
+									for(var i=0; i<data['data']['items'].length; i++)
+									{
+										if(data['data']['items'][i]['quote_rate'] > 0)
+											data['data']['items'][i]['balance'] = data['data']['items'][i]['quote']/data['data']['items'][i]['quote_rate'];
+			
+										data['data']['items'][i]['wallet'] = selected_wallets[no_fetched];
+			
+										coins_data.push(data['data']['items'][i]);
+									}
+			
+									if(++no_fetched == selected_wallets.length)
+									{
+										sort_data();
+									}
+							}).fail(function() {
+								clear_table();
+								document.getElementById('loading_gif').src = "";
+								document.getElementById('loading_gif').style.visibility = "hidden";
+								document.getElementById('loading_gif').style.display = "none";
+								document.getElementById("balance_spotlight").style.display = "none";
+								document.getElementById('show_ignored_coins_button').style.display = "none";
+								document.getElementById("table_spotlight").style.width = "600px";
+			
+			
+								alert("failed to fetch wallet information, please refresh to try again");
+							});
+						}
+					});
+				}
+			
+				function refresh_table()
+				{
+					if(refresh_ms > 0)
+						sleep(refresh_ms).then(() => { fetch_table_covalenthq(); refresh_table(); });
+				}
+			
+				function setup_id_map()
+				{
+					for(var i=0; i<cg_coins_data.length; i++)
+					{
+						if(id_map[cg_coins_data[i]['symbol'].toLowerCase()] == undefined)
+							id_map[cg_coins_data[i]['symbol'].toLowerCase()] = cg_coins_data[i]['id'];
+						id_map[cg_coins_data[i]['name'].replace(/ /g, "").replace(/-/g, "").toLowerCase()] = cg_coins_data[i]['id'];
+						id_map[cg_coins_data[i]['id'].replace(/ /g, "").replace(/-/g, "").toLowerCase()] = cg_coins_data[i]['id'];
+					}
+				}
+			
+				function fetch_coins_list()
+				{
+					$(document).ready(function(){
+						$.get(
+				    	    'https://api.coingecko.com/api/v3/coins/list',              
 							function(data) {
-								for(var i=0; i<data['data']['items'].length; i++)
-								{
-									if(data['data']['items'][i]['quote_rate'] > 0)
-										data['data']['items'][i]['balance'] = data['data']['items'][i]['quote']/data['data']['items'][i]['quote_rate'];
-		
-									data['data']['items'][i]['wallet'] = selected_wallets[no_fetched];
-		
-									coins_data.push(data['data']['items'][i]);
-								}
-		
-								if(++no_fetched == selected_wallets.length)
-								{
-									sort_data();
-								}
+								cg_coins_data = data;
+								setup_id_map();
+			
+								fetch_table_covalenthq();
+								refresh_table();
 						}).fail(function() {
 							clear_table();
 							document.getElementById('loading_gif').src = "";
@@ -574,462 +922,509 @@
 							document.getElementById("balance_spotlight").style.display = "none";
 							document.getElementById('show_ignored_coins_button').style.display = "none";
 							document.getElementById("table_spotlight").style.width = "600px";
-		
-		
-							alert("failed to fetch wallet information, please refresh to try again");
+			
+			
+							document.getElementById("table_div").innerHTML = "<p style='margin-top: 20px; margin-bottom: 10px'>failed to fetch coins list, please refresh to try again.</p>";
 						});
-					}
-				});
-			}
-		
-			function refresh_table()
-			{
-				if(refresh_ms > 0)
-					sleep(refresh_ms).then(() => { fetch_table_covalenthq(); refresh_table(); });
-			}
-		
-			function setup_id_map()
-			{
-				for(var i=0; i<cg_coins_data.length; i++)
-				{
-					if(id_map[cg_coins_data[i]['symbol'].toLowerCase()] == undefined)
-						id_map[cg_coins_data[i]['symbol'].toLowerCase()] = cg_coins_data[i]['id'];
-					id_map[cg_coins_data[i]['name'].replace(/ /g, "").replace(/-/g, "").toLowerCase()] = cg_coins_data[i]['id'];
-					id_map[cg_coins_data[i]['id'].replace(/ /g, "").replace(/-/g, "").toLowerCase()] = cg_coins_data[i]['id'];
-				}
-			}
-		
-			function fetch_coins_list()
-			{
-				$(document).ready(function(){
-					$.get(
-			    	    'https://api.coingecko.com/api/v3/coins/list',              
-						function(data) {
-							cg_coins_data = data;
-							setup_id_map();
-		
-							fetch_table_covalenthq();
-							refresh_table();
-					}).fail(function() {
-						clear_table();
-						document.getElementById('loading_gif').src = "";
-						document.getElementById('loading_gif').style.visibility = "hidden";
-						document.getElementById('loading_gif').style.display = "none";
-						document.getElementById("balance_spotlight").style.display = "none";
-						document.getElementById('show_ignored_coins_button').style.display = "none";
-						document.getElementById("table_spotlight").style.width = "600px";
-		
-		
-						document.getElementById("table_div").innerHTML = "<p style='margin-top: 20px; margin-bottom: 10px'>failed to fetch coins list, please refresh to try again.</p>";
 					});
-				});
-			}
-		
-			function show_wallet_select()
-			{
-				document.getElementById('show_wallet_select_link').style.display = "none";
-				document.getElementById('wallet_select').style.display = "block";
-			}
-		
-			function hide_wallet_select()
-			{
-				document.getElementById('show_wallet_select_link').style.display = "block";
-				document.getElementById('wallet_select').style.display = "none";
-			}
-		
-			function setup_wallet_select()
-			{
-				var x = document.getElementById('wallet_select');
-				for(var i=x.options.length-1; i>=0; i--)
-					x.remove(i);
-		
-				var wallets = fetch_wallets(user);
-				var wallet_map = {};
-		
-				if(wallets.length > 1)
+				}
+			
+				function show_wallet_select()
 				{
-					if(localStorage.getItem(user + "-wallet"))
+					var options = document.getElementById("wallet_select").options;
+			
+				    for(var i = 0; i < options.length; i++)
+				     	options[i].selected = false;
+			
+					document.getElementById('show_wallet_select_link_spotlight').style.display = "none";
+					document.getElementById('wallet_select').style.display = "block";
+				}
+			
+				function hide_wallet_select()
+				{
+					document.getElementById('show_wallet_select_link_spotlight').style.display = "block";
+					document.getElementById('wallet_select').style.display = "none";
+				}
+			
+				function setup_wallet_select()
+				{
+					var x = document.getElementById('wallet_select');
+					for(var i=x.options.length-1; i>=0; i--)
+						x.remove(i);
+			
+					var wallets = fetch_wallets(user);
+					var wallet_map = {};
+			
+					if(wallets.length > 1)
 					{
-						selected_wallets = localStorage.getItem(user + "-wallet").split(',');
-						for(var i=0; i<selected_wallets.length; i++)
-							wallet_map[selected_wallets[i]] = true;
+						if(localStorage.getItem(user + "-wallet"))
+						{
+							selected_wallets = localStorage.getItem(user + "-wallet").split(',');
+							for(var i=0; i<selected_wallets.length; i++)
+								wallet_map[selected_wallets[i]] = true;
+						}
+						else
+							selected_wallets = [wallets[1]];
+			
+						for(var i=1; i<wallets.length; i++)
+						{
+							var option = document.createElement("option");
+							option.text = wallets[i];
+							if(wallet_map[wallets[i]] == true)
+								option.selected = true;
+							x.add(option);
+			
+							wallet_info[wallets[i]] = [localStorage.getItem(user + '-wallets-' + wallets[i] + "-network"),
+							                           CryptoJS.AES.decrypt(localStorage.getItem(user + '-wallets-' + wallets[i] + "-address"), CryptoJS.AES.decrypt(localStorage.getItem('password'), "Go hang a salami, I’m a lasagna hog.").toString(CryptoJS.enc.Utf8)).toString(CryptoJS.enc.Utf8)];
+						}
+			
+						document.getElementById('wallet_select').size = wallets.length - 1;
+			
+						document.getElementById('selected_wallets').innerHTML = selected_wallets.join(' + ');
 					}
 					else
-						selected_wallets = [wallets[1]];
-		
-					for(var i=1; i<wallets.length; i++)
 					{
-						var option = document.createElement("option");
-						option.text = wallets[i];
-						if(wallet_map[wallets[i]] == true)
-							option.selected = true;
-						x.add(option);
-		
-						wallet_info[wallets[i]] = [localStorage.getItem(user + '-wallets-' + wallets[i] + "-network"),
-						                           CryptoJS.AES.decrypt(localStorage.getItem(user + '-wallets-' + wallets[i] + "-address"), CryptoJS.AES.decrypt(localStorage.getItem('password'), "Go hang a salami, I’m a lasagna hog.").toString(CryptoJS.enc.Utf8)).toString(CryptoJS.enc.Utf8)];
+						document.getElementById('wallet_select').style.display = "none";
+						document.getElementById('balance_spotlight').style.display = "none";
+						document.getElementById('table_spotlight').style.display = "none";
+						document.getElementById('show_ignored_coins_button').style.display = "none";
+						document.getElementById('no_wallets_spotlight').style.display = "block";
+						document.getElementById('no_wallets_spotlight').innerHTML = user + " does not have any wallets";
 					}
-		
-					document.getElementById('wallet_select').size = wallets.length - 1;
-		
+				}
+			
+				function wallet_select_event()
+				{
+					selected_wallets = Array.from(document.getElementById('wallet_select').selectedOptions).map(({ value }) => value);
 					document.getElementById('selected_wallets').innerHTML = selected_wallets.join(' + ');
-				}
-				else
-				{
-					document.getElementById('wallet_select').style.display = "none";
-					document.getElementById('balance_spotlight').style.display = "none";
-					document.getElementById('table_spotlight').style.display = "none";
-					document.getElementById('show_ignored_coins_button').style.display = "none";
-					document.getElementById('no_wallets_spotlight').style.display = "block";
-					document.getElementById('no_wallets_spotlight').innerHTML = user + " does not have any wallets";
-				}
-			}
-		
-			function wallet_select_event()
-			{
-				selected_wallets = Array.from(document.getElementById('wallet_select').selectedOptions).map(({ value }) => value);
-				document.getElementById('selected_wallets').innerHTML = selected_wallets.join(' + ');
-		
-		
-				document.getElementById('balance_chart_div').style.display = "none";
-				document.getElementById('balance_chart_spotlight').style.display = "none";
-		
-				if(balance_chart != undefined)
-				{
-					balance_chart.destroy();
-					document.getElementById('balance_chart').innerHTML = "";
-				}
-				
-				localStorage.setItem(user + "-wallet", selected_wallets.join(','));
-				fetch_table_covalenthq();
-				fetch_balance_data();
-			}
-		
-			function ignore_coin(wallet_name, id)
-			{
-				ignorelist = fetch_ignorelist(user, wallet_name);
-				ignore(user, ignorelist, wallet_name, id);
-				draw_table();
-			}
-		
-			function unignore_coin(wallet_name, id)
-			{
-				ignorelist = fetch_ignorelist(user, wallet_name);
-				unignore(user, ignorelist, wallet_name, id);
-				draw_table();
-			}
-		
-			function toggle_hide_coins()
-			{
-				var table = document.getElementById('wallet_table');
-				var no_rows = table.rows.length - 1;
-		
-				if(add_hide_buttons)
-				{
-					add_hide_buttons = false;
-		
-					for(var r=1; r<no_rows; r++)
-						table.rows[r].deleteCell(7);
-				}
-				else
-				{
-					add_hide_buttons = true;
-		
-					for(var r=1; r<document.getElementById('wallet_table').rows.length-1; r++)
+			
+			
+					document.getElementById('balance_chart_div').style.display = "none";
+					document.getElementById('balance_chart_spotlight').style.display = "none";
+			
+					if(balance_chart != undefined)
 					{
-						var coin_name = document.getElementById('wallet_table').rows[r].cells[2].innerText.toLowerCase().replace(/ /g, "").replace(/-/g, "");
-						if(ignore_map[coin_name] != true &&
-						   	ignore_map[coin_name] != true)
+						balance_chart.destroy();
+						document.getElementById('balance_chart').innerHTML = "";
+					}
+					
+					localStorage.setItem(user + "-wallet", selected_wallets.join(','));
+					fetch_table_covalenthq();
+					fetch_balance_data();
+				}
+			
+				function ignore_coin(wallet_name, id)
+				{
+					ignorelist = fetch_ignorelist(user, wallet_name);
+					ignore(user, ignorelist, wallet_name, id);
+					draw_table();
+				}
+			
+				function unignore_coin(wallet_name, id)
+				{
+					ignorelist = fetch_ignorelist(user, wallet_name);
+					unignore(user, ignorelist, wallet_name, id);
+					draw_table();
+				}
+			
+				function toggle_hide_coins()
+				{
+					var table = document.getElementById('wallet_table');
+					var no_rows = table.rows.length - 1;
+			
+					if(add_hide_buttons)
+					{
+						add_hide_buttons = false;
+			
+						for(var r=1; r<no_rows; r++)
+							table.rows[r].deleteCell(7);
+					}
+					else
+					{
+						add_hide_buttons = true;
+			
+						for(var r=1; r<document.getElementById('wallet_table').rows.length-1; r++)
 						{
-							if(table.rows[r].cells[5].innerText != '-')
+							var coin_name = document.getElementById('wallet_table').rows[r].cells[2].innerText.toLowerCase().replace(/ /g, "").replace(/-/g, "");
+							if(ignore_map[coin_name] != true &&
+							   	ignore_map[coin_name] != true)
 							{
-								table.rows[r].insertCell(7).innerHTML = "<a onclick='ignore_coin(\"" + table.rows[r].cells[3].innerText + "\", \"" + table.rows[r].cells[2].innerText.replace(/ /g, "").replace(/-/g, "").toLowerCase() + "\")'><i class='fas fa-trash fa-1x' style='vertical-align:middle'></i></a>";
+								if(table.rows[r].cells[5].innerText != '-')
+								{
+									table.rows[r].insertCell(7).innerHTML = "<a onclick='ignore_coin(\"" + table.rows[r].cells[3].innerText + "\", \"" + table.rows[r].cells[2].innerText.replace(/ /g, "").replace(/-/g, "").toLowerCase() + "\")'><i class='fas fa-trash fa-1x' style='vertical-align:middle'></i></a>";
+								}
+							}
+							else if(show_ignored_coins)
+							{
+								table.rows[r].insertCell(7).innerHTML = "<a onclick='unignore_coin(\"" + table.rows[r].cells[3].innerText  + "\", \"" + table.rows[r].cells[2].innerText.replace(/ /g, "").replace(/-/g, "").toLowerCase() + "\")'><i class='fas fa-trash-restore fa-1x' style='vertical-align:middle'></i></a>";
 							}
 						}
-						else if(show_ignored_coins)
+					}
+				}
+			
+				function toggle_show_ignored_coins()
+				{
+					if(show_ignored_coins)
+					{
+						show_ignored_coins = false;
+						document.getElementById('show_ignored_coins_button').innerHTML = "show ignored coins";
+					}
+					else
+					{
+						show_ignored_coins = true;
+						document.getElementById('show_ignored_coins_button').innerHTML = "hide ignored coins";
+					}
+			
+					draw_table();
+				}
+			
+				function draw_chart(title, data)
+				{
+					var options = {
+				      series: [{
+					      name: "Balance",
+					      data: data
+					  }],
+				      chart: {
+					      type: 'area',
+					      stacked: false,
+					      background: 'none',
+					      height: 350,
+					      zoom: {
+					        type: 'xy',
+					        enabled: true,
+					      },
+					      toolbar: {
+					        autoSelected: 'zoom'
+					      }
+					    },
+					  colors:['#C600EB', '#E91E63', '#9C27B0'],
+					  dataLabels: {
+					      enabled: false
+					  },
+					  markers: {
+					    size: 0,
+					  },
+					  title: {
+					    text: title,
+					    align: 'left',
+					    textColor: '#ff1493',
+					  },
+					  fill: {
+					    type: 'gradient',
+					    gradient: {
+					      shadeIntensity: 0.4,
+					      inverseColors: false,
+					      opacityFrom: 0.8,
+					      opacityTo: 0.4,
+					      stops: [0, 90, 100]
+					    },
+					  },
+					  yaxis: {
+					    labels: {
+					      formatter: function (val) {
+					        if(val == 0)
+					        	return 0;
+					        else if(val >= 1)
+					        	return val.toLocaleString('en');
+					        else if(val > 0 && val < 0.001)
+					        	return val.toExponential(3);
+					        else
+					        	return val.toFixed(5);
+					      },
+					    },
+					    tickAmount: 4,
+					    title: {
+					      text: "Balance",
+					    },
+					  },
+					  xaxis: {
+					    type: 'datetime',
+				        tickAmount: 5,
+					    labels: {
+					      formatter: function (val) {
+					        if(chart_range == "hour" || chart_range == "day")
+						    	return new Date(val).toLocaleTimeString();
+						    else
+						    	return new Date(val).toLocaleDateString();
+					      },
+					    },
+					  },
+					  theme: {
+					  	mode: 'dark',
+					  },
+					  stroke: {
+					   width: 2,    
+					  },
+					  tooltip: {
+					    shared: false,
+					    y: {
+					      formatter: function (val) {
+					        if(val == 0)
+					        	return 0;
+					        else if(val >= 1)
+					        	return val.toLocaleString('en');
+					        else if(val > 0 && val < 0.001)
+					        	return val.toExponential(3);
+					        else
+					        	return val.toFixed(5);
+					      }
+					    }
+					  }
+				    };
+			
+				    balance_chart = new ApexCharts(document.querySelector("#balance_chart"), options);
+				    balance_chart.render();
+				}
+			
+				function fetch_balance_data()
+				{
+					$(document).ready(async function(){
+						balance_data = [];
+						var no_fetched = 0;
+			
+						for(var i=0; i<selected_wallets.length; i++)
 						{
-							table.rows[r].insertCell(7).innerHTML = "<a onclick='unignore_coin(\"" + table.rows[r].cells[3].innerText  + "\", \"" + table.rows[r].cells[2].innerText.replace(/ /g, "").replace(/-/g, "").toLowerCase() + "\")'><i class='fas fa-trash-restore fa-1x' style='vertical-align:middle'></i></a>";
+							//alert('https://api.covalenthq.com/v1/' + wallet_info[selected_wallets[i]][0] + '/address/' + wallet_info[selected_wallets[i]][1] + '/portfolio_v2/?key=' + covalenthq_api_key);
+							await $.get(
+								'https://api.covalenthq.com/v1/' + wallet_info[selected_wallets[i]][0] + '/address/' + wallet_info[selected_wallets[i]][1] + '/portfolio_v2/?key=' + covalenthq_api_key,
+								function(data) {
+									for(var j=0; j<data['items'].length; j++)
+									{
+										data['items'][j]['wallet'] = selected_wallets[no_fetched];
+										balance_data.push(data['items'][j]);
+									}
+									no_fetched++;
+							}).fail(function() {
+								document.getElementById('balance_chart_spotlight').style.display = "none";
+								alert("could not find balance chart for " + document.getElementById('chart_select').text);
+							});
+						}
+			
+						document.getElementById('balance_chart_spotlight').style.display = "block";
+					});
+				}
+			
+				function fetch_chart()
+				{
+					chart_select_value = document.getElementById('chart_select').value;
+					var coin_info = document.getElementById('chart_select').value.split(' -- ');
+					var chart_data = [];
+			
+					if(balance_chart != undefined)
+					{
+						balance_chart.destroy();
+						document.getElementById('balance_chart').innerHTML = "";
+					}
+					else
+						document.getElementById('balance_chart_card').style.display = "block";
+			
+					for(var i=0; i<balance_data.length; i++)
+					{
+						if(balance_data[i]['wallet'] == coin_info[0] && balance_data[i]['contract_address'] == coin_info[1])
+						{
+							var j=balance_data[i]['holdings'].length-1;
+			
+							for(; j>=0; j--)
+								if(balance_data[i]['holdings'][j]['close']['quote'] != undefined && balance_data[i]['holdings'][j]['close']['quote'] > 0)
+									break;
+			
+							if(j+1 < balance_data[i]['holdings'].length)
+								j++;
+			
+							for(; j>=0; j--)
+								if(balance_data[i]['holdings'][j]['close']['quote'] != undefined)
+									chart_data[j] = [balance_data[i]['holdings'][j]['timestamp'], balance_data[i]['holdings'][j]['close']['quote']];
+			
+							draw_chart(balance_data[i]['contract_name'], chart_data);
+							break;
 						}
 					}
+			
+					document.getElementById('balance_chart_spotlight').style.display = "block";
 				}
-			}
-		
-			function toggle_show_ignored_coins()
-			{
-				if(show_ignored_coins)
-				{
-					show_ignored_coins = false;
-					document.getElementById('show_ignored_coins_button').innerHTML = "show ignored coins";
-				}
-				else
-				{
-					show_ignored_coins = true;
-					document.getElementById('show_ignored_coins_button').innerHTML = "hide ignored coins";
-				}
-		
-				draw_table();
-			}
-		
-			function draw_chart(title, data)
-			{
-				var options = {
-			      series: [{
-				      name: "Balance",
-				      data: data
-				  }],
-			      chart: {
-				      type: 'area',
-				      stacked: false,
-				      background: 'none',
-				      height: 350,
-				      zoom: {
-				        type: 'xy',
-				        enabled: true,
-				      },
-				      toolbar: {
-				        autoSelected: 'zoom'
-				      }
-				    },
-				  colors:['#C600EB', '#E91E63', '#9C27B0'],
-				  dataLabels: {
-				      enabled: false
-				  },
-				  markers: {
-				    size: 0,
-				  },
-				  title: {
-				    text: title,
-				    align: 'left',
-				    textColor: '#ff1493',
-				  },
-				  fill: {
-				    type: 'gradient',
-				    gradient: {
-				      shadeIntensity: 0.4,
-				      inverseColors: false,
-				      opacityFrom: 0.8,
-				      opacityTo: 0.4,
-				      stops: [0, 90, 100]
-				    },
-				  },
-				  yaxis: {
-				    labels: {
-				      formatter: function (val) {
-				        if(val == 0)
-				        	return 0;
-				        else if(val >= 1)
-				        	return val.toLocaleString('en');
-				        else if(val > 0 && val < 0.001)
-				        	return val.toExponential(3);
-				        else
-				        	return val.toFixed(5);
-				      },
-				    },
-				    tickAmount: 4,
-				    title: {
-				      text: "Balance",
-				    },
-				  },
-				  xaxis: {
-				    type: 'datetime',
-			        tickAmount: 5,
-				    labels: {
-				      formatter: function (val) {
-				        if(chart_range == "hour" || chart_range == "day")
-					    	return new Date(val).toLocaleTimeString();
-					    else
-					    	return new Date(val).toLocaleDateString();
-				      },
-				    },
-				  },
-				  theme: {
-				  	mode: 'dark',
-				  },
-				  stroke: {
-				   width: 2,    
-				  },
-				  tooltip: {
-				    shared: false,
-				    y: {
-				      formatter: function (val) {
-				        if(val == 0)
-				        	return 0;
-				        else if(val >= 1)
-				        	return val.toLocaleString('en');
-				        else if(val > 0 && val < 0.001)
-				        	return val.toExponential(3);
-				        else
-				        	return val.toFixed(5);
-				      }
-				    }
-				  }
-			    };
-		
-			    balance_chart = new ApexCharts(document.querySelector("#balance_chart"), options);
-			    balance_chart.render();
-			}
-		
-			function fetch_balance_data()
-			{
-				$(document).ready(async function(){
-					balance_data = [];
-					var no_fetched = 0;
-		
-					for(var i=0; i<selected_wallets.length; i++)
-					{
-						//alert('https://api.covalenthq.com/v1/' + wallet_info[selected_wallets[i]][0] + '/address/' + wallet_info[selected_wallets[i]][1] + '/portfolio_v2/?key=' + covalenthq_api_key);
-						await $.get(
-							'https://api.covalenthq.com/v1/' + wallet_info[selected_wallets[i]][0] + '/address/' + wallet_info[selected_wallets[i]][1] + '/portfolio_v2/?key=' + covalenthq_api_key,
-							function(data) {
-								for(var j=0; j<data['items'].length; j++)
-								{
-									data['items'][j]['wallet'] = selected_wallets[no_fetched];
-									balance_data.push(data['items'][j]);
-								}
-								no_fetched++;
-						}).fail(function() {
-							document.getElementById('balance_chart_div').style.display = "none";
-							alert("could not find balance chart for " + document.getElementById('chart_select').text);
-						});
-					}
-		
-					document.getElementById('balance_chart_div').style.display = "block";
-				});
-			}
-		
-			function fetch_chart()
-			{
-				chart_select_value = document.getElementById('chart_select').value;
-				var coin_info = document.getElementById('chart_select').value.split(' -- ');
-				var chart_data = [];
-		
-				if(balance_chart != undefined)
-				{
-					balance_chart.destroy();
-					document.getElementById('balance_chart').innerHTML = "";
-				}
-		
-				for(var i=0; i<balance_data.length; i++)
-				{
-					if(balance_data[i]['wallet'] == coin_info[0] && balance_data[i]['contract_address'] == coin_info[1])
-					{
-						var j=balance_data[i]['holdings'].length-1;
-		
-						for(; j>=0; j--)
-							if(balance_data[i]['holdings'][j]['close']['quote'] != undefined && balance_data[i]['holdings'][j]['close']['quote'] > 0)
-								break;
-		
-						if(j+1 < balance_data[i]['holdings'].length)
-							j++;
-		
-						for(; j>=0; j--)
-							if(balance_data[i]['holdings'][j]['close']['quote'] != undefined)
-								chart_data[j] = [balance_data[i]['holdings'][j]['timestamp'], balance_data[i]['holdings'][j]['close']['quote']];
-		
-						draw_chart(balance_data[i]['contract_name'], chart_data);
-						break;
-					}
-				}
-		
-				document.getElementById('balance_chart_spotlight').style.display = "block";
-				document.getElementById('balance_chart_spotlight').style.height = (document.getElementById('balance_chart').offsetHeight) + "px";
-			}
-		
-			document.getElementById('table_spotlight').style.width = (document.getElementById('loading_gif').offsetWidth + 400) + "px";
-			document.getElementById("table_div").scrollIntoView();
-		
-			if(localStorage.getItem(user + "-wallets"))
-			{
-				setup_wallet_select();
+			
 				document.getElementById('table_spotlight').style.width = (document.getElementById('loading_gif').offsetWidth + 400) + "px";
 				document.getElementById("table_div").scrollIntoView();
-				fetch_coins_list();
-				fetch_balance_data();
-			}
-			else
-			{
-				clear_table();
-				document.getElementById('loading_gif').src = "";
-				document.getElementById('loading_gif').style.visibility = "hidden";
-				document.getElementById('loading_gif').style.display = "none";
-				document.getElementById("wallet_select").style.display = "none";
-				document.getElementById("balance_spotlight").style.display = "none";
-				document.getElementById('show_ignored_coins_button').style.display = "none";
-				document.getElementById("table_spotlight").style.width = "600px";
-		
-				if(localStorage.getItem("username"))
-					document.getElementById("table_div").innerHTML = "<p style='margin-top: 20px; margin-bottom: 20px'>Please <a href='config.html'>configure</a> your wallet address and CovalentHQ api key.</p><p style='margin-bottom: 10px'><b>Note:</b> You will need to register an account with <a href='https://covalenthq.com/'>CovalentHQ</a> to obtain a free API key</p>";
-				else
-					document.getElementById("table_div").innerHTML = "<p style='margin-top: 20px; margin-bottom: 20px'>Please login to access the wallet tracker</p><p style='margin-bottom: 10px'><a href='login.html?return_to=wallet.html'><i class='fas fa-sign-in-alt fa-2x' style='margin-bottom: 10px'></i></a></p>";
-			}
-		</script>
-
-		<!-- Footer -->
-		<div class="footer wrapper">
-			<div class="inner" style="text-align:center">
-				<noselect>
-					<p>
-						<a href="search.html" title='search'><i class="fas fa-search fa-2x"></i></a> &nbsp;
-						<a href="coins.html" title='coins'><i class="fas fa-coins fa-2x"></i></a> &nbsp;
-						<a href="categories.html" title='categories'><i class="fas fa-cubes fa-2x"></i></a> &nbsp;
-						<a href="charts.html" title='charts'><i class="fas fa-chart-area fa-2x"></i></a> &nbsp;
-						<a href="news.html" title='news'><i class="fas fa-newspaper fa-2x"></i></a> &nbsp;
-						<a href="scams.html" title='scams'><i class="fas fa-bomb fa-2x"></i></a> &nbsp;
-						<a href="watchlist.html" title='watchlist'><i class="fas fa-binoculars fa-2x"></i></a> &nbsp;
-						<a href="wallet.html" title='wallet tracker'><i class="fas fa-wallet fa-2x"></i></a><br>
-						
-						<a href="https://t.me/dexata_army" title='telegram'><i class="icon brands fa-telegram-plane fa-2x"></i></a> &nbsp;
-						<a href="https://twitter.com/dexata_army" title='twitter'><i class="icon brands fa-twitter fa-2x"></i></a> &nbsp;
-						<a href="https://github.com/dexata-army" title='github'><i class="icon brands fa-github-alt fa-2x"></i></a> &nbsp;
-						<a href="config.html" title='config'><i class="fas fa-cogs fa-2x"></i></a> &nbsp;
-						<a href="manage_users.html" title='manage users'><i class="fas fa-user-cog fa-2x"></i></a> &nbsp;
-						<text id="login_footer_item" style="display: inline-block"><a href="login.html" title='login'><i class="fas fa-sign-in-alt fa-2x"></i></a></text>
-					</p>
-		
-					<p>
-						<input id="footer_search_box" placeholder="search">
-					</p>
-		
-					<p class="copyright">
-						&copy;<script>document.write(new Date().getFullYear())</script> Dexata
-					</p>
-				</noselect>
-			</div>
-		</div>
-		
-		<script>
-			window.addEventListener('keydown',this.keydown,false);
-		
-			function keydown(e)
-			{
-				var code = e.keyCode;
-				
-				if(document.activeElement.tagName == "INPUT")
+			
+				if(localStorage.getItem(user + "-wallets"))
 				{
-					if(code == 13)
+					setup_wallet_select();
+					document.getElementById('table_spotlight').style.width = (document.getElementById('loading_gif').offsetWidth + 400) + "px";
+					document.getElementById("table_div").scrollIntoView();
+					fetch_coins_list();
+					fetch_balance_data();
+				}
+				else
+				{
+					clear_table();
+					document.getElementById('loading_gif').src = "";
+					document.getElementById('loading_gif').style.visibility = "hidden";
+					document.getElementById('loading_gif').style.display = "none";
+					document.getElementById("wallet_select").style.display = "none";
+					document.getElementById("balance_spotlight").style.display = "none";
+					document.getElementById('show_ignored_coins_button').style.display = "none";
+					document.getElementById("table_spotlight").style.width = "600px";
+			
+					if(localStorage.getItem("username"))
+						document.getElementById("table_div").innerHTML = "<p style='margin-top: 20px; margin-bottom: 20px'>Please <a href='config.html'>configure</a> your wallet address and CovalentHQ api key.</p><p style='margin-bottom: 10px'><b>Note:</b> You will need to register an account with <a href='https://covalenthq.com/'>CovalentHQ</a> to obtain a free API key</p>";
+					else
+						document.getElementById("table_div").innerHTML = "<p style='margin-top: 20px; margin-bottom: 20px'>Please login to access the wallet tracker</p><p style='margin-bottom: 10px'><a href='login.html?return_to=wallet.html'><i class='fas fa-sign-in-alt fa-2x' style='margin-bottom: 10px'></i></a></p>";
+				}
+			</script>
+
+			<!-- BEGIN #footer -->
+			<div id="footer" class="app-content">
+				<div class="row">
+					<!-- footer -->
+					<noselect>
+						<center>
+							<div style="width: 300px; max-width: 100%">
+								<!-- BEGIN card -->
+								<div class="card mb-3">
+									<!-- BEGIN card-body -->
+									<div class="card-body copyright">
+										&copy;<script>document.write(new Date().getFullYear())</script> Dexata
+									</div>
+									<!-- END card-body -->
+									
+									<!-- BEGIN card-arrow -->
+									<div class="card-arrow">
+										<div class="card-arrow-top-left"></div>
+										<div class="card-arrow-top-right"></div>
+										<div class="card-arrow-bottom-left"></div>
+										<div class="card-arrow-bottom-right"></div>
+									</div>
+									<!-- END card-arrow -->
+								</div>
+								<!-- END card -->
+							</div>
+			
+							<p>
+								<input id="footer_search_box" placeholder="search">
+							</p></center>
+					</noselect>
+				</div>
+			</div>
+			
+			<script>
+				window.addEventListener('keydown',this.keydown,false);
+			
+				function keydown(e)
+				{
+					var code = e.keyCode;
+					
+					if(document.activeElement.tagName == "INPUT")
 					{
-						if(document.activeElement.id == "footer_search_box" &&
-							document.getElementById('footer_search_box').value != "")
+						if(code == 13)
 						{
-							window.location.href = "search.html?term=" + document.getElementById('footer_search_box').value;
+							if(document.activeElement.id == "footer_search_box" &&
+								document.getElementById('footer_search_box').value != "")
+								window.location.href = "search.html?term=" + document.getElementById('footer_search_box').value;
+							else if(document.activeElement.id == "search_box" &&
+								document.getElementById('search_box').value != "")
+								window.location.href = "search.html?term=" + document.getElementById('search_box').value;
 						}
 					}
 				}
-			}
-		</script>
+			</script>
+			
+			<!-- BEGIN btn-scroll-top -->
+			<a href="#" data-toggle="scroll-to-top" class="btn-scroll-top fade"><i class="fa fa-arrow-up"></i></a>
+			<!-- END btn-scroll-top -->
+
+			<!-- BEGIN theme-panel -->
+			<div class="app-theme-panel">
+				<div class="app-theme-panel-container">
+					<div class="app-theme-panel-content">
+						<div class="small fw-bold text-white mb-1">Theme Color</div>
+						<div class="card mb-3">
+							<!-- BEGIN card-body -->
+							<div class="card-body p-2">
+								<!-- BEGIN theme-list -->
+								<div class="app-theme-list">
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-pink" data-theme-class="theme-pink" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Pink">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-red" data-theme-class="theme-red" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Red">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-warning" data-theme-class="theme-warning" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Orange">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-yellow" data-theme-class="theme-yellow" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Yellow">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-lime" data-theme-class="theme-lime" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Lime">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-green" data-theme-class="theme-green" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Green">&nbsp;</a></div>
+									<div class="app-theme-list-item active"><a href="javascript:;" class="app-theme-list-link bg-teal" data-theme-class="" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Default">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-info" data-theme-class="theme-info"  data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Cyan">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-primary" data-theme-class="theme-primary"  data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Blue">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-purple" data-theme-class="theme-purple" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Purple">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-indigo" data-theme-class="theme-indigo" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Indigo">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-gray-100" data-theme-class="theme-gray-200" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Gray">&nbsp;</a></div>
+								</div>
+								<!-- END theme-list -->
+							</div>
+							<!-- END card-body -->
+							
+							<!-- BEGIN card-arrow -->
+							<div class="card-arrow">
+								<div class="card-arrow-top-left"></div>
+								<div class="card-arrow-top-right"></div>
+								<div class="card-arrow-bottom-left"></div>
+								<div class="card-arrow-bottom-right"></div>
+							</div>
+							<!-- END card-arrow -->
+						</div>
+						
+						<div class="small fw-bold text-white mb-1">Theme Cover</div>
+						<div class="card">
+							<!-- BEGIN card-body -->
+							<div class="card-body p-2">
+								<!-- BEGIN theme-cover -->
+								<div class="app-theme-cover">
+									<div class="app-theme-cover-item active">
+										<a href="javascript:;" class="app-theme-cover-link" style="background-image: url(assets/img/cover/cover-thumb-1.jpg);" data-theme-cover-class="" data-toggle="theme-cover-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Default">&nbsp;</a>
+									</div>
+									<div class="app-theme-cover-item">
+										<a href="javascript:;" class="app-theme-cover-link" style="background-image: url(assets/img/cover/cover-thumb-2.jpg);" data-theme-cover-class="bg-cover-2" data-toggle="theme-cover-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Cover 2">&nbsp;</a>
+									</div>
+									<div class="app-theme-cover-item">
+										<a href="javascript:;" class="app-theme-cover-link" style="background-image: url(assets/img/cover/cover-thumb-3.jpg);" data-theme-cover-class="bg-cover-3" data-toggle="theme-cover-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Cover 3">&nbsp;</a>
+									</div>
+									<div class="app-theme-cover-item">
+										<a href="javascript:;" class="app-theme-cover-link" style="background-image: url(assets/img/cover/cover-thumb-4.jpg);" data-theme-cover-class="bg-cover-4" data-toggle="theme-cover-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Cover 4">&nbsp;</a>
+									</div>
+									<div class="app-theme-cover-item">
+										<a href="javascript:;" class="app-theme-cover-link" style="background-image: url(assets/img/cover/cover-thumb-5.jpg);" data-theme-cover-class="bg-cover-5" data-toggle="theme-cover-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Cover 5">&nbsp;</a>
+									</div>
+								</div>
+								<!-- END theme-cover -->
+							</div>
+							<!-- END card-body -->
+							
+							<!-- BEGIN card-arrow -->
+							<div class="card-arrow">
+								<div class="card-arrow-top-left"></div>
+								<div class="card-arrow-top-right"></div>
+								<div class="card-arrow-bottom-left"></div>
+								<div class="card-arrow-bottom-right"></div>
+							</div>
+							<!-- END card-arrow -->
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- END theme-panel -->
+		</div>
+		<!-- END #app -->
 
 		<script>
-			//changes login to logout on page if logged in
+			//sets up login/logout menu link
 			if(localStorage.getItem("username"))
 			{
-				//document.getElementById('login_menu_item').innerHTML = "<a onclick='logout()'>logout</a>";
-				//document.getElementById('login_footer_item').innerHTML = "<a onclick='logout()' title='logout'><i class='fas fa-sign-out-alt fa-2x'></i></a>";
-				document.getElementById('login_menu_item').innerHTML = "<a href='logout.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1) + "'>logout</a>"
-				document.getElementById('login_footer_item').innerHTML = "<a href='logout.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1) + "'><i class='fas fa-sign-out-alt fa-2x'></i></a>"
+				document.getElementById('login_menu_item').innerHTML = "<a href='logout.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1) + "' class='menu-link'><span class='menu-icon'><i class='fas fa-sign-out-alt fa-1x'></i></span><span class='menu-text'>logout</span></a>";
+				document.getElementById('login_header_item').innerHTML = "logout <i class='fas fa-sign-out-alt fa-1x ms-auto text-theme fs-16px my-n1'></i>";
+				document.getElementById('login_header_item').href = "logout.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
 			}
 			else
 			{
-				document.getElementById('login_menu_item').innerHTML = "<a href='login.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1) + "'>login</a>"
-				document.getElementById('login_footer_item').innerHTML = "<a href='login.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1) + "'><i class='fas fa-sign-in-alt fa-2x'></i></a>"
+				document.getElementById('login_menu_item').innerHTML = "<a href='login.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1) + "' class='menu-link'><span class='menu-icon'><i class='fas fa-sign-in-alt fa-1x'></i></span><span class='menu-text'>login</span></a>";
+				document.getElementById('login_header_item').innerHTML = "login <i class='fas fa-sign-in-alt fa-1x ms-auto text-theme fs-16px my-n1'></i>";
+				document.getElementById('login_header_item').href = "login.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
 			}
 		
 			//prevent autocomplete
@@ -1037,10 +1432,8 @@
 				$(this).attr('autocomplete', 'off')
 			});
 		</script>
-
-		<script src="assets/js/browser.min.js"></script>
-		<script src="assets/js/breakpoints.min.js"></script>
-		<script src="assets/js/util.js"></script>
-		<script src="assets/js/main.js"></script>
+		
+		<script src="assets/js/vendor.min.js"></script>
+		<script src="assets/js/app.min.js"></script>
 	</body>
 </html>

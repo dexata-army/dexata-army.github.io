@@ -1,17 +1,16 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 	<head>
-		<title>Dexata - scams</title>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<title>Dexata - scams</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="description" content="" />
-		<meta name="keywords" content="" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<link rel="stylesheet" href="assets/css/pagestyle.css" />
-		<link rel="stylesheet" href="assets/css/print.css" />
 		<link rel="icon" type="image/svg" href="images/logo.png">
 		
-		<!-- Scripts -->
+		<link href="assets/css/vendor.min.css" rel="stylesheet" />
+		<link href="assets/css/app.min.css" rel="stylesheet" />
+		<link href="assets/css/pagestyle.css" rel="stylesheet" />
+		
 		<script src="assets/js/params.js"></script>
 		<script src="assets/js/sleep.js"></script>
 		<script src="assets/js/wallet.js"></script>
@@ -20,22 +19,8 @@
 		<script src="assets/js/crypto-js/crypto-js.js"></script>
 		
 		<script src="assets/js/jquery.min.js"></script>
-		<script src="assets/js/jquery.dropotron.min.js"></script>
-		<script src="assets/js/jquery.scrollex.min.js"></script>
-		<script src="assets/js/jquery.scrolly.min.js"></script>
 		
-		<!-- https://printjs.crabbly.com/ -->
-		<script src="assets/js/print.js"></script>
-		
-		<!-- Global site tag (gtag.js) - Google Analytics -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-D70JLR4EJM"></script>
-		<script>
-		  window.dataLayer = window.dataLayer || [];
-		  function gtag(){dataLayer.push(arguments);}
-		  gtag('js', new Date());
-		
-		  gtag('config', 'G-D70JLR4EJM');
-		</script>
+		<script src="https://kit.fontawesome.com/b51e6952ec.js"></script>
 
 		<script>
 			var user = "guest";
@@ -171,283 +156,587 @@
 			};
 		</script>
 	</head>
-	<body class="is-preload">
-		<!-- Header -->
-		<header id="header" class="alt">
-			<div class="logo" style="margin-top: -25px">
-				<noselect>
-					<a href="index.html"><img src="images/logo.png" height="45px" style="vertical-align: middle"> Dexata</a> &nbsp; 
-					<a href="search.html" title='search'><i class="fas fa-search fa-1x" style="vertical-align:middle"></i></a> 
-					<a href="config.html" title='config'><i class="fas fa-cogs fa-1x" style="vertical-align:middle"></i></a> 
-					<a href="manage_users.html" title='manage users'><i class="fas fa-user-cog fa-1x" style="vertical-align:middle"></i></a> 
-				</noselect>
-			</div>
-		
-			<nav id="nav">
-				<ul>
-					<li><a href="index.html">home</a></li>
-					<li><a href="coins.html">coins</a></li>
-					<li><a href="categories.html">categories</a></li>
-					<li><a href="charts.html">charts</a></li>
-					<li><a href="news.html">news</a></li>
-					<li><a href="scams.html">scams</a></li>
-					<li><a href="watchlist.html">watchlist</a></li>
-					<li><a href="wallet.html">wallet</a></li>
-					<li id="login_menu_item"></li>
-				</ul>
-			</nav>
-		</header>
-
-		<!-- Wrapper -->
-		<div id="wrapper">
-			<!-- One -->
-			<section id="one" class="wrapper style1">
-				<div class="inner">
-					<div class="spotlights">
-						<center>
-							<div class="spotlight" style="max-width:500px; margin-bottom: 50px">
-								<div class="content">
-									<h1><i class="fas fa-bomb fa-4x" style="vertical-align:middle"></i><br><noselect>Scam Search</noselect></h1>
+	<body class="theme-green">
+		<!-- BEGIN #app -->
+		<div id="app" class="app app-sidebar-collapsed">
+			<!-- BEGIN #header -->
+			<div id="header" class="app-header">
+				<!-- BEGIN desktop-toggler -->
+				<div class="desktop-toggler">
+					<button type="button" class="menu-toggler" data-toggle-class="app-sidebar-collapsed" data-dismiss-class="app-sidebar-toggled" data-toggle-target=".app">
+						<span class="bar"></span>
+						<span class="bar"></span>
+						<span class="bar"></span>
+					</button>
+				</div>
+				<!-- BEGIN desktop-toggler -->
+				
+				<!-- BEGIN mobile-toggler -->
+				<div class="mobile-toggler">
+					<button type="button" class="menu-toggler" data-toggle-class="app-sidebar-mobile-toggled" data-toggle-target=".app">
+						<span class="bar"></span>
+						<span class="bar"></span>
+						<span class="bar"></span>
+					</button>
+				</div>
+				<!-- END mobile-toggler -->
+				
+				<!-- BEGIN brand -->
+				<div class="brand">
+					<a href="index.html" class="brand-logo">
+						<img src="images/logo.png" style="max-height: 2rem"> Dexata
+					</a>
+				</div>
+				<!-- END brand -->
+				
+				<!-- BEGIN menu -->
+				<div class="menu">
+					<div class="menu-item dropdown">
+						<a href="#" data-toggle-class="app-header-menu-search-toggled" data-toggle-target=".app" class="menu-link">
+							<div class="menu-icon"><i class="bi bi-search nav-icon"></i></div>
+						</a>
+					</div>
+					<div class="menu-item dropdown dropdown-mobile-full">
+						<a href="javascript:;" data-toggle="theme-panel-expand" class="app-theme-toggle-btn"><i class="bi bi-sliders nav-icon"></i></a>
+						<a href="#" data-bs-toggle="dropdown" data-bs-display="static" class="menu-link">
+							<div class="menu-icon"><i class="bi bi-grid-3x3-gap nav-icon"></i></div>
+						</a>
+						<div class="dropdown-menu fade dropdown-menu-end w-300px text-center p-0 mt-1">
+							<div class="row row-grid gx-0">
+								<div class="col-4">
+									<a href="coins.html" class="dropdown-item text-decoration-none p-3 bg-none">
+										<div style="margin-top: 5px; margin-bottom: 5px"><i class="fas fa-coins fa-2x"></i></div>
+										<div class="fw-500 fs-10px text-white">coins</div>
+									</a>
+								</div>
+								<div class="col-4">
+									<a href="categories.html" class="dropdown-item text-decoration-none p-3 bg-none">
+										<div style="margin-top: 5px; margin-bottom: 5px"><i class="fas fa-cubes fa-2x"></i></div>
+										<div class="fw-500 fs-10px text-white">categories</div>
+									</a>
+								</div>
+								<div class="col-4">
+									<a href="charts.html" class="dropdown-item text-decoration-none p-3 bg-none">
+										<div style="margin-top: 5px; margin-bottom: 5px"><i class="fas fa-chart-area fa-2x"></i></div>
+										<div class="fw-500 fs-10px text-white">charts</div>
+									</a>
 								</div>
 							</div>
-		
-							<input id="search_input" placeholder="search" style="margin-bottom:15px">
-		
-							<div id="table_spotlight" class="spotlight" style="max-width: 100%; visibility: hidden">
-								<div id="table_div" class="xscroll">
-									<div id="no_results_msg" style=""></div>
-									<img id="loading_gif" src="" style="margin-top: 20px; max-width: 150px; display: none;">
-									<table id="search_table" class="scam" style="display: none; white-space: normal; word-wrap: break-word; line-height: 1.5">
-										<thead>
-											<tr>
-												<th>name</th>
-												<th>url</th>
-												<th>category</th>
-												<th>subcategory</th>
-												<th style="max-width: 200px; word-wrap: break-word">description</th>
-											</tr>
-										</thead>
-										<tfoot>
-											<tr>
-												<th>name</th>
-												<th>url</th>
-												<th>category</th>
-												<th>subcategory</th>
-												<th>description</th>
-											</tr>
-										</tfoot>
-									</table>
+							<div class="row row-grid gx-0">
+								<div class="col-4">
+									<a href="news.html" class="dropdown-item text-decoration-none p-3 bg-none">
+										<div style="margin-top: 5px; margin-bottom: 5px"><i class="fas fa-newspaper fa-2x"></i></div>
+										<div class="fw-500 fs-10px text-white">news</div>
+									</a>
+								</div>
+								<div class="col-4">
+									<a href="search.html" class="dropdown-item text-decoration-none p-3 bg-none">
+										<div style="margin-top: 5px; margin-bottom: 5px"><i class="fas fa-search fa-2x"></i></div>
+										<div class="fw-500 fs-10px text-white">search</div>
+									</a>
+								</div>
+								<div class="col-4">
+									<a href="manage_users.html" class="dropdown-item text-decoration-none p-3 bg-none">
+										<div style="margin-top: 5px; margin-bottom: 5px"><i class="fas fa-user-cog fa-2x"></i></div>
+										<div class="fw-500 fs-10px text-white">users</div>
+									</a>
 								</div>
 							</div>
-						</center>
+						</div>
+					</div>
+					<div class="menu-item dropdown dropdown-mobile-full">
+						<a href="#" data-bs-toggle="dropdown" data-bs-display="static" class="menu-link">
+							<div id="header_username" class="menu-text d-sm-block">guest</div>
+						</a>
+						<div class="dropdown-menu dropdown-menu-end me-lg-3 fs-11px mt-1">
+							<a class="dropdown-item d-flex align-items-center" href="watchlist.html">watchlist <i class="fas fa-binoculars fa-1x ms-auto text-theme fs-16px my-n1"></i></a>
+							<a class="dropdown-item d-flex align-items-center" href="wallet.html">wallet <i class="fas fa-wallet fa-1x ms-auto text-theme fs-16px my-n1"></i></a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item d-flex align-items-center" href="config.html">config <i class="fas fa-cogs fa-1x ms-auto text-theme fs-16px my-n1"></i></a>
+							<a id="login_header_item" class="dropdown-item d-flex align-items-center" href="login.html">login <i class="fas fa-sign-in-alt fa-1x ms-auto text-theme fs-16px my-n1"></i></a>
+						</div>
 					</div>
 				</div>
-			</section>
-		</div>
-		
-		<script>
-			var coins_data;
-		
-			window.addEventListener('keydown',this.keydown,false);
-		
-			function clear_table()
-			{
-				var table = document.getElementById("search_table");
-		
-				var no_rows = table.rows.length-1;
-				for(var i=0; i < no_rows; i++)
-					table.deleteRow(1);		
-		
-				document.getElementById('no_results_msg').style.display = "none";
-			}
-		
-			function search_coins()
-			{
-				var table = document.getElementById("search_table");
-				var no_coins_found = 0;
-		
-				var search_term = document.getElementById("search_input").value.toLowerCase();
-		
-				for(var i=0; i<coins_data['result'].length; i++)
+				<!-- END menu -->
+				
+				<!-- BEGIN menu-search -->
+				<div class="menu-search" name="header_search_form">
+					<div class="menu-search-container">
+						<div class="menu-search-icon"><i class="bi bi-search"></i></div>
+						<div class="menu-search-input">
+							<input id="search_box" type="text" class="form-control form-control-lg" placeholder="search" />
+						</div>
+						<div class="menu-search-icon">
+							<a href="#" data-toggle-class="app-header-menu-search-toggled" data-toggle-target=".app"><i class="bi bi-x-lg"></i></a>
+						</div>
+					</div>
+				</div>
+				<!-- END menu-search -->
+			</div>
+			<!-- END #header -->
+			
+			<script>
+				document.getElementById('header_username').innerHTML = user;
+			</script>
+			
+			<!-- BEGIN #sidebar -->
+			<div id="sidebar" class="app-sidebar">
+				<!-- BEGIN scrollbar -->
+				<div class="app-sidebar-content" data-scrollbar="true" data-height="100%">
+					<!-- BEGIN menu -->
+					<div class="menu">
+						<div class="menu-header">Navigation</div>
+						<div class="menu-item">
+							<a href="index.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-home fa-1x"></i></span>
+								<span class="menu-text">home</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="coins.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-coins fa-1x"></i></span>
+								<span class="menu-text">coins</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="categories.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-cubes fa-1x"></i></span>
+								<span class="menu-text">categories</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="charts.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-chart-area fa-1x"></i></span>
+								<span class="menu-text">charts</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="news.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-newspaper fa-1x"></i></span>
+								<span class="menu-text">news</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="scams.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-bomb fa-1x"></i></span>
+								<span class="menu-text">scams</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="search.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-search fa-1x"></i></span>
+								<span class="menu-text">search</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="watchlist.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-binoculars fa-1x"></i></span>
+								<span class="menu-text">watchlist</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="wallet.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-wallet fa-1x"></i></span>
+								<span class="menu-text">wallet</span>
+							</a>
+						</div>
+			
+						<div class="menu-header">Manage</div>
+						<div class="menu-item">
+							<a href="config.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-cogs fa-1x"></i></span>
+								<span class="menu-text">config</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="manage_users.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-user-cog fa-1x"></i></span>
+								<span class="menu-text">users</span>
+							</a>
+						</div>
+						<div id="login_menu_item" class="menu-item">
+							<a href="login.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-sign-in-alt fa-1x"></i></span>
+								<span class="menu-text">login</span>
+							</a>
+						</div>
+					</div>
+					<!-- END menu -->
+				</div>
+				<!-- END scrollbar -->
+			</div>
+			<!-- END #sidebar -->
+				
+			<!-- BEGIN mobile-sidebar-backdrop -->
+			<button class="app-sidebar-mobile-backdrop" data-toggle-target=".app" data-toggle-class="app-sidebar-mobile-toggled"></button>
+			<!-- END mobile-sidebar-backdrop -->
+			
+			<!-- BEGIN #content -->
+			<div id="content" class="app-content">
+				<div class="row">
+					<!-- title spotlight -->
+					<center>
+						<div id="title_spotlight" style="max-width: 100%; width: 400px">
+							<!-- BEGIN card -->
+							<div class="card mb-3">
+								<!-- BEGIN card-body -->
+								<div class="card-body">
+									<h1><i class="fas fa-bomb fa-4x" style="vertical-align:middle"></i><br><noselect>scam search</noselect></h1>
+								</div>
+								<!-- END card-body -->
+								
+								<!-- BEGIN card-arrow -->
+								<div class="card-arrow">
+									<div class="card-arrow-top-left"></div>
+									<div class="card-arrow-top-right"></div>
+									<div class="card-arrow-bottom-left"></div>
+									<div class="card-arrow-bottom-right"></div>
+								</div>
+								<!-- END card-arrow -->
+							</div>
+							<!-- END card -->
+						</div>
+					</center>
+				</div>
+			
+				<center>
+					<input id="search_input" placeholder="search" style="margin-bottom:15px"><br>
+				</center>
+			
+				<div class="row">
+					<!-- search div -->
+					<center>
+						<div id="table_spotlight" style="max-width: 100%; display: none">
+							<!-- BEGIN card -->
+							<div class="card mb-3">
+								<!-- BEGIN card-body -->
+								<div class="card-body">
+									<div id="table_div" class="xscroll">
+										<div id="no_results_msg" style=""></div>
+										<img id="loading_gif" src="" style="max-width: 150px">
+										<table id="search_table" class="scam" style="display: none; white-space: normal; word-wrap: break-word; line-height: 1.5">
+											<thead>
+												<tr>
+													<th>name</th>
+													<th>url</th>
+													<th>category</th>
+													<th>subcategory</th>
+													<th style="max-width: 200px; word-wrap: break-word">description</th>
+												</tr>
+											</thead>
+											<tfoot>
+												<tr>
+													<th>name</th>
+													<th>url</th>
+													<th>category</th>
+													<th>subcategory</th>
+													<th>description</th>
+												</tr>
+											</tfoot>
+										</table>
+									</div>
+								</div>
+								<!-- END card-body -->
+								
+								<!-- BEGIN card-arrow -->
+								<div class="card-arrow">
+									<div class="card-arrow-top-left"></div>
+									<div class="card-arrow-top-right"></div>
+									<div class="card-arrow-bottom-left"></div>
+									<div class="card-arrow-bottom-right"></div>
+								</div>
+								<!-- END card-arrow -->
+							</div>
+							<!-- END card -->
+						</div>
+					</center>
+				</div>
+			</div>
+			
+			<script>
+				var coins_data;
+			
+				window.addEventListener('keydown',this.keydown,false);
+			
+				function clear_table()
 				{
-					if(coins_data['result'][i]['name'] == search_term ||
-						coins_data['result'][i]['url'] == search_term ||
-						coins_data['result'][i]['category'] == search_term ||
-						coins_data['result'][i]['subcategory'] == search_term ||
-						coins_data['result'][i]['description'] == search_term)
+					var table = document.getElementById("search_table");
+			
+					var no_rows = table.rows.length-1;
+					for(var i=0; i < no_rows; i++)
+						table.deleteRow(1);		
+			
+					document.getElementById('no_results_msg').style.display = "none";
+				}
+			
+				function search_coins()
+				{
+					var table = document.getElementById("search_table");
+					var no_coins_found = 0;
+			
+					var search_term = document.getElementById("search_input").value.toLowerCase();
+			
+					for(var i=0; i<coins_data['result'].length; i++)
 					{
-						var row = table.insertRow(1);
-						no_coins_found++;
-		
-						row.insertCell(0).innerHTML = coins_data['result'][i]['name'];
-						row.insertCell(1).innerHTML = coins_data['result'][i]['url'];
-						row.insertCell(2).innerHTML = coins_data['result'][i]['category'];
-						row.insertCell(3).innerHTML = coins_data['result'][i]['subcategory'];
-						row.insertCell(4).innerHTML = coins_data['result'][i]['description'];
+						if(coins_data['result'][i]['name'] == search_term ||
+							coins_data['result'][i]['url'] == search_term ||
+							coins_data['result'][i]['category'] == search_term ||
+							coins_data['result'][i]['subcategory'] == search_term ||
+							coins_data['result'][i]['description'] == search_term)
+						{
+							var row = table.insertRow(1);
+							no_coins_found++;
+			
+							row.insertCell(0).innerHTML = coins_data['result'][i]['name'];
+							row.insertCell(1).innerHTML = coins_data['result'][i]['url'];
+							row.insertCell(2).innerHTML = coins_data['result'][i]['category'];
+							row.insertCell(3).innerHTML = coins_data['result'][i]['subcategory'];
+							row.insertCell(4).innerHTML = coins_data['result'][i]['description'];
+						}
+						else if((coins_data['result'][i]['name'] != undefined && coins_data['result'][i]['name'].toLowerCase().search(search_term) != -1) ||
+							(coins_data['result'][i]['url'] != undefined && coins_data['result'][i]['url'].toLowerCase().search(search_term) != -1) ||
+							(coins_data['result'][i]['category'] != undefined && coins_data['result'][i]['category'].toLowerCase().search(search_term) != -1) ||
+							(coins_data['result'][i]['subcategory'] != undefined && coins_data['result'][i]['subcategory'].toLowerCase().search(search_term) != -1) ||
+							(coins_data['result'][i]['description'] != undefined && coins_data['result'][i]['description'].toLowerCase().search(search_term) != -1))
+						{
+							var row = table.insertRow(no_coins_found+1);
+							no_coins_found++;
+			
+							row.insertCell(0).innerHTML = coins_data['result'][i]['name'];
+							row.insertCell(1).innerHTML = coins_data['result'][i]['url'];
+							row.insertCell(2).innerHTML = coins_data['result'][i]['category'];
+							row.insertCell(3).innerHTML = coins_data['result'][i]['subcategory'];
+							row.insertCell(4).innerHTML = coins_data['result'][i]['description'];
+						}
 					}
-					else if((coins_data['result'][i]['name'] != undefined && coins_data['result'][i]['name'].toLowerCase().search(search_term) != -1) ||
-						(coins_data['result'][i]['url'] != undefined && coins_data['result'][i]['url'].toLowerCase().search(search_term) != -1) ||
-						(coins_data['result'][i]['category'] != undefined && coins_data['result'][i]['category'].toLowerCase().search(search_term) != -1) ||
-						(coins_data['result'][i]['subcategory'] != undefined && coins_data['result'][i]['subcategory'].toLowerCase().search(search_term) != -1) ||
-						(coins_data['result'][i]['description'] != undefined && coins_data['result'][i]['description'].toLowerCase().search(search_term) != -1))
+			
+					document.getElementById("loading_gif").src = "";
+					document.getElementById("loading_gif").style.display = "none";
+					document.getElementById("search_table").style.display = "inline";
+			
+					if(no_coins_found > 0)
+						document.getElementById('table_spotlight').style.width = (document.getElementById('search_table').offsetWidth + 70) + "px";
+					else
 					{
-						var row = table.insertRow(no_coins_found+1);
-						no_coins_found++;
-		
-						row.insertCell(0).innerHTML = coins_data['result'][i]['name'];
-						row.insertCell(1).innerHTML = coins_data['result'][i]['url'];
-						row.insertCell(2).innerHTML = coins_data['result'][i]['category'];
-						row.insertCell(3).innerHTML = coins_data['result'][i]['subcategory'];
-						row.insertCell(4).innerHTML = coins_data['result'][i]['description'];
+						document.getElementById("search_table").style.display = "none";
+						document.getElementById('table_spotlight').style.width = "500px";
+						document.getElementById('no_results_msg').innerHTML = "<p style='margin-top: 20px; margin-bottom: 10px'>No scam coins found for '" + search_term + "'</p><p style='margin-bottom: 10px'><b>Note:</b> Not all scams are known to us yet</p>";
+						document.getElementById('no_results_msg').style.display = "inline";
 					}
 				}
-		
-				document.getElementById("loading_gif").src = "";
-				document.getElementById("loading_gif").style.display = "none";
-				document.getElementById("loading_gif").style.visibility = "hidden";
-				document.getElementById("search_table").style.display = "inline";
-		
-				if(no_coins_found > 0)
-					document.getElementById('table_spotlight').style.width = (document.getElementById('search_table').offsetWidth + 70) + "px";
-				else
+			
+				function fetch_coins_list()
 				{
-					document.getElementById("search_table").style.display = "none";
-					document.getElementById('table_spotlight').style.width = "500px";
-					document.getElementById('no_results_msg').innerHTML = "<p style='margin-top: 20px; margin-bottom: 10px'>No scam coins found for '" + search_term + "'</p><p style='margin-bottom: 10px'><b>Note:</b> Not all scams are known to us yet</p>";
-					document.getElementById('no_results_msg').style.display = "inline";
+					$(document).ready(function(){
+						$.get(
+				    	    'https://api.cryptoscamdb.org/v1/scams',              
+							function(data) {
+								coins_data = data;
+								if(document.getElementById('search_input').value != "")
+								{
+									clear_table();
+									search_coins();
+									document.getElementById("search_input").scrollIntoView();
+								}
+						}).fail(function() {
+							clear_table();
+							document.getElementById('loading_gif').src = "";
+							document.getElementById('loading_gif').style.display = "none";
+							document.getElementById("table_spotlight").style.width = "600px";
+			
+							document.getElementById("table_div").innerHTML = "<p style='margin-top: 20px; margin-bottom: 10px'>failed to fetch scam coins information, please refresh to try again.</p>";
+						});
+					});
 				}
-			}
-		
-			function fetch_coins_list()
-			{
-				$(document).ready(function(){
-					$.get(
-			    	    'https://api.cryptoscamdb.org/v1/scams',              
-						function(data) {
-							coins_data = data;
-							if(document.getElementById('search_input').value != "")
+			
+				function keydown(e)
+				{
+					var code = e.keyCode;
+					
+					if(document.activeElement.tagName == "INPUT")
+					{
+						if(code == 13)
+						{
+							if(document.activeElement.id == "search_input")
 							{
 								clear_table();
-								search_coins();
-								document.getElementById("search_input").scrollIntoView();
+								document.getElementById("search_table").style.display = "none";
+								document.getElementById("loading_gif").src = "images/loading.gif";
+								document.getElementById("loading_gif").style.display = "block";
+								document.getElementById("table_spotlight").style.display = "block";
+								sleep(50).then(() => { search_coins() });
 							}
-					}).fail(function() {
-						clear_table();
-						document.getElementById('loading_gif').src = "";
-						document.getElementById('loading_gif').style.visibility = "hidden";
-						document.getElementById('loading_gif').style.display = "none";
-						document.getElementById("table_spotlight").style.width = "600px";
-		
-						document.getElementById("table_div").innerHTML = "<p style='margin-top: 20px; margin-bottom: 10px'>failed to fetch scam coins information, please refresh to try again.</p>";
-					});
-				});
-			}
-		
-			function keydown(e)
-			{
-				var code = e.keyCode;
-				
-				if(document.activeElement.tagName == "INPUT")
-				{
-					if(code == 13)
-					{
-						if(document.activeElement.id == "search_input")
-						{
-							clear_table();
-							document.getElementById("search_table").style.display = "none";
-							document.getElementById("loading_gif").style.display = "inline";
-							document.getElementById("loading_gif").src = "images/loading.gif";
-							document.getElementById("loading_gif").style.visibility = "visible";
-							document.getElementById("table_spotlight").style.visibility = "visible";
-							sleep(50).then(() => { search_coins() });
 						}
 					}
 				}
-			}
-		
-			if(param_map.get('term') != undefined)
-			{
-				document.getElementById('search_input').value = param_map.get('term');
-		
-				document.getElementById("search_table").style.display = "none";
-				document.getElementById("loading_gif").style.display = "inline";
-				document.getElementById("loading_gif").src = "images/loading.gif";
-				document.getElementById("loading_gif").style.visibility = "visible";
-				document.getElementById("table_spotlight").style.visibility = "visible";
-			}
-		
-			document.getElementById('table_spotlight').style.width = (document.getElementById('loading_gif').offsetWidth + 400) + "px";
-		
-			fetch_coins_list();
-		</script>
+			
+				if(param_map.get('term') != undefined)
+				{
+					document.getElementById('search_input').value = param_map.get('term');
+			
+					document.getElementById("search_table").style.display = "none";
+					document.getElementById("loading_gif").src = "images/loading.gif";
+					document.getElementById("loading_gif").style.display = "block";
+					document.getElementById("table_spotlight").style.display = "block";
+				}
+			
+				document.getElementById('table_spotlight').style.width = (document.getElementById('loading_gif').offsetWidth + 400) + "px";
+			
+				fetch_coins_list();
+			</script>
 
-		<!-- Footer -->
-		<div class="footer wrapper">
-			<div class="inner" style="text-align:center">
-				<noselect>
-					<p>
-						<a href="search.html" title='search'><i class="fas fa-search fa-2x"></i></a> &nbsp;
-						<a href="coins.html" title='coins'><i class="fas fa-coins fa-2x"></i></a> &nbsp;
-						<a href="categories.html" title='categories'><i class="fas fa-cubes fa-2x"></i></a> &nbsp;
-						<a href="charts.html" title='charts'><i class="fas fa-chart-area fa-2x"></i></a> &nbsp;
-						<a href="news.html" title='news'><i class="fas fa-newspaper fa-2x"></i></a> &nbsp;
-						<a href="scams.html" title='scams'><i class="fas fa-bomb fa-2x"></i></a> &nbsp;
-						<a href="watchlist.html" title='watchlist'><i class="fas fa-binoculars fa-2x"></i></a> &nbsp;
-						<a href="wallet.html" title='wallet tracker'><i class="fas fa-wallet fa-2x"></i></a><br>
-						
-						<a href="https://t.me/dexata_army" title='telegram'><i class="icon brands fa-telegram-plane fa-2x"></i></a> &nbsp;
-						<a href="https://twitter.com/dexata_army" title='twitter'><i class="icon brands fa-twitter fa-2x"></i></a> &nbsp;
-						<a href="https://github.com/dexata-army" title='github'><i class="icon brands fa-github-alt fa-2x"></i></a> &nbsp;
-						<a href="config.html" title='config'><i class="fas fa-cogs fa-2x"></i></a> &nbsp;
-						<a href="manage_users.html" title='manage users'><i class="fas fa-user-cog fa-2x"></i></a> &nbsp;
-						<text id="login_footer_item" style="display: inline-block"><a href="login.html" title='login'><i class="fas fa-sign-in-alt fa-2x"></i></a></text>
-					</p>
-		
-					<p>
-						<input id="footer_search_box" placeholder="search">
-					</p>
-		
-					<p class="copyright">
-						&copy;<script>document.write(new Date().getFullYear())</script> Dexata
-					</p>
-				</noselect>
+			<!-- BEGIN #footer -->
+			<div id="footer" class="app-content">
+				<div class="row">
+					<!-- footer -->
+					<noselect>
+						<center>
+							<div style="width: 300px; max-width: 100%">
+								<!-- BEGIN card -->
+								<div class="card mb-3">
+									<!-- BEGIN card-body -->
+									<div class="card-body copyright">
+										&copy;<script>document.write(new Date().getFullYear())</script> Dexata
+									</div>
+									<!-- END card-body -->
+									
+									<!-- BEGIN card-arrow -->
+									<div class="card-arrow">
+										<div class="card-arrow-top-left"></div>
+										<div class="card-arrow-top-right"></div>
+										<div class="card-arrow-bottom-left"></div>
+										<div class="card-arrow-bottom-right"></div>
+									</div>
+									<!-- END card-arrow -->
+								</div>
+								<!-- END card -->
+							</div>
+			
+							<p>
+								<input id="footer_search_box" placeholder="search">
+							</p></center>
+					</noselect>
+				</div>
 			</div>
-		</div>
-		
-		<script>
-			window.addEventListener('keydown',this.keydown,false);
-		
-			function keydown(e)
-			{
-				var code = e.keyCode;
-				
-				if(document.activeElement.tagName == "INPUT")
+			
+			<script>
+				window.addEventListener('keydown',this.keydown,false);
+			
+				function keydown(e)
 				{
-					if(code == 13)
+					var code = e.keyCode;
+					
+					if(document.activeElement.tagName == "INPUT")
 					{
-						if(document.activeElement.id == "footer_search_box" &&
-							document.getElementById('footer_search_box').value != "")
+						if(code == 13)
 						{
-							window.location.href = "search.html?term=" + document.getElementById('footer_search_box').value;
+							if(document.activeElement.id == "footer_search_box" &&
+								document.getElementById('footer_search_box').value != "")
+								window.location.href = "search.html?term=" + document.getElementById('footer_search_box').value;
+							else if(document.activeElement.id == "search_box" &&
+								document.getElementById('search_box').value != "")
+								window.location.href = "search.html?term=" + document.getElementById('search_box').value;
 						}
 					}
 				}
-			}
-		</script>
+			</script>
+			
+			<!-- BEGIN btn-scroll-top -->
+			<a href="#" data-toggle="scroll-to-top" class="btn-scroll-top fade"><i class="fa fa-arrow-up"></i></a>
+			<!-- END btn-scroll-top -->
+
+			<!-- BEGIN theme-panel -->
+			<div class="app-theme-panel">
+				<div class="app-theme-panel-container">
+					<div class="app-theme-panel-content">
+						<div class="small fw-bold text-white mb-1">Theme Color</div>
+						<div class="card mb-3">
+							<!-- BEGIN card-body -->
+							<div class="card-body p-2">
+								<!-- BEGIN theme-list -->
+								<div class="app-theme-list">
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-pink" data-theme-class="theme-pink" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Pink">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-red" data-theme-class="theme-red" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Red">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-warning" data-theme-class="theme-warning" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Orange">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-yellow" data-theme-class="theme-yellow" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Yellow">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-lime" data-theme-class="theme-lime" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Lime">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-green" data-theme-class="theme-green" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Green">&nbsp;</a></div>
+									<div class="app-theme-list-item active"><a href="javascript:;" class="app-theme-list-link bg-teal" data-theme-class="" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Default">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-info" data-theme-class="theme-info"  data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Cyan">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-primary" data-theme-class="theme-primary"  data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Blue">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-purple" data-theme-class="theme-purple" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Purple">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-indigo" data-theme-class="theme-indigo" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Indigo">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-gray-100" data-theme-class="theme-gray-200" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Gray">&nbsp;</a></div>
+								</div>
+								<!-- END theme-list -->
+							</div>
+							<!-- END card-body -->
+							
+							<!-- BEGIN card-arrow -->
+							<div class="card-arrow">
+								<div class="card-arrow-top-left"></div>
+								<div class="card-arrow-top-right"></div>
+								<div class="card-arrow-bottom-left"></div>
+								<div class="card-arrow-bottom-right"></div>
+							</div>
+							<!-- END card-arrow -->
+						</div>
+						
+						<div class="small fw-bold text-white mb-1">Theme Cover</div>
+						<div class="card">
+							<!-- BEGIN card-body -->
+							<div class="card-body p-2">
+								<!-- BEGIN theme-cover -->
+								<div class="app-theme-cover">
+									<div class="app-theme-cover-item active">
+										<a href="javascript:;" class="app-theme-cover-link" style="background-image: url(assets/img/cover/cover-thumb-1.jpg);" data-theme-cover-class="" data-toggle="theme-cover-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Default">&nbsp;</a>
+									</div>
+									<div class="app-theme-cover-item">
+										<a href="javascript:;" class="app-theme-cover-link" style="background-image: url(assets/img/cover/cover-thumb-2.jpg);" data-theme-cover-class="bg-cover-2" data-toggle="theme-cover-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Cover 2">&nbsp;</a>
+									</div>
+									<div class="app-theme-cover-item">
+										<a href="javascript:;" class="app-theme-cover-link" style="background-image: url(assets/img/cover/cover-thumb-3.jpg);" data-theme-cover-class="bg-cover-3" data-toggle="theme-cover-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Cover 3">&nbsp;</a>
+									</div>
+									<div class="app-theme-cover-item">
+										<a href="javascript:;" class="app-theme-cover-link" style="background-image: url(assets/img/cover/cover-thumb-4.jpg);" data-theme-cover-class="bg-cover-4" data-toggle="theme-cover-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Cover 4">&nbsp;</a>
+									</div>
+									<div class="app-theme-cover-item">
+										<a href="javascript:;" class="app-theme-cover-link" style="background-image: url(assets/img/cover/cover-thumb-5.jpg);" data-theme-cover-class="bg-cover-5" data-toggle="theme-cover-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Cover 5">&nbsp;</a>
+									</div>
+								</div>
+								<!-- END theme-cover -->
+							</div>
+							<!-- END card-body -->
+							
+							<!-- BEGIN card-arrow -->
+							<div class="card-arrow">
+								<div class="card-arrow-top-left"></div>
+								<div class="card-arrow-top-right"></div>
+								<div class="card-arrow-bottom-left"></div>
+								<div class="card-arrow-bottom-right"></div>
+							</div>
+							<!-- END card-arrow -->
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- END theme-panel -->
+		</div>
+		<!-- END #app -->
 
 		<script>
-			//changes login to logout on page if logged in
+			//sets up login/logout menu link
 			if(localStorage.getItem("username"))
 			{
-				//document.getElementById('login_menu_item').innerHTML = "<a onclick='logout()'>logout</a>";
-				//document.getElementById('login_footer_item').innerHTML = "<a onclick='logout()' title='logout'><i class='fas fa-sign-out-alt fa-2x'></i></a>";
-				document.getElementById('login_menu_item').innerHTML = "<a href='logout.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1) + "'>logout</a>"
-				document.getElementById('login_footer_item').innerHTML = "<a href='logout.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1) + "'><i class='fas fa-sign-out-alt fa-2x'></i></a>"
+				document.getElementById('login_menu_item').innerHTML = "<a href='logout.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1) + "' class='menu-link'><span class='menu-icon'><i class='fas fa-sign-out-alt fa-1x'></i></span><span class='menu-text'>logout</span></a>";
+				document.getElementById('login_header_item').innerHTML = "logout <i class='fas fa-sign-out-alt fa-1x ms-auto text-theme fs-16px my-n1'></i>";
+				document.getElementById('login_header_item').href = "logout.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
 			}
 			else
 			{
-				document.getElementById('login_menu_item').innerHTML = "<a href='login.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1) + "'>login</a>"
-				document.getElementById('login_footer_item').innerHTML = "<a href='login.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1) + "'><i class='fas fa-sign-in-alt fa-2x'></i></a>"
+				document.getElementById('login_menu_item').innerHTML = "<a href='login.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1) + "' class='menu-link'><span class='menu-icon'><i class='fas fa-sign-in-alt fa-1x'></i></span><span class='menu-text'>login</span></a>";
+				document.getElementById('login_header_item').innerHTML = "login <i class='fas fa-sign-in-alt fa-1x ms-auto text-theme fs-16px my-n1'></i>";
+				document.getElementById('login_header_item').href = "login.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
 			}
 		
 			//prevent autocomplete
@@ -455,10 +744,8 @@
 				$(this).attr('autocomplete', 'off')
 			});
 		</script>
-
-		<script src="assets/js/browser.min.js"></script>
-		<script src="assets/js/breakpoints.min.js"></script>
-		<script src="assets/js/util.js"></script>
-		<script src="assets/js/main.js"></script>
+		
+		<script src="assets/js/vendor.min.js"></script>
+		<script src="assets/js/app.min.js"></script>
 	</body>
 </html>

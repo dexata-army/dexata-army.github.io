@@ -1,17 +1,16 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 	<head>
-		<title>Dexata - coin</title>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<title>Dexata - coin</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="description" content="" />
-		<meta name="keywords" content="" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<link rel="stylesheet" href="assets/css/pagestyle.css" />
-		<link rel="stylesheet" href="assets/css/print.css" />
 		<link rel="icon" type="image/svg" href="images/logo.png">
 		
-		<!-- Scripts -->
+		<link href="assets/css/vendor.min.css" rel="stylesheet" />
+		<link href="assets/css/app.min.css" rel="stylesheet" />
+		<link href="assets/css/pagestyle.css" rel="stylesheet" />
+		
 		<script src="assets/js/params.js"></script>
 		<script src="assets/js/sleep.js"></script>
 		<script src="assets/js/wallet.js"></script>
@@ -20,22 +19,8 @@
 		<script src="assets/js/crypto-js/crypto-js.js"></script>
 		
 		<script src="assets/js/jquery.min.js"></script>
-		<script src="assets/js/jquery.dropotron.min.js"></script>
-		<script src="assets/js/jquery.scrollex.min.js"></script>
-		<script src="assets/js/jquery.scrolly.min.js"></script>
 		
-		<!-- https://printjs.crabbly.com/ -->
-		<script src="assets/js/print.js"></script>
-		
-		<!-- Global site tag (gtag.js) - Google Analytics -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-D70JLR4EJM"></script>
-		<script>
-		  window.dataLayer = window.dataLayer || [];
-		  function gtag(){dataLayer.push(arguments);}
-		  gtag('js', new Date());
-		
-		  gtag('config', 'G-D70JLR4EJM');
-		</script>
+		<script src="https://kit.fontawesome.com/b51e6952ec.js"></script>
 
 		<script>
 			var user = "guest";
@@ -171,105 +156,371 @@
 			};
 		</script>
 	</head>
-	<body class="is-preload">
-		<!-- Header -->
-		<header id="header" class="alt">
-			<div class="logo" style="margin-top: -25px">
-				<noselect>
-					<a href="index.html"><img src="images/logo.png" height="45px" style="vertical-align: middle"> Dexata</a> &nbsp; 
-					<a href="search.html" title='search'><i class="fas fa-search fa-1x" style="vertical-align:middle"></i></a> 
-					<a href="config.html" title='config'><i class="fas fa-cogs fa-1x" style="vertical-align:middle"></i></a> 
-					<a href="manage_users.html" title='manage users'><i class="fas fa-user-cog fa-1x" style="vertical-align:middle"></i></a> 
-				</noselect>
+	<body class="theme-green">
+		<!-- BEGIN #app -->
+		<div id="app" class="app app-sidebar-collapsed">
+			<!-- BEGIN #header -->
+			<div id="header" class="app-header">
+				<!-- BEGIN desktop-toggler -->
+				<div class="desktop-toggler">
+					<button type="button" class="menu-toggler" data-toggle-class="app-sidebar-collapsed" data-dismiss-class="app-sidebar-toggled" data-toggle-target=".app">
+						<span class="bar"></span>
+						<span class="bar"></span>
+						<span class="bar"></span>
+					</button>
+				</div>
+				<!-- BEGIN desktop-toggler -->
+				
+				<!-- BEGIN mobile-toggler -->
+				<div class="mobile-toggler">
+					<button type="button" class="menu-toggler" data-toggle-class="app-sidebar-mobile-toggled" data-toggle-target=".app">
+						<span class="bar"></span>
+						<span class="bar"></span>
+						<span class="bar"></span>
+					</button>
+				</div>
+				<!-- END mobile-toggler -->
+				
+				<!-- BEGIN brand -->
+				<div class="brand">
+					<a href="index.html" class="brand-logo">
+						<img src="images/logo.png" style="max-height: 2rem"> Dexata
+					</a>
+				</div>
+				<!-- END brand -->
+				
+				<!-- BEGIN menu -->
+				<div class="menu">
+					<div class="menu-item dropdown">
+						<a href="#" data-toggle-class="app-header-menu-search-toggled" data-toggle-target=".app" class="menu-link">
+							<div class="menu-icon"><i class="bi bi-search nav-icon"></i></div>
+						</a>
+					</div>
+					<div class="menu-item dropdown dropdown-mobile-full">
+						<a href="javascript:;" data-toggle="theme-panel-expand" class="app-theme-toggle-btn"><i class="bi bi-sliders nav-icon"></i></a>
+						<a href="#" data-bs-toggle="dropdown" data-bs-display="static" class="menu-link">
+							<div class="menu-icon"><i class="bi bi-grid-3x3-gap nav-icon"></i></div>
+						</a>
+						<div class="dropdown-menu fade dropdown-menu-end w-300px text-center p-0 mt-1">
+							<div class="row row-grid gx-0">
+								<div class="col-4">
+									<a href="coins.html" class="dropdown-item text-decoration-none p-3 bg-none">
+										<div style="margin-top: 5px; margin-bottom: 5px"><i class="fas fa-coins fa-2x"></i></div>
+										<div class="fw-500 fs-10px text-white">coins</div>
+									</a>
+								</div>
+								<div class="col-4">
+									<a href="categories.html" class="dropdown-item text-decoration-none p-3 bg-none">
+										<div style="margin-top: 5px; margin-bottom: 5px"><i class="fas fa-cubes fa-2x"></i></div>
+										<div class="fw-500 fs-10px text-white">categories</div>
+									</a>
+								</div>
+								<div class="col-4">
+									<a href="charts.html" class="dropdown-item text-decoration-none p-3 bg-none">
+										<div style="margin-top: 5px; margin-bottom: 5px"><i class="fas fa-chart-area fa-2x"></i></div>
+										<div class="fw-500 fs-10px text-white">charts</div>
+									</a>
+								</div>
+							</div>
+							<div class="row row-grid gx-0">
+								<div class="col-4">
+									<a href="news.html" class="dropdown-item text-decoration-none p-3 bg-none">
+										<div style="margin-top: 5px; margin-bottom: 5px"><i class="fas fa-newspaper fa-2x"></i></div>
+										<div class="fw-500 fs-10px text-white">news</div>
+									</a>
+								</div>
+								<div class="col-4">
+									<a href="search.html" class="dropdown-item text-decoration-none p-3 bg-none">
+										<div style="margin-top: 5px; margin-bottom: 5px"><i class="fas fa-search fa-2x"></i></div>
+										<div class="fw-500 fs-10px text-white">search</div>
+									</a>
+								</div>
+								<div class="col-4">
+									<a href="manage_users.html" class="dropdown-item text-decoration-none p-3 bg-none">
+										<div style="margin-top: 5px; margin-bottom: 5px"><i class="fas fa-user-cog fa-2x"></i></div>
+										<div class="fw-500 fs-10px text-white">users</div>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="menu-item dropdown dropdown-mobile-full">
+						<a href="#" data-bs-toggle="dropdown" data-bs-display="static" class="menu-link">
+							<div id="header_username" class="menu-text d-sm-block">guest</div>
+						</a>
+						<div class="dropdown-menu dropdown-menu-end me-lg-3 fs-11px mt-1">
+							<a class="dropdown-item d-flex align-items-center" href="watchlist.html">watchlist <i class="fas fa-binoculars fa-1x ms-auto text-theme fs-16px my-n1"></i></a>
+							<a class="dropdown-item d-flex align-items-center" href="wallet.html">wallet <i class="fas fa-wallet fa-1x ms-auto text-theme fs-16px my-n1"></i></a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item d-flex align-items-center" href="config.html">config <i class="fas fa-cogs fa-1x ms-auto text-theme fs-16px my-n1"></i></a>
+							<a id="login_header_item" class="dropdown-item d-flex align-items-center" href="login.html">login <i class="fas fa-sign-in-alt fa-1x ms-auto text-theme fs-16px my-n1"></i></a>
+						</div>
+					</div>
+				</div>
+				<!-- END menu -->
+				
+				<!-- BEGIN menu-search -->
+				<div class="menu-search" name="header_search_form">
+					<div class="menu-search-container">
+						<div class="menu-search-icon"><i class="bi bi-search"></i></div>
+						<div class="menu-search-input">
+							<input id="search_box" type="text" class="form-control form-control-lg" placeholder="search" />
+						</div>
+						<div class="menu-search-icon">
+							<a href="#" data-toggle-class="app-header-menu-search-toggled" data-toggle-target=".app"><i class="bi bi-x-lg"></i></a>
+						</div>
+					</div>
+				</div>
+				<!-- END menu-search -->
 			</div>
-		
-			<nav id="nav">
-				<ul>
-					<li><a href="index.html">home</a></li>
-					<li><a href="coins.html">coins</a></li>
-					<li><a href="categories.html">categories</a></li>
-					<li><a href="charts.html">charts</a></li>
-					<li><a href="news.html">news</a></li>
-					<li><a href="scams.html">scams</a></li>
-					<li><a href="watchlist.html">watchlist</a></li>
-					<li><a href="wallet.html">wallet</a></li>
-					<li id="login_menu_item"></li>
-				</ul>
-			</nav>
-		</header>
-
-		<!-- Wrapper -->
-		<div id="wrapper">
-			<!-- One -->
-			<section id="one" class="wrapper style1">
-				<div class="inner">
-					<div class="spotlights">
-						<center>
-							<div id="title_spotlight" class="spotlight" style="max-width:100%; margin-bottom: 20px">
-								<div id="title_div" class="content">
-									<h1 id="coin_title" style="margin-top: 5px"></h1>
+			<!-- END #header -->
+			
+			<script>
+				document.getElementById('header_username').innerHTML = user;
+			</script>
+			
+			<!-- BEGIN #sidebar -->
+			<div id="sidebar" class="app-sidebar">
+				<!-- BEGIN scrollbar -->
+				<div class="app-sidebar-content" data-scrollbar="true" data-height="100%">
+					<!-- BEGIN menu -->
+					<div class="menu">
+						<div class="menu-header">Navigation</div>
+						<div class="menu-item">
+							<a href="index.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-home fa-1x"></i></span>
+								<span class="menu-text">home</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="coins.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-coins fa-1x"></i></span>
+								<span class="menu-text">coins</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="categories.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-cubes fa-1x"></i></span>
+								<span class="menu-text">categories</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="charts.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-chart-area fa-1x"></i></span>
+								<span class="menu-text">charts</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="news.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-newspaper fa-1x"></i></span>
+								<span class="menu-text">news</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="scams.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-bomb fa-1x"></i></span>
+								<span class="menu-text">scams</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="search.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-search fa-1x"></i></span>
+								<span class="menu-text">search</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="watchlist.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-binoculars fa-1x"></i></span>
+								<span class="menu-text">watchlist</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="wallet.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-wallet fa-1x"></i></span>
+								<span class="menu-text">wallet</span>
+							</a>
+						</div>
+			
+						<div class="menu-header">Manage</div>
+						<div class="menu-item">
+							<a href="config.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-cogs fa-1x"></i></span>
+								<span class="menu-text">config</span>
+							</a>
+						</div>
+						<div class="menu-item">
+							<a href="manage_users.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-user-cog fa-1x"></i></span>
+								<span class="menu-text">users</span>
+							</a>
+						</div>
+						<div id="login_menu_item" class="menu-item">
+							<a href="login.html" class="menu-link">
+								<span class="menu-icon"><i class="fas fa-sign-in-alt fa-1x"></i></span>
+								<span class="menu-text">login</span>
+							</a>
+						</div>
+					</div>
+					<!-- END menu -->
+				</div>
+				<!-- END scrollbar -->
+			</div>
+			<!-- END #sidebar -->
+				
+			<!-- BEGIN mobile-sidebar-backdrop -->
+			<button class="app-sidebar-mobile-backdrop" data-toggle-target=".app" data-toggle-class="app-sidebar-mobile-toggled"></button>
+			<!-- END mobile-sidebar-backdrop -->
+			
+			<!-- BEGIN #content -->
+			<div id="content" class="app-content">
+				<div class="row">
+					<!-- coin title -->
+					<center>
+						<div style="width: 500px; max-width: 100%;">
+							<!-- BEGIN card -->
+							<div class="card mb-3">
+								<!-- BEGIN card-body -->
+								<div class="card-body">
+									<!-- BEGIN title -->
+									<div class="d-flex fw-bold small mb-3">
+										<h3 class="flex-grow-1" id="coin_title">Dexata</h3>
+									</div>
+									<!-- END title -->
+			
 									<noselect>
-										<p style="margin-top:0px; margin-bottom: 0px" id="coin_links"></p>
-										<p style="margin-top:5px; margin-bottom: 10px" id="other_links"></p>
-										<a id="show_watchlist_icon" onclick="show_watchlists_table()" style="max-width: 100%; margin-top: 0px"><i class='fas fa-eye fa-2x'></i></a>
-										<div id="watchlists_spotlight" class="spotlight" style="display: none; overflow: hidden; margin-top: -10px;margin-bottom: 0px">
+										<p style="margin-top:0px; margin-bottom: 10px" id="coin_links"></p>
+										<p style="margin-top:10px; margin-bottom: 10px" id="other_links"></p>
+										<a id="show_watchlist_icon" onclick="show_watchlists_table()" style="max-width: 100%; margin-top: 10px"><i class='fas fa-eye fa-2x'></i></a>
+										<div id="watchlists_spotlight" class="spotlight" style="display: none; overflow: hidden; margin-top: 0px; margin-bottom: 0px">
 											<table id="watchlists_table" style="text-align: left; width: auto"></table>
 										</div>
 									</noselect>
 								</div>
-							</div>
-							<div id="contract_spotlight" class="spotlight" style="max-width: 100%; max-height: 250px; overflow-y: scroll; display: none; margin-bottom: 20px;">
-								<div id="contract_table_div" class="xscroll" style="max-width: 100%">
-									<table id="contract_table" style="text-align:center">
-										<tr>
-											<td></td>
-											<td><b>contract</b></td>
-											<td></td>
-										</tr>
-									</table>
+								<!-- END card-body -->
+								
+								<!-- BEGIN card-arrow -->
+								<div class="card-arrow">
+									<div class="card-arrow-top-left"></div>
+									<div class="card-arrow-top-right"></div>
+									<div class="card-arrow-bottom-left"></div>
+									<div class="card-arrow-bottom-right"></div>
 								</div>
+								<!-- END card-arrow -->
 							</div>
-							<div id="page_div">
-								<div id="data_table_spotlight" class="spotlight" style="width: 350px; max-width: 100%; display:inline-block; margin-bottom: 20px; vertical-align: top;">
-									<div id="data_table_div" class="xscroll">
-										<table id="data_table" style="text-align:right">
-											<tr>
-												<td><b>price:</b></td>
-												<td></td>
-											</tr>
-											<tr>
-												<td><b>market cap rank:</b></td>
-												<td></td>
-											</tr>
-											<tr>
-												<td><b>market cap:</b></td>
-												<td></td>
-											</tr>
-											<tr>
-												<td><b>diluted<br>market cap:</b></td>
-												<td></td>
-											</tr>
-											<tr>
-												<td><b>volume:</b></td>
-												<td></td>
-											</tr>
-											<tr>
-												<td><b>total supply:</b></td>
-												<td></td>
-											</tr>
-											<tr>
-												<td><b>max supply:</b></td>
-												<td></td>
-											</tr>
-											<tr>
-												<td><b>circulating supply:</b></td>
-												<td></td>
-											</tr>
-										</table>
+							<!-- END card -->
+						</div>
+					</center>
+				</div>
+			
+				<div class="row">
+					<!-- contract table -->
+					<center>
+						<div id="contract_spotlight" style="width: auto; max-width: 100%; display: none">
+							<!-- BEGIN card -->
+							<div class="card mb-3">
+								<!-- BEGIN card-body -->
+								<div class="card-body">
+									<!-- BEGIN title -->
+									<div class="d-flex fw-bold small mb-3">
+										<span class="flex-grow-1">contracts</span>
+										<a href="#" data-toggle="card-expand" class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
 									</div>
+									<!-- END title -->
+			
+									<center>
+										<div id="contract_table_div" class="xscroll" style="max-width: 100%; max-height: 60vh">
+											<table id="contract_table" style="text-align:center">
+											</table>
+										</div>
+									</center>
 								</div>
-								<div id="rhs_table_div" style="max-width: 100%; display:inline-block; vertical-align: top;">
-									<div id="change_table_spotlight" class="spotlight" style="width: 600px; max-width: 100%; margin-bottom: 20px">
+								<!-- END card-body -->
+								
+								<!-- BEGIN card-arrow -->
+								<div class="card-arrow">
+									<div class="card-arrow-top-left"></div>
+									<div class="card-arrow-top-right"></div>
+									<div class="card-arrow-bottom-left"></div>
+									<div class="card-arrow-bottom-right"></div>
+								</div>
+								<!-- END card-arrow -->
+							</div>
+							<!-- END card -->
+						</div>
+					</center>
+				</div>
+			
+				<center>
+					<div class="row">
+						<div class="col">
+							<!-- info table -->
+							<div id="data_table_spotlight" style="width: auto; max-width: 100%;">
+								<!-- BEGIN card -->
+								<div class="card mb-3">
+									<!-- BEGIN card-body -->
+									<div class="card-body">
+										<center>
+											<div id="data_table_div" class="xscroll">
+												<table id="data_table" style="text-align:right">
+													<tr>
+														<td><b>price:</b></td>
+														<td></td>
+													</tr>
+													<tr>
+														<td><b>market cap rank:</b></td>
+														<td></td>
+													</tr>
+													<tr>
+														<td><b>market cap:</b></td>
+														<td></td>
+													</tr>
+													<tr>
+														<td><b>diluted<br>market cap:</b></td>
+														<td></td>
+													</tr>
+													<tr>
+														<td><b>volume:</b></td>
+														<td></td>
+													</tr>
+													<tr>
+														<td><b>total supply:</b></td>
+														<td></td>
+													</tr>
+													<tr>
+														<td><b>max supply:</b></td>
+														<td></td>
+													</tr>
+													<tr>
+														<td><b>circulating supply:</b></td>
+														<td></td>
+													</tr>
+												</table>
+											</div>
+										</center>
+									</div>
+									<!-- END card-body -->
+									
+									<!-- BEGIN card-arrow -->
+									<div class="card-arrow">
+										<div class="card-arrow-top-left"></div>
+										<div class="card-arrow-top-right"></div>
+										<div class="card-arrow-bottom-left"></div>
+										<div class="card-arrow-bottom-right"></div>
+									</div>
+									<!-- END card-arrow -->
+								</div>
+								<!-- END card -->
+							</div>
+						</div>
+			
+						<div class="col">
+							<!-- percentage change table -->
+							<div id="change_table_spotlight" style="width: auto; max-width: 100%;">
+								<!-- BEGIN card -->
+								<div class="card mb-3">
+									<!-- BEGIN card-body -->
+									<div class="card-body">
+										<center>
 											<div id="change_table_div" class="xscroll">
 												<table id="change_table" style="text-align:center">
 													<thead>
@@ -290,8 +541,29 @@
 													</tr>
 												</table>
 											</div>
+										</center>
 									</div>
-									<div id="at_table_spotlight" class="spotlight" style="width: 600px; max-width: 100%;">
+									<!-- END card-body -->
+									
+									<!-- BEGIN card-arrow -->
+									<div class="card-arrow">
+										<div class="card-arrow-top-left"></div>
+										<div class="card-arrow-top-right"></div>
+										<div class="card-arrow-bottom-left"></div>
+										<div class="card-arrow-bottom-right"></div>
+									</div>
+									<!-- END card-arrow -->
+								</div>
+								<!-- END card -->
+							</div>
+			
+							<!-- all time low/high table -->
+							<div id="at_table_spotlight" style="width: auto; max-width: 100%;">
+								<!-- BEGIN card -->
+								<div class="card mb-3">
+									<!-- BEGIN card-body -->
+									<div class="card-body">
+										<center>
 											<div id="at_table_div" class="xscroll">
 												<table id="at_table" style="text-align:center">
 													<thead>
@@ -319,872 +591,1112 @@
 													</tr>
 												</table>
 											</div>
+										</center>
+									</div>
+									<!-- END card-body -->
+									
+									<!-- BEGIN card-arrow -->
+									<div class="card-arrow">
+										<div class="card-arrow-top-left"></div>
+										<div class="card-arrow-top-right"></div>
+										<div class="card-arrow-bottom-left"></div>
+										<div class="card-arrow-bottom-right"></div>
+									</div>
+									<!-- END card-arrow -->
+								</div>
+								<!-- END card -->
+							</div>
+						</div>
+					</div>
+				</center>
+			
+				<div class="row">
+					<!-- price chart -->
+					<center>
+						<div id="prices_chart_spotlight" style="max-width: 100%">
+							<!-- BEGIN card -->
+							<div class="card mb-3">
+								<!-- BEGIN card-body -->
+								<div class="card-body" style="height: 65vh">
+									<div id="prices_chart" style="min-width: 200px; margin: 0 auto; margin-bottom: -20px;">
 									</div>
 								</div>
-		
-								<select name="chart_range" id="chart_range" style="width:130px; margin-top: 0px; margin-bottom: 10px" onchange="change_chart_range()">
-									<option value="hour">hour</option>
-									<option value="day">day</option>
-									<option value="week">week</option>
-									<option value="month">month</option>
-									<option value="year">year</option>
-									<option value="max">max</option>
-								</select>
-								<div id="prices_chart_spotlight" class="spotlight" style="width: 100%; overflow: hidden">
-									<div id="prices_chart" style="min-width: 200px; width: 90%; padding-top: 30px; padding-bottom:30px; margin: 0 auto">
-									</div><br>
+								<!-- END card-body -->
+								
+								<!-- BEGIN card-arrow -->
+								<div class="card-arrow">
+									<div class="card-arrow-top-left"></div>
+									<div class="card-arrow-top-right"></div>
+									<div class="card-arrow-bottom-left"></div>
+									<div class="card-arrow-bottom-right"></div>
 								</div>
-								<div id="total_volumes_chart_spotlight" class="spotlight" style="width: 100%; overflow: hidden">
-									<div id="total_volumes_chart" style="min-width: 200px; width: 90%; padding-top: 30px; padding-bottom:30px; margin: 0 auto">
-									</div><br>
+								<!-- END card-arrow -->
+							</div>
+							<!-- END card -->
+						</div>
+			
+						<div id="total_volumes_chart_spotlight" style="max-width: 100%">
+							<!-- BEGIN card -->
+							<div class="card mb-3">
+								<!-- BEGIN card-body -->
+								<div class="card-body" style="height: 65vh">
+									<div id="total_volumes_chart" style="min-width: 200px; margin: 0 auto; margin-bottom: -20px;">
+									</div>
 								</div>
-							</div>
-							<div id="exchange_spotlight" class="spotlight" style="max-width: 100%; max-height: 330px; overflow-y: scroll; margin-bottom: 30px; margin-top: 20px">
-								<div id="exchange_table_div" class="xscroll" style="max-width: 100%">
-									<table id="exchange_table" style="text-align:center">
-										<tr>
-											<td></td>
-											<td><a onclick="toggle_sort('exchange')"><b>exchange</b></a></td>
-											<td><a onclick="toggle_sort('target_coin_id')"><b>pair</b></a></td>
-											<td><a onclick="toggle_sort('price')"><b>price</b></a></td>
-											<td><a onclick="toggle_sort('24h volume')"><b>24h volume</b></a></td>
-											<td><a onclick="toggle_sort('trust_score')"><b>trust</b></a></td>
-										</tr>
-									</table>
+								<!-- END card-body -->
+								
+								<!-- BEGIN card-arrow -->
+								<div class="card-arrow">
+									<div class="card-arrow-top-left"></div>
+									<div class="card-arrow-top-right"></div>
+									<div class="card-arrow-bottom-left"></div>
+									<div class="card-arrow-bottom-right"></div>
 								</div>
+								<!-- END card-arrow -->
 							</div>
-							<div id="desc_spotlight" class="spotlight" style="max-width: 100%; max-height: 450px; overflow-y: scroll; display: inline-block; margin-bottom: 10px;">
-							</div><br>
-		
-							<div id="newsfeed_div" style="max-height: 350px; overflow-y: scroll; background-color: #2E2E35; border-radius: 5px; scrollbar-color: grey #2e2e35;">
-							</div>
-		
-							<div id="last_updated" style="max-width: 100%; display: inline-block; margin-bottom: -50px; margin-top: 15px">
-							</div>
-						</center>
-					</div>
-		
+							<!-- END card -->
+						</div>
+					</center>
 				</div>
-			</section>
-		</div>
-		
-		
-		
-		<script>
-			var details_filled = 0;
-			var refresh_ms = 60000;
-			var chart_range = "hour";
-			var chart_freq = "minute";
-			var price_chart, vol_chart;
-		
-			var sort_attrib = 'trust';
-			var sort_dir = -1;
-			var coin_data;
-		
-			var watchlist_name;
-			var watchlist;
-			var watching;
-		
-			var watchlist_names;
-			var watchlists = {};
-		
-			if(localStorage.getItem(user + '-refresh_sec'))
-				refresh_ms = 1000*localStorage.getItem(user + '-refresh_sec');
-			else
-				localStorage.setItem(user + '-refresh_sec', 60);
-		
-			if(localStorage.getItem(user + '-chart_freq'))
-				chart_freq = localStorage.getItem(user + '-chart_freq');
-			else
-				localStorage.setItem(user + '-chart_freq', 'minute');
-		
-			if(localStorage.getItem(user + '-chart_range'))
-				chart_range = localStorage.getItem(user + '-chart_range');
-			else
-				localStorage.setItem(user + '-chart_range', 'hour');
-		
-			document.getElementById('chart_range').value = chart_range;
-		
-			function treatAsUTC(date)
-			{
-			    var result = new Date(date);
-			    result.setMinutes(result.getMinutes() - result.getTimezoneOffset());
-			    return result;
-			}
-		
-			var millisecondsPerDay = 24 * 60 * 60 * 1000;
-			function daysSince(date)
-			{   
-			    return Math.round((treatAsUTC(new Date()) - treatAsUTC(date)) / millisecondsPerDay);
-			}
-		
-			function draw_chart(title, chart_type, y_title, data)
-			{
-				var options = {
-			      series: [{
-				      name: y_title,
-				      data: data
-				  }],
-			      chart: {
-				      type: 'area',
-				      stacked: false,
-				      background: 'none',
-				      height: 350,
-				      zoom: {
-				        type: 'xy',
-				        enabled: true,
-				      },
-				      toolbar: {
-				        autoSelected: 'zoom'
-				      }
-				    },
-				  colors:['#C600EB', '#E91E63', '#9C27B0'],
-				  dataLabels: {
-				      enabled: false
-				  },
-				  markers: {
-				    size: 0,
-				  },
-				  title: {
-				    text: title,
-				    align: 'left',
-				    textColor: '#ff1493',
-				  },
-				  fill: {
-				    type: 'gradient',
-				    gradient: {
-				      shadeIntensity: 0.4,
-				      inverseColors: false,
-				      opacityFrom: 0.8,
-				      opacityTo: 0.4,
-				      stops: [0, 90, 100]
-				    },
-				  },
-				  yaxis: {
-				    labels: {
-				      formatter: function (val) {
-				        if(val == 0)
-				        	return 0;
-				        else if(val >= 1)
-				        	return val.toLocaleString('en');
-				        else if(val > 0 && val < 0.001)
-				        	return val.toExponential(3);
-				        else
-				        	return val.toFixed(5);
-				      },
-				    },
-				    tickAmount: 4,
-				    title: {
-				      text: y_title,
-				    },
-				  },
-				  xaxis: {
-				    type: 'datetime',
-			        tickAmount: 5,
-				    labels: {
-				      formatter: function (val) {
-				        if(chart_range == "hour" || chart_range == "day")
-					    	return new Date(val).toLocaleTimeString();
-					    else
-					    	return new Date(val).toLocaleDateString();
-				      },
-				    },
-				  },
-				  theme: {
-				  	mode: 'dark',
-				  },
-				  stroke: {
-				   width: 2,    
-				  },
-				  tooltip: {
-				    shared: false,
-				    y: {
-				      formatter: function (val) {
-				        if(val == 0)
-				        	return 0;
-				        else if(val >= 1)
-				        	return val.toLocaleString('en');
-				        else if(val > 0 && val < 0.001)
-				        	return val.toExponential(3);
-				        else
-				        	return val.toFixed(5);
-				      }
-				    }
-				  }
-			    };
-		
-			    var chart = new ApexCharts(document.querySelector("#" + chart_type + "_chart"), options);
-			    chart.render();
-			    return chart;
-			}
-		
-			function fetch_chart(chart_type, y_title, coin_data)
-			{
-				var data_range;
-		
-				if(chart_range == "hour")
-					data_range = 0.041666667;
-				else if(chart_range == "day")
-					data_range = 1;
-				else if(chart_range == "week")
-					data_range = 7;
-				else if(chart_range == "month")
-					data_range = 30;
-				else if(chart_range == "year")
-					data_range = 365;
-				else if(chart_range == "max")
-					data_range = "max";
-		
-				$(document).ready(function(){
-					//alert('https://api.coingecko.com/api/v3/coins/' + coin_data['id'] + '/market_chart?vs_currency=usd&days=' + data_range + '&interval=' + chart_freq);
-					$.get(
-						'https://api.coingecko.com/api/v3/coins/' + coin_data['id'] + '/market_chart?vs_currency=usd&days=' + data_range + '&interval=' + chart_freq,
-						function(data) {
-							if(chart_type == "prices")
-							{
-								if(price_chart != undefined)
-								{
-									price_chart.destroy();
-									document.getElementById('prices_chart').innerHTML = "";
-								}
-								price_chart = draw_chart(coin_data['name'], chart_type, y_title, data[chart_type]);
-		
-								document.getElementById('prices_chart_spotlight').style.height = (document.getElementById('prices_chart').offsetHeight + 10) + "px";
-							}
-							else
-							{
-								if(vol_chart != undefined)
-								{
-									vol_chart.destroy();
-									document.getElementById('total_volumes_chart').innerHTML = "";
-								}
-								vol_chart = draw_chart(coin_data['name'], chart_type, y_title, data[chart_type]);
-		
-		
-								document.getElementById('total_volumes_chart_spotlight').style.height = (document.getElementById('total_volumes_chart').offsetHeight + 10) + "px";
-							}
-					}).fail(function() {
-						alert("failed to fetch chart data");
-					});
-				});
-			}
-		
-			function clear_page()
-			{
-				document.getElementById("coin_title").innerHTML = '<img src="images/logo.png" height="225px" style="vertical-align: middle";><noselect> Dexata</noselect>';
-		
-				document.getElementById("page_div").innerHTML = "";
-			}
-		
-			function ctrl_c(val)
-			{
-				var textArea = document.createElement("textarea");
-				textArea.value = val;
-		
-				textArea.style.position = "fixed";
-				textArea.style.bottom = "-30px";
-				textArea.style.right = "-30px";
-				textArea.style.width = "0px";
-				textArea.style.height = "0px";
-		
-				document.body.appendChild(textArea);
-				textArea.select();
-				textArea.setSelectionRange(0, 99999); /*For mobile devices*/
-				document.execCommand("copy");
-				textArea.style.visibility = "hidden";
-			}
-		
-			function show_watchlists_table()
-			{
-				document.getElementById('show_watchlist_icon').style.display = "none";
-				document.getElementById('watchlists_spotlight').style.display = "block";
-			}
-		
-			function hide_watchlists_table()
-			{
-				document.getElementById('show_watchlist_icon').style.display = "block";
-				document.getElementById('watchlists_spotlight').style.display = "none";
-			}
-		
-			function toggle_watching(name)
-			{
-				var found = false;
-		
-				for(var i=0; i<watchlists[name].length; i++)
-				{
-					if(watchlists[name][i] == param_map.get('id'))
-					{
-						unwatch(user, name, param_map.get('id'));
-						found = true;
-						break;
-					}
-				}
-		
-				if(!found)
-					watch(user, name, param_map.get('id'));
-		
-				watchlists[name] = fetch_watchlist(user, name);
-		
-				hide_watchlists_table();
-			}
-		
-			function clear_table()
-			{
-				var table = document.getElementById("exchange_table");
-		
-				var no_rows = table.rows.length-1;
-				for(var i=0; i < no_rows; i++)
-					table.deleteRow(1);		
-			}
-		
-			function draw_exchange_table()
-			{
-				clear_table();
-		
-				if(coin_data['tickers'] != undefined)
-				{
-					document.getElementById('exchange_spotlight').style.display = "block";
-		
-					for(var r=0; r<coin_data['tickers'].length; r++)
-					{
-						if(coin_data['tickers'][r]['market']['name'] != undefined)
-						{
-							var row = document.getElementById('exchange_table').insertRow(r+1);
-		
-							row.insertCell(0).innerHTML = "<img class='round' src='images/exchanges/" + coin_data['tickers'][r]['market']['identifier'] + ".png' style='min-width: 23px; max-height: 23px; vertical-align: middle' onerror='this.style.display=\"none\"'>";
-		
-							row.insertCell(1).innerHTML = coin_data['tickers'][r]['market']['name'];
-		
-							row.insertCell(2).innerHTML = "<a href='" + coin_data['tickers'][r]['trade_url'] + "'>" + coin_data['tickers'][r]['coin_id'] + "/" + coin_data['tickers'][r]['target_coin_id'] + "</a>";
-		
-							row.insertCell(3).innerHTML = "$" + coin_data['tickers'][r]['converted_last']['usd'];
-		
-							row.insertCell(4).innerHTML = "$" + coin_data['tickers'][r]['converted_volume']['usd'].toLocaleString();
-		
-							if(coin_data['tickers'][r]['trust_score'] == undefined)
-								row.insertCell(5).innerHTML = "";
-							else if(coin_data['tickers'][r]['trust_score'] == "green")
-								row.insertCell(5).innerHTML = "<green><i class='fas fa-circle fa-1x' style='vertical-align:middle'></i></green>";
-							else
-								row.insertCell(5).innerHTML = "<red><i class='fas fa-circle fa-1x' style='vertical-align:middle'></i></red>";
-						}
-					}
-				}
-			}
-		
-			function sort_data()
-			{
-				if(sort_attrib == "trust_score" || sort_attrib == "target_coin_id")
-				{
-					coin_data['tickers'].sort(function(obj1, obj2) {
-						if(obj1[sort_attrib] == undefined)
-						{
-							if(obj2[sort_attrib] == undefined)
-								return 0;
-							else
-								return sort_dir*1;
-						}
-						else if(obj2[sort_attrib] == undefined)
-							return sort_dir*-1;
-						else if(obj1[sort_attrib].toLowerCase() > obj2[sort_attrib].toLowerCase())
-							return sort_dir*1;
-						else if(obj1[sort_attrib] == obj2[sort_attrib])
-							return 0;
-						else return sort_dir*-1;
-					});
-				}
-				else if(sort_attrib == "exchange")
-				{
-					coin_data['tickers'].sort(function(obj1, obj2) {
-						if(obj1['market']['name'].toLowerCase() > obj2['market']['name'].toLowerCase())
-							return sort_dir*1;
-						else if(obj1['market']['name'] == obj2['market']['name'])
-							return 0;
-						else return sort_dir*-1;
-					});
-				}
-				else if(sort_attrib == "price")
-				{
-					coin_data['tickers'].sort(function(obj1, obj2) {
-						return sort_dir*(obj1['converted_last']['usd'] - obj2['converted_last']['usd']);
-					});
-				}
-				else if(sort_attrib == "24h volume")
-				{
-					coin_data['tickers'].sort(function(obj1, obj2) {
-						return sort_dir*(obj1['converted_volume']['usd'] - obj2['converted_volume']['usd']);
-					});
-				}
-		
-				draw_exchange_table();
-			}
-		
-			function toggle_sort(attrib)
-			{
-				if(sort_attrib == attrib)
-					sort_dir *= -1;
+			
+				<div class="row">
+					<!-- exchange table -->
+					<center>
+						<div id="exchange_spotlight" style="max-width: 100%">
+							<!-- BEGIN card -->
+							<div class="card mb-3">
+								<!-- BEGIN card-body -->
+								<div class="card-body">
+									<!-- BEGIN title -->
+									<div class="d-flex fw-bold small mb-3">
+										<span class="flex-grow-1">exchanges</span>
+										<a href="#" data-toggle="card-expand" class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+									</div>
+									<!-- END title -->
+			
+									<center>
+										<div id="exchange_table_div" class="xscroll" style="max-width: 100%; max-height: 60vh">
+											<table id="exchange_table" style="text-align:center">
+												<tr>
+													<td></td>
+													<td><a onclick="toggle_sort('exchange')"><b>exchange</b></a></td>
+													<td><a onclick="toggle_sort('target_coin_id')"><b>pair</b></a></td>
+													<td><a onclick="toggle_sort('price')"><b>price</b></a></td>
+													<td><a onclick="toggle_sort('24h volume')"><b>24h volume</b></a></td>
+													<td><a onclick="toggle_sort('trust_score')"><b>trust</b></a></td>
+												</tr>
+											</table>
+										</div>
+									</center>
+								</div>
+								<!-- END card-body -->
+								
+								<!-- BEGIN card-arrow -->
+								<div class="card-arrow">
+									<div class="card-arrow-top-left"></div>
+									<div class="card-arrow-top-right"></div>
+									<div class="card-arrow-bottom-left"></div>
+									<div class="card-arrow-bottom-right"></div>
+								</div>
+								<!-- END card-arrow -->
+							</div>
+							<!-- END card -->
+						</div>
+					</center>
+				</div>
+			
+				<div class="row">
+					<!-- about div -->
+					<center>
+						<div style="width: auto; max-width: 100%">
+							<!-- BEGIN card -->
+							<div class="card mb-3">
+								<!-- BEGIN card-body -->
+								<div class="card-body">
+									<!-- BEGIN title -->
+									<div class="d-flex fw-bold small mb-3">
+										<span class="flex-grow-1">About</span>
+										<a href="#" data-toggle="card-expand" class="text-white text-opacity-50 text-decoration-none"><i class="bi bi-fullscreen"></i></a>
+									</div>
+									<!-- END title -->
+			
+									<div id="desc_div" style="max-height: 60vh; overflow-y: auto;">
+									</div>
+								</div>
+								<!-- END card-body -->
+								
+								<!-- BEGIN card-arrow -->
+								<div class="card-arrow">
+									<div class="card-arrow-top-left"></div>
+									<div class="card-arrow-top-right"></div>
+									<div class="card-arrow-bottom-left"></div>
+									<div class="card-arrow-bottom-right"></div>
+								</div>
+								<!-- END card-arrow -->
+							</div>
+							<!-- END card -->
+						</div>
+					</center>
+				</div>
+			
+				<div class="row">
+					<!-- news div -->
+					<center>
+						<div style="width: 600px; max-width: 100%">
+							<!-- BEGIN card -->
+							<div class="card mb-3">
+								<!-- BEGIN card-body -->
+								<div class="card-body">
+									<div id="newsfeed_div" style="max-height: 60vh; overflow-y: scroll; scrollbar-color: grey #2e2e35;">
+									</div>
+								</div>
+								<!-- END card-body -->
+								
+								<!-- BEGIN card-arrow -->
+								<div class="card-arrow">
+									<div class="card-arrow-top-left"></div>
+									<div class="card-arrow-top-right"></div>
+									<div class="card-arrow-bottom-left"></div>
+									<div class="card-arrow-bottom-right"></div>
+								</div>
+								<!-- END card-arrow -->
+							</div>
+							<!-- END card -->
+						</div>
+					</center>
+				</div>
+			
+				<div class="row">
+					<!-- last updated div -->
+					<center>
+						<div id="last_updated_spotlight" style="max-width: 100%">
+							<!-- BEGIN card -->
+							<div class="card mb-3">
+								<!-- BEGIN card-body -->
+								<div class="card-body">
+									<!-- BEGIN title -->
+									<div class="d-flex fw-bold small mb-3">
+										<span class="flex-grow-1">last updated</span>
+									</div>
+									<!-- END title -->
+			
+									<div id="last_updated" style="max-width: 300px">
+									</div>
+								</div>
+								<!-- END card-body -->
+								
+								<!-- BEGIN card-arrow -->
+								<div class="card-arrow">
+									<div class="card-arrow-top-left"></div>
+									<div class="card-arrow-top-right"></div>
+									<div class="card-arrow-bottom-left"></div>
+									<div class="card-arrow-bottom-right"></div>
+								</div>
+								<!-- END card-arrow -->
+							</div>
+							<!-- END card -->
+						</div>
+					</center>
+				</div>
+			</div>
+			
+			<script>
+				var details_filled = 0;
+				var refresh_ms = 60000;
+				var chart_range = "hour";
+				var chart_freq = "minute";
+				var price_chart, vol_chart;
+			
+				var sort_attrib = 'trust';
+				var sort_dir = -1;
+				var coin_data;
+			
+				var watchlist_name;
+				var watchlist;
+				var watching;
+			
+				var watchlist_names;
+				var watchlists = {};
+			
+				if(localStorage.getItem(user + '-refresh_sec'))
+					refresh_ms = 1000*localStorage.getItem(user + '-refresh_sec');
 				else
+					localStorage.setItem(user + '-refresh_sec', 60);
+			
+				if(localStorage.getItem(user + '-chart_freq'))
+					chart_freq = localStorage.getItem(user + '-chart_freq');
+				else
+					localStorage.setItem(user + '-chart_freq', 'minute');
+			
+				if(localStorage.getItem(user + '-chart_range'))
+					chart_range = localStorage.getItem(user + '-chart_range');
+				else
+					localStorage.setItem(user + '-chart_range', 'hour');
+			
+				//document.getElementById('chart_range').value = chart_range;
+			
+				function treatAsUTC(date)
 				{
-					sort_attrib = attrib;
-					sort_dir = -1;
+				    var result = new Date(date);
+				    result.setMinutes(result.getMinutes() - result.getTimezoneOffset());
+				    return result;
 				}
-		
-				sort_data();
-			}
-		
-			function fill_details(data)
-			{
-				document.title = "Dexata - " + data['symbol'];
-		
-				if(data['image']['large'] != "")
-					document.getElementById("coin_title").innerHTML = '<img onerror="this.src=\'images/missing.png\'" class="rounded" src="' + data['image']['large'] + '" height="150px" style="vertical-align: middle";><br>' + data['name'] + ' (' + data['symbol'] + ')';
-		
-				document.getElementById("coin_links").innerHTML = "";
-		
-				if(data['links']['homepage'][0] != "")
-					document.getElementById("coin_links").innerHTML += '<a href="' + data['links']['homepage'][0] + '" title="homepage"><i class="fas fa-home fa-2x"></i></a></a>';
-		
-				if(data['links']['facebook_username'] != null)
-				{
-					if(data['community_data']['facebook_likes'] != null)
-						document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="https://facebook.com/' + data['links']['facebook_username'] + '" title="Facebook - ' + data['community_data']['facebook_likes'] + ' likes"><i class="icon brands fa-facebook-f fa-2x"></a>';
-					else
-						document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="https://facebook.com/' + data['links']['facebook_username'] + '" title="Facebook"><i class="icon brands fa-facebook-f fa-2x"></a>';
+			
+				var millisecondsPerDay = 24 * 60 * 60 * 1000;
+				function daysSince(date)
+				{   
+				    return Math.round((treatAsUTC(new Date()) - treatAsUTC(date)) / millisecondsPerDay);
 				}
-		
-				if(data['links']['subreddit_url'] != null)
+			
+				function draw_chart(title, chart_type, y_title, data)
 				{
-					if(data['community_data']['reddit_subscribers'] != null)
-						document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="' + data['links']['subreddit_url'].replace("www", "old") + '" title="Reddit - ' + data['community_data']['reddit_subscribers'] + ' subscribers"><i class="icon brands fa-reddit-alien fa-2x"></i></a>';
-					else
-						document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="' + data['links']['subreddit_url'].replace("www", "old") + '" title="Reddit"><i class="icon brands fa-reddit-alien fa-2x"></i></a>';
+					var options = {
+				      series: [{
+					      name: y_title,
+					      data: data
+					  }],
+				      chart: {
+					      type: 'area',
+					      stacked: false,
+					      background: 'none',
+					      height: '100%',
+					      zoom: {
+					        type: 'xy',
+					        enabled: true,
+					      },
+					      toolbar: {
+					        autoSelected: 'zoom'
+					      }
+					    },
+					  colors:['#C600EB', '#E91E63', '#9C27B0'],
+					  dataLabels: {
+					      enabled: false
+					  },
+					  markers: {
+					    size: 0,
+					  },
+					  title: {
+					    text: title,
+					    align: 'left',
+					    textColor: '#ff1493',
+					  },
+					  fill: {
+					    type: 'gradient',
+					    gradient: {
+					      shadeIntensity: 0.4,
+					      inverseColors: false,
+					      opacityFrom: 0.8,
+					      opacityTo: 0.4,
+					      stops: [0, 90, 100]
+					    },
+					  },
+					  yaxis: {
+					    labels: {
+					      formatter: function (val) {
+					        if(val == 0)
+					        	return 0;
+					        else if(val >= 1)
+					        	return val.toLocaleString('en');
+					        else if(val > 0 && val < 0.001)
+					        	return val.toExponential(3);
+					        else
+					        	return val.toFixed(5);
+					      },
+					    },
+					    tickAmount: 4,
+					    title: {
+					      text: y_title,
+					    },
+					  },
+					  xaxis: {
+					    type: 'datetime',
+				        tickAmount: 5,
+					    labels: {
+					      formatter: function (val) {
+					        if(chart_range == "hour" || chart_range == "day")
+						    	return new Date(val).toLocaleTimeString();
+						    else
+						    	return new Date(val).toLocaleDateString();
+					      },
+					    },
+					  },
+					  theme: {
+					  	mode: 'dark',
+					  },
+					  stroke: {
+					   width: 2,    
+					  },
+					  tooltip: {
+					    shared: false,
+					    y: {
+					      formatter: function (val) {
+					        if(val == 0)
+					        	return 0;
+					        else if(val >= 1)
+					        	return val.toLocaleString('en');
+					        else if(val > 0 && val < 0.001)
+					        	return val.toExponential(3);
+					        else
+					        	return val.toFixed(5);
+					      }
+					    }
+					  }
+				    };
+			
+				    var chart = new ApexCharts(document.querySelector("#" + chart_type + "_chart"), options);
+				    chart.render();
+				    return chart;
 				}
-		
-				if(data['links']['telegram_channel_identifier'] != null)
+			
+				function fetch_chart(chart_type, y_title, coin_data)
 				{
-					if(data['community_data']['telegram_channel_user_count'] != null)
-						document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="https://t.me/' + data['links']['telegram_channel_identifier'] + '" title="Telegram - ' + data['community_data']['telegram_channel_user_count'] + ' users"><i class="icon brands fa-telegram-plane fa-2x"></i></a>';
-					else
-						document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="https://t.me/' + data['links']['telegram_channel_identifier'] + '" title="Telegram"><i class="icon brands fa-telegram-plane fa-2x"></i></a>';
+					var data_range;
+			
+					if(chart_range == "hour")
+						data_range = 0.041666667;
+					else if(chart_range == "day")
+						data_range = 1;
+					else if(chart_range == "week")
+						data_range = 7;
+					else if(chart_range == "month")
+						data_range = 30;
+					else if(chart_range == "year")
+						data_range = 365;
+					else if(chart_range == "max")
+						data_range = "max";
+			
+					$(document).ready(function(){
+						//alert('https://api.coingecko.com/api/v3/coins/' + coin_data['id'] + '/market_chart?vs_currency=usd&days=' + data_range + '&interval=' + chart_freq);
+						$.get(
+							'https://api.coingecko.com/api/v3/coins/' + coin_data['id'] + '/market_chart?vs_currency=usd&days=' + data_range + '&interval=' + chart_freq,
+							function(data) {
+								if(chart_type == "prices")
+								{
+									if(price_chart != undefined)
+									{
+										price_chart.destroy();
+										document.getElementById('prices_chart').innerHTML = "";
+									}
+									price_chart = draw_chart(coin_data['name'], chart_type, y_title, data[chart_type]);
+			
+									//document.getElementById('prices_chart_spotlight').style.height = (document.getElementById('prices_chart').offsetHeight + 10) + "px";
+								}
+								else
+								{
+									if(vol_chart != undefined)
+									{
+										vol_chart.destroy();
+										document.getElementById('total_volumes_chart').innerHTML = "";
+									}
+									vol_chart = draw_chart(coin_data['name'], chart_type, y_title, data[chart_type]);
+			
+			
+									//document.getElementById('total_volumes_chart_spotlight').style.height = (document.getElementById('total_volumes_chart').offsetHeight + 10) + "px";
+								}
+						}).fail(function() {
+							alert("failed to fetch chart data");
+						});
+					});
 				}
-		
-				if(data['links']['twitter_screen_name'] != null)
+			
+				function clear_page()
 				{
-					if(data['community_data']['twitter_followers'] != null)
-						document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="https://twitter.com/' + data['links']['twitter_screen_name'] + '" title="Twitter - ' + data['community_data']['twitter_followers'] + ' followers"><i class="icon brands fa-twitter fa-2x"></a>';
-					else
-						document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="https://twitter.com/' + data['links']['twitter_screen_name'] + '" title="Twitter"><i class="icon brands fa-twitter fa-2x"></a>';
+					document.getElementById("coin_title").innerHTML = '<img src="images/logo.png" height="225px" style="vertical-align: middle";><noselect> Dexata</noselect>';
+			
+					document.getElementById("page_div").innerHTML = "";
 				}
-		
-				if(data['links']['chat_url'][0] != null)
+			
+				function ctrl_c(val)
 				{
-					if(data['links']['chat_url'][0].search("discord") != -1)
-						document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="' + data['links']['chat_url'][0] + '" title="Discord"><i class="fab fa-discord fa-2x"></i></a>';
-					else
-						document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="' + data['links']['chat_url'][0] + '" title="chat"><i class="fas fa-comments fa-2x"></i></a>';
+					var textArea = document.createElement("textarea");
+					textArea.value = val;
+			
+					textArea.style.position = "fixed";
+					textArea.style.bottom = "-30px";
+					textArea.style.right = "-30px";
+					textArea.style.width = "0px";
+					textArea.style.height = "0px";
+			
+					document.body.appendChild(textArea);
+					textArea.select();
+					textArea.setSelectionRange(0, 99999); /*For mobile devices*/
+					document.execCommand("copy");
+					textArea.style.visibility = "hidden";
 				}
-		
-		
-				if(data['platforms']['binance-smart-chain'] != undefined)
+			
+				function show_watchlists_table()
 				{
-					document.getElementById("other_links").innerHTML += '<a href="https://bscscan.com/token/' + data['platforms']['binance-smart-chain'] + '" title="BSCScan"><img src="images/icons/bscscan.png" height="30px"></a>';
-					document.getElementById("other_links").innerHTML += '&nbsp;&nbsp;&nbsp;<a href="https://poocoin.app/tokens/' + data['contract_address'] + '" title="Poocoin"><img src="images/logos/poocoin-poocoin.svg" height="30px"></a>';
+					document.getElementById('show_watchlist_icon').style.display = "none";
+					document.getElementById('watchlists_spotlight').style.display = "block";
 				}
-		
-				if(data['platforms']['ethereum'] != undefined)
+			
+				function hide_watchlists_table()
 				{
-					document.getElementById("other_links").innerHTML += '&nbsp;&nbsp;&nbsp;<a href="https://etherscan.io/token/' + data['platforms']['ethereum'] + '" title="EtherScan"><img src="images/icons/etherscan.png" height="30px"></a>';
-					document.getElementById("other_links").innerHTML += '&nbsp;&nbsp;<a href="https://ethplorer.io/address/' + data['platforms']['ethereum'] + '" title="Ethplorer"><img src="images/icons/ethplorer.png" height="30px"></a>';
+					document.getElementById('show_watchlist_icon').style.display = "block";
+					document.getElementById('watchlists_spotlight').style.display = "none";
 				}
-		
-				if(data['platforms']['polygon-pos'] != undefined)
-					document.getElementById("other_links").innerHTML += '&nbsp;&nbsp;<a href="https://polygonscan.com/token/' + data['platforms']['polygon-pos'] + '" title="PolygonScan"><img src="images/icons/polygonscan.png" height="30px"></a>';
-		
-				if(data['platforms']['solana'] != undefined)
-					document.getElementById("other_links").innerHTML += '&nbsp;&nbsp;<a href="https://solscan.io/token/' + data['platforms']['solana'] + '" title="SolScan"><img src="images/icons/solscan.png" height="30px"></a>';
-		
-				document.getElementById('title_spotlight').style.width = (document.getElementById('title_div').offsetWidth + 70) + "px";
-		
-				if(data['contract_address'] != undefined && data['contract_address'].length > 10)
+			
+				function toggle_watching(name)
 				{
-					if(data['platforms'] != undefined)
+					var found = false;
+			
+					for(var i=0; i<watchlists[name].length; i++)
 					{
-						document.getElementById('contract_spotlight').style.display = "inline-block";
-		
-						var table = document.getElementById('contract_table');
-		
-						var r = 1;
-						for(let p in data['platforms'])
+						if(watchlists[name][i] == param_map.get('id'))
 						{
-							var row = table.insertRow(r++);
-		
-							row.insertCell(0).innerHTML = "<img src='images/icons/" + p + ".png' class='round' style='min-width: 20px; max-height: 20px; vertical-align: middle' onerror='this.style.display=\"none\"'>";
-		
-							var cell = row.insertCell(1);
-							cell.innerHTML = data['platforms'][p];
-							cell.setAttribute('title', p);
-		
-							row.insertCell(2).innerHTML = "<a onclick=\"ctrl_c(\'" + data['platforms'][p] + "\')\"><i class='fas fa-copy fa-1x' style='vertical-align:middle; margin-left: 10px'></i></a>";
-						}
-					}
-					else
-					{
-						var row = table.insertRow(1);
-		
-						row.insertCell(1).innerHTML = data['contract_address'];
-		
-						row.insertCell(2).innerHTML = "<a onclick=\"ctrl_c(\'" + data['contract_address'] + "\')\"><i class='fas fa-copy fa-1x' style='vertical-align:middle'></i></a>";
-					}
-		
-					document.getElementById('contract_spotlight').style.width = document.getElementById('title_spotlight').style.width = (document.getElementById('contract_table').offsetWidth + 70) + "px";
-				}
-		
-				draw_exchange_table();
-				document.getElementById('exchange_spotlight').style.width = (document.getElementById('exchange_table').offsetWidth + 250) + "px";
-		
-				var table = document.getElementById('watchlists_table');
-				for(var i=1; i<watchlist_names.length; i++)
-				{
-					var row = table.insertRow(i-1);
-					row.insertCell(0).innerHTML = "<div style='margin-bottom:-20px'><input id='" + watchlist_names[i] + "' type='checkbox'><label for='" + watchlist_names[i] + "'>" + watchlist_names[i] + "</label></div>";
-		
-					document.getElementById(watchlist_names[i]).addEventListener('change', (event) => {
-						toggle_watching(event.currentTarget.id);
-					})
-		
-					for(var j=0; j<watchlists[watchlist_names[i]].length; j++)
-					{
-						if(watchlists[watchlist_names[i] ][j] == param_map.get('id'))
-						{
-							document.getElementById(watchlist_names[i]).checked = true;
+							unwatch(user, name, param_map.get('id'));
+							found = true;
 							break;
 						}
 					}
-				}
-		
-				if(data['description']['en'] != undefined && 
-					data['description']['en'] != "")
-					document.getElementById('desc_spotlight').innerHTML = "<h3 style='margin-top: 15px; margin-bottom: 10px'>About</h3><center><p style='max-width: 90%; margin-top: 10px; margin-bottom: 20px'>" + data['description']['en'] + "</p></center>";
-				else
-					document.getElementById('desc_spotlight').style.display = "none";
-		
-				document.getElementById('newsfeed_div').innerHTML = 
-				'<iframe id="newsfeed_iframe" scrolling="no" width="100%" height="650px" allowtransparency="true" frameborder="0" src="https://cryptopanic.com/widgets/news/?bg_color=2E2E35&amp;currencies=' + data['symbol'] + '&amp;font_family=sans&amp;header_bg_color=30343B&amp;header_text_color=FFFFFF&amp;link_color=679267&amp;news_feed=recent&amp;posts_limit=10&amp;text_color=FFFFFF&amp;title=News"></iframe>';
-		
-				var body_width = document.body.clientWidth;
-				if(body_width < 530)
-					document.getElementById('newsfeed_iframe').style.height = "1000px";
-				else if(body_width < 700)
-					document.getElementById('newsfeed_iframe').style.height = "900px";
-				else if(body_width < 950)
-					document.getElementById('newsfeed_iframe').style.height = "800px";
-				else if(body_width < 1100)
-					document.getElementById('newsfeed_iframe').style.height = "700px";
-			}
-		
-			function fill_data(data)
-			{
-				var table = document.getElementById("data_table");
-		
-				if(data['market_data']['current_price']['usd'] == 0)
-					table.rows[0].cells[1].innerHTML = "-";
-				else if(data['market_data']['current_price']['usd'] > 999)
-					table.rows[0].cells[1].innerHTML = "$" + data['market_data']['current_price']['usd'].toLocaleString('en');
-				else if(data['market_data']['current_price']['usd'] < 0.001)
-					table.rows[0].cells[1].innerHTML = "$" + data['market_data']['current_price']['usd'].toExponential(3);
-				else
-					table.rows[0].cells[1].innerHTML = "$" + data['market_data']['current_price']['usd'].toFixed(5);
-		
-				if(data['market_data']['market_cap_rank'] > 0)
-					table.rows[1].cells[1].innerHTML = data['market_data']['market_cap_rank'].toLocaleString('en');
-				else
-					table.rows[1].cells[1].innerHTML = '-';
-		
-				if(data['market_data']['market_cap']['usd'] > 0)
-					table.rows[2].cells[1].innerHTML = "$" + data['market_data']['market_cap']['usd'].toLocaleString('en');
-				else
-					table.rows[2].cells[1].innerHTML = '-';
-		
-				if(data['market_data']['current_price']['usd'] > 0 &&
-					data['market_data']['total_supply'])
-					table.rows[3].cells[1].innerHTML = "$" + (data['market_data']['current_price']['usd']*data['market_data']['total_supply']).toLocaleString('en');
-				else
-					table.rows[3].cells[1].innerHTML = '-';
-		
-				if(data['market_data']['market_cap']['usd'] > 0)
-					table.rows[4].cells[1].innerHTML = "$" + data['market_data']['total_volume']['usd'].toLocaleString('en');
-				else
-					table.rows[4].cells[1].innerHTML = '-';
-		
-				if(data['market_data']['total_supply'] > 0)
-					table.rows[5].cells[1].innerHTML = data['market_data']['total_supply'].toLocaleString('en');
-				else
-					table.rows[5].cells[1].innerHTML = '-';
-		
-				if(data['market_data']['max_supply'] > 0)
-					table.rows[6].cells[1].innerHTML = data['market_data']['max_supply'].toLocaleString('en');
-				else
-					table.rows[6].cells[1].innerHTML = '-';
-		
-				if(data['market_data']['circulating_supply'] > 0)
-					table.rows[7].cells[1].innerHTML = data['market_data']['circulating_supply'].toLocaleString('en');
-				else
-					table.rows[7].cells[1].innerHTML = '-';
-		
-				table = document.getElementById("change_table");
-		
-				if(data['market_data']['price_change_percentage_1h_in_currency']['usd'] == undefined)
-					table.rows[1].cells[0].innerHTML = "-";
-				else if(data['market_data']['price_change_percentage_1h_in_currency']['usd'] >= 0)
-					table.rows[1].cells[0].innerHTML = "<green>" + data['market_data']['price_change_percentage_1h_in_currency']['usd'].toLocaleString('en') + "%</green>";
-				else
-					table.rows[1].cells[0].innerHTML = "<red>" + data['market_data']['price_change_percentage_1h_in_currency']['usd'].toLocaleString('en') + "%</red>";
-		
-				if(data['market_data']['price_change_percentage_24h_in_currency']['usd'] == undefined)
-					table.rows[1].cells[1].innerHTML = "-";
-				else if(data['market_data']['price_change_percentage_24h_in_currency']['usd'] >= 0)
-					table.rows[1].cells[1].innerHTML = "<green>" + data['market_data']['price_change_percentage_24h_in_currency']['usd'].toLocaleString('en') + "%</green>";
-				else
-					table.rows[1].cells[1].innerHTML = "<red>" + data['market_data']['price_change_percentage_24h_in_currency']['usd'].toLocaleString('en') + "%</red>";
-		
-				if(data['market_data']['price_change_percentage_7d_in_currency']['usd'] == undefined)
-					table.rows[1].cells[2].innerHTML = "-";
-				else if(data['market_data']['price_change_percentage_7d_in_currency']['usd'] >= 0)
-					table.rows[1].cells[2].innerHTML = "<green>" + data['market_data']['price_change_percentage_7d_in_currency']['usd'].toLocaleString('en') + "%</green>";
-				else
-					table.rows[1].cells[2].innerHTML = "<red>" + data['market_data']['price_change_percentage_7d_in_currency']['usd'].toLocaleString('en') + "%</red>";
-		
-				if(data['market_data']['price_change_percentage_30d_in_currency']['usd'] == undefined)
-					table.rows[1].cells[3].innerHTML = "-";
-				else if(data['market_data']['price_change_percentage_30d_in_currency']['usd'] >= 0)
-					table.rows[1].cells[3].innerHTML = "<green>" + data['market_data']['price_change_percentage_30d_in_currency']['usd'].toLocaleString('en') + "%</green>";
-				else
-					table.rows[1].cells[3].innerHTML = "<red>" + data['market_data']['price_change_percentage_30d_in_currency']['usd'].toLocaleString('en') + "%</red>";
-		
-				if(data['market_data']['price_change_percentage_1y_in_currency']['usd'] == undefined)
-					table.rows[1].cells[4].innerHTML = "-";
-				else if(data['market_data']['price_change_percentage_1y_in_currency']['usd'] >= 0)
-					table.rows[1].cells[4].innerHTML = "<green>" + data['market_data']['price_change_percentage_1y_in_currency']['usd'].toLocaleString('en') + "%</green>";
-				else
-					table.rows[1].cells[4].innerHTML = "<red>" + data['market_data']['price_change_percentage_1y_in_currency']['usd'].toLocaleString('en') + "%</red>";
-		
-				table = document.getElementById('at_table');
-		
-				if(data['market_data']['atl']['usd'] == undefined)
-					table.rows[1].cells[1].innerHTML = "-";
-				/*else if(data['market_data']['atl']['usd'] > 0 && data['market_data']['atl']['usd'] < 0.001)
-					table.rows[1].cells[1].innerHTML = "$" + data['market_data']['atl']['usd'].toExponential(3);*/
-				else
-					table.rows[1].cells[1].innerHTML = "$" + data['market_data']['atl']['usd'];
-		
-				if(data['market_data']['ath']['usd'] == undefined)
-					table.rows[2].cells[1].innerHTML = "-";
-				/*else if(data['market_data']['ath']['usd'] > 0 && data['market_data']['ath']['usd'] < 0.001)
-					table.rows[2].cells[1].innerHTML = "$" + data['market_data']['ath']['usd'].toExponential(3);*/
-				else
-					table.rows[2].cells[1].innerHTML = "$" + data['market_data']['ath']['usd'];
-		
-				if(data['market_data']['atl_change_percentage']['usd'] == undefined)
-					table.rows[1].cells[2].innerHTML = "-";
-				else if(data['market_data']['atl_change_percentage']['usd'] >= 0)
-					table.rows[1].cells[2].innerHTML = "<green>" + data['market_data']['atl_change_percentage']['usd'].toLocaleString('en') + "%</green>";
-				else
-					table.rows[1].cells[2].innerHTML = "<red>" + data['market_data']['atl_change_percentage']['usd'].toLocaleString('en') + "%</red>";
-		
-				if(data['market_data']['ath_change_percentage']['usd'] == undefined)
-					table.rows[2].cells[2].innerHTML = "-";
-				else if(data['market_data']['ath_change_percentage']['usd'] >= 0)
-					table.rows[2].cells[2].innerHTML = "<green>" + data['market_data']['ath_change_percentage']['usd'].toLocaleString('en') + "%</green>";
-				else
-					table.rows[2].cells[2].innerHTML = "<red>" + data['market_data']['ath_change_percentage']['usd'].toLocaleString('en') + "%</red>";
-		
-				if(data['market_data']['atl_date']['usd'] == undefined)
-					table.rows[1].cells[3].innerHTML = "-";
-				else
-				{
-					table.rows[1].cells[3].innerHTML = new Date(data['market_data']['atl_date']['usd']).toLocaleDateString();
-					table.rows[1].cells[4].innerHTML = daysSince(data['market_data']['atl_date']['usd']);
-				}
-		
-				if(data['market_data']['ath_date']['usd'] == undefined)
-					table.rows[2].cells[3].innerHTML = "-";
-				else
-				{
-					table.rows[2].cells[3].innerHTML = new Date(data['market_data']['ath_date']['usd']).toLocaleDateString();
-					table.rows[2].cells[4].innerHTML = daysSince(data['market_data']['ath_date']['usd']);
-				}
-		
-				if(data['last_updated'] != undefined)
-					document.getElementById('last_updated').innerHTML = "<p><b>data last updated</b><br>" + new Date(data['last_updated']).toLocaleTimeString() + " " + new Date(data['last_updated']).toLocaleDateString() + "</p>";
-			}
-		
-			function fetch_info_from_contract_address()
-			{
-				$(document).ready(function(){
-					$.get(
-			    	    'https://api.coingecko.com/api/v3/coins/' + param_map.get('network') + '/contract/' + param_map.get('contract_address'),              
-						function(data) {
-							coin_data = data;
-							if(!details_filled)
-							{
-								details_filled = 1;
-								fill_details(data);
-							}
-							fill_data(data);
-							fetch_chart("prices", "Price", data);
-							fetch_chart("total_volumes", "Volume", data);
-					}).fail(function() {
-						clear_page();
-						document.getElementById("page_div").innerHTML = "<p>could not find " + param_map.get('contract_address') + " on the " + param_map.get('network') + " network</p>";
-					});
-				});
-			}
-		
-			function fetch_info_from_id()
-			{
-				$(document).ready(function(){
-					$.get(
-			    	    'https://api.coingecko.com/api/v3/coins/' + param_map.get('id'),              
-						function(data) {
-							coin_data = data;
-							if(!details_filled)
-							{
-								details_filled = 1;
-								fill_details(data);
-							}
-							fill_data(data);
-							fetch_chart("prices", "Price", data);
-							fetch_chart("total_volumes", "Volume", data);
-					}).fail(function(){ 
-						clear_page();
-						document.getElementById("page_div").innerHTML = "<p>could not find " + param_map.get('id') + "</p>";
-					});
-				});
-			}
-		
-			function fetch_info()
-			{
-				if(param_map.get('contract_address') != undefined && param_map.get('network') != undefined)
-				{
-					fetch_info_from_contract_address();
-				}
-				else if(param_map.get('id') != undefined)
-				{
-					fetch_info_from_id();
-				}
-				else
-				{
-					clear_page();
-		
-					document.getElementById("page_div").innerHTML = "<p>please specify a coin name or alternatively a contract address along with a network</p>";
-				}
-			}
-		
-			function change_chart_range()
-			{
-				chart_range = document.getElementById('chart_range').value;
-				localStorage.setItem(user + '-chart_range', chart_range);
-				
-				if(chart_range == "hour")
-					chart_freq = "minute";
-				else if(chart_range == "day" || chart_range == "week")
-					chart_freq = "hourly";
-				else if(chart_range == "month" || chart_range == "year" || chart_range == "max")
-					chart_freq = "daily";
-		
-				localStorage.setItem(user + '-chart_freq', chart_freq);
-		
-				fetch_info();
-			}
-		
-			function refresh_data()
-			{
-				if(refresh_ms > 0)
-					sleep(refresh_ms).then(() => { fetch_info(); refresh_data(); });
-			}
-		
-			watchlist_names = fetch_watchlists(user);
-			for(var i=0; i<watchlist_names.length; i++)
-				watchlists[watchlist_names[i]] = fetch_watchlist(user, watchlist_names[i]);
-		
-			fetch_info();
-			document.getElementById('data_table_spotlight').style.width = (document.getElementById('data_table').offsetWidth + 60) + "px";
-			document.getElementById('exchange_spotlight').style.width = (document.getElementById('exchange_table_div').offsetWidth + 200) + "px";
-			var max_width = Math.max(document.getElementById('change_table').offsetWidth, document.getElementById('at_table').offsetWidth);
-			document.getElementById('change_table_spotlight').style.width = (max_width + 170) + "px";
-			document.getElementById('at_table_spotlight').style.width = (max_width + 170) + "px";
-			document.getElementById('rhs_table_div').style.width = (max_width + 190) + "px";
-			refresh_data();
 			
-		</script>
-
-		<!-- Footer -->
-		<div class="footer wrapper">
-			<div class="inner" style="text-align:center">
-				<noselect>
-					<p>
-						<a href="search.html" title='search'><i class="fas fa-search fa-2x"></i></a> &nbsp;
-						<a href="coins.html" title='coins'><i class="fas fa-coins fa-2x"></i></a> &nbsp;
-						<a href="categories.html" title='categories'><i class="fas fa-cubes fa-2x"></i></a> &nbsp;
-						<a href="charts.html" title='charts'><i class="fas fa-chart-area fa-2x"></i></a> &nbsp;
-						<a href="news.html" title='news'><i class="fas fa-newspaper fa-2x"></i></a> &nbsp;
-						<a href="scams.html" title='scams'><i class="fas fa-bomb fa-2x"></i></a> &nbsp;
-						<a href="watchlist.html" title='watchlist'><i class="fas fa-binoculars fa-2x"></i></a> &nbsp;
-						<a href="wallet.html" title='wallet tracker'><i class="fas fa-wallet fa-2x"></i></a><br>
-						
-						<a href="https://t.me/dexata_army" title='telegram'><i class="icon brands fa-telegram-plane fa-2x"></i></a> &nbsp;
-						<a href="https://twitter.com/dexata_army" title='twitter'><i class="icon brands fa-twitter fa-2x"></i></a> &nbsp;
-						<a href="https://github.com/dexata-army" title='github'><i class="icon brands fa-github-alt fa-2x"></i></a> &nbsp;
-						<a href="config.html" title='config'><i class="fas fa-cogs fa-2x"></i></a> &nbsp;
-						<a href="manage_users.html" title='manage users'><i class="fas fa-user-cog fa-2x"></i></a> &nbsp;
-						<text id="login_footer_item" style="display: inline-block"><a href="login.html" title='login'><i class="fas fa-sign-in-alt fa-2x"></i></a></text>
-					</p>
-		
-					<p>
-						<input id="footer_search_box" placeholder="search">
-					</p>
-		
-					<p class="copyright">
-						&copy;<script>document.write(new Date().getFullYear())</script> Dexata
-					</p>
-				</noselect>
-			</div>
-		</div>
-		
-		<script>
-			window.addEventListener('keydown',this.keydown,false);
-		
-			function keydown(e)
-			{
-				var code = e.keyCode;
-				
-				if(document.activeElement.tagName == "INPUT")
+					if(!found)
+						watch(user, name, param_map.get('id'));
+			
+					watchlists[name] = fetch_watchlist(user, name);
+			
+					hide_watchlists_table();
+				}
+			
+				function clear_table()
 				{
-					if(code == 13)
+					var table = document.getElementById("exchange_table");
+			
+					var no_rows = table.rows.length-1;
+					for(var i=0; i < no_rows; i++)
+						table.deleteRow(1);		
+				}
+			
+				function draw_exchange_table()
+				{
+					clear_table();
+			
+					if(coin_data['tickers'] != undefined)
 					{
-						if(document.activeElement.id == "footer_search_box" &&
-							document.getElementById('footer_search_box').value != "")
+						for(var r=0; r<coin_data['tickers'].length; r++)
 						{
-							window.location.href = "search.html?term=" + document.getElementById('footer_search_box').value;
+							if(coin_data['tickers'][r]['market']['name'] != undefined)
+							{
+								var row = document.getElementById('exchange_table').insertRow(r+1);
+			
+								row.insertCell(0).innerHTML = "<img class='round' src='images/exchanges/" + coin_data['tickers'][r]['market']['identifier'] + ".png' style='min-width: 23px; max-height: 23px; vertical-align: middle' onerror='this.style.display=\"none\"'>";
+			
+								row.insertCell(1).innerHTML = coin_data['tickers'][r]['market']['name'];
+			
+								row.insertCell(2).innerHTML = "<a href='" + coin_data['tickers'][r]['trade_url'] + "'>" + coin_data['tickers'][r]['coin_id'] + "/" + coin_data['tickers'][r]['target_coin_id'] + "</a>";
+			
+								row.insertCell(3).innerHTML = "$" + coin_data['tickers'][r]['converted_last']['usd'];
+			
+								row.insertCell(4).innerHTML = "$" + coin_data['tickers'][r]['converted_volume']['usd'].toLocaleString();
+			
+								if(coin_data['tickers'][r]['trust_score'] == undefined)
+									row.insertCell(5).innerHTML = "";
+								else if(coin_data['tickers'][r]['trust_score'] == "green")
+									row.insertCell(5).innerHTML = "<green><i class='fas fa-circle fa-1x' style='vertical-align:middle'></i></green>";
+								else
+									row.insertCell(5).innerHTML = "<red><i class='fas fa-circle fa-1x' style='vertical-align:middle'></i></red>";
+							}
 						}
 					}
 				}
-			}
-		</script>
+			
+				function sort_data()
+				{
+					if(sort_attrib == "trust_score" || sort_attrib == "target_coin_id")
+					{
+						coin_data['tickers'].sort(function(obj1, obj2) {
+							if(obj1[sort_attrib] == undefined)
+							{
+								if(obj2[sort_attrib] == undefined)
+									return 0;
+								else
+									return sort_dir*1;
+							}
+							else if(obj2[sort_attrib] == undefined)
+								return sort_dir*-1;
+							else if(obj1[sort_attrib].toLowerCase() > obj2[sort_attrib].toLowerCase())
+								return sort_dir*1;
+							else if(obj1[sort_attrib] == obj2[sort_attrib])
+								return 0;
+							else return sort_dir*-1;
+						});
+					}
+					else if(sort_attrib == "exchange")
+					{
+						coin_data['tickers'].sort(function(obj1, obj2) {
+							if(obj1['market']['name'].toLowerCase() > obj2['market']['name'].toLowerCase())
+								return sort_dir*1;
+							else if(obj1['market']['name'] == obj2['market']['name'])
+								return 0;
+							else return sort_dir*-1;
+						});
+					}
+					else if(sort_attrib == "price")
+					{
+						coin_data['tickers'].sort(function(obj1, obj2) {
+							return sort_dir*(obj1['converted_last']['usd'] - obj2['converted_last']['usd']);
+						});
+					}
+					else if(sort_attrib == "24h volume")
+					{
+						coin_data['tickers'].sort(function(obj1, obj2) {
+							return sort_dir*(obj1['converted_volume']['usd'] - obj2['converted_volume']['usd']);
+						});
+					}
+			
+					draw_exchange_table();
+				}
+			
+				function toggle_sort(attrib)
+				{
+					if(sort_attrib == attrib)
+						sort_dir *= -1;
+					else
+					{
+						sort_attrib = attrib;
+						sort_dir = -1;
+					}
+			
+					sort_data();
+				}
+			
+				function fill_details(data)
+				{
+					document.title = "Dexata - " + data['symbol'];
+			
+					if(data['image']['large'] != "")
+						document.getElementById("coin_title").innerHTML = '<img onerror="this.src=\'images/missing.png\'" class="rounded" src="' + data['image']['large'] + '" height="150px" style="vertical-align: middle; margin-bottom: 10px";><br>' + data['name'] + ' (' + data['symbol'] + ')';
+			
+					document.getElementById("coin_links").innerHTML = "";
+			
+					if(data['links']['homepage'][0] != "")
+						document.getElementById("coin_links").innerHTML += '<a href="' + data['links']['homepage'][0] + '" title="homepage"><i class="fas fa-home fa-2x"></i></a></a>';
+			
+					if(data['links']['facebook_username'] != null)
+					{
+						if(data['community_data']['facebook_likes'] != null)
+							document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="https://facebook.com/' + data['links']['facebook_username'] + '" title="Facebook - ' + data['community_data']['facebook_likes'] + ' likes"><i class="fab fa-facebook-f fa-2x"></a>';
+						else
+							document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="https://facebook.com/' + data['links']['facebook_username'] + '" title="Facebook"><i class="fab fa-facebook-f fa-2x"></a>';
+					}
+			
+					if(data['links']['subreddit_url'] != null)
+					{
+						if(data['community_data']['reddit_subscribers'] != null)
+							document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="' + data['links']['subreddit_url'].replace("www", "old") + '" title="Reddit - ' + data['community_data']['reddit_subscribers'] + ' subscribers"><i class="fab fa-reddit-alien fa-2x"></i></a>';
+						else
+							document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="' + data['links']['subreddit_url'].replace("www", "old") + '" title="Reddit"><i class="fab fa-reddit-alien fa-2x"></i></a>';
+					}
+			
+					if(data['links']['telegram_channel_identifier'] != null)
+					{
+						if(data['community_data']['telegram_channel_user_count'] != null)
+							document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="https://t.me/' + data['links']['telegram_channel_identifier'] + '" title="Telegram - ' + data['community_data']['telegram_channel_user_count'] + ' users"><i class="fab fa-telegram-plane fa-2x"></i></a>';
+						else
+							document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="https://t.me/' + data['links']['telegram_channel_identifier'] + '" title="Telegram"><i class="fab fa-telegram-plane fa-2x"></i></a>';
+					}
+			
+					if(data['links']['twitter_screen_name'] != null)
+					{
+						if(data['community_data']['twitter_followers'] != null)
+							document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="https://twitter.com/' + data['links']['twitter_screen_name'] + '" title="Twitter - ' + data['community_data']['twitter_followers'] + ' followers"><i class="fab fa-twitter fa-2x"></a>';
+						else
+							document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="https://twitter.com/' + data['links']['twitter_screen_name'] + '" title="Twitter"><i class="fab fa-twitter fa-2x"></a>';
+					}
+			
+					if(data['links']['chat_url'][0] != null)
+					{
+						if(data['links']['chat_url'][0].search("discord") != -1)
+							document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="' + data['links']['chat_url'][0] + '" title="Discord"><i class="fab fa-discord fa-2x"></i></a>';
+						else
+							document.getElementById("coin_links").innerHTML += '&nbsp;&nbsp;<a href="' + data['links']['chat_url'][0] + '" title="chat"><i class="fas fa-comments fa-2x"></i></a>';
+					}
+			
+			
+					if(data['platforms']['binance-smart-chain'] != undefined)
+					{
+						document.getElementById("other_links").innerHTML += '<a href="https://bscscan.com/token/' + data['platforms']['binance-smart-chain'] + '" title="BSCScan"><img src="images/icons/bscscan.png" height="30px"></a>';
+						document.getElementById("other_links").innerHTML += '&nbsp;&nbsp;&nbsp;<a href="https://poocoin.app/tokens/' + data['contract_address'] + '" title="Poocoin"><img src="images/logos/poocoin-poocoin.svg" height="30px"></a>';
+					}
+			
+					if(data['platforms']['ethereum'] != undefined)
+					{
+						document.getElementById("other_links").innerHTML += '&nbsp;&nbsp;&nbsp;<a href="https://etherscan.io/token/' + data['platforms']['ethereum'] + '" title="EtherScan"><img src="images/icons/etherscan.png" height="30px"></a>';
+						document.getElementById("other_links").innerHTML += '&nbsp;&nbsp;<a href="https://ethplorer.io/address/' + data['platforms']['ethereum'] + '" title="Ethplorer"><img src="images/icons/ethplorer.png" height="30px"></a>';
+					}
+			
+					if(data['platforms']['polygon-pos'] != undefined)
+						document.getElementById("other_links").innerHTML += '&nbsp;&nbsp;<a href="https://polygonscan.com/token/' + data['platforms']['polygon-pos'] + '" title="PolygonScan"><img src="images/icons/polygonscan.png" height="30px"></a>';
+			
+					if(data['platforms']['solana'] != undefined)
+						document.getElementById("other_links").innerHTML += '&nbsp;&nbsp;<a href="https://solscan.io/token/' + data['platforms']['solana'] + '" title="SolScan"><img src="images/icons/solscan.png" height="30px"></a>';
+			
+					//document.getElementById('title_spotlight').style.width = (document.getElementById('title_div').offsetWidth + 70) + "px";
+			
+					if(data['contract_address'] != undefined && data['contract_address'].length > 10)
+					{
+						if(data['platforms'] != undefined)
+						{
+							document.getElementById('contract_spotlight').style.display = "inline-block";
+			
+							var table = document.getElementById('contract_table');
+			
+							var r = 0;
+							for(let p in data['platforms'])
+							{
+								var row = table.insertRow(r++);
+			
+								row.insertCell(0).innerHTML = "<img src='images/icons/" + p + ".png' class='round' style='min-width: 20px; max-height: 20px; vertical-align: middle' onerror='this.style.display=\"none\"'>";
+			
+								var cell = row.insertCell(1);
+								cell.innerHTML = data['platforms'][p];
+								cell.setAttribute('title', p);
+			
+								row.insertCell(2).innerHTML = "<a onclick=\"ctrl_c(\'" + data['platforms'][p] + "\')\"><i class='fas fa-copy fa-1x' style='vertical-align:middle; margin-left: 10px'></i></a>";
+							}
+						}
+						else
+						{
+							var row = table.insertRow(1);
+			
+							row.insertCell(1).innerHTML = data['contract_address'];
+			
+							row.insertCell(2).innerHTML = "<a onclick=\"ctrl_c(\'" + data['contract_address'] + "\')\"><i class='fas fa-copy fa-1x' style='vertical-align:middle'></i></a>";
+						}
+			
+						document.getElementById('contract_spotlight').style.width = (document.getElementById('contract_table').offsetWidth + 50) + "px";
+					}
+			
+					draw_exchange_table();
+					document.getElementById('exchange_spotlight').style.width = (document.getElementById('exchange_table').offsetWidth + 50) + "px";
+			
+					var table = document.getElementById('watchlists_table');
+					for(var i=1; i<watchlist_names.length; i++)
+					{
+						var row = table.insertRow(i-1);
+						row.insertCell(0).innerHTML = "<div style='margin-bottom:0px'><input id='" + watchlist_names[i] + "' type='checkbox'><label for='" + watchlist_names[i] + "'>" + watchlist_names[i] + "</label></div>";
+			
+						document.getElementById(watchlist_names[i]).addEventListener('change', (event) => {
+							toggle_watching(event.currentTarget.id);
+						})
+			
+						for(var j=0; j<watchlists[watchlist_names[i]].length; j++)
+						{
+							if(watchlists[watchlist_names[i] ][j] == param_map.get('id'))
+							{
+								document.getElementById(watchlist_names[i]).checked = true;
+								break;
+							}
+						}
+					}
+			
+					if(data['description']['en'] != undefined && 
+						data['description']['en'] != "")
+						document.getElementById('desc_div').innerHTML = "<center><p style='max-width: 90%; margin-top: 10px; margin-bottom: 20px'>" + data['description']['en'] + "</p></center>";
+					else
+						document.getElementById('desc_div').style.display = "none";
+			
+					document.getElementById('newsfeed_div').innerHTML = 
+					'<iframe id="newsfeed_iframe" scrolling="no" width="100%" height="650px" allowtransparency="true" frameborder="0" src="https://cryptopanic.com/widgets/news/?bg_color=FFFFFF00&amp;currencies=' + data['symbol'] + '&amp;font_family=mono&amp;font_size=13&amp;header_bg_color=FFFFFF00&amp;header_text_color=FFFFFF&amp;link_color=679267&amp;news_feed=recent&amp;posts_limit=10&amp;text_color=FFFFFF&amp;title=news"></iframe>';
+			
+					var body_width = document.body.clientWidth;
+					if(body_width < 530)
+						document.getElementById('newsfeed_iframe').style.height = "1000px";
+					else if(body_width < 700)
+						document.getElementById('newsfeed_iframe').style.height = "900px";
+					else if(body_width < 950)
+						document.getElementById('newsfeed_iframe').style.height = "800px";
+					else if(body_width < 1100)
+						document.getElementById('newsfeed_iframe').style.height = "700px";
+				}
+			
+				function fill_data(data)
+				{
+					var table = document.getElementById("data_table");
+			
+					if(data['market_data']['current_price']['usd'] == 0)
+						table.rows[0].cells[1].innerHTML = "-";
+					else if(data['market_data']['current_price']['usd'] > 999)
+						table.rows[0].cells[1].innerHTML = "$" + data['market_data']['current_price']['usd'].toLocaleString('en');
+					else if(data['market_data']['current_price']['usd'] < 0.001)
+						table.rows[0].cells[1].innerHTML = "$" + data['market_data']['current_price']['usd'].toExponential(3);
+					else
+						table.rows[0].cells[1].innerHTML = "$" + data['market_data']['current_price']['usd'].toFixed(5);
+			
+					if(data['market_data']['market_cap_rank'] > 0)
+						table.rows[1].cells[1].innerHTML = data['market_data']['market_cap_rank'].toLocaleString('en');
+					else
+						table.rows[1].cells[1].innerHTML = '-';
+			
+					if(data['market_data']['market_cap']['usd'] > 0)
+						table.rows[2].cells[1].innerHTML = "$" + data['market_data']['market_cap']['usd'].toLocaleString('en');
+					else
+						table.rows[2].cells[1].innerHTML = '-';
+			
+					if(data['market_data']['current_price']['usd'] > 0 &&
+						data['market_data']['total_supply'])
+						table.rows[3].cells[1].innerHTML = "$" + (data['market_data']['current_price']['usd']*data['market_data']['total_supply']).toLocaleString('en');
+					else
+						table.rows[3].cells[1].innerHTML = '-';
+			
+					if(data['market_data']['market_cap']['usd'] > 0)
+						table.rows[4].cells[1].innerHTML = "$" + data['market_data']['total_volume']['usd'].toLocaleString('en');
+					else
+						table.rows[4].cells[1].innerHTML = '-';
+			
+					if(data['market_data']['total_supply'] > 0)
+						table.rows[5].cells[1].innerHTML = data['market_data']['total_supply'].toLocaleString('en');
+					else
+						table.rows[5].cells[1].innerHTML = '-';
+			
+					if(data['market_data']['max_supply'] > 0)
+						table.rows[6].cells[1].innerHTML = data['market_data']['max_supply'].toLocaleString('en');
+					else
+						table.rows[6].cells[1].innerHTML = '-';
+			
+					if(data['market_data']['circulating_supply'] > 0)
+						table.rows[7].cells[1].innerHTML = data['market_data']['circulating_supply'].toLocaleString('en');
+					else
+						table.rows[7].cells[1].innerHTML = '-';
+			
+					table = document.getElementById("change_table");
+			
+					if(data['market_data']['price_change_percentage_1h_in_currency']['usd'] == undefined)
+						table.rows[1].cells[0].innerHTML = "-";
+					else if(data['market_data']['price_change_percentage_1h_in_currency']['usd'] >= 0)
+						table.rows[1].cells[0].innerHTML = "<green>" + data['market_data']['price_change_percentage_1h_in_currency']['usd'].toLocaleString('en') + "%</green>";
+					else
+						table.rows[1].cells[0].innerHTML = "<red>" + data['market_data']['price_change_percentage_1h_in_currency']['usd'].toLocaleString('en') + "%</red>";
+			
+					if(data['market_data']['price_change_percentage_24h_in_currency']['usd'] == undefined)
+						table.rows[1].cells[1].innerHTML = "-";
+					else if(data['market_data']['price_change_percentage_24h_in_currency']['usd'] >= 0)
+						table.rows[1].cells[1].innerHTML = "<green>" + data['market_data']['price_change_percentage_24h_in_currency']['usd'].toLocaleString('en') + "%</green>";
+					else
+						table.rows[1].cells[1].innerHTML = "<red>" + data['market_data']['price_change_percentage_24h_in_currency']['usd'].toLocaleString('en') + "%</red>";
+			
+					if(data['market_data']['price_change_percentage_7d_in_currency']['usd'] == undefined)
+						table.rows[1].cells[2].innerHTML = "-";
+					else if(data['market_data']['price_change_percentage_7d_in_currency']['usd'] >= 0)
+						table.rows[1].cells[2].innerHTML = "<green>" + data['market_data']['price_change_percentage_7d_in_currency']['usd'].toLocaleString('en') + "%</green>";
+					else
+						table.rows[1].cells[2].innerHTML = "<red>" + data['market_data']['price_change_percentage_7d_in_currency']['usd'].toLocaleString('en') + "%</red>";
+			
+					if(data['market_data']['price_change_percentage_30d_in_currency']['usd'] == undefined)
+						table.rows[1].cells[3].innerHTML = "-";
+					else if(data['market_data']['price_change_percentage_30d_in_currency']['usd'] >= 0)
+						table.rows[1].cells[3].innerHTML = "<green>" + data['market_data']['price_change_percentage_30d_in_currency']['usd'].toLocaleString('en') + "%</green>";
+					else
+						table.rows[1].cells[3].innerHTML = "<red>" + data['market_data']['price_change_percentage_30d_in_currency']['usd'].toLocaleString('en') + "%</red>";
+			
+					if(data['market_data']['price_change_percentage_1y_in_currency']['usd'] == undefined)
+						table.rows[1].cells[4].innerHTML = "-";
+					else if(data['market_data']['price_change_percentage_1y_in_currency']['usd'] >= 0)
+						table.rows[1].cells[4].innerHTML = "<green>" + data['market_data']['price_change_percentage_1y_in_currency']['usd'].toLocaleString('en') + "%</green>";
+					else
+						table.rows[1].cells[4].innerHTML = "<red>" + data['market_data']['price_change_percentage_1y_in_currency']['usd'].toLocaleString('en') + "%</red>";
+			
+					table = document.getElementById('at_table');
+			
+					if(data['market_data']['atl']['usd'] == undefined)
+						table.rows[1].cells[1].innerHTML = "-";
+					/*else if(data['market_data']['atl']['usd'] > 0 && data['market_data']['atl']['usd'] < 0.001)
+						table.rows[1].cells[1].innerHTML = "$" + data['market_data']['atl']['usd'].toExponential(3);*/
+					else
+						table.rows[1].cells[1].innerHTML = "$" + data['market_data']['atl']['usd'];
+			
+					if(data['market_data']['ath']['usd'] == undefined)
+						table.rows[2].cells[1].innerHTML = "-";
+					/*else if(data['market_data']['ath']['usd'] > 0 && data['market_data']['ath']['usd'] < 0.001)
+						table.rows[2].cells[1].innerHTML = "$" + data['market_data']['ath']['usd'].toExponential(3);*/
+					else
+						table.rows[2].cells[1].innerHTML = "$" + data['market_data']['ath']['usd'];
+			
+					if(data['market_data']['atl_change_percentage']['usd'] == undefined)
+						table.rows[1].cells[2].innerHTML = "-";
+					else if(data['market_data']['atl_change_percentage']['usd'] >= 0)
+						table.rows[1].cells[2].innerHTML = "<green>" + data['market_data']['atl_change_percentage']['usd'].toLocaleString('en') + "%</green>";
+					else
+						table.rows[1].cells[2].innerHTML = "<red>" + data['market_data']['atl_change_percentage']['usd'].toLocaleString('en') + "%</red>";
+			
+					if(data['market_data']['ath_change_percentage']['usd'] == undefined)
+						table.rows[2].cells[2].innerHTML = "-";
+					else if(data['market_data']['ath_change_percentage']['usd'] >= 0)
+						table.rows[2].cells[2].innerHTML = "<green>" + data['market_data']['ath_change_percentage']['usd'].toLocaleString('en') + "%</green>";
+					else
+						table.rows[2].cells[2].innerHTML = "<red>" + data['market_data']['ath_change_percentage']['usd'].toLocaleString('en') + "%</red>";
+			
+					if(data['market_data']['atl_date']['usd'] == undefined)
+						table.rows[1].cells[3].innerHTML = "-";
+					else
+					{
+						table.rows[1].cells[3].innerHTML = new Date(data['market_data']['atl_date']['usd']).toLocaleDateString();
+						table.rows[1].cells[4].innerHTML = daysSince(data['market_data']['atl_date']['usd']);
+					}
+			
+					if(data['market_data']['ath_date']['usd'] == undefined)
+						table.rows[2].cells[3].innerHTML = "-";
+					else
+					{
+						table.rows[2].cells[3].innerHTML = new Date(data['market_data']['ath_date']['usd']).toLocaleDateString();
+						table.rows[2].cells[4].innerHTML = daysSince(data['market_data']['ath_date']['usd']);
+					}
+			
+					if(data['last_updated'] != undefined)
+						document.getElementById('last_updated').innerHTML = new Date(data['last_updated']).toLocaleTimeString() + " " + new Date(data['last_updated']).toLocaleDateString();
+				}
+			
+				function fetch_info_from_contract_address()
+				{
+					$(document).ready(function(){
+						$.get(
+				    	    'https://api.coingecko.com/api/v3/coins/' + param_map.get('network') + '/contract/' + param_map.get('contract_address'),              
+							function(data) {
+								coin_data = data;
+								if(!details_filled)
+								{
+									details_filled = 1;
+									fill_details(data);
+								}
+								fill_data(data);
+								fetch_chart("prices", "Price", data);
+								fetch_chart("total_volumes", "Volume", data);
+						}).fail(function() {
+							clear_page();
+							document.getElementById("page_div").innerHTML = "<p>could not find " + param_map.get('contract_address') + " on the " + param_map.get('network') + " network</p>";
+						});
+					});
+				}
+			
+				function fetch_info_from_id()
+				{
+					$(document).ready(function(){
+						$.get(
+				    	    'https://api.coingecko.com/api/v3/coins/' + param_map.get('id'),              
+							function(data) {
+								coin_data = data;
+								if(!details_filled)
+								{
+									details_filled = 1;
+									fill_details(data);
+								}
+								fill_data(data);
+								fetch_chart("prices", "Price", data);
+								fetch_chart("total_volumes", "Volume", data);
+						}).fail(function(){ 
+							clear_page();
+							document.getElementById("page_div").innerHTML = "<p>could not find " + param_map.get('id') + "</p>";
+						});
+					});
+				}
+			
+				function fetch_info()
+				{
+					if(param_map.get('contract_address') != undefined && param_map.get('network') != undefined)
+					{
+						fetch_info_from_contract_address();
+					}
+					else if(param_map.get('id') != undefined)
+					{
+						fetch_info_from_id();
+					}
+					else
+					{
+						clear_page();
+			
+						document.getElementById("page_div").innerHTML = "<p>please specify a coin name or alternatively a contract address along with a network</p>";
+					}
+				}
+			
+				function change_chart_range()
+				{
+					chart_range = document.getElementById('chart_range').value;
+					localStorage.setItem(user + '-chart_range', chart_range);
+					
+					if(chart_range == "hour")
+						chart_freq = "minute";
+					else if(chart_range == "day" || chart_range == "week")
+						chart_freq = "hourly";
+					else if(chart_range == "month" || chart_range == "year" || chart_range == "max")
+						chart_freq = "daily";
+			
+					localStorage.setItem(user + '-chart_freq', chart_freq);
+			
+					fetch_info();
+				}
+			
+				function refresh_data()
+				{
+					if(refresh_ms > 0)
+						sleep(refresh_ms).then(() => { fetch_info(); refresh_data(); });
+				}
+			
+				watchlist_names = fetch_watchlists(user);
+				for(var i=0; i<watchlist_names.length; i++)
+					watchlists[watchlist_names[i]] = fetch_watchlist(user, watchlist_names[i]);
+			
+				fetch_info();
+				/*document.getElementById('data_table_spotlight').style.width = (document.getElementById('data_table_div').offsetWidth) + "px";
+				var max_width = Math.max(document.getElementById('change_table_div').offsetWidth, document.getElementById('at_table_div').offsetWidth) + 120;
+				document.getElementById('change_table_spotlight').style.width = max_width + "px";
+				document.getElementById('at_table_spotlight').style.width = max_width + "px";*/
+				document.getElementById('last_updated_spotlight').style.width = (document.getElementById('last_updated').offsetWidth) + "px";
+				refresh_data();
+				
+			</script>
+
+			<!-- BEGIN #footer -->
+			<div id="footer" class="app-content">
+				<div class="row">
+					<!-- footer -->
+					<noselect>
+						<center>
+							<div style="width: 300px; max-width: 100%">
+								<!-- BEGIN card -->
+								<div class="card mb-3">
+									<!-- BEGIN card-body -->
+									<div class="card-body copyright">
+										&copy;<script>document.write(new Date().getFullYear())</script> Dexata
+									</div>
+									<!-- END card-body -->
+									
+									<!-- BEGIN card-arrow -->
+									<div class="card-arrow">
+										<div class="card-arrow-top-left"></div>
+										<div class="card-arrow-top-right"></div>
+										<div class="card-arrow-bottom-left"></div>
+										<div class="card-arrow-bottom-right"></div>
+									</div>
+									<!-- END card-arrow -->
+								</div>
+								<!-- END card -->
+							</div>
+			
+							<p>
+								<input id="footer_search_box" placeholder="search">
+							</p></center>
+					</noselect>
+				</div>
+			</div>
+			
+			<script>
+				window.addEventListener('keydown',this.keydown,false);
+			
+				function keydown(e)
+				{
+					var code = e.keyCode;
+					
+					if(document.activeElement.tagName == "INPUT")
+					{
+						if(code == 13)
+						{
+							if(document.activeElement.id == "footer_search_box" &&
+								document.getElementById('footer_search_box').value != "")
+								window.location.href = "search.html?term=" + document.getElementById('footer_search_box').value;
+							else if(document.activeElement.id == "search_box" &&
+								document.getElementById('search_box').value != "")
+								window.location.href = "search.html?term=" + document.getElementById('search_box').value;
+						}
+					}
+				}
+			</script>
+			
+			<!-- BEGIN btn-scroll-top -->
+			<a href="#" data-toggle="scroll-to-top" class="btn-scroll-top fade"><i class="fa fa-arrow-up"></i></a>
+			<!-- END btn-scroll-top -->
+
+			<!-- BEGIN theme-panel -->
+			<div class="app-theme-panel">
+				<div class="app-theme-panel-container">
+					<div class="app-theme-panel-content">
+						<div class="small fw-bold text-white mb-1">Theme Color</div>
+						<div class="card mb-3">
+							<!-- BEGIN card-body -->
+							<div class="card-body p-2">
+								<!-- BEGIN theme-list -->
+								<div class="app-theme-list">
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-pink" data-theme-class="theme-pink" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Pink">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-red" data-theme-class="theme-red" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Red">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-warning" data-theme-class="theme-warning" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Orange">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-yellow" data-theme-class="theme-yellow" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Yellow">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-lime" data-theme-class="theme-lime" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Lime">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-green" data-theme-class="theme-green" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Green">&nbsp;</a></div>
+									<div class="app-theme-list-item active"><a href="javascript:;" class="app-theme-list-link bg-teal" data-theme-class="" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Default">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-info" data-theme-class="theme-info"  data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Cyan">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-primary" data-theme-class="theme-primary"  data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Blue">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-purple" data-theme-class="theme-purple" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Purple">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-indigo" data-theme-class="theme-indigo" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Indigo">&nbsp;</a></div>
+									<div class="app-theme-list-item"><a href="javascript:;" class="app-theme-list-link bg-gray-100" data-theme-class="theme-gray-200" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Gray">&nbsp;</a></div>
+								</div>
+								<!-- END theme-list -->
+							</div>
+							<!-- END card-body -->
+							
+							<!-- BEGIN card-arrow -->
+							<div class="card-arrow">
+								<div class="card-arrow-top-left"></div>
+								<div class="card-arrow-top-right"></div>
+								<div class="card-arrow-bottom-left"></div>
+								<div class="card-arrow-bottom-right"></div>
+							</div>
+							<!-- END card-arrow -->
+						</div>
+						
+						<div class="small fw-bold text-white mb-1">Theme Cover</div>
+						<div class="card">
+							<!-- BEGIN card-body -->
+							<div class="card-body p-2">
+								<!-- BEGIN theme-cover -->
+								<div class="app-theme-cover">
+									<div class="app-theme-cover-item active">
+										<a href="javascript:;" class="app-theme-cover-link" style="background-image: url(assets/img/cover/cover-thumb-1.jpg);" data-theme-cover-class="" data-toggle="theme-cover-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Default">&nbsp;</a>
+									</div>
+									<div class="app-theme-cover-item">
+										<a href="javascript:;" class="app-theme-cover-link" style="background-image: url(assets/img/cover/cover-thumb-2.jpg);" data-theme-cover-class="bg-cover-2" data-toggle="theme-cover-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Cover 2">&nbsp;</a>
+									</div>
+									<div class="app-theme-cover-item">
+										<a href="javascript:;" class="app-theme-cover-link" style="background-image: url(assets/img/cover/cover-thumb-3.jpg);" data-theme-cover-class="bg-cover-3" data-toggle="theme-cover-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Cover 3">&nbsp;</a>
+									</div>
+									<div class="app-theme-cover-item">
+										<a href="javascript:;" class="app-theme-cover-link" style="background-image: url(assets/img/cover/cover-thumb-4.jpg);" data-theme-cover-class="bg-cover-4" data-toggle="theme-cover-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Cover 4">&nbsp;</a>
+									</div>
+									<div class="app-theme-cover-item">
+										<a href="javascript:;" class="app-theme-cover-link" style="background-image: url(assets/img/cover/cover-thumb-5.jpg);" data-theme-cover-class="bg-cover-5" data-toggle="theme-cover-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Cover 5">&nbsp;</a>
+									</div>
+								</div>
+								<!-- END theme-cover -->
+							</div>
+							<!-- END card-body -->
+							
+							<!-- BEGIN card-arrow -->
+							<div class="card-arrow">
+								<div class="card-arrow-top-left"></div>
+								<div class="card-arrow-top-right"></div>
+								<div class="card-arrow-bottom-left"></div>
+								<div class="card-arrow-bottom-right"></div>
+							</div>
+							<!-- END card-arrow -->
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- END theme-panel -->
+		</div>
+		<!-- END #app -->
 
 		<script>
-			//changes login to logout on page if logged in
+			//sets up login/logout menu link
 			if(localStorage.getItem("username"))
 			{
-				//document.getElementById('login_menu_item').innerHTML = "<a onclick='logout()'>logout</a>";
-				//document.getElementById('login_footer_item').innerHTML = "<a onclick='logout()' title='logout'><i class='fas fa-sign-out-alt fa-2x'></i></a>";
-				document.getElementById('login_menu_item').innerHTML = "<a href='logout.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1) + "'>logout</a>"
-				document.getElementById('login_footer_item').innerHTML = "<a href='logout.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1) + "'><i class='fas fa-sign-out-alt fa-2x'></i></a>"
+				document.getElementById('login_menu_item').innerHTML = "<a href='logout.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1) + "' class='menu-link'><span class='menu-icon'><i class='fas fa-sign-out-alt fa-1x'></i></span><span class='menu-text'>logout</span></a>";
+				document.getElementById('login_header_item').innerHTML = "logout <i class='fas fa-sign-out-alt fa-1x ms-auto text-theme fs-16px my-n1'></i>";
+				document.getElementById('login_header_item').href = "logout.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
 			}
 			else
 			{
-				document.getElementById('login_menu_item').innerHTML = "<a href='login.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1) + "'>login</a>"
-				document.getElementById('login_footer_item').innerHTML = "<a href='login.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1) + "'><i class='fas fa-sign-in-alt fa-2x'></i></a>"
+				document.getElementById('login_menu_item').innerHTML = "<a href='login.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1) + "' class='menu-link'><span class='menu-icon'><i class='fas fa-sign-in-alt fa-1x'></i></span><span class='menu-text'>login</span></a>";
+				document.getElementById('login_header_item').innerHTML = "login <i class='fas fa-sign-in-alt fa-1x ms-auto text-theme fs-16px my-n1'></i>";
+				document.getElementById('login_header_item').href = "login.html?return_to=" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
 			}
 		
 			//prevent autocomplete
@@ -1192,10 +1704,8 @@
 				$(this).attr('autocomplete', 'off')
 			});
 		</script>
-
-		<script src="assets/js/browser.min.js"></script>
-		<script src="assets/js/breakpoints.min.js"></script>
-		<script src="assets/js/util.js"></script>
-		<script src="assets/js/main.js"></script>
+		
+		<script src="assets/js/vendor.min.js"></script>
+		<script src="assets/js/app.min.js"></script>
 	</body>
 </html>
