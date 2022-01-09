@@ -206,3 +206,10 @@ div::-webkit-scrollbar-corner {
 div::-webkit-resizer {
   background: black;
 }
+
+/*For WebKit Browsers*/
+.app-sidebar-content::-webkit-scrollbar 
+{ 
+    width: 0;
+    height: 0;
+}
